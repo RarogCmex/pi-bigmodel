@@ -57,6 +57,16 @@ describe("catalog invariants", () => {
 		}
 	});
 
+	test("paid models price cache reads at or below the input rate", () => {
+		for (const entry of CATALOG) {
+			if (entry.cny.input === 0) continue; // free/unpriced models
+			assert.ok(
+				entry.cny.cacheRead <= entry.cny.input,
+				`${entry.id}: cacheRead ¥${entry.cny.cacheRead} > input ¥${entry.cny.input}`,
+			);
+		}
+	});
+
 	test("every model in the live /models listing is curated", () => {
 		for (const id of LIVE_MODELS_IDS) {
 			assert.ok(CATALOG_BY_ID.has(id), `catalog missing live id ${id}`);
