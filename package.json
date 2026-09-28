@@ -1,9 +1,17 @@
 {
-  "name": "pi-bigmodel",
-  "private": true,
+  "name": "@rarogcmex/pi-bigmodel",
   "version": "0.1.0",
   "description": "BigModel (Zhipu AI, open.bigmodel.cn) provider for pi — curated CN catalog with CNY-derived pricing, real GLM thinking semantics (thinking.type + reasoning_effort), /login support, additive live overlay from GET /models.",
   "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RarogCmex/pi-bigmodel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RarogCmex/pi-bigmodel/issues"
+  },
+  "homepage": "https://github.com/RarogCmex/pi-bigmodel#readme",
   "keywords": [
     "pi-package",
     "pi",
@@ -14,6 +22,12 @@
     "glm",
     "zai"
   ],
+  "scripts": {
+    "test": "node --test",
+    "typecheck": "tsc -p tsconfig.json",
+    "check": "npm run typecheck && npm test",
+    "live": "node --test 'live/*.ts'"
+  },
   "pi": {
     "extensions": [
       "./index.ts"
@@ -27,9 +41,7 @@
       "optional": true
     }
   },
-  "scripts": {
-    "test": "node --test",
-    "typecheck": "tsc -p tsconfig.json",
-    "live": "node --test 'live/*.ts'"
+  "publishConfig": {
+    "access": "public"
   }
 }
