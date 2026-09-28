@@ -15,7 +15,9 @@
 ## Установка
 
 ```
-pi install ~/pi-plugins/pi-bigmodel
+pi install git:github.com/RarogCmex/pi-bigmodel@main
+# или локально
+pi install /path/to/pi-bigmodel
 ```
 
 ## Авторизация
