@@ -2,6 +2,21 @@
 
 Провайдер [BigModel / Zhipu AI](https://open.bigmodel.cn) (GLM-модели: GLM-5.3, GLM-5.2, GLM-5.1/5/5-Turbo, GLM-4.7/4.6/4.5, VLM GLM-5V-Turbo / GLM-4.6V / GLM-4.5V и бесплатные flash-модели) для [pi](https://github.com/earendil-works/pi).
 
+> **In English.** pi-bigmodel registers **BigModel / Zhipu AI**'s China endpoint
+> (`open.bigmodel.cn`) as a native pi provider under the id `bigmodel`: a curated
+> GLM catalog (24 ids — text and vision), prices taken from the CNY rate card and
+> converted to pi's USD `ModelCost`, real GLM thinking semantics
+> (`thinking:{type}` plus `reasoning_effort` on GLM-5.2/5.3), `/login`, and an
+> additive `GET /models` overlay. Install with
+> `pi install git:github.com/RarogCmex/pi-bigmodel@main`, authenticate with
+> `/login bigmodel` or `BIGMODEL_API_KEY`. It exists alongside pi's built-in `zai`
+> provider, which targets the *international* endpoint and bills in USD — see
+> «Зачем это, если в pi уже есть `zai`» below. The rest of this README is in
+> Russian. Note that this plugin's user-facing runtime strings are also Russian,
+> including the message that replaces the gateway's opaque Chinese 401; that is a
+> deliberate language choice, not an oversight, and § Авторизация below says so
+> explicitly so a non-Russian user is not surprised.
+
 Регистрирует `bigmodel` как first-class pi-ai провайдер:
 
 - курируемый каталог CN-эндпоинта с ценами, пересчитанными из юаней (прайс [docs.bigmodel.cn](https://docs.bigmodel.cn/cn/guide/start/pricing));
@@ -35,6 +50,15 @@ pi install /path/to/pi-bigmodel
 Ключи создаются на [open.bigmodel.cn/usercenter/proj-mgmt/apikeys](https://open.bigmodel.cn/usercenter/proj-mgmt/apikeys). Формат — `id.secret`; ключ с хвостовым переводом строки отклоняется так же, как отозванный, поэтому обе ветки обрезают пробелы.
 
 При 401 (ключ истёк/отозван) `message_end` переписывает китайское сообщение в понятное, а `turn_end` добавляет постоянную запись с ссылкой и подсказкой `/login bigmodel` (только в интерактивном TUI: в print/json-режимах `ctx.hasUI === false`, и запись не добавляется — иначе она скрыла бы текст ошибки из вывода `pi -p`, где проверяется «последнее сообщение — ассистент»).
+
+> **Язык сообщений.** Обе эти строки — на русском (`errors.ts`, `index.ts`), как и
+> весь README. Заявленная цель — заменить непрозрачную китайскую 401 на сообщение,
+> которое называет причину и путь решения; для русскоязычного пользователя это
+> работает, для остальных замена получается столь же непрозрачной, только на другом
+> языке. Это осознанный выбор языка плагина, а не недосмотр: метаданные пакета
+> (`description`, `keywords`) и комментарии в коде при этом английские. Если вам
+> нужен английский рантайм — это отдельная задача, и начать стоит именно с
+> `errors.ts` и `index.ts`, потому что это вывод пользователю, а не документация.
 
 ## Модели
 
