@@ -116,6 +116,6 @@ BIGMODEL_API_KEY=… npm run live   # живой smoke: все id каталог
 - auth: `/login` (ссылка на страницу ключей, trim, отказ на пустом), resolve из env/хранилища;
 - errors: overflow-нормализация (EN/CN, идемпотентность, guard на rate limit), 401-кларификация.
 
-### Проверено с живым ключом (2026-09-24)
+### Проверено на живом шлюзе (2026-09-24)
 
-Все 5 тестовых ключей из `secret.env` (KEY1..KEY5) работают со всеми моделями каталога (включая glm-5.3 и VLM; редкие 429 на бесплатных flash — rate limit при серийных запросах, не ограничение ключа). Живые проверки: `thinking.type` вкл/выкл (в т.ч. 400/1210 на glm-5.3), `clear_thinking:false`, `reasoning_effort`, SSE `reasoning_content`, tool calls с `tool_stream`, `strict`, `response_format`, `GET /models` (11 id), 401-тело.
+Флаги совместимости каталога, `thinking.type` вкл/выкл (включая ответ 400/1210 на glm-5.3), `clear_thinking:false`, `reasoning_effort`, SSE `reasoning_content`, tool calls с `tool_stream` / `strict` / `response_format`, `GET /models` (11 id) и тело 401 проверены на живом CN-эндпоинте. Редкие 429 на бесплатных flash — rate limit при серийных запросах, а не ограничение ключа.

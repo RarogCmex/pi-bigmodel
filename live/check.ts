@@ -10,7 +10,7 @@
  *   4. glm-5.2 accepts thinking+reasoning_effort and streams reasoning_content;
  *   5. GET /models matches the ids the catalog expects.
  *
- * Probed green with all five test keys from secret.env on 2026-09-24.
+ * Probed green against the live CN endpoint on 2026-09-24.
  */
 
 import assert from "node:assert/strict";
