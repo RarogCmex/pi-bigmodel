@@ -1,5 +1,7 @@
 # pi-bigmodel
 
+npm-имя пакета — `@rarogcmex/pi-bigmodel`.
+
 Провайдер [BigModel / Zhipu AI](https://open.bigmodel.cn) (GLM-модели: GLM-5.3, GLM-5.2, GLM-5.1/5/5-Turbo, GLM-4.7/4.6/4.5, VLM GLM-5V-Turbo / GLM-4.6V / GLM-4.5V и бесплатные flash-модели) для [pi](https://github.com/earendil-works/pi).
 
 > **In English.** pi-bigmodel registers **BigModel / Zhipu AI**'s China endpoint
