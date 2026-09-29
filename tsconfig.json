@@ -1,4 +1,20 @@
 {
+  // Тайпчек против типов pi:
+  //   npm run check      (typecheck + офлайн-тесты)
+  //
+  // Требует один раз слинковать пакеты самого pi (вне гита):
+  //   node scripts/link-pi.mjs
+  // Скрипт сам находит глобальную установку pi (префикс npm, nvm, pnpm,
+  // ~/.local, /usr/local или каталог, куда резолвится исполняемый `pi`) и
+  // линкует @earendil-works/pi-coding-agent, @earendil-works/pi-ai и @types/node
+  // (на Windows — junctions). Для конкретной установки:
+  //   PI_ROOT=/path/to/node_modules node scripts/link-pi.mjs
+  //
+  // `paths` ниже повторяет загрузчик расширений pi: тот подменяет голый
+  // спецификатор "@earendil-works/pi-ai" на compat-энтрипоинт pi-ai (строгое
+  // надмножество базового). Без этой настройки tsc резолвит спецификатор в
+  // dist/index.d.ts и сообщает об отсутствии openAICompletionsApi, хотя pi
+  // даёт его в рантайме.
   "compilerOptions": {
     "target": "es2022",
     "module": "esnext",

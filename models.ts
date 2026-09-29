@@ -5,7 +5,8 @@
  *
  *  1. Currency. open.bigmodel.cn bills in CNY; pi's `ModelCost` is USD per
  *     million tokens. Converted at a documented rate, overridable via
- *     `BIGMODEL_CNY_PER_USD` (same policy as pi-siliconflow).
+ *     `BIGMODEL_CNY_PER_USD`. The default is deliberately the same rate as in
+ *     our other CNY-billed gateway plugins, so cost reports stay comparable.
  *
  *  2. Request shape. The gateway is OpenAI-chat-completions compatible, but
  *     pi's URL-based auto-detection classifies open.bigmodel.cn as a vanilla
@@ -42,8 +43,9 @@ export const PROVIDER_ID = "bigmodel";
 export const DEFAULT_BASE_URL = "https://open.bigmodel.cn/api/paas/v4";
 
 /**
- * CNY per 1 USD. Mid-market rate on 2026-09-15 (open.er-api.com), same source
- * date as pi-siliconflow's rate. Overridable because FX drifts.
+ * CNY per 1 USD. Mid-market rate observed 2026-09-15 (open.er-api.com); the same
+ * source date is used for every CNY-billed gateway plugin we ship, so their cost
+ * reports stay comparable. Overridable because FX drifts.
  */
 export const DEFAULT_CNY_PER_USD = 6.7252;
 

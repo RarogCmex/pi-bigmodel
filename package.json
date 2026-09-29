@@ -4,6 +4,9 @@
   "description": "BigModel (Zhipu AI, open.bigmodel.cn) provider for pi — curated CN catalog with CNY-derived pricing, real GLM thinking semantics (thinking.type + reasoning_effort), /login support, additive live overlay from GET /models.",
   "type": "module",
   "license": "MIT",
+  "engines": {
+    "node": ">=22.18.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RarogCmex/pi-bigmodel.git"
@@ -34,10 +37,14 @@
     ]
   },
   "peerDependencies": {
-    "@earendil-works/pi-coding-agent": "*"
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-ai": "*"
   },
   "peerDependenciesMeta": {
     "@earendil-works/pi-coding-agent": {
+      "optional": true
+    },
+    "@earendil-works/pi-ai": {
       "optional": true
     }
   },

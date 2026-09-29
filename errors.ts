@@ -13,8 +13,9 @@
  *
  *  2. The Chinese-only 401 message ("令牌已过期或验证不正确" = "token expired or
  *     incorrect") into an actionable hint with the key-page link. The body IS
- *     delivered (BigModel uses an OpenAI error envelope, unlike SiliconFlow),
- *     so only a translation is needed — the original text always survives.
+ *     delivered (BigModel uses a standard OpenAI error envelope, so pi-ai
+ *     already surfaces `error.message`), so only a translation is needed — the
+ *     original text always survives.
  */
 
 const CONTEXT_OVERFLOW_RE =

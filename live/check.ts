@@ -10,7 +10,8 @@
  *   4. glm-5.2 accepts thinking+reasoning_effort and streams reasoning_content;
  *   5. GET /models matches the ids the catalog expects.
  *
- * Probed green against the live CN endpoint on 2026-09-24.
+ * Every test below is skipped unless BIGMODEL_API_KEY is set, so the file is
+ * safe to leave in the tree: `npm test` never reaches the network.
  */
 
 import assert from "node:assert/strict";

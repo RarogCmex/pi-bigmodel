@@ -78,7 +78,12 @@ export interface CatalogEntry {
 	thinking: ThinkingControl;
 	cny: CnyPrice;
 	cnyTiers?: CnyTier[];
-	/** Free-text pricing caveat surfaced in the README; pi's Model has no notes field. */
+	/**
+	 * Free-text pricing caveat for maintainers and for the README tables.
+	 * Deliberately NOT exposed to pi: `Model` has no notes field, so
+	 * `entryToModel` never copies it — a caveat that must reach the user has to
+	 * be written into the README (see the † footnote there).
+	 */
 	priceNote?: string;
 }
 

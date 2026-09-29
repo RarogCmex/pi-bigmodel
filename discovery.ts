@@ -5,7 +5,7 @@
  * OpenAI-style `{"object":"list","data":[{"id":…}]}` with *chat* ids only —
  * the free flash models and all VLMs are absent from the listing even though
  * they answer /chat/completions. The overlay is therefore additive and
- * unknowns-only, exactly like pi-siliconflow: known catalog ids keep their
+ * unknowns-only: known catalog ids keep their
  * curated CNY prices/caps, new ids are appended with family-guessed
  * thinking/vision/windows, and a failed listing degrades to the baseline.
  */
