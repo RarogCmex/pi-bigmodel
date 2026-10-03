@@ -163,9 +163,9 @@ npm run check               # typecheck + 53 офлайн-теста (без с�
 BIGMODEL_API_KEY=… npm run live   # живой smoke: все id каталога + thinking-сценарии
 ```
 
-**Предварительные условия.** Node ≥ 22.18 — и тесты, и `live/check.ts` это
-`.ts`, который исполняется напрямую (нативный type-stripping; обнаружение
-`.ts`-тестов у `node --test` включено без флага начиная с 22.18).
+**Предварительные условия.** Node ≥ 22.19 — нижнюю границу задаёт хост: `engines.node` у pi `>=22.19.0` (измерено и на 0.87.0, и на 1.0.0). Сам
+type-stripping без флага и обнаружение `.ts`-тестов у `node --test` доступны
+с 22.18.
 
 `npm install` сам по себе не даёт дерева, пригодного для тайпчека: пакеты pi
 (`@earendil-works/pi-ai`, `@earendil-works/pi-coding-agent`, `@types/node`)
