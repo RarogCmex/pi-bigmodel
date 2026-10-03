@@ -176,7 +176,9 @@ BIGMODEL_API_KEY=… npm run live   # живой smoke: все id каталог
 на Windows — junctions. Для конкретной установки:
 `PI_ROOT=/path/to/node_modules node scripts/link-pi.mjs`. Проверено на
 pi 0.87.1 / pi-ai 0.87.1 / `@types/node` 22.19.19; тот же setup и `npm run check`
-повторены на pi 0.99.1 / pi-ai 0.99.1 (2026-09-30) — 53/53 зелёные.
+повторены на pi 0.99.1 / pi-ai 0.99.1 (2026-09-30) и на pi 1.0.0 / pi-ai 1.0.0
+(2026-10-03) — в обоих прогонах 53/53 зелёные; загрузка на 1.0.0 проверена отдельно:
+`pi -ne -e <репа> --offline --list-models bigmodel` даёт те же 24 модели.
 
 `npm run typecheck` зовёт голый `tsc`, а `devDependencies` здесь намеренно пусты
 (`scripts/link-pi.mjs` линкует только пакеты пи), поэтому TypeScript нужен в
