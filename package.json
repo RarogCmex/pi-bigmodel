@@ -1,6 +1,6 @@
 {
   "name": "@rarogcmex/pi-bigmodel",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "BigModel (Zhipu AI, open.bigmodel.cn) provider for pi — curated CN catalog with CNY-derived pricing, real GLM thinking semantics (thinking.type + reasoning_effort), /login support, additive live overlay from GET /models.",
   "type": "module",
   "license": "MIT",
