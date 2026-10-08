@@ -8,26 +8,45 @@
  *     `BIGMODEL_CNY_PER_USD`. The default is deliberately the same rate as in
  *     our other CNY-billed gateway plugins, so cost reports stay comparable.
  *
- *  2. Request shape. The gateway is OpenAI-chat-completions compatible, but
- *     pi's URL-based auto-detection classifies open.bigmodel.cn as a vanilla
- *     OpenAI endpoint, which is wrong in five places:
- *      - reasoning is toggled with a top-level `thinking: {type}` object —
- *        pi's "zai" thinkingFormat (same protocol as the built-in z.ai
- *        provider, live-verified on the CN endpoint 2026-09-24);
- *      - `reasoning_effort` is accepted only by GLM-5.2 and the GLM-5.3
- *        family, so `supportsReasoningEffort` is pinned per entry;
- *      - the documented roles are system/user/assistant/tool — no `developer`;
- *      - the reference documents `max_tokens`, not `max_completion_tokens`;
- *      - `store` / `prompt_cache_retention` / grammar tools are absent from
- *        the reference — never send them.
- *     `tool_stream: true` (compat `zaiToolStream`) is documented and was
- *     accepted in a live tool-call probe. `strict: true` on tools and
- *     `response_format` json_object were also accepted live.
+ *  2. Request shape. The gateway is OpenAI-chat-completions compatible. Since
+ *     pi-ai 1.1.0 its URL auto-detection recognises `open.bigmodel.cn` as zai
+ *     (`api/openai-completions.js:1227`), which already gets four things right:
+ *     `thinkingFormat: "zai"`, `maxTokensField: "max_tokens"`,
+ *     `supportsStore: false`, `supportsDeveloperRole: false`. What detection
+ *     still gets wrong for this endpoint, and why the flags below are explicit:
+ *      - `supportsReasoningEffort` detects to FALSE for every zai URL, but
+ *        GLM-5.2 and the GLM-5.3 family do take `reasoning_effort` (docs +
+ *        live); it is pinned per entry from `ThinkingControl`, because the
+ *        gateway silently accepts the field on models that ignore it and
+ *        acceptance therefore proves nothing;
+ *      - `zaiToolStream` detects to FALSE, but `tool_stream: true` is documented
+ *        and was accepted live (2026-09-24, re-checked 2026-10-09);
+ *      - `supportsStrictMode` detects to FALSE for every non-OpenAI URL (pi
+ *        #9816), but `strict: true` tool schemas are accepted live.
+ *     `supportsLongCacheRetention`/`supportsStore` stay false on purpose: the
+ *     chat-completions spec (openapi.json, read 2026-10-09) has no `store`,
+ *     `prompt_cache_key` or `prompt_cache_retention` field. Probing showed the
+ *     gateway ACCEPTS all three and ignores them (200, no behaviour change), so
+ *     the reason is "not in the contract", not "rejected" — sending them would
+ *     only imply a cache control we do not have.
+ *
+ *  3. Image limits. `Model.inputLimits` (pi ≥ 1.0) carries the endpoint's
+ *     documented per-image caps so pi resizes before an image enters the
+ *     transcript instead of letting the gateway reject it.
+ *
+ * Deliberately NOT set: `promptCache`. The gateway's cache is implicit and the
+ * docs publish no TTL, so there is no honest number to put there — and pi's
+ * cache warmer only fires for models that declare one
+ * (`pi/dist/core/cache-warmer.js`: `ttlMs === undefined` → stop, "cache
+ * lifetime unavailable"). Declaring a guessed TTL would make pi send extra
+ * billed cache-warming requests for a cache it cannot keep alive. See the
+ * «Кэш контекста» section of the README for the measured behaviour.
  */
 
 import type { Model, ModelCost, OpenAICompletionsCompat } from "@earendil-works/pi-ai";
 import {
 	CATALOG,
+	CN_IMAGE_LIMITS,
 	GLM52_EFFORT,
 	GLM53_EFFORT,
 	type CatalogEntry,
@@ -86,7 +105,9 @@ function toCost(cny: CnyPrice, tiers: readonly CnyTier[] | undefined, rate: numb
 
 /**
  * Compatibility flags shared by every catalog model. Per-entry thinking flags
- * are layered on top in `thinkingCompat`.
+ * are layered on top in `thinkingCompat`. The header comment explains which of
+ * these pi-ai 1.1.0 would already detect for `open.bigmodel.cn` and which are
+ * here because detection gets them wrong.
  */
 const CHAT_COMPAT: OpenAICompletionsCompat = {
 	maxTokensField: "max_tokens",
@@ -161,6 +182,7 @@ export function entryToModel(entry: CatalogEntry, baseUrl: string, rate: number)
 		maxTokens: entry.maxTokens,
 		compat: { ...CHAT_COMPAT, ...compat },
 	};
+	if (entry.imageLimits) model.inputLimits = entry.imageLimits;
 	if (map) model.thinkingLevelMap = map;
 	return model;
 }
@@ -211,6 +233,10 @@ export function unknownModelToModel(id: string, baseUrl: string): BigModelModel 
 		thinking: guessThinking(id),
 		cny: { input: 0, output: 0, cacheRead: 0 },
 	};
+	// Guessed vision models get the endpoint-wide image caps: the 5 MB /
+	// 6000×6000 limit is a property of the chat-completions contract, not of a
+	// model family, so an unlisted VLM inherits it safely.
+	if (entry.input.includes("image")) entry.imageLimits = CN_IMAGE_LIMITS;
 	const model = entryToModel(entry, baseUrl, DEFAULT_CNY_PER_USD);
 	// Unknowns must not invent a price: pin the object so tests can
 	// identity-compare against ZERO_COST.

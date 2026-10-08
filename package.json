@@ -26,7 +26,7 @@
     "zai"
   ],
   "scripts": {
-    "test": "node --test",
+    "test": "node --test --import ./test/no-network.ts",
     "typecheck": "tsc -p tsconfig.json",
     "check": "npm run typecheck && npm test",
     "live": "node --test 'live/*.ts'"

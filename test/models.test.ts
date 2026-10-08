@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test, { describe } from "node:test";
+import { calculateCost, clampThinkingLevel, getSupportedThinkingLevels } from "@earendil-works/pi-ai";
 import type { OpenAICompletionsCompat } from "@earendil-works/pi-ai";
 import {
 	buildModels,
@@ -72,12 +73,16 @@ describe("buildModels / entryToModel", () => {
 	});
 
 	test("forced thinkers hide 'off' so pi never sends thinking.type=disabled", () => {
-		for (const id of ["glm-5.3", "glm-5.3-flash", "glm-5.3-flashx", "glm-4.7", "glm-4.5v", "glm-4.1v-thinking-flash"]) {
+		for (const id of ["glm-5.3", "glm-5.3-flash", "glm-5.3-flashx", "glm-4.1v-thinking-flash"]) {
 			const model = entryToModel(CATALOG_BY_ID.get(id)!, DEFAULT_BASE_URL, RATE);
 			assert.equal(model.reasoning, true, id);
 			assert.equal(model.thinkingLevelMap?.off, null, id);
+			// Assert through pi's own picker logic, not just the raw map: this is
+			// what decides whether "off" is offered to the user.
+			assert.ok(!getSupportedThinkingLevels(model).includes("off"), `${id}: pi still offers off`);
 		}
-		// GLM-5.3 effort is exactly low|high|max (server 400s otherwise).
+		// GLM-5.3 effort is exactly low|high|max (server 400s otherwise: probed
+		// 2026-10-09, `reasoning_effort: "medium"` → 400 code 1210).
 		assert.deepEqual(entryToModel(CATALOG_BY_ID.get("glm-5.3")!, DEFAULT_BASE_URL, RATE).thinkingLevelMap, {
 			off: null,
 			minimal: null,
@@ -87,6 +92,53 @@ describe("buildModels / entryToModel", () => {
 			xhigh: null,
 			max: "max",
 		});
+	});
+
+	test("GLM-4.7 / GLM-4.5V offer 'off' again (turn-level thinking, probed 2026-10-09)", () => {
+		// Both were forced thinkers on 2026-09-24. `thinking:{type:"disabled"}` is
+		// now accepted AND honoured: a 64-token answer to "12*13" came back as
+		// content "156" with completion_tokens_details.reasoning_tokens === 0,
+		// while `enabled` spent all 64 tokens in reasoning_content.
+		for (const id of ["glm-4.7", "glm-4.5v"]) {
+			const model = entryToModel(CATALOG_BY_ID.get(id)!, DEFAULT_BASE_URL, RATE);
+			assert.equal(model.reasoning, true, id);
+			assert.equal(model.thinkingLevelMap, undefined, `${id}: should not pin a level map`);
+			assert.equal((model.compat as Record<string, unknown>).supportsReasoningEffort, false, id);
+			assert.ok(getSupportedThinkingLevels(model).includes("off"), `${id}: pi must offer off`);
+			assert.equal(clampThinkingLevel(model, "off"), "off", id);
+		}
+	});
+
+	test("image models publish the documented CN input limits", () => {
+		const imageModels = buildModels(DEFAULT_BASE_URL).filter((m) => m.input.includes("image"));
+		assert.ok(imageModels.length >= 8, `expected the VLM families, got ${imageModels.length}`);
+		for (const model of imageModels) {
+			const resize = model.inputLimits?.images?.resize;
+			assert.ok(resize, `${model.id}: no inputLimits.images.resize`);
+			// openapi.json → VisionMultimodalContentItem (2026-10-09): every image
+			// ≤5 MB and ≤6000×6000 px. pi's maxBytes is the BASE64 payload size, so
+			// 5e6 keeps the decoded file under the documented cap either way.
+			assert.equal(resize!.maxWidth, 6000, model.id);
+			assert.equal(resize!.maxHeight, 6000, model.id);
+			assert.equal(resize!.maxBytes, 5_000_000, model.id);
+		}
+		// The 50-images-per-request cap is documented only for the 5.3-Flash /
+		// 5V-Turbo / 4.6V / 4.5V families, so the 4.1V entries must not claim it.
+		for (const model of buildModels(DEFAULT_BASE_URL)) {
+			if (!model.input.includes("image")) {
+				assert.equal(model.inputLimits, undefined, `${model.id}: text model must not carry image limits`);
+			}
+		}
+		const byId = new Map(buildModels(DEFAULT_BASE_URL).map((m) => [m.id, m]));
+		assert.equal(byId.get("glm-4.6v")!.inputLimits?.images?.maxPerRequest, 50);
+		assert.equal(byId.get("glm-4.1v-thinking-flash")!.inputLimits?.images?.maxPerRequest, undefined);
+	});
+
+	test("a guessed vision id inherits the endpoint-wide image caps", () => {
+		const model = unknownModelToModel("glm-6.9v-turbo", DEFAULT_BASE_URL);
+		assert.deepEqual(model.input, ["text", "image"]);
+		assert.equal(model.inputLimits?.images?.resize?.maxWidth, 6000);
+		assert.equal(unknownModelToModel("glm-6.9", DEFAULT_BASE_URL).inputLimits, undefined);
 	});
 
 	test("cost is CNY-derived USD with cache tiers", () => {
@@ -148,5 +200,55 @@ describe("unknownModelToModel", () => {
 		const stranger = unknownModelToModel("mystery-model", DEFAULT_BASE_URL);
 		assert.equal(stranger.reasoning, false);
 		assert.deepEqual(stranger.input, ["text"]);
+	});
+});
+
+describe("prompt-cache metadata and cost math", () => {
+	test("no model declares promptCache, so pi never sends cache-warming requests", () => {
+		// BigModel's cache is implicit and the docs publish no TTL
+		// (capabilities/cache.md, read 2026-10-09). pi's warmer needs a TTL:
+		// `getPromptCacheTtlMs` returns undefined without `promptCache` and the
+		// warmer stops with "cache lifetime unavailable"
+		// (pi/dist/core/cache-warmer.js). Declaring a guessed TTL would make pi
+		// replay billed requests to keep alive a cache it cannot schedule.
+		for (const model of buildModels(DEFAULT_BASE_URL)) {
+			assert.equal(model.promptCache, undefined, model.id);
+		}
+	});
+
+	test("cache reads are priced, cache writes are not (storage is 限时免费)", () => {
+		for (const entry of CATALOG) {
+			const model = entryToModel(entry, DEFAULT_BASE_URL, RATE);
+			assert.equal(model.cost.cacheWrite, 0, entry.id);
+			assert.equal(model.cost.cacheRead, cnyToUsd(entry.cny.cacheRead, RATE), entry.id);
+		}
+	});
+
+	test("pi picks the pricing tier from prompt tokens INCLUDING cache hits", () => {
+		// calculateCost (pi-ai/dist/models.js) matches tiers on
+		// input + cacheRead + cacheWrite, which is exactly BigModel's
+		// 「输入长度 ≥32K」 band: the band is about prompt length, not about the
+		// part of it that was billed fresh. A 40K prompt that is 90% cached must
+		// still be priced in the ≥32K band.
+		const model = entryToModel(CATALOG_BY_ID.get("glm-5.1")!, DEFAULT_BASE_URL, RATE);
+		assert.ok(model.cost.tiers?.length, "glm-5.1 must carry the ≥32K tier");
+		const usage = {
+			input: 4_000,
+			output: 100,
+			cacheRead: 36_000,
+			cacheWrite: 0,
+			totalTokens: 40_100,
+			cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, total: 0 },
+		};
+		calculateCost(model, usage);
+		const tier = model.cost.tiers![0];
+		assert.equal(usage.cost.input, (tier.input / 1e6) * usage.input, "tier input rate must apply");
+		assert.equal(usage.cost.cacheRead, (tier.cacheRead / 1e6) * usage.cacheRead, "tier cacheRead rate must apply");
+		assert.notEqual(tier.input, model.cost.input, "precondition: the tier differs from the base rate");
+
+		// Below the threshold the base band applies.
+		const small = { ...usage, input: 4_000, cacheRead: 6_000, cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, total: 0 } };
+		calculateCost(model, small);
+		assert.equal(small.cost.input, (model.cost.input / 1e6) * small.input);
 	});
 });

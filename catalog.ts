@@ -1,8 +1,8 @@
 /**
  * Curated BigModel (open.bigmodel.cn) catalog.
  *
- * Data provenance — every field was read from public Zhipu pages on 2026-09-24
- * and cross-checked live against the gateway:
+ * Data provenance — every field was read from public Zhipu pages (2026-09-24,
+ * re-read 2026-10-09) and cross-checked live against the gateway:
  *
  *   ids, contextWindow,    https://docs.bigmodel.cn/cn/guide/start/model-overview.md
  *   maxTokens, `input`
@@ -10,9 +10,35 @@
  *                          (CNY per 1M tokens, cache = 缓存命中; 缓存存储 is
  *                          currently 限时免费, so cacheWrite stays 0)
  *   thinking semantics     https://docs.bigmodel.cn/cn/guide/capabilities/thinking.md
- *                          (thinking.type enabled/disabled; reasoning_effort is
- *                          GLM-5.2+ only; GLM-5.3 & GLM-4.7 flagships are forced
- *                          thinkers — `disabled` returns 400 code 1210, probed)
+ *                          + …/capabilities/thinking-mode.md
+ *   request params         https://docs.bigmodel.cn/openapi/openapi.json
+ *                          (ChatCompletionTextRequest / …VisionRequest)
+ *   image limits           openapi.json → VisionMultimodalContentItem
+ *   error codes            https://docs.bigmodel.cn/cn/api/api-code.md
+ *
+ * Output caps re-measured live 2026-10-09 from free rejections
+ * (`max_tokens: 99999999` → 400 code 1210 "限制数值范围[1,N]"):
+ *   glm-4.5-flash 98304 ✓, glm-4.7-flash 131072 ✓, glm-4.5-air 98304 ✓.
+ *
+ * Thinking was re-probed live 2026-10-09 (`thinking:{type:"disabled"}`, then a
+ * 64-token generation to see whether reasoning actually stopped):
+ *   - GLM-5.3 / 5.3-Flash / 5.3-FlashX → 400 code 1210 「该模型始终思考」 (forced);
+ *   - GLM-4.7 and GLM-4.5V → 200 and reasoning_tokens 0, i.e. thinking DOES turn
+ *     off now. Both were forced thinkers on 2026-09-24; GLM-4.7 gained 轮级思考
+ *     (turn-level thinking) per thinking-mode.md. They are `dynamic` now, so pi
+ *     offers "off" for them. The prose in thinking.md still calls them 强制思考 —
+ *     the gateway disagrees, and the gateway is what pi talks to;
+ *   - GLM-4.1V-Thinking-Flash/FlashX → 200, but the answer still arrives with a
+ *     `<think>` block inside `content` (no reasoning_content, no
+ *     reasoning_tokens) whether thinking is enabled or not. "off" would be a
+ *     lie, so they stay `always`.
+ *   Everything else accepted `disabled` and produced no reasoning (dynamic).
+ *
+ * Note on the OpenAPI enums (2026-10-09): the documented model enum for text
+ * requests omits `glm-4.5` and the vision enum omits `glm-4.5v`, and neither
+ * appears in model-overview — yet `GET /models` still lists `glm-4.5` and both
+ * answer /chat/completions with 200 and echo their own id (no silent rerouting).
+ * They stay in the catalog; the enum is a docs artifact, not an entitlement list.
  *
  * Models are omitted on purpose (README "Намеренно не включены"):
  *   - `glm-4v-flash` (16K ctx / 1K out — useless for an agent)
@@ -32,7 +58,7 @@
  * inventing a CNY rate would corrupt cost reports.
  */
 
-import type { ThinkingLevelMap } from "@earendil-works/pi-ai";
+import type { ModelInputLimits, ThinkingLevelMap } from "@earendil-works/pi-ai";
 
 export type GatewayApi = "openai-completions";
 
@@ -52,15 +78,28 @@ export interface CnyTier extends CnyPrice {
 /**
  * How a model exposes reasoning on the BigModel gateway.
  *
- * Verified against docs + live probes (2026-09-24):
+ * Verified against docs + live probes (2026-09-24, re-probed 2026-10-09):
  *  - `none`    no thinking params at all (GLM-4 generation);
  *  - `dynamic` hybrid: `thinking.type` enabled/disabled, no effort control
- *              (GLM-5.1/5/5-Turbo, GLM-4.6/4.5 families, most VLMs);
+ *              (GLM-5.1/5/5-Turbo, GLM-4.7, GLM-4.6/4.5 families, GLM-4.5V,
+ *              most VLMs). GLM-4.7 and GLM-4.5V moved here from `always`:
+ *              `disabled` is accepted and honoured now (measured, not doc-derived
+ *              — thinking.md still calls them 强制思考);
  *  - `effort`  dynamic + `reasoning_effort` (GLM-5.2 only: none|minimal|low|
  *              medium|high|xhigh|max, server maps low/medium→high, xhigh→max);
- *  - `always`  forced thinker: `disabled` → 400 "该模型始终思考" (GLM-5.3
- *              family with low/high/max effort; GLM-4.7, GLM-4.5V, 4.1V-Thinking
- *              without effort).
+ *  - `always`  "off" is not a real option. Two different reasons:
+ *              GLM-5.3/5.3-Flash/5.3-FlashX reject `disabled` with 400 code 1210
+ *              「该模型始终思考」 and take low/high/max effort; GLM-4.1V-Thinking
+ *              accepts `disabled` but thinks anyway, emitting `<think>` inside
+ *              `content` (no reasoning_content), so hiding "off" is the honest
+ *              mapping for a different cause.
+ *
+ * `reasoning_effort` is GLM-5.2+ only per the docs, and the gateway silently
+ * ACCEPTS it on models that ignore it (probed 2026-10-09: glm-5.1, glm-4.7,
+ * glm-5v-turbo, glm-4.7-flash all answered 200 to `reasoning_effort`), so
+ * acceptance proves nothing — `supportsReasoningEffort` stays pinned per entry
+ * from the documentation, and GLM-5.3's low/high/max restriction IS enforced
+ * (`medium` → 400/1210, probed).
  */
 export type ThinkingControl =
 	| { kind: "none" }
@@ -85,6 +124,14 @@ export interface CatalogEntry {
 	 * be written into the README (see the † footnote there).
 	 */
 	priceNote?: string;
+	/**
+	 * Gateway input limits for image-capable models, published to pi as
+	 * `Model.inputLimits` so it resizes before an image enters the transcript.
+	 * Text-only entries leave it unset and pi applies its own default profile.
+	 */
+	imageLimits?: ModelInputLimits;
+	/** Set when the vendor announced retirement without a date. README-only. */
+	retiring?: string;
 }
 
 /** Context/output sizes as published, expanded from the "200K / 128K" display form. */
@@ -129,10 +176,31 @@ function tier32K(cny: CnyPrice): CnyTier {
 	return { inputTokensAbove: TIER_32K, ...cny };
 }
 
-/** Same-image limits the built-in zai catalog publishes for GLM-5.3-Flash. */
-export const GLM53_FLASH_IMAGE_LIMITS = {
-	images: { resize: { maxWidth: 2000, maxHeight: 2000, maxBytes: 4_718_592, jpegQuality: 80 } },
+/**
+ * Image limits as the CN endpoint documents them (openapi.json →
+ * VisionMultimodalContentItem, read 2026-10-09): every image ≤ 5 MB and
+ * ≤ 6000×6000 px, jpg/png/jpeg.
+ *
+ * pi's `maxBytes` is the BASE64 payload size, not the file size
+ * (`pi/dist/utils/image-resize-core.js`: "4.5MB of base64 payload"), so
+ * 5_000_000 keeps the decoded image under the documented 5 MB whichever way the
+ * gateway measures it. The resize profile is deliberately the documented
+ * ceiling rather than pi's 2000×2000 default: GLM-5.3-Flash is sold for
+ * screenshot/GUI work and downscaling to 2000 px destroys small UI text. The
+ * trade-off is that bigger images cost more input tokens — override per model in
+ * `~/.pi/agent/models.json` (`inputLimits.images.resize`) if you want cheaper.
+ */
+const CN_IMAGE_RESIZE = {
+	resize: { maxWidth: 6000, maxHeight: 6000, maxBytes: 5_000_000, jpegQuality: 80 },
+} as const;
+
+/** Models the docs cap at 50 images per request (5.3-Flash/5V-Turbo/4.6V/4.5V). */
+export const CN_IMAGE_LIMITS_50: ModelInputLimits = {
+	images: { ...CN_IMAGE_RESIZE, maxPerRequest: 50 },
 };
+
+/** Image models with no published per-request count (GLM-4.1V-Thinking family). */
+export const CN_IMAGE_LIMITS: ModelInputLimits = { images: { ...CN_IMAGE_RESIZE } };
 
 export const CATALOG: readonly CatalogEntry[] = [
 	// ── Flagship text ───────────────────────────────────────────────────
@@ -151,6 +219,7 @@ export const CATALOG: readonly CatalogEntry[] = [
 		contextWindow: CTX_1M,
 		maxTokens: OUT_128K,
 		input: ["text", "image"],
+		imageLimits: CN_IMAGE_LIMITS_50,
 		thinking: { kind: "always", levels: GLM53_EFFORT },
 		cny: { input: 0.8, output: 2.8, cacheRead: 0.23 },
 	},
@@ -160,6 +229,7 @@ export const CATALOG: readonly CatalogEntry[] = [
 		contextWindow: CTX_1M,
 		maxTokens: OUT_128K,
 		input: ["text", "image"],
+		imageLimits: CN_IMAGE_LIMITS_50,
 		thinking: { kind: "always", levels: GLM53_EFFORT },
 		cny: { input: 2, output: 7, cacheRead: 0.57 },
 	},
@@ -213,7 +283,9 @@ export const CATALOG: readonly CatalogEntry[] = [
 		contextWindow: CTX_200K,
 		maxTokens: OUT_128K,
 		input: ["text"],
-		thinking: { kind: "always" },
+		// Forced thinker on 2026-09-24; `disabled` accepted and honoured live
+		// 2026-10-09 (reasoning_tokens 0) — GLM-4.7 has turn-level thinking.
+		thinking: { kind: "dynamic" },
 		cny: { input: 3, output: 14, cacheRead: 0.6 },
 		cnyTiers: [tier32K({ input: 4, output: 16, cacheRead: 0.8 })],
 		priceNote: "базовая полоса = вывод ≥0.2K; полоса вывода <0.2K дешевле (2/8)",
@@ -286,6 +358,10 @@ export const CATALOG: readonly CatalogEntry[] = [
 		input: ["text"],
 		thinking: { kind: "dynamic" },
 		cny: { input: 0, output: 0, cacheRead: 0 },
+		// model-overview marks it 「（即将下线）」 as of 2026-10-09 and publishes no
+		// date; the 即将弃用模型 table does not list it either. Kept until the
+		// gateway actually rejects it — it still answered 200 live.
+		retiring: "помечена «即将下线» в model-overview (2026-10-09), дата не опубликована",
 	},
 	{
 		id: "glm-4-flash-250414",
@@ -313,6 +389,7 @@ export const CATALOG: readonly CatalogEntry[] = [
 		contextWindow: CTX_200K,
 		maxTokens: OUT_128K,
 		input: ["text", "image"],
+		imageLimits: CN_IMAGE_LIMITS_50,
 		thinking: { kind: "dynamic" },
 		cny: { input: 5, output: 22, cacheRead: 1.2 },
 		cnyTiers: [tier32K({ input: 7, output: 26, cacheRead: 1.8 })],
@@ -323,6 +400,7 @@ export const CATALOG: readonly CatalogEntry[] = [
 		contextWindow: CTX_128K,
 		maxTokens: OUT_32K,
 		input: ["text", "image"],
+		imageLimits: CN_IMAGE_LIMITS_50,
 		thinking: { kind: "dynamic" },
 		cny: { input: 1, output: 3, cacheRead: 0.2 },
 		cnyTiers: [tier32K({ input: 2, output: 6, cacheRead: 0.4 })],
@@ -333,6 +411,7 @@ export const CATALOG: readonly CatalogEntry[] = [
 		contextWindow: CTX_128K,
 		maxTokens: OUT_32K,
 		input: ["text", "image"],
+		imageLimits: CN_IMAGE_LIMITS_50,
 		thinking: { kind: "dynamic" },
 		cny: { input: 0.15, output: 1.5, cacheRead: 0.03 },
 		cnyTiers: [tier32K({ input: 0.3, output: 3, cacheRead: 0.03 })],
@@ -343,6 +422,7 @@ export const CATALOG: readonly CatalogEntry[] = [
 		contextWindow: CTX_128K,
 		maxTokens: OUT_32K,
 		input: ["text", "image"],
+		imageLimits: CN_IMAGE_LIMITS_50,
 		thinking: { kind: "dynamic" },
 		cny: { input: 0, output: 0, cacheRead: 0 },
 	},
@@ -352,7 +432,10 @@ export const CATALOG: readonly CatalogEntry[] = [
 		contextWindow: CTX_64K,
 		maxTokens: OUT_32K,
 		input: ["text", "image"],
-		thinking: { kind: "always" },
+		imageLimits: CN_IMAGE_LIMITS_50,
+		// Forced thinker on 2026-09-24; `disabled` accepted and honoured live
+		// 2026-10-09 (reasoning_tokens 0), so "off" is a real option again.
+		thinking: { kind: "dynamic" },
 		cny: { input: 2, output: 6, cacheRead: 0.4 },
 		cnyTiers: [tier32K({ input: 4, output: 12, cacheRead: 0.8 })],
 	},
@@ -362,6 +445,11 @@ export const CATALOG: readonly CatalogEntry[] = [
 		contextWindow: CTX_64K,
 		maxTokens: OUT_16K,
 		input: ["text", "image"],
+		imageLimits: CN_IMAGE_LIMITS,
+		// `always`, but not because the gateway rejects `disabled` — it answers
+		// 200 either way (live 2026-10-09). This model emits its reasoning as a
+		// `<think>` block inside `content` and never fills reasoning_content, so
+		// "off" would change nothing and is hidden from pi's picker.
 		thinking: { kind: "always" },
 		cny: { input: 0, output: 0, cacheRead: 0 },
 	},
@@ -371,6 +459,8 @@ export const CATALOG: readonly CatalogEntry[] = [
 		contextWindow: CTX_64K,
 		maxTokens: OUT_16K,
 		input: ["text", "image"],
+		imageLimits: CN_IMAGE_LIMITS,
+		// Same text-embedded thinking as the free sibling (probed live 2026-10-09).
 		thinking: { kind: "always" },
 		cny: { input: 2, output: 2, cacheRead: 0 },
 	},
@@ -380,8 +470,5 @@ export const CATALOG_BY_ID: ReadonlyMap<string, CatalogEntry> = new Map(
 	CATALOG.map((entry) => [entry.id, entry]),
 );
 
-/** Image-input models that ship documented resize limits (same model as z.ai's). */
-export const IMAGE_LIMITS_BY_ID: ReadonlyMap<string, object> = new Map([
-	["glm-5.3-flash", GLM53_FLASH_IMAGE_LIMITS],
-	["glm-5.3-flashx", GLM53_FLASH_IMAGE_LIMITS],
-]);
+/** Every image-capable entry carries documented limits (see CN_IMAGE_LIMITS*). */
+export const IMAGE_MODEL_IDS: readonly string[] = CATALOG.filter((e) => e.input.includes("image")).map((e) => e.id);
