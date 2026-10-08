@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test, { describe } from "node:test";
-import { CATALOG, CATALOG_BY_ID, type CnyTier } from "../catalog.ts";
+import { CATALOG, CATALOG_BY_ID, IMAGE_MODEL_IDS, type CnyTier } from "../catalog.ts";
 import { DEFAULT_BASE_URL } from "../models.ts";
 
 /** Exact live listing of `GET /models` on open.bigmodel.cn, 2026-09-24. */
@@ -65,6 +65,28 @@ describe("catalog invariants", () => {
 				`${entry.id}: cacheRead ¥${entry.cny.cacheRead} > input ¥${entry.cny.input}`,
 			);
 		}
+	});
+
+	test("every image-capable entry carries documented limits", () => {
+		// IMAGE_LIMITS_BY_ID used to sit here unused, so pi silently applied its
+		// own default resize profile. The invariant that would have caught it:
+		assert.ok(IMAGE_MODEL_IDS.length >= 8, `expected the VLM families, got ${IMAGE_MODEL_IDS.length}`);
+		for (const id of IMAGE_MODEL_IDS) {
+			const entry = CATALOG_BY_ID.get(id)!;
+			assert.ok(entry.input.includes("image"), id);
+			assert.ok(entry.imageLimits?.images?.resize, `${id}: no documented resize limits`);
+			assert.equal(entry.imageLimits!.images!.resize!.maxWidth, 6000, id);
+		}
+		for (const entry of CATALOG) {
+			if (!entry.input.includes("image")) assert.equal(entry.imageLimits, undefined, entry.id);
+		}
+	});
+
+	test("retirement marks are recorded where the vendor announced them", () => {
+		// model-overview marks glm-4.5-flash 即将下线 without a date (2026-10-09).
+		// It stays in the catalog until the gateway rejects it; the mark exists so
+		// the next maintainer knows it was seen, not missed.
+		assert.match(CATALOG_BY_ID.get("glm-4.5-flash")!.retiring ?? "", /即将下线/);
 	});
 
 	test("every model in the live /models listing is curated", () => {
