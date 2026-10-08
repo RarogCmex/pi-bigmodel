@@ -1,0 +1,1698 @@
+{
+ "stage": "free",
+ "at": "2026-10-08T17:55:34.142Z",
+ "records": [
+  {
+   "label": "GET /models",
+   "status": 200,
+   "ids": [
+    "glm-4.5",
+    "glm-4.5-air",
+    "glm-4.6",
+    "glm-4.7",
+    "glm-5",
+    "glm-5-turbo",
+    "glm-5.1",
+    "glm-5.2",
+    "glm-5.3",
+    "glm-5.3-flash",
+    "glm-5.3-flashx"
+   ]
+  },
+  {
+   "label": "thinking:disabled glm-4.7-flash",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.7-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 429,
+   "error": {
+    "code": "1305",
+    "message": "该模型当前访问量过大，请您稍后再试"
+   }
+  },
+  {
+   "label": "thinking:disabled glm-4.5-flash",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-4.5-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 10,
+    "prompt_tokens_details": {
+     "cached_tokens": 4
+    },
+    "total_tokens": 11
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-4-flash-250414",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4-flash-250414",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-4-flash-250414",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 6,
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-4.1v-thinking-flash",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.1v-thinking-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-4.1v-thinking-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 7,
+    "total_tokens": 8
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-4.6v-flash",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.6v-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-4.6v-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "prompt_tokens": 11,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 12
+   },
+   "finish": "length"
+  },
+  {
+   "label": "effort=low glm-4.7-flash (expect reject)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.7-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "enabled"
+    },
+    "reasoning_effort": "low"
+   },
+   "status": 200,
+   "model": "glm-4.7-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 1
+    },
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 2
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "effort=max glm-4.5-flash (expect reject)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "enabled"
+    },
+    "reasoning_effort": "max"
+   },
+   "status": 200,
+   "model": "glm-4.5-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 5
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "max_tokens=99999999 glm-4.5-flash",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 99999999
+   },
+   "status": 400,
+   "error": {
+    "code": "1210",
+    "message": "max_tokens参数非法：限制数值范围[1,98304]"
+   }
+  },
+  {
+   "label": "max_tokens=99999999 glm-4.7-flash",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.7-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 99999999
+   },
+   "status": 400,
+   "error": {
+    "code": "1210",
+    "message": "max_tokens参数非法：限制数值范围[1,131072]"
+   }
+  },
+  {
+   "label": "tool_stream glm-4.5-flash (not in doc list)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Look up the weather for a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     }
+    ],
+    "tool_stream": true
+   },
+   "status": 200,
+   "model": "glm-4.5-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 159,
+    "prompt_tokens_details": {
+     "cached_tokens": 43
+    },
+    "total_tokens": 160
+   },
+   "finish": "length"
+  },
+  {
+   "label": "tool_stream glm-4-flash-250414 (not in doc list)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4-flash-250414",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Look up the weather for a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     }
+    ],
+    "tool_stream": true
+   },
+   "status": 200,
+   "model": "glm-4-flash-250414",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 102,
+    "total_tokens": 103
+   },
+   "finish": "length"
+  },
+  {
+   "label": "strict:true tool glm-4.5-flash",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Look up the weather for a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       },
+       "strict": true
+      }
+     }
+    ]
+   },
+   "status": 200,
+   "model": "glm-4.5-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 159,
+    "prompt_tokens_details": {
+     "cached_tokens": 90
+    },
+    "total_tokens": 160
+   },
+   "finish": "length"
+  },
+  {
+   "label": "response_format json_object",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 23
+     }
+    ],
+    "max_tokens": 20,
+    "response_format": {
+     "type": "json_object"
+    }
+   },
+   "status": 200,
+   "model": "glm-4.5-flash",
+   "usage": {
+    "completion_tokens": 20,
+    "prompt_tokens": 66,
+    "prompt_tokens_details": {
+     "cached_tokens": 56
+    },
+    "total_tokens": 86
+   },
+   "finish": "length"
+  },
+  {
+   "label": "stream_options include_usage",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "stream": true,
+    "stream_options": {
+     "include_usage": true
+    }
+   },
+   "status": 200,
+   "rawBody": "data: {\"id\":\"20261009015456dfa744dc7c144abe\",\"created\":1791482096,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.5-flash\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"reasoning_content\":\"\\n\"}}]}\n\ndata: {\"id\":\"20261009015456dfa744dc7c144abe\",\"created\":1791482096,\"object\":\"chat.completion.chunk\",\"model\":\"glm-4.5-flash\",\"choices\":[{\"index\":0,\"finish_reason\":\"length\",\"delta\":{\"role\":\"assistant\""
+  },
+  {
+   "label": "store:false (we declare supportsStore=false)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "store": false
+   },
+   "status": 200,
+   "model": "glm-4.5-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 5
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "prompt_cache_retention (declared false)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "prompt_cache_retention": "24h"
+   },
+   "status": 200,
+   "model": "glm-4.5-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 5
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "prompt_cache_key (never sent by pi here)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "prompt_cache_key": "pi-probe"
+   },
+   "status": 200,
+   "model": "glm-4.5-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 5
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "clear_thinking:false (pi sends this)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "enabled",
+     "clear_thinking": false
+    }
+   },
+   "status": 200,
+   "model": "glm-4.5-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 5
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "cache probe #1 (~4969 chars)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "system",
+      "len": 4969
+     },
+     {
+      "role": "user",
+      "len": 10
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "enabled",
+     "clear_thinking": false
+    }
+   },
+   "status": 200,
+   "model": "glm-4.5-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 1510,
+    "prompt_tokens_details": {
+     "cached_tokens": 4
+    },
+    "total_tokens": 1511
+   },
+   "finish": "length"
+  },
+  {
+   "label": "cache probe #2 (~4969 chars)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "system",
+      "len": 4969
+     },
+     {
+      "role": "user",
+      "len": 10
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "enabled",
+     "clear_thinking": false
+    }
+   },
+   "status": 200,
+   "model": "glm-4.5-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 1510,
+    "prompt_tokens_details": {
+     "cached_tokens": 1508
+    },
+    "total_tokens": 1511
+   },
+   "finish": "length"
+  },
+  {
+   "label": "cache probe #3 (~4969 chars)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "system",
+      "len": 4969
+     },
+     {
+      "role": "user",
+      "len": 10
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "enabled",
+     "clear_thinking": false
+    }
+   },
+   "status": 200,
+   "model": "glm-4.5-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 1510,
+    "prompt_tokens_details": {
+     "cached_tokens": 1508
+    },
+    "total_tokens": 1511
+   },
+   "finish": "length"
+  },
+  {
+   "label": "overflow 200K tokens glm-4.5-flash (3.9MB)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 3888897
+     }
+    ],
+    "max_tokens": 1
+   },
+   "status": 400,
+   "error": {
+    "code": "1261",
+    "message": "Prompt exceeds max length"
+   },
+   "rawBody": "{\"error\":{\"code\":\"1261\",\"message\":\"Prompt exceeds max length\"}}"
+  },
+  {
+   "label": "POST /api/v1/responses (existence)",
+   "url": "…/api/v1/responses",
+   "body": {
+    "model": "definitely-not-a-model",
+    "input": "hi"
+   },
+   "status": 400,
+   "error": {
+    "code": "model_not_found",
+    "message": "模型不存在，请检查模型代码。"
+   }
+  },
+  {
+   "label": "POST /api/anthropic/v1/messages (existence)",
+   "url": "…/api/anthropic/v1/messages",
+   "body": {
+    "model": "definitely-not-a-model",
+    "max_tokens": 1,
+    "messages": [
+     {
+      "role": "user",
+      "len": 2
+     }
+    ]
+   },
+   "status": 400,
+   "error": {
+    "code": "1211",
+    "message": "[1211][模型不存在，请检查模型代码。][20261009015533c889cdea19ff404c]"
+   }
+  }
+ ]
+}
+---
+{
+ "stage": "paid",
+ "at": "2026-10-08T18:00:25.933Z",
+ "records": [
+  {
+   "label": "thinking:disabled glm-5.3",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-5.3",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 400,
+   "error": {
+    "code": "1210",
+    "message": "该模型始终思考，不支持关闭思考；请使用 low、high 或 max。"
+   }
+  },
+  {
+   "label": "thinking:disabled glm-5.3-flash",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-5.3-flash",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 400,
+   "error": {
+    "code": "1210",
+    "message": "该模型始终思考，不支持关闭思考；请使用 low、high 或 max。"
+   }
+  },
+  {
+   "label": "thinking:disabled glm-5.3-flashx",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-5.3-flashx",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 400,
+   "error": {
+    "code": "1210",
+    "message": "该模型始终思考，不支持关闭思考；请使用 low、high 或 max。"
+   }
+  },
+  {
+   "label": "thinking:disabled glm-5.2",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-5.2",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-5.2",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "prompt_tokens": 7,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 8
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-5.1",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-5.1",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-5.1",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-5-turbo",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-5-turbo",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-5-turbo",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-5",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-5",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-5",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 7,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 8
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-4.7",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.7",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-4.7",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-4.7-flashx",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.7-flashx",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": "ERR",
+   "error": {
+    "message": "TimeoutError: The operation was aborted due to timeout"
+   }
+  },
+  {
+   "label": "thinking:disabled glm-4.6",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.6",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-4.6",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-4.5",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-4.5",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-4.5-air",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-air",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-4.5-air",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 10,
+    "prompt_tokens_details": {
+     "cached_tokens": 4
+    },
+    "total_tokens": 11
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-4.5-airx",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-airx",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-4.5-airx",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 10,
+    "prompt_tokens_details": {
+     "cached_tokens": 9
+    },
+    "total_tokens": 11
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-4-flashx-250414",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4-flashx-250414",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-4-flashx-250414",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 6,
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-5v-turbo",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-5v-turbo",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-5v-turbo",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-4.6v",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.6v",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-4.6v",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "prompt_tokens": 11,
+    "prompt_tokens_details": {
+     "cached_tokens": 4
+    },
+    "total_tokens": 12
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-4.6v-flashx",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.6v-flashx",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-4.6v-flashx",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "prompt_tokens": 11,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 12
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-4.5v",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5v",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-4.5v",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 2
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "thinking:disabled glm-4.1v-thinking-flashx",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.1v-thinking-flashx",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 200,
+   "model": "glm-4.1v-thinking-flashx",
+   "usage": {
+    "completion_tokens": 1,
+    "prompt_tokens": 7,
+    "total_tokens": 8
+   },
+   "finish": "length"
+  },
+  {
+   "label": "effort=low glm-5.1 (docs: unsupported)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-5.1",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "enabled"
+    },
+    "reasoning_effort": "low"
+   },
+   "status": 200,
+   "model": "glm-5.1",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 1
+    },
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "effort=low glm-4.7 (docs: unsupported)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.7",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "enabled"
+    },
+    "reasoning_effort": "low"
+   },
+   "status": 200,
+   "model": "glm-4.7",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 1
+    },
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "effort=none glm-5.2 (docs: gives up thinking)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-5.2",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "enabled"
+    },
+    "reasoning_effort": "none"
+   },
+   "status": 200,
+   "model": "glm-5.2",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 1
+    },
+    "prompt_tokens": 13,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 14
+   },
+   "finish": "length"
+  },
+  {
+   "label": "effort=medium glm-5.3 (docs: only low/high/max)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-5.3",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "enabled"
+    },
+    "reasoning_effort": "medium"
+   },
+   "status": 400,
+   "error": {
+    "code": "1210",
+    "message": "该模型始终思考，不支持关闭思考；请使用 low、high 或 max。"
+   }
+  },
+  {
+   "label": "effort=low glm-5v-turbo (docs: unsupported)",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-5v-turbo",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "enabled"
+    },
+    "reasoning_effort": "low"
+   },
+   "status": 200,
+   "model": "glm-5v-turbo",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 1
+    },
+    "prompt_tokens": 6,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 7
+   },
+   "finish": "length"
+  },
+  {
+   "label": "max_tokens=99999999 glm-4.5-air",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-4.5-air",
+    "messages": [
+     {
+      "role": "user",
+      "len": 1
+     }
+    ],
+    "max_tokens": 99999999,
+    "thinking": {
+     "type": "disabled"
+    }
+   },
+   "status": 400,
+   "error": {
+    "code": "1210",
+    "message": "max_tokens参数非法：限制数值范围[1,98304]"
+   }
+  },
+  {
+   "label": "paid cache probe #1 glm-5.3-flash",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-5.3-flash",
+    "messages": [
+     {
+      "role": "system",
+      "len": 8069
+     },
+     {
+      "role": "user",
+      "len": 2
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "enabled",
+     "clear_thinking": false
+    },
+    "reasoning_effort": "low"
+   },
+   "status": 200,
+   "model": "glm-5.3-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "prompt_tokens": 2335,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 2336
+   },
+   "finish": "length"
+  },
+  {
+   "label": "paid cache probe #2 glm-5.3-flash",
+   "url": "…/api/paas/v4/chat/completions",
+   "body": {
+    "model": "glm-5.3-flash",
+    "messages": [
+     {
+      "role": "system",
+      "len": 8069
+     },
+     {
+      "role": "user",
+      "len": 2
+     }
+    ],
+    "max_tokens": 1,
+    "thinking": {
+     "type": "enabled",
+     "clear_thinking": false
+    },
+    "reasoning_effort": "low"
+   },
+   "status": 200,
+   "model": "glm-5.3-flash",
+   "usage": {
+    "completion_tokens": 1,
+    "completion_tokens_details": {
+     "reasoning_tokens": 1
+    },
+    "prompt_tokens": 2335,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "total_tokens": 2336
+   },
+   "finish": "length"
+  }
+ ]
+}
+---
+
+---
+{
+ "stage": "followup2",
+ "at": "2026-10-08T18:03:30.405Z",
+ "records": [
+  {
+   "label": "glm-4.7 disabled",
+   "model": "glm-4.7",
+   "status": 200,
+   "content": "156",
+   "reasoning": "",
+   "reasonTok": 0,
+   "out": 2,
+   "cached": 0,
+   "prompt": 18,
+   "echoedModel": "glm-4.7"
+  },
+  {
+   "label": "glm-4.7 enabled",
+   "model": "glm-4.7",
+   "status": 200,
+   "content": "",
+   "reasoning": "1.  Identify the core question: 12 * 13.\n2.  Perform the mul",
+   "reasonTok": 64,
+   "out": 64,
+   "cached": 0,
+   "prompt": 18,
+   "echoedModel": "glm-4.7"
+  },
+  {
+   "label": "glm-4.5v disabled",
+   "model": "glm-4.5v",
+   "status": 200,
+   "content": "156",
+   "reasoning": "",
+   "reasonTok": 0,
+   "out": 2,
+   "cached": 0,
+   "prompt": 18,
+   "echoedModel": "glm-4.5v"
+  },
+  {
+   "label": "glm-4.5v enabled",
+   "model": "glm-4.5v",
+   "status": 200,
+   "content": "",
+   "reasoning": "The user is asking for the product of 12 and 13.\nI need to c",
+   "reasonTok": 64,
+   "out": 64,
+   "cached": 0,
+   "prompt": 18,
+   "echoedModel": "glm-4.5v"
+  },
+  {
+   "label": "glm-4.1v-thinking-flashx disabled",
+   "model": "glm-4.1v-thinking-flashx",
+   "status": 200,
+   "content": "<think>Got it, let's calculate 12 multiplied by 13. One way to do this is to bre",
+   "reasoning": "",
+   "out": 64,
+   "prompt": 19,
+   "echoedModel": "glm-4.1v-thinking-flashx"
+  },
+  {
+   "label": "glm-4.7-flashx disabled (retry)",
+   "model": "glm-4.7-flashx",
+   "status": 200,
+   "content": "156",
+   "reasoning": "",
+   "reasonTok": 0,
+   "out": 2,
+   "cached": 2,
+   "prompt": 18,
+   "echoedModel": "glm-4.7-flashx"
+  },
+  {
+   "label": "glm-5.1 disabled (control)",
+   "model": "glm-5.1",
+   "status": 200,
+   "content": "156",
+   "reasoning": "",
+   "reasonTok": 0,
+   "out": 2,
+   "cached": 0,
+   "prompt": 18,
+   "echoedModel": "glm-5.1"
+  },
+  {
+   "label": "glm-5.1 enabled (control)",
+   "model": "glm-5.1",
+   "status": 200,
+   "content": "",
+   "reasoning": "1.  Identify the core request: Calculate 12 * 13.\n2.  Perfor",
+   "reasonTok": 64,
+   "out": 64,
+   "cached": 0,
+   "prompt": 18,
+   "echoedModel": "glm-5.1"
+  },
+  {
+   "label": "glm-5.3-flash cache #1",
+   "model": "glm-5.3-flash",
+   "status": 200,
+   "content": "",
+   "reasoning": "User",
+   "reasonTok": 1,
+   "out": 1,
+   "cached": 0,
+   "prompt": 2335,
+   "echoedModel": "glm-5.3-flash"
+  },
+  {
+   "label": "glm-5.3-flash cache #2",
+   "model": "glm-5.3-flash",
+   "status": 200,
+   "content": "",
+   "reasoning": "We",
+   "reasonTok": 1,
+   "out": 1,
+   "cached": 0,
+   "prompt": 2335,
+   "echoedModel": "glm-5.3-flash"
+  },
+  {
+   "label": "glm-5.3-flash cache #3",
+   "model": "glm-5.3-flash",
+   "status": 200,
+   "content": "",
+   "reasoning": "The",
+   "reasonTok": 1,
+   "out": 1,
+   "cached": 0,
+   "prompt": 2335,
+   "echoedModel": "glm-5.3-flash"
+  },
+  {
+   "label": "glm-4.7 cache #1",
+   "model": "glm-4.7",
+   "status": 200,
+   "content": "A",
+   "reasoning": "",
+   "reasonTok": 0,
+   "out": 1,
+   "cached": 0,
+   "prompt": 2328,
+   "echoedModel": "glm-4.7"
+  },
+  {
+   "label": "glm-4.7 cache #2",
+   "model": "glm-4.7",
+   "status": 200,
+   "content": "q",
+   "reasoning": "",
+   "reasonTok": 0,
+   "out": 1,
+   "cached": 0,
+   "prompt": 2328,
+   "echoedModel": "glm-4.7"
+  }
+ ]
+}
+
+---
+{
+ "stage": "cache-characterisation",
+ "at": "2026-10-08T18:05:50.344Z",
+ "records": [
+  {
+   "label": "glm-4.7 delayed re-send (same prefix)",
+   "model": "glm-4.7",
+   "status": 200,
+   "prompt": 2329,
+   "cached": 2304,
+   "at": "2026-10-08T18:04:26.178Z"
+  },
+  {
+   "label": "glm-4.7 delayed re-send #2",
+   "model": "glm-4.7",
+   "status": 200,
+   "prompt": 2330,
+   "cached": 2304,
+   "at": "2026-10-08T18:04:49.273Z"
+  },
+  {
+   "label": "glm-4.5-flash control #1",
+   "model": "glm-4.5-flash",
+   "status": 200,
+   "prompt": 2333,
+   "cached": 4,
+   "at": "2026-10-08T18:04:56.035Z"
+  },
+  {
+   "label": "glm-4.5-flash control #2",
+   "model": "glm-4.5-flash",
+   "status": 200,
+   "prompt": 2333,
+   "cached": 2327,
+   "at": "2026-10-08T18:05:13.717Z"
+  },
+  {
+   "label": "glm-4.7 2x prefix #1",
+   "model": "glm-4.7",
+   "status": 200,
+   "prompt": 4648,
+   "cached": 2304,
+   "at": "2026-10-08T18:05:16.845Z"
+  },
+  {
+   "label": "glm-4.7 2x prefix #2",
+   "model": "glm-4.7",
+   "status": 200,
+   "prompt": 4648,
+   "cached": 4608,
+   "at": "2026-10-08T18:05:50.344Z"
+  }
+ ]
+}
