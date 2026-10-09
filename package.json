@@ -1,7 +1,7 @@
 {
   "name": "@rarogcmex/pi-bigmodel",
-  "version": "0.4.0",
-  "description": "BigModel (Zhipu AI, open.bigmodel.cn) provider for pi — curated CN catalog with CNY-derived pricing, two wire protocols (OpenAI Responses API by default, chat completions via BIGMODEL_PROTOCOL), real GLM thinking semantics, documented image limits, gateway error rewrites (overflow/balance/plan/in-band 401), /login, additive live overlay from GET /models, plus a billed web-search sidecar (bigmodel_search, codemode-exposed).",
+  "version": "0.5.0",
+  "description": "BigModel (Zhipu AI, open.bigmodel.cn) provider for pi — curated CN catalog with CNY-derived pricing, two wire protocols (OpenAI Responses API by default, chat completions via BIGMODEL_PROTOCOL), real GLM thinking semantics, documented image limits, gateway error rewrites (overflow/balance/plan/in-band 401), /login, additive live overlay from GET /models, plus a billed web-search sidecar (bigmodel_search, codemode-exposed). Bilingual messages: English by default, Russian via PI_BIGMODEL_LANG.",
   "type": "module",
   "license": "MIT",
   "engines": {

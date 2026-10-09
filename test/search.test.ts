@@ -11,6 +11,7 @@
 
 import assert from "node:assert/strict";
 import test, { afterEach, beforeEach, describe, it } from "node:test";
+import { setLocale } from "../i18n.ts";
 import { mkdtempSync, rmSync, writeFileSync, mkdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -201,7 +202,7 @@ describe("formatting", () => {
 		assert.ok(text.includes("[1] 德国“主权 AI”自曝"));
 		assert.ok(text.includes("2026-10-04"));
 		assert.ok(!text.includes("    https://"), "empty links must not render url lines");
-		assert.ok(text.includes("движок: search_std"));
+		assert.ok(text.includes("engine: search_std"));
 		assert.ok(text.includes("¥0.01"));
 	});
 
@@ -214,40 +215,53 @@ describe("formatting", () => {
 		const parsed = parseAskResponse(fixtures.chatSearch);
 		const text = formatAskText(parsed, "glm-4-flash-250414", "search_std");
 		assert.ok(text.includes("智谱AI最新发布的模型是GLM-6.0。"));
-		assert.ok(text.includes("источники:"));
-		assert.ok(text.includes("модель: glm-4-flash-250414 (бесплатная)"));
+		assert.ok(text.includes("sources:"));
+		assert.ok(text.includes("model: glm-4-flash-250414 (free)"));
 	});
 });
 
 // ── Error mapping (fixtures are live bodies) ────────────────────────────────
 
 describe("error mapping", () => {
+	it("Russian is an option, not the default: setLocale('ru') switches the messages", () => {
+		setLocale("ru");
+		try {
+			const ru = searchErrorMessage(429, fixtures.errors.balance);
+			assert.ok(ru.includes("на счете нет средств"));
+			assert.ok(ru.includes("¥0.01"));
+			setLocale("en");
+			assert.ok(searchErrorMessage(429, fixtures.errors.balance).includes("no funds"));
+		} finally {
+			setLocale("en"); // the offline suite's pinned locale
+		}
+	});
+
 	it("429/1113 → billing message with the per-call prices", () => {
 		const msg = searchErrorMessage(429, fixtures.errors.balance);
-		assert.ok(msg.includes("нет средств"));
+		assert.ok(msg.includes("no funds"));
 		assert.ok(msg.includes("¥0.01"));
 		assert.ok(msg.includes("open.bigmodel.cn"));
-		assert.ok(msg.includes("отказ не тарифицируется"));
+		assert.ok(msg.includes("rejections are not billed"));
 	});
 
 	it("400/1211 → engine vocabulary (engines are models to this endpoint)", () => {
 		const msg = searchErrorMessage(400, fixtures.errors.engine);
-		assert.ok(msg.includes("неизвестный поисковый движок"));
+		assert.ok(msg.includes("unknown search engine"));
 		assert.ok(msg.includes("search_std, search_pro, search_pro_sogou, search_pro_quark"));
 	});
 
 	it("429/1305 → transient overload, retry later", () => {
 		const msg = searchErrorMessage(429, fixtures.errors.throttle);
-		assert.ok(msg.includes("перегружен"));
-		assert.ok(msg.includes("Повторите"));
+		assert.ok(msg.includes("overloaded"));
+		assert.ok(msg.includes("Retry later"));
 	});
 
 	it("401 and auth codes → key guidance", () => {
 		const msg = searchErrorMessage(401, { error: { code: "1000", message: "身份验证失败。" } });
-		assert.ok(msg.includes("ключ недействителен"));
+		assert.ok(msg.includes("the key is invalid"));
 		assert.ok(msg.includes("/login bigmodel"));
 		const viaCode = searchErrorMessage(200, { error: { code: "1003", message: "令牌已过期" } });
-		assert.ok(viaCode.includes("ключ недействителен"));
+		assert.ok(viaCode.includes("the key is invalid"));
 	});
 
 	it("anything else → status + code + message, no invention", () => {
@@ -339,7 +353,7 @@ describe("execute", () => {
 		const tool = buildSearchTool({}, { agentDir: () => dir, fetch: stubFetch(200, ungrounded), env: (n) => realEnv[n] });
 		await assert.rejects(
 			tool.execute("call-2b", { action: "ask", task: "智谱AI最新发布的模型是什么？" } as SearchToolParams, undefined, undefined, {} as never),
-			/встроенный поиск не выполнился.*не подкрепл[её]н источниками/s,
+			/builtin search did not run.*not backed by sources/s,
 		);
 	});
 
@@ -358,7 +372,7 @@ describe("execute", () => {
 		const tool = buildSearchTool({}, { agentDir: () => dir, fetch: stubFetch(429, fixtures.errors.balance), env: (n) => realEnv[n] });
 		await assert.rejects(
 			tool.execute("call-4", { action: "search", task: "q" } as SearchToolParams, undefined, undefined, {} as never),
-			/нет средств.*¥0\.01/s,
+			/no funds.*¥0\.01/s,
 		);
 	});
 

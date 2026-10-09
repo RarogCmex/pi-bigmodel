@@ -31,6 +31,7 @@ import { mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { API_KEYS_URL } from "./errors.ts";
+import { t } from "./i18n.ts";
 import { resolveBaseUrl } from "./models.ts";
 import type { AgentToolResult, ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
@@ -266,7 +267,7 @@ function str(v: unknown): string {
 	return typeof v === "string" ? v : "";
 }
 
-// ── Error mapping (Russian, the plugin's user-facing voice) ────────────────
+// ── Error mapping (bilingual via i18n.ts; English by default) ────────────────
 //
 // The gateway's own order (measured): billing first (429/1113 on an empty
 // balance arrives even for an invalid engine), then engine validation
@@ -277,25 +278,22 @@ export function searchErrorMessage(status: number, body: unknown): string {
 	const code = String(err?.code ?? "");
 	const message = String(err?.message ?? "");
 	if (status === 429 && (code === "1113" || message.includes("余额不足"))) {
-		return (
-			"BigModel: на счете нет средств. Поиск тарифицируется за вызов — ¥0.01 (search_std), " +
-			"¥0.03 (search_pro), ¥0.05 (search_pro_sogou/search_pro_quark); отказ не тарифицируется. " +
-			`Пополните баланс: ${API_KEYS_URL}`
-		);
+		return t("searchBilling", { keysUrl: API_KEYS_URL });
 	}
 	if (status === 400 && code === "1211") {
-		return `BigModel: неизвестный поисковый движок (${message}). Допустимые: ${SEARCH_ENGINES.join(", ")}.`;
+		return t("searchEngine", { message, engines: SEARCH_ENGINES.join(", ") });
 	}
 	if (status === 401 || ["1000", "1001", "1003", "1005"].includes(code)) {
-		return `BigModel: ключ недействителен, отозван или истёк (${message}). Проверьте ключ: ${API_KEYS_URL} — затем \`/login bigmodel\` или BIGMODEL_API_KEY.`;
+		return t("searchAuth", { message, keysUrl: API_KEYS_URL });
 	}
 	if (status === 429 && ["1302", "1305", "1313"].includes(code)) {
-		return `BigModel: сервис перегружен или сработал rate limit (${message}). Повторите вызов позже.`;
+		return t("searchThrottle", { message });
 	}
-	return `BigModel web search: HTTP ${status}${code ? ` code ${code}` : ""}${message ? ` — ${message}` : ""}.`;
+	return t("searchGeneric", { status, codePart: code ? ` code ${code}` : "", message });
 }
 
-// ── Output formatting ──────────────────────────────────────────────────────
+
+// ── Output formatting (model-facing: English only; i18n covers what the USER reads) ──────────────────────────────────────────────────────
 
 const SNIPPET_CHARS = 480;
 const TOTAL_CHARS = 20_000;
@@ -303,28 +301,28 @@ const TOTAL_CHARS = 20_000;
 export function formatSearchText(parsed: ParsedSearch, engine: SearchEngine): string {
 	const lines: string[] = [];
 	if (parsed.intent || parsed.keywords) {
-		lines.push(`intent: ${parsed.intent ?? "?"}${parsed.keywords ? ` («${parsed.keywords}»)` : ""}`);
+		lines.push(`intent: ${parsed.intent ?? "?"}${parsed.keywords ? ` ("${parsed.keywords}")` : ""}`);
 	}
 	parsed.hits.forEach((h, i) => {
-		lines.push(`[${i + 1}] ${h.title || "(без заголовка)"}${h.media ? ` — ${h.media}` : ""}${h.published ? `, ${h.published}` : ""}`);
+		lines.push(`[${i + 1}] ${h.title || "(no title)"}${h.media ? ` — ${h.media}` : ""}${h.published ? `, ${h.published}` : ""}`);
 		if (h.url) lines.push(`    ${h.url}`);
 		const snippet = truncate(h.snippet, SNIPPET_CHARS);
 		if (snippet) lines.push(`    ${snippet.replace(/\s+/g, " ").trim()}`);
 	});
-	if (!parsed.hits.length) lines.push("(результатов нет)");
-	lines.push("", `движок: ${engine} · результатов: ${parsed.hits.length} · стоимость вызова: ¥${SEARCH_ENGINE_PRICES[engine].toFixed(2)}`);
+	if (!parsed.hits.length) lines.push("(no results)");
+	lines.push("", `engine: ${engine} · results: ${parsed.hits.length} · call cost: ¥${SEARCH_ENGINE_PRICES[engine].toFixed(2)}`);
 	return truncate(lines.join("\n"), TOTAL_CHARS);
 }
 
 export function formatAskText(parsed: ParsedAsk, model: string, engine: SearchEngine): string {
-	const lines: string[] = [parsed.answer.trim() || "(пустой ответ)"];
+	const lines: string[] = [parsed.answer.trim() || "(empty answer)"];
 	if (parsed.hits.length) {
-		lines.push("", "источники:");
+		lines.push("", "sources:");
 		parsed.hits.forEach((h, i) => {
-			lines.push(`[${i + 1}] ${h.title || h.url || "(без заголовка)"}${h.url ? `\n    ${h.url}` : ""}`);
+			lines.push(`[${i + 1}] ${h.title || h.url || "(no title)"}${h.url ? `\n    ${h.url}` : ""}`);
 		});
 	}
-	lines.push("", `модель: ${model} (бесплатная) · движок: ${engine} · стоимость: ¥${SEARCH_ENGINE_PRICES[engine].toFixed(2)} за поисковый вызов`);
+	lines.push("", `model: ${model} (free) · engine: ${engine} · cost: ¥${SEARCH_ENGINE_PRICES[engine].toFixed(2)} per search call`);
 	return truncate(lines.join("\n"), TOTAL_CHARS);
 }
 
@@ -480,10 +478,7 @@ export function buildSearchTool(cfg: SearchConfig, deps: SearchToolDeps): Regist
 
 			const key = readStoredApiKey(deps.agentDir()) ?? env("BIGMODEL_API_KEY");
 			if (!key) {
-				throw new Error(
-					"Нет ключа BigModel. Выполните `/login bigmodel` или задайте BIGMODEL_API_KEY — " +
-						"сайдкар поиска использует тот же ключ, что и провайдер.",
-				);
+				throw new Error(t("searchNoKey"));
 			}
 
 			if (action === "ask") {
@@ -497,11 +492,7 @@ export function buildSearchTool(cfg: SearchConfig, deps: SearchToolDeps): Regist
 				// skip would sell an ungrounded answer as a search-grounded one —
 				// fail loudly instead.
 				if (!parsed.searched) {
-					throw new Error(
-						"BigModel: встроенный поиск не выполнился — в ответе нет массива web_search. " +
-							"Наиболее вероятная причина — отсутствие средств: поиск в chat тарифицируется (¥0.01 std / ¥0.03 pro / ¥0.05 sogou|quark). " +
-							`Ответ модели отброшен, он не подкреплён источниками. Пополните баланс: ${API_KEYS_URL}`,
-					);
+					throw new Error(t("searchUngrounded", { keysUrl: API_KEYS_URL }));
 				}
 				return {
 					content: [{ type: "text", text: formatAskText(parsed, model, engine) }],

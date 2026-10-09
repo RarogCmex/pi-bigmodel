@@ -85,7 +85,9 @@ import {
 	normalizeOverflowError,
 	shouldClarify,
 } from "./errors.ts";
+import { t } from "./i18n.ts";
 import { PROVIDER_ID, resolveProtocol } from "./models.ts";
+import { API_KEYS_URL } from "./errors.ts";
 import { buildBigModelProvider, withGatewayErrorRemediation } from "./provider.ts";
 import {
 	buildSearchTool,
@@ -176,9 +178,7 @@ export default function (pi: ExtensionAPI) {
     if (event.entries.some((e) => (e as { customType?: string }).customType === customType)) return;
     const content = limitKind
       ? limitHelpEntryContent(limitKind)
-      : "BigModel (Zhipu AI): ключ недействителен, отозван или истёк. " +
-        "Проверьте ключ и баланс: https://open.bigmodel.cn/usercenter/proj-mgmt/apikeys — " +
-        "затем выполните `/login bigmodel` или обновите `BIGMODEL_API_KEY`.";
+      : t("authHelpEntry", { keysUrl: API_KEYS_URL });
     return {
       entries: [...event.entries, { type: "custom_message", customType, content, display: true }],
     };
@@ -211,69 +211,76 @@ export default function (pi: ExtensionAPI) {
   }
 
   // ── Command: /bigmodel ────────────────────────────────────────────────
+  // Menu labels are localized, but the selected option is matched by INDEX,
+  // not by substring: a locale switch between renders must not reroute a pick.
   pi.registerCommand("bigmodel", {
-    description: "Поиск BigModel: сайдкар bigmodel_search (экспозиция, движок, модель для ask)",
+    description: "BigModel search sidecar: exposure, default engine, ask model",
     handler: async (_args: string, ctx: ExtensionCommandContext) => {
       const dir = fallbackAgentDir();
       const cfg = loadSearchConfig(dir);
-      const choice = await ctx.ui.select("BigModel:", [
-        "Статус",
-        `Поиск — экспозиция инструмента (сейчас: ${resolveSearchExposure(cfg)})`,
-        `Поиск — движок по умолчанию (сейчас: ${resolveSearchEngine(cfg)}, ¥${SEARCH_ENGINE_PRICES[resolveSearchEngine(cfg)].toFixed(2)}/вызов)`,
-        `Поиск — модель для action=ask (сейчас: ${resolveAskModel(cfg)})`,
-      ]);
+      const options = [
+        t("menuStatus"),
+        t("menuExposure", { current: resolveSearchExposure(cfg) }),
+        t("menuEngine", { engine: resolveSearchEngine(cfg), price: SEARCH_ENGINE_PRICES[resolveSearchEngine(cfg)].toFixed(2) }),
+        t("menuAskModel", { model: resolveAskModel(cfg) }),
+      ];
+      const choice = await ctx.ui.select("BigModel:", options);
       if (!choice) return;
+      const pick = options.indexOf(choice);
 
-      if (choice === "Статус") {
+      if (pick === 0) {
         const s = searchStatus(cfg);
         const key = readStoredApiKey(dir) ?? process.env?.BIGMODEL_API_KEY;
         ctx.ui.notify(
-          `bigmodel_search: экспозиция ${s.exposure}, движок ${s.engine} (¥${SEARCH_ENGINE_PRICES[s.engine].toFixed(2)}/вызов), ` +
-            `модель ask ${s.askModel}. Ключ: ${key ? "есть" : "нет — /login bigmodel или BIGMODEL_API_KEY"}. ` +
-            `Конфиг: ${searchConfigPath(dir)}`,
+          t("statusNotify", {
+            exposure: s.exposure,
+            engine: s.engine,
+            price: SEARCH_ENGINE_PRICES[s.engine].toFixed(2),
+            askModel: s.askModel,
+            keyState: key ? t("keyPresent") : t("keyMissing"),
+            configPath: searchConfigPath(dir),
+          }),
           "info",
         );
         return;
       }
 
-      if (choice.includes("экспозиция")) {
+      if (pick === 1) {
         const current = resolveSearchExposure(cfg);
-        const options = SEARCH_EXPOSURES.map((e) => `${current === e ? "• " : "  "}${SEARCH_EXPOSURE_LABELS[e]}`);
-        const sel = await ctx.ui.select(`Экспозиция bigmodel_search (сейчас ${current}):`, options);
+        const labels = SEARCH_EXPOSURES.map((e) => `${current === e ? "• " : "  "}${SEARCH_EXPOSURE_LABELS[e]}`);
+        const sel = await ctx.ui.select(t("exposurePrompt", { current }), labels);
         if (!sel) return;
-        const picked = SEARCH_EXPOSURES[options.indexOf(sel)] ?? current;
+        const picked = SEARCH_EXPOSURES[labels.indexOf(sel)] ?? current;
         saveSearchConfig(dir, { ...cfg, searchExposure: picked });
-        const note = picked === "codemode" ? " Требует включённого codemode в pi; без codemode инструмент недостижим." : "";
-        ctx.ui.notify(`Экспозиция bigmodel_search: ${picked}.${note} Перезагрузка…`, "info");
+        const note = picked === "codemode" ? t("codemodeNote") : "";
+        ctx.ui.notify(t("exposureSet", { picked, note }), "info");
         await ctx.reload();
         return;
       }
 
-      if (choice.includes("движок")) {
+      if (pick === 2) {
         const current = resolveSearchEngine(cfg);
-        const options = SEARCH_ENGINES.map((e) => `${current === e ? "• " : "  "}${e} — ¥${SEARCH_ENGINE_PRICES[e].toFixed(2)}/вызов`);
-        const sel = await ctx.ui.select(`Движок по умолчанию (сейчас ${current}):`, options);
+        const labels = SEARCH_ENGINES.map((e) => `${current === e ? "• " : "  "}${e} — ¥${SEARCH_ENGINE_PRICES[e].toFixed(2)}`);
+        const sel = await ctx.ui.select(t("enginePrompt", { current }), labels);
         if (!sel) return;
-        const picked = SEARCH_ENGINES[options.indexOf(sel)] ?? current;
+        const picked = SEARCH_ENGINES[labels.indexOf(sel)] ?? current;
         saveSearchConfig(dir, { ...cfg, searchEngine: picked });
-        ctx.ui.notify(`Движок по умолчанию: ${picked}. Перезагрузка…`, "info");
+        ctx.ui.notify(t("engineSet", { picked }), "info");
         await ctx.reload();
         return;
       }
 
-      if (choice.includes("модель")) {
+      if (pick === 3) {
         const entered = (await ctx.ui.input(
-          `Модель для action=ask (пусто = ${resolveAskModel({})} — бесплатная; сейчас ${resolveAskModel(cfg)}):`,
+          t("askModelPrompt", { defaultModel: resolveAskModel({}), current: resolveAskModel(cfg) }),
         ))?.trim();
         if (entered === undefined) return;
         const next = { ...cfg };
         if (entered) next.askModel = entered;
         else delete next.askModel;
         saveSearchConfig(dir, next);
-        ctx.ui.notify(
-          `Модель ask: ${resolveAskModel(next)}${entered && !/flash/i.test(entered) ? " (не flash — тарифицируется как обычный ход модели поверх поискового вызова)" : ""}. Перезагрузка…`,
-          "info",
-        );
+        const note = entered && !/flash/i.test(entered) ? t("askModelNote") : "";
+        ctx.ui.notify(t("askModelSet", { model: resolveAskModel(next), note }), "info");
         await ctx.reload();
         return;
       }
@@ -294,11 +301,7 @@ export default function (pi: ExtensionAPI) {
   if (requested !== undefined && !recognized) {
     pi.on("session_start", (_event, ctx) => {
       if (!ctx.hasUI) return;
-      ctx.ui.notify(
-        `BigModel: BIGMODEL_PROTOCOL="${requested}" не распознано — зарегистрирован ${api}. ` +
-          `Допустимые значения: responses, completions.`,
-        "warning",
-      );
+      ctx.ui.notify(t("protocolWarning", { requested, api }), "warning");
     });
   }
 }

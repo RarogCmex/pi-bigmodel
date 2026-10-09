@@ -18,6 +18,12 @@
  */
 
 import { registerHooks } from "node:module";
+import { setLocale } from "../i18n.ts";
+
+// The offline suite pins English: assertions on user-facing strings must not
+// depend on the machine's LANG (test/i18n.test.ts exercises both locales
+// explicitly through tIn/setLocale).
+setLocale("en");
 
 registerHooks({
 	resolve(specifier, context, next) {

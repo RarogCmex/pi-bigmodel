@@ -122,24 +122,29 @@ export const BILLING_URL = "https://bigmodel.cn/finance";
 /** Coding Plan overview — the product a `plan`-kind code refers to. */
 export const CODING_PLAN_URL = "https://bigmodel.cn/coding-plan/personal/overview";
 
+import { t } from "./i18n.ts";
+
 /**
  * Rewrites the opaque/Chinese auth failure into a readable, actionable message.
- * Always keeps the original text so nothing is hidden from the user.
+ * Always keeps the original text so nothing is hidden from the user. Bilingual:
+ * English by default, Russian when the locale says so (i18n.ts).
  */
 /** Prefix every rewrite from this file starts with; also the idempotency guard. */
 export const REWRITE_PREFIX = "BigModel (Zhipu AI): ";
-/** Stable opening of the auth rewrite, so `turn_end` can recognise its own text. */
-export const AUTH_REWRITE_MARKER = `${REWRITE_PREFIX}ключ API недействителен`;
+/**
+ * ASCII tag embedded in the auth rewrite (both locales) so `classifyRewritten`
+ * can read it back regardless of the active locale — the same trick the limit
+ * tag uses. The old Russian marker is still recognized for messages written by
+ * pre-i18n versions of this plugin (persisted sessions).
+ */
+export const AUTH_TAG = "[auth]";
+const LEGACY_AUTH_MARKER = `${REWRITE_PREFIX}ключ API недействителен`;
 
 export function clarifyErrorMessage(errorMessage: string): string | undefined {
 	if (!errorMessage) return undefined;
 	if (errorMessage.startsWith(REWRITE_PREFIX)) return undefined; // idempotent
 	if (!AUTH_RE.test(errorMessage)) return undefined;
-	return (
-		`${AUTH_REWRITE_MARKER}, отозван или истёк (либо не передан). ` +
-		`Проверьте ключ: ${API_KEYS_URL} — затем выполните \`/login bigmodel\` ` +
-		`или обновите \`BIGMODEL_API_KEY\`. Исходная ошибка: ${errorMessage}`
-	);
+	return t("authRewrite", { keysUrl: API_KEYS_URL, original: errorMessage });
 }
 
 /**
@@ -187,18 +192,12 @@ const DENY_LIST_TAG: Record<LimitKind, string> = {
 
 const LIMIT_TAG_RE = /\[(billing|quota exceeded) (\d{3,4}|[a-z_]+|-) (balance|quota|plan)\]/;
 
-const LIMIT_ADVICE: Record<LimitKind, string> = {
-	balance:
-		`на аккаунте закончились деньги и нет ресурсных пакетов. Пополните баланс или подключите пакет: ` +
-		`${BILLING_URL}. Бесплатные модели (glm-4.7-flash, glm-4.5-flash, glm-4-flash-250414, glm-4.6v-flash, ` +
-		`glm-4.1v-thinking-flash) продолжают работать и без баланса.`,
-	quota:
-		`достигнут предел использования (лимит сбросится в указанное сервером время). Повторные запросы до сброса ` +
-		`не помогут; при необходимости возьмите модель дешевле или другой ключ.`,
-	plan:
-		`ключ или подписка не дают доступа к этой модели. Ключи GLM Coding Plan работают на эндпоинте ` +
-		`/api/coding/paas/v4 (в pi это встроенный провайдер zai-coding-cn), а этот плагин использует стандартный ` +
-		`/api/paas/v4 с оплатой по факту: ${CODING_PLAN_URL}.`,
+// Locale-independent advice bodies: the URLs are the load-bearing part and the
+// ASCII tag stays ASCII in every locale (i18n.ts).
+const LIMIT_ADVICE: Record<LimitKind, () => string> = {
+	balance: () => t("limitAdviceBalance", { billingUrl: BILLING_URL }),
+	quota: () => t("limitAdviceQuota"),
+	plan: () => t("limitAdvicePlan", { codingPlanUrl: CODING_PLAN_URL }),
 };
 
 /**
@@ -210,7 +209,7 @@ export function clarifyLimitErrorMessage(errorMessage: string): string | undefin
 	const limit = classifyLimitError(errorMessage);
 	if (!limit) return undefined;
 	const tag = `[${DENY_LIST_TAG[limit.kind]} ${limit.code ?? "-"} ${limit.kind}]`;
-	return `BigModel (Zhipu AI): ${LIMIT_ADVICE[limit.kind]} ${tag} Исходная ошибка: ${errorMessage}`;
+	return t("limitRewrite", { advice: LIMIT_ADVICE[limit.kind](), tag, original: errorMessage });
 }
 
 /**
@@ -227,7 +226,7 @@ export function classifyRewritten(
 	if (!errorMessage) return undefined;
 	const tag = LIMIT_TAG_RE.exec(errorMessage);
 	if (tag) return { type: "limit", kind: tag[3] as LimitKind };
-	if (errorMessage.includes(AUTH_REWRITE_MARKER)) return { type: "auth" };
+	if (errorMessage.includes(AUTH_TAG) || errorMessage.includes(LEGACY_AUTH_MARKER)) return { type: "auth" };
 	return undefined;
 }
 
@@ -235,9 +234,9 @@ export function classifyRewritten(
 export function limitHelpEntryContent(kind: LimitKind): string {
 	const suffix =
 		kind === "plan"
-			? `Ключи Coding Plan относятся к другому эндпоинту: ${CODING_PLAN_URL}`
-			: `Баланс и лимиты: ${BILLING_URL} — ключ: ${API_KEYS_URL}`;
-	return `BigModel (Zhipu AI): запрос отклонён не из-за нагрузки, повторные попытки не помогут. ${suffix}`;
+			? t("limitHelpSuffixPlan", { codingPlanUrl: CODING_PLAN_URL })
+			: t("limitHelpSuffixBilling", { billingUrl: BILLING_URL, keysUrl: API_KEYS_URL });
+	return t("limitHelpEntry", { suffix });
 }
 
 /**
