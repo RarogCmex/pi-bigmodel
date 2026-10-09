@@ -17,8 +17,16 @@
  *   error codes            https://docs.bigmodel.cn/cn/api/api-code.md
  *
  * Output caps re-measured live 2026-10-09 from free rejections
- * (`max_tokens: 99999999` → 400 code 1210 "限制数值范围[1,N]"):
- *   glm-4.5-flash 98304 ✓, glm-4.7-flash 131072 ✓, glm-4.5-air 98304 ✓.
+ * (`max_tokens: 99999999` → 400 code 1210 「限制数值范围[1,N]») on BOTH surfaces —
+ * chat completions and /api/v1/responses agree on every id:
+ *   131072  glm-4.5, 4.6, 4.7, 4.7-flash, 4.7-flashx, 5, 5.1, 5.2, 5.3,
+ *           5.3-flash, 5.3-flashx, 5-turbo, 5v-turbo
+ *   98304   glm-4.5-air, 4.5-airx, 4.5-flash
+ *   32768   glm-4.6v, 4.6v-flashx, 4.6v-flash
+ *   16384   glm-4.5v, 4.1v-thinking-flash, 4.1v-thinking-flashx,
+ *           4-flash-250414, 4-flashx-250414
+ * Two catalog entries disagreed and were corrected: glm-4.5 (96K -> 128K) and
+ * glm-4.5v (32K -> 16K).
  *
  * Thinking was re-probed live 2026-10-09 (`thinking:{type:"disabled"}`, then a
  * 64-token generation to see whether reasoning actually stopped):
@@ -60,7 +68,34 @@
 
 import type { ModelInputLimits, ThinkingLevelMap } from "@earendil-works/pi-ai";
 
-export type GatewayApi = "openai-completions";
+/**
+ * The two wire protocols this gateway serves, and the only two this plugin
+ * registers. Both were probed live 2026-10-09 (research/):
+ *
+ *  - `openai-completions` — `POST {base}/chat/completions`, the surface this
+ *    plugin shipped with. Thinking is a first-class request field
+ *    (`thinking:{type:"enabled"|"disabled"}`), so "off" really is off
+ *    (measured: reasoning_tokens 0), and errors carry numeric business codes
+ *    (1113, 1261, 1000…).
+ *  - `openai-responses` — `POST https://open.bigmodel.cn/api/v1/responses`,
+ *    OpenAI-Responses-shaped (`input`, `reasoning.effort`, `max_output_tokens`,
+ *    output items, `response.*` stream events). It is the DEFAULT here because
+ *    it is the only surface that documents `prompt_cache_key` (cluster routing
+ *    for cache hits) and `previous_response_id`. The trade-off, measured: it has
+ *    no working thinking switch — `reasoning.effort:"none"`, an undocumented
+ *    `thinking:{type:"disabled"}` and `do_sample:false` were all accepted and
+ *    all ignored (GLM-4.7 still spent 93-118 reasoning tokens), so "off" is
+ *    hidden from pi on this surface instead of pretending to work. Its errors
+ *    use OpenAI-style string codes (`insufficient_quota`,
+ *    `context_length_exceeded`, `overloaded`) and — unlike every other surface
+ *    here — an auth failure arrives as HTTP 200 with an in-band
+ *    `{code,msg,success:false}` body (see errors.ts `remediateInBandResponse`).
+ *
+ * Every catalog id exists on both (free availability sweep, 2026-10-09: all 24
+ * answered the `max_output_tokens` rejection rather than `model_not_found`, and
+ * the disclosed output caps agreed between the two surfaces on every id).
+ */
+export type GatewayApi = "openai-completions" | "openai-responses";
 
 /** CNY per 1M tokens. `cacheRead` is the 缓存命中 column; 0 when "不支持"/"-". */
 export interface CnyPrice {
@@ -322,7 +357,10 @@ export const CATALOG: readonly CatalogEntry[] = [
 		id: "glm-4.5",
 		name: "GLM-4.5",
 		contextWindow: CTX_128K,
-		maxTokens: OUT_96K,
+		// The docs give 96K for the "GLM-4.5 family", and glm-4.5-air/-airx/-flash
+		// do disclose [1,98304]; this id discloses [1,131072] on BOTH surfaces
+		// (free rejection probe, 2026-10-09). The gateway wins.
+		maxTokens: OUT_128K,
 		input: ["text"],
 		thinking: { kind: "dynamic" },
 		cny: { input: 0, output: 0, cacheRead: 0 },
@@ -430,7 +468,10 @@ export const CATALOG: readonly CatalogEntry[] = [
 		id: "glm-4.5v",
 		name: "GLM-4.5V",
 		contextWindow: CTX_64K,
-		maxTokens: OUT_32K,
+		// Was OUT_32K. Both surfaces disclose [1,16384] (2026-10-09) and the
+		// vision request spec says 「GLM-4.5V最大支持16K输出长度」 — the catalog entry
+		// was simply wrong, and pi would have requested outputs the gateway 400s.
+		maxTokens: OUT_16K,
 		input: ["text", "image"],
 		imageLimits: CN_IMAGE_LIMITS_50,
 		// Forced thinker on 2026-09-24; `disabled` accepted and honoured live

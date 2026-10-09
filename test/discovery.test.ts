@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import test, { describe } from "node:test";
 import { buildOverlay, fetchBigModelModels, parseModelIds } from "../discovery.ts";
+
+const CHAT = "openai-completions" as const;
 import { DEFAULT_BASE_URL } from "../models.ts";
 import { CATALOG_BY_ID } from "../catalog.ts";
 import type { RefreshModelsContext } from "@earendil-works/pi-ai";
@@ -60,23 +62,23 @@ describe("parseModelIds", () => {
 
 describe("buildOverlay", () => {
 	test("known ids produce no overlay — curated prices win", () => {
-		const overlay = buildOverlay(parseModelIds(LIVE_PAYLOAD), DEFAULT_BASE_URL);
+		const overlay = buildOverlay(parseModelIds(LIVE_PAYLOAD), DEFAULT_BASE_URL, CHAT);
 		// Every live id is already curated, so the overlay is empty…
 		assert.deepEqual(overlay.map((m) => m.id), []);
 		// …but a brand-new id would register with family-guessed defaults.
-		const fresh = buildOverlay(["glm-6"], DEFAULT_BASE_URL);
+		const fresh = buildOverlay(["glm-6"], DEFAULT_BASE_URL, CHAT);
 		assert.deepEqual(fresh.map((m) => m.id), ["glm-6"]);
 		assert.deepEqual(fresh[0].cost, { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 });
 	});
 
 	test("excluded families never auto-register", () => {
-		assert.deepEqual(buildOverlay(["cogview-4", "embedding-3", "glm-5.4"], DEFAULT_BASE_URL).map((m) => m.id), [
+		assert.deepEqual(buildOverlay(["cogview-4", "embedding-3", "glm-5.4"], DEFAULT_BASE_URL, CHAT).map((m) => m.id), [
 			"glm-5.4",
 		]);
 	});
 
 	test("an explicit known-set is honoured", () => {
-		const overlay = buildOverlay(["glm-5.3"], DEFAULT_BASE_URL, new Set(CATALOG_BY_ID.keys()));
+		const overlay = buildOverlay(["glm-5.3"], DEFAULT_BASE_URL, CHAT, new Set(CATALOG_BY_ID.keys()));
 		assert.deepEqual(overlay, []);
 	});
 });
@@ -94,12 +96,12 @@ describe("fetchBigModelModels", () => {
 	test("no network / no key / aborted → empty overlay, no fetch", async () => {
 		let called = 0;
 		await withFetch(() => { called++; throw new Error("must not fetch"); }, async () => {
-			assert.deepEqual(await fetchBigModelModels(DEFAULT_BASE_URL, context({ allowNetwork: false })), []);
+			assert.deepEqual(await fetchBigModelModels({ listingBaseUrl: DEFAULT_BASE_URL, baseUrl: DEFAULT_BASE_URL, api: CHAT }, context({ allowNetwork: false })), []);
 			const aborted = new AbortController();
 			aborted.abort();
-			assert.deepEqual(await fetchBigModelModels(DEFAULT_BASE_URL, context({ signal: aborted.signal })), []);
+			assert.deepEqual(await fetchBigModelModels({ listingBaseUrl: DEFAULT_BASE_URL, baseUrl: DEFAULT_BASE_URL, api: CHAT }, context({ signal: aborted.signal })), []);
 			assert.deepEqual(
-				await fetchBigModelModels(DEFAULT_BASE_URL, context({ credential: undefined })),
+				await fetchBigModelModels({ listingBaseUrl: DEFAULT_BASE_URL, baseUrl: DEFAULT_BASE_URL, api: CHAT }, context({ credential: undefined })),
 				[],
 			);
 		});
@@ -116,7 +118,7 @@ describe("fetchBigModelModels", () => {
 				return new Response(JSON.stringify({ data: [{ id: "glm-6" }] }), { status: 200 });
 			}) as unknown as typeof fetch,
 			async () => {
-				const out = await fetchBigModelModels(DEFAULT_BASE_URL, context({ credential: undefined }));
+				const out = await fetchBigModelModels({ listingBaseUrl: DEFAULT_BASE_URL, baseUrl: DEFAULT_BASE_URL, api: CHAT }, context({ credential: undefined }));
 				assert.deepEqual(out.map((m) => m.id), ["glm-6"]);
 			},
 		);
@@ -126,10 +128,10 @@ describe("fetchBigModelModels", () => {
 
 	test("non-ok and network failure degrade to an empty overlay", async () => {
 		await withFetch((async () => new Response("nope", { status: 401 })) as unknown as typeof fetch, async () => {
-			assert.deepEqual(await fetchBigModelModels(DEFAULT_BASE_URL, context()), []);
+			assert.deepEqual(await fetchBigModelModels({ listingBaseUrl: DEFAULT_BASE_URL, baseUrl: DEFAULT_BASE_URL, api: CHAT }, context()), []);
 		});
 		await withFetch((async () => { throw new Error("network down"); }) as unknown as typeof fetch, async () => {
-			assert.deepEqual(await fetchBigModelModels(DEFAULT_BASE_URL, context()), []);
+			assert.deepEqual(await fetchBigModelModels({ listingBaseUrl: DEFAULT_BASE_URL, baseUrl: DEFAULT_BASE_URL, api: CHAT }, context()), []);
 		});
 	});
 });

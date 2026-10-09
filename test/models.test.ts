@@ -16,21 +16,24 @@ import { CATALOG, CATALOG_BY_ID, type CatalogEntry } from "../catalog.ts";
 const RATE = 7;
 
 function compatOf(entry: CatalogEntry): OpenAICompletionsCompat & Record<string, unknown> {
-	return entryToModel(entry, DEFAULT_BASE_URL, RATE).compat as never;
+	return entryToModel(entry, DEFAULT_BASE_URL, RATE, CHAT).compat as never;
 }
+
+const CHAT = "openai-completions" as const;
+const RESP = "openai-responses" as const;
 
 describe("buildModels / entryToModel", () => {
 	test("provider, api and base url are pinned on every model", () => {
-		for (const model of buildModels(DEFAULT_BASE_URL)) {
+		for (const model of buildModels(CHAT, DEFAULT_BASE_URL)) {
 			assert.equal(model.provider, PROVIDER_ID);
 			assert.equal(model.api, "openai-completions");
 			assert.equal(model.baseUrl, DEFAULT_BASE_URL);
 		}
-		assert.equal(buildModels(DEFAULT_BASE_URL).length, CATALOG.length);
+		assert.equal(buildModels(CHAT, DEFAULT_BASE_URL).length, CATALOG.length);
 	});
 
 	test("shared compat flags match the live-verified gateway behaviour", () => {
-		for (const model of buildModels(DEFAULT_BASE_URL)) {
+		for (const model of buildModels(CHAT, DEFAULT_BASE_URL)) {
 			const c = model.compat as Record<string, unknown>;
 			assert.equal(c.thinkingFormat, "zai");
 			assert.equal(c.maxTokensField, "max_tokens");
@@ -45,20 +48,20 @@ describe("buildModels / entryToModel", () => {
 		const c = compatOf(CATALOG_BY_ID.get("glm-4-flash-250414")!);
 		assert.equal(CATALOG_BY_ID.get("glm-4-flash-250414")!.thinking.kind, "none");
 		assert.equal(c.supportsReasoningEffort, false);
-		const model = entryToModel(CATALOG_BY_ID.get("glm-4-flash-250414")!, DEFAULT_BASE_URL, RATE);
+		const model = entryToModel(CATALOG_BY_ID.get("glm-4-flash-250414")!, DEFAULT_BASE_URL, RATE, CHAT);
 		assert.equal(model.reasoning, false);
 		assert.equal(model.thinkingLevelMap, undefined);
 	});
 
 	test("dynamic: reasoning on, effort off, no level map", () => {
-		const model = entryToModel(CATALOG_BY_ID.get("glm-4.6")!, DEFAULT_BASE_URL, RATE);
+		const model = entryToModel(CATALOG_BY_ID.get("glm-4.6")!, DEFAULT_BASE_URL, RATE, CHAT);
 		assert.equal(model.reasoning, true);
 		assert.equal((model.compat as Record<string, unknown>).supportsReasoningEffort, false);
 		assert.equal(model.thinkingLevelMap, undefined);
 	});
 
 	test("effort (glm-5.2): full reasoning_effort scale", () => {
-		const model = entryToModel(CATALOG_BY_ID.get("glm-5.2")!, DEFAULT_BASE_URL, RATE);
+		const model = entryToModel(CATALOG_BY_ID.get("glm-5.2")!, DEFAULT_BASE_URL, RATE, CHAT);
 		assert.equal(model.reasoning, true);
 		assert.equal((model.compat as Record<string, unknown>).supportsReasoningEffort, true);
 		assert.deepEqual(model.thinkingLevelMap, {
@@ -74,7 +77,7 @@ describe("buildModels / entryToModel", () => {
 
 	test("forced thinkers hide 'off' so pi never sends thinking.type=disabled", () => {
 		for (const id of ["glm-5.3", "glm-5.3-flash", "glm-5.3-flashx", "glm-4.1v-thinking-flash"]) {
-			const model = entryToModel(CATALOG_BY_ID.get(id)!, DEFAULT_BASE_URL, RATE);
+			const model = entryToModel(CATALOG_BY_ID.get(id)!, DEFAULT_BASE_URL, RATE, CHAT);
 			assert.equal(model.reasoning, true, id);
 			assert.equal(model.thinkingLevelMap?.off, null, id);
 			// Assert through pi's own picker logic, not just the raw map: this is
@@ -83,7 +86,7 @@ describe("buildModels / entryToModel", () => {
 		}
 		// GLM-5.3 effort is exactly low|high|max (server 400s otherwise: probed
 		// 2026-10-09, `reasoning_effort: "medium"` → 400 code 1210).
-		assert.deepEqual(entryToModel(CATALOG_BY_ID.get("glm-5.3")!, DEFAULT_BASE_URL, RATE).thinkingLevelMap, {
+		assert.deepEqual(entryToModel(CATALOG_BY_ID.get("glm-5.3")!, DEFAULT_BASE_URL, RATE, CHAT).thinkingLevelMap, {
 			off: null,
 			minimal: null,
 			low: "low",
@@ -100,7 +103,7 @@ describe("buildModels / entryToModel", () => {
 		// content "156" with completion_tokens_details.reasoning_tokens === 0,
 		// while `enabled` spent all 64 tokens in reasoning_content.
 		for (const id of ["glm-4.7", "glm-4.5v"]) {
-			const model = entryToModel(CATALOG_BY_ID.get(id)!, DEFAULT_BASE_URL, RATE);
+			const model = entryToModel(CATALOG_BY_ID.get(id)!, DEFAULT_BASE_URL, RATE, CHAT);
 			assert.equal(model.reasoning, true, id);
 			assert.equal(model.thinkingLevelMap, undefined, `${id}: should not pin a level map`);
 			assert.equal((model.compat as Record<string, unknown>).supportsReasoningEffort, false, id);
@@ -110,7 +113,7 @@ describe("buildModels / entryToModel", () => {
 	});
 
 	test("image models publish the documented CN input limits", () => {
-		const imageModels = buildModels(DEFAULT_BASE_URL).filter((m) => m.input.includes("image"));
+		const imageModels = buildModels(CHAT, DEFAULT_BASE_URL).filter((m) => m.input.includes("image"));
 		assert.ok(imageModels.length >= 8, `expected the VLM families, got ${imageModels.length}`);
 		for (const model of imageModels) {
 			const resize = model.inputLimits?.images?.resize;
@@ -124,25 +127,25 @@ describe("buildModels / entryToModel", () => {
 		}
 		// The 50-images-per-request cap is documented only for the 5.3-Flash /
 		// 5V-Turbo / 4.6V / 4.5V families, so the 4.1V entries must not claim it.
-		for (const model of buildModels(DEFAULT_BASE_URL)) {
+		for (const model of buildModels(CHAT, DEFAULT_BASE_URL)) {
 			if (!model.input.includes("image")) {
 				assert.equal(model.inputLimits, undefined, `${model.id}: text model must not carry image limits`);
 			}
 		}
-		const byId = new Map(buildModels(DEFAULT_BASE_URL).map((m) => [m.id, m]));
+		const byId = new Map(buildModels(CHAT, DEFAULT_BASE_URL).map((m) => [m.id, m]));
 		assert.equal(byId.get("glm-4.6v")!.inputLimits?.images?.maxPerRequest, 50);
 		assert.equal(byId.get("glm-4.1v-thinking-flash")!.inputLimits?.images?.maxPerRequest, undefined);
 	});
 
 	test("a guessed vision id inherits the endpoint-wide image caps", () => {
-		const model = unknownModelToModel("glm-6.9v-turbo", DEFAULT_BASE_URL);
+		const model = unknownModelToModel("glm-6.9v-turbo", DEFAULT_BASE_URL, CHAT);
 		assert.deepEqual(model.input, ["text", "image"]);
 		assert.equal(model.inputLimits?.images?.resize?.maxWidth, 6000);
-		assert.equal(unknownModelToModel("glm-6.9", DEFAULT_BASE_URL).inputLimits, undefined);
+		assert.equal(unknownModelToModel("glm-6.9", DEFAULT_BASE_URL, CHAT).inputLimits, undefined);
 	});
 
 	test("cost is CNY-derived USD with cache tiers", () => {
-		const model = entryToModel(CATALOG_BY_ID.get("glm-5.1")!, DEFAULT_BASE_URL, RATE);
+		const model = entryToModel(CATALOG_BY_ID.get("glm-5.1")!, DEFAULT_BASE_URL, RATE, CHAT);
 		assert.equal(model.cost.input, cnyToUsd(6, RATE));
 		assert.equal(model.cost.output, cnyToUsd(24, RATE));
 		assert.equal(model.cost.cacheRead, cnyToUsd(1.3, RATE));
@@ -154,14 +157,14 @@ describe("buildModels / entryToModel", () => {
 	});
 
 	test("free models convert to zero cost", () => {
-		const model = entryToModel(CATALOG_BY_ID.get("glm-4.7-flash")!, DEFAULT_BASE_URL, RATE);
+		const model = entryToModel(CATALOG_BY_ID.get("glm-4.7-flash")!, DEFAULT_BASE_URL, RATE, CHAT);
 		assert.deepEqual(model.cost, { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 });
 		assert.equal(model.cost.tiers, undefined);
 	});
 
 	test("vision models declare image input", () => {
 		for (const id of ["glm-5.3-flash", "glm-4.6v", "glm-4.5v", "glm-5v-turbo"]) {
-			const model = entryToModel(CATALOG_BY_ID.get(id)!, DEFAULT_BASE_URL, RATE);
+			const model = entryToModel(CATALOG_BY_ID.get(id)!, DEFAULT_BASE_URL, RATE, CHAT);
 			assert.deepEqual(model.input, ["text", "image"], id);
 		}
 	});
@@ -177,27 +180,27 @@ describe("cnyPerUsd", () => {
 
 describe("unknownModelToModel", () => {
 	test("zero cost, never an invented price", () => {
-		const model = unknownModelToModel("glm-6", DEFAULT_BASE_URL);
+		const model = unknownModelToModel("glm-6", DEFAULT_BASE_URL, CHAT);
 		assert.deepEqual(model.cost, { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 });
 	});
 
 	test("family guesses", () => {
-		const glm53 = unknownModelToModel("glm-5.3-turbo", DEFAULT_BASE_URL);
+		const glm53 = unknownModelToModel("glm-5.3-turbo", DEFAULT_BASE_URL, CHAT);
 		assert.equal(glm53.thinkingLevelMap?.off, null);
 		assert.equal((glm53.compat as Record<string, unknown>).supportsReasoningEffort, true);
 		assert.equal(glm53.contextWindow, 1_048_576);
 
-		const glm52 = unknownModelToModel("glm-5.2-turbo", DEFAULT_BASE_URL);
+		const glm52 = unknownModelToModel("glm-5.2-turbo", DEFAULT_BASE_URL, CHAT);
 		assert.equal(glm52.thinkingLevelMap?.off, "none");
 
-		const glm5 = unknownModelToModel("glm-5.4", DEFAULT_BASE_URL);
+		const glm5 = unknownModelToModel("glm-5.4", DEFAULT_BASE_URL, CHAT);
 		assert.equal((glm5.compat as Record<string, unknown>).supportsReasoningEffort, false);
 		assert.equal(glm5.contextWindow, 204_800);
 
-		const vlm = unknownModelToModel("glm-6v", DEFAULT_BASE_URL);
+		const vlm = unknownModelToModel("glm-6v", DEFAULT_BASE_URL, CHAT);
 		assert.deepEqual(vlm.input, ["text", "image"]);
 
-		const stranger = unknownModelToModel("mystery-model", DEFAULT_BASE_URL);
+		const stranger = unknownModelToModel("mystery-model", DEFAULT_BASE_URL, CHAT);
 		assert.equal(stranger.reasoning, false);
 		assert.deepEqual(stranger.input, ["text"]);
 	});
@@ -211,14 +214,14 @@ describe("prompt-cache metadata and cost math", () => {
 		// warmer stops with "cache lifetime unavailable"
 		// (pi/dist/core/cache-warmer.js). Declaring a guessed TTL would make pi
 		// replay billed requests to keep alive a cache it cannot schedule.
-		for (const model of buildModels(DEFAULT_BASE_URL)) {
+		for (const model of buildModels(CHAT, DEFAULT_BASE_URL)) {
 			assert.equal(model.promptCache, undefined, model.id);
 		}
 	});
 
 	test("cache reads are priced, cache writes are not (storage is 限时免费)", () => {
 		for (const entry of CATALOG) {
-			const model = entryToModel(entry, DEFAULT_BASE_URL, RATE);
+			const model = entryToModel(entry, DEFAULT_BASE_URL, RATE, CHAT);
 			assert.equal(model.cost.cacheWrite, 0, entry.id);
 			assert.equal(model.cost.cacheRead, cnyToUsd(entry.cny.cacheRead, RATE), entry.id);
 		}
@@ -230,7 +233,7 @@ describe("prompt-cache metadata and cost math", () => {
 		// 「输入长度 ≥32K」 band: the band is about prompt length, not about the
 		// part of it that was billed fresh. A 40K prompt that is 90% cached must
 		// still be priced in the ≥32K band.
-		const model = entryToModel(CATALOG_BY_ID.get("glm-5.1")!, DEFAULT_BASE_URL, RATE);
+		const model = entryToModel(CATALOG_BY_ID.get("glm-5.1")!, DEFAULT_BASE_URL, RATE, CHAT);
 		assert.ok(model.cost.tiers?.length, "glm-5.1 must carry the ≥32K tier");
 		const usage = {
 			input: 4_000,

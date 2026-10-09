@@ -19,6 +19,7 @@ import { CATALOG, CATALOG_BY_ID } from "../catalog.ts";
 import { DEFAULT_BASE_URL, DEFAULT_CNY_PER_USD, entryToModel } from "../models.ts";
 
 const api = openAICompletionsApi();
+const CHAT = "openai-completions" as const;
 
 const weatherTool: Tool = {
 	name: "get_weather",
@@ -29,7 +30,7 @@ const weatherTool: Tool = {
 function model(id: string): Model<"openai-completions"> {
 	const entry = CATALOG_BY_ID.get(id);
 	assert.ok(entry, `${id} missing from catalog`);
-	return entryToModel(entry, DEFAULT_BASE_URL, DEFAULT_CNY_PER_USD) as Model<"openai-completions">;
+	return entryToModel(entry, DEFAULT_BASE_URL, DEFAULT_CNY_PER_USD, CHAT) as Model<"openai-completions">;
 }
 
 /**

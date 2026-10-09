@@ -1,18 +1,29 @@
 /**
  * Live model discovery — the dynamic half of a semi-dynamic catalog.
  *
- * `GET {base}/models` on open.bigmodel.cn (live, 2026-09-24) returns an
- * OpenAI-style `{"object":"list","data":[{"id":…}]}` with *chat* ids only —
- * the free flash models and all VLMs are absent from the listing even though
- * they answer /chat/completions. The overlay is therefore additive and
- * unknowns-only: known catalog ids keep their
- * curated CNY prices/caps, new ids are appended with family-guessed
- * thinking/vision/windows, and a failed listing degrades to the baseline.
+ * `GET https://open.bigmodel.cn/api/paas/v4/models` (live 2026-09-24, unchanged
+ * 2026-10-09) returns an OpenAI-style `{"object":"list","data":[{"id":…}]}` with
+ * *chat* ids only — the free flash models and all VLMs are absent from the
+ * listing even though they answer both surfaces. The overlay is therefore
+ * additive and unknowns-only: known catalog ids keep their curated CNY
+ * prices/caps, new ids are appended with family-guessed thinking/vision/windows,
+ * and a failed listing degrades to the baseline.
+ *
+ * The listing is read from the COMPLETIONS base even when the provider is
+ * registered on the Responses surface, because that is the only endpoint that
+ * publishes an id list for the standard API:
+ *   - `GET /api/paas/v4/models` → 11 ids, OpenAI shape (used here);
+ *   - `GET /api/v1/models` → exists, but returns 3 coding-plan-oriented entries
+ *     (`glm-5.3`, `glm-5.3-flash`, `glm-5-turbo`) whose `id` field is EMPTY —
+ *     the name lives in `slug`/`display_name` — so it cannot drive an overlay.
+ *     Read 2026-10-09; it did corroborate two catalog facts (glm-5.3 reasoning
+ *     levels are exactly low|high|max; glm-5.3-flash input modalities are
+ *     text+image).
  */
 
 import type { RefreshModelsContext } from "@earendil-works/pi-ai";
-import { CATALOG_BY_ID } from "./catalog.ts";
-import { unknownModelToModel, type BigModelModel } from "./models.ts";
+import { CATALOG_BY_ID, type GatewayApi } from "./catalog.ts";
+import { DEFAULT_BASE_URL, unknownModelToModel, type BigModelModel } from "./models.ts";
 
 /** Payload of `GET /models` on open.bigmodel.cn. */
 interface ModelsResponse {
@@ -52,9 +63,10 @@ export function parseModelIds(payload: unknown): string[] {
 export function buildOverlay(
 	ids: readonly string[],
 	baseUrl: string,
+	api: GatewayApi,
 	known: ReadonlySet<string> = new Set(CATALOG_BY_ID.keys()),
 ): BigModelModel[] {
-	return ids.filter((id) => !known.has(id) && !EXCLUDED.test(id)).map((id) => unknownModelToModel(id, baseUrl));
+	return ids.filter((id) => !known.has(id) && !EXCLUDED.test(id)).map((id) => unknownModelToModel(id, baseUrl, api));
 }
 
 /** Resolve the bearer token pi's auth layer did not hand us (env-only setups). */
@@ -67,6 +79,16 @@ function resolveKey(context: RefreshModelsContext): string | undefined {
 	return fromEnv?.trim() ? fromEnv.trim() : undefined;
 }
 
+/** Where the discovery targets point: the listing endpoint and the models' own base/api. */
+export interface DiscoveryTargets {
+	/** `GET {listingBaseUrl}/models` — the completions base, see the header. */
+	listingBaseUrl: string;
+	/** Base URL stamped on overlay models: the active surface's own base. */
+	baseUrl: string;
+	/** Wire protocol stamped on overlay models. */
+	api: GatewayApi;
+}
+
 /**
  * `fetchModels` implementation. Never throws: returning `[]` leaves the
  * curated baseline (and any previously persisted overlay) untouched, so an
@@ -74,7 +96,7 @@ function resolveKey(context: RefreshModelsContext): string | undefined {
  * "broken provider".
  */
 export async function fetchBigModelModels(
-	baseUrl: string,
+	targets: DiscoveryTargets,
 	context: RefreshModelsContext,
 	timeoutMs = 8_000,
 ): Promise<BigModelModel[]> {
@@ -89,14 +111,15 @@ export async function fetchBigModelModels(
 	const onAbort = () => controller.abort();
 	context.signal.addEventListener("abort", onAbort, { once: true });
 
+	const { listingBaseUrl, baseUrl, api } = targets;
 	try {
-		const url = `${baseUrl.replace(/\/+$/, "")}/models`;
+		const url = `${(listingBaseUrl || DEFAULT_BASE_URL).replace(/\/+$/, "")}/models`;
 		const response = await fetch(url, {
 			headers: { Authorization: `Bearer ${key}` },
 			signal: controller.signal,
 		});
 		if (!response.ok) return [];
-		return buildOverlay(parseModelIds(await response.json()), baseUrl);
+		return buildOverlay(parseModelIds(await response.json()), baseUrl, api);
 	} catch {
 		return [];
 	} finally {

@@ -6,6 +6,25 @@
  * semantics), `/login` support, an additive live-discovery overlay from
  * `GET /models`, and readable messages for the gateway's Chinese-only errors.
  *
+ * Two wire protocols are available and one is registered per process
+ * (`BIGMODEL_PROTOCOL`, default `responses`):
+ *   - `openai-responses` — `POST https://open.bigmodel.cn/api/v1/responses`.
+ *     The default: it is the surface Zhipu is building out, the only one that
+ *     documents `prompt_cache_key` (cluster routing for cache hits, which pi
+ *     fills from the session id) and `previous_response_id`, and pi's adapter
+ *     replays reasoning items for free. Its price: thinking cannot be switched
+ *     off there (`reasoning.effort:"none"`, an undocumented
+ *     `thinking:{type:"disabled"}` and `do_sample:false` were all accepted and
+ *     all ignored — GLM-4.7 still spent ~100 reasoning tokens), so "off" is
+ *     hidden from pi's picker instead of lying, and auth failures arrive as
+ *     HTTP 200 with an in-band body (handled by `withGatewayErrorRemediation`);
+ *   - `openai-completions` — `POST {base}/chat/completions`, the original
+ *     surface, where `thinking:{type:"disabled"}` really zeroes
+ *     reasoning_tokens. Choose it when turning thinking off matters more than
+ *     cache routing.
+ * Both were probed live on 2026-10-09; the evidence and the reasoning are in
+ * `research/2026-10-09-refresh.md`.
+ *
  * The gateway is OpenAI-chat-completions compatible, so streaming/tool calls/
  * usage accounting are delegated to pi-ai's `openAICompletionsApi` with the
  * "zai" thinking format — the same protocol as the built-in z.ai provider.
@@ -32,7 +51,7 @@
 // superset of the core one that re-exports `openAICompletionsApi`. This is
 // the only pi-runtime-only import in the package; everything else lives in
 // modules that plain Node can load, which is what makes them testable.
-import { openAICompletionsApi } from "@earendil-works/pi-ai";
+import { openAICompletionsApi, openAIResponsesApi } from "@earendil-works/pi-ai";
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import {
 	clarifyErrorMessage,
@@ -42,8 +61,8 @@ import {
 	normalizeOverflowError,
 	shouldClarify,
 } from "./errors.ts";
-import { PROVIDER_ID } from "./models.ts";
-import { buildBigModelProvider } from "./provider.ts";
+import { PROVIDER_ID, resolveProtocol } from "./models.ts";
+import { buildBigModelProvider, withGatewayErrorRemediation } from "./provider.ts";
 
 export default function (pi: ExtensionAPI) {
   // Three rewrites, all guarded to this provider and to error-stop assistants,
@@ -114,5 +133,9 @@ export default function (pi: ExtensionAPI) {
     };
   });
 
-  pi.registerProvider(buildBigModelProvider(openAICompletionsApi()));
+  // One wire protocol per registration (see models.ts / provider.ts for the
+  // trade-off): `BIGMODEL_PROTOCOL=responses` (default) or `completions`.
+  const { api } = resolveProtocol();
+  const streams = api === "openai-responses" ? openAIResponsesApi() : openAICompletionsApi();
+  pi.registerProvider(buildBigModelProvider(api, withGatewayErrorRemediation(streams)));
 }
