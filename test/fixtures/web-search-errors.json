@@ -1,0 +1,20 @@
+{
+ "engine": {
+  "error": {
+   "code": "1211",
+   "message": "模型不存在，请检查模型代码。"
+  }
+ },
+ "balance": {
+  "error": {
+   "code": "1113",
+   "message": "余额不足或无可用资源包,请充值。"
+  }
+ },
+ "throttle": {
+  "error": {
+   "code": "1305",
+   "message": "该模型当前访问量过大，请您稍后再试"
+  }
+ }
+}

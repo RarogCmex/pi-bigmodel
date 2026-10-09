@@ -21,6 +21,9 @@
 
 import assert from "node:assert/strict";
 import test, { describe, beforeEach, afterEach } from "node:test";
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import type { AssistantMessage } from "@earendil-works/pi-ai";
 import extension from "../index.ts";
 
@@ -29,17 +32,25 @@ type Handler = (event: any, ctx: any) => any;
 interface FakePi {
 	handlers: Map<string, Handler[]>;
 	registered: unknown[];
+	tools: unknown[];
+	commands: unknown[];
 	on(event: string, handler: Handler): () => void;
 	registerProvider(provider: unknown): void;
+	registerTool(tool: unknown): void;
+	registerCommand(name: string, command: unknown): void;
 	emit(event: string, payload: any, ctx?: any): any;
 }
 
 function fakePi(): FakePi {
 	const handlers = new Map<string, Handler[]>();
 	const registered: unknown[] = [];
+	const tools: unknown[] = [];
+	const commands: unknown[] = [];
 	return {
 		handlers,
 		registered,
+		tools,
+		commands,
 		on(event, handler) {
 			const list = handlers.get(event) ?? [];
 			list.push(handler);
@@ -50,6 +61,12 @@ function fakePi(): FakePi {
 		},
 		registerProvider(provider) {
 			registered.push(provider);
+		},
+		registerTool(tool) {
+			tools.push(tool);
+		},
+		registerCommand(name, command) {
+			commands.push({ name, command });
 		},
 		emit(event, payload, ctx) {
 			// pi applies the first handler result; the chain is not additive here
@@ -103,20 +120,51 @@ const LIVE = {
 describe("extension wiring", () => {
 	let pi: FakePi;
 	const realProtocol = process.env.BIGMODEL_PROTOCOL;
+	const realAgentDir = process.env.PI_CODING_AGENT_DIR;
+	// A hermetic agent dir: index.ts reads the search-sidecar config from it at
+	// registration, and the developer's real ~/.pi/agent must not leak in.
+	let tmpAgentDir: string;
 
 	beforeEach(() => {
+		tmpAgentDir = mkdtempSync(join(tmpdir(), "pi-bm-entry-"));
+		process.env.PI_CODING_AGENT_DIR = tmpAgentDir;
 		pi = fakePi();
 		extension(pi as never);
 	});
 	afterEach(() => {
 		if (realProtocol === undefined) delete process.env.BIGMODEL_PROTOCOL;
 		else process.env.BIGMODEL_PROTOCOL = realProtocol;
+		if (realAgentDir === undefined) delete process.env.PI_CODING_AGENT_DIR;
+		else process.env.PI_CODING_AGENT_DIR = realAgentDir;
+		rmSync(tmpAgentDir, { recursive: true, force: true });
 	});
 
 	test("registers the provider and the two rewrite hooks", () => {
 		assert.equal(pi.registered.length, 1);
 		assert.ok(pi.handlers.get("message_end")?.length, "message_end not wired");
 		assert.ok(pi.handlers.get("turn_end")?.length, "turn_end not wired");
+	});
+
+	test("search sidecar: tool + command registered by default, section only on codemode", () => {
+		// No config file → exposure defaults to codemode.
+		assert.equal(pi.tools.length, 1);
+		assert.equal((pi.tools[0] as { name?: string }).name, "bigmodel_search");
+		assert.equal((pi.tools[0] as { exposure?: string }).exposure, "codemode");
+		assert.equal(pi.commands.length, 1);
+		assert.equal((pi.commands[0] as { name?: string }).name, "bigmodel");
+		const event: any = { systemPromptOptions: { sections: {} } };
+		pi.emit("before_agent_start", event);
+		assert.ok(event.systemPromptOptions.sections.bigmodel.includes("bigmodel_search"));
+	});
+
+	test("search sidecar: exposure=off registers neither tool nor section", () => {
+		const off = fakePi();
+		writeFileSync(join(tmpAgentDir, "pi-bigmodel.json"), JSON.stringify({ searchExposure: "off" }), "utf8");
+		extension(off as never);
+		assert.equal(off.tools.length, 0);
+		const event: any = { systemPromptOptions: { sections: {} } };
+		off.emit("before_agent_start", event);
+		assert.equal(event.systemPromptOptions.sections.bigmodel, undefined);
 	});
 
 	test("registers the Responses surface by default", () => {

@@ -1,0 +1,32 @@
+{
+ "created": 1791565200,
+ "id": "2026101000595945dc1b74f0b54e0e",
+ "request_id": "2026101000595945dc1b74f0b54e0e",
+ "search_intent": [
+  {
+   "intent": "SEARCH_ALL",
+   "keywords": "智谱ai glm 最新模型",
+   "query": "智谱AI GLM 最新模型"
+  }
+ ],
+ "search_result": [
+  {
+   "content": "近日，德国 AI 公司 Aleph Alpha 发布新一代开放权重模型 Kolibri，将其定位为面向政府、工业和航空航天等受监管领域的主权 AI”。 不过，随模型公开的 189 页技术报告披露，在监督微调（SFT）数据生产过程中，智谱 GLM-5.2、GLM-5.3 和阿里 Qwen3.8-27B，被列为生成数据以及重新生成部分开放数据的主要模型。 Kolibri 采用 MoE 架构，总参数量为… (1048 chars)",
+   "icon": "",
+   "link": "",
+   "media": "",
+   "publish_date": "2026-10-04",
+   "refer": "ref_1",
+   "title": "德国“主权 AI”自曝：GLM、Qwen 成主要数据生成模型"
+  },
+  {
+   "content": "恒智易为你带来AI行业最新要闻。 来源丨恒智易 1、智谱推出GLM-5.3-FlashX 财联社9月18日电，智谱正式宣布发布GLM-5.3-FlashX，API同步全面开放。据介绍，新版本推理速度最高可达200 tokens/s，较现有GLM-5.3-Flash提升5倍，定价提升至原版本的2.5倍。（财联社） 2、华为发布新AI计算架构，让百万处理器成为一台计算机 《科创板日报》17日讯，华为发… (1025 chars)",
+   "icon": "",
+   "link": "",
+   "media": "",
+   "publish_date": "2026-09-18",
+   "refer": "ref_2",
+   "title": "智谱推出GLM-5.3-FlashX，华为发布新AI计算架构，阿里通用医疗影像模型登上Science正刊"
+  }
+ ]
+}

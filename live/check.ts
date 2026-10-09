@@ -12,8 +12,10 @@
  *   - billed, and the bulk of the spend: one request per PAID catalog id at
  *     `max_tokens: 8`, plus the deliberately larger generations the reclassified
  *     thinkers need to prove reasoning actually stopped (64 and 48 tokens),
- *     `glm-5.2` streaming `reasoning_content` at 300, and one `glm-4.5-air`
- *     rejection. Measured 2026-10-09 on a funded key: 41 checks, ~277 s, ≈¥0.05.
+ *     `glm-5.2` streaming `reasoning_content` at 300, one `glm-4.5-air`
+ *     rejection, and two `search_std` calls (¥0.02) from the bigmodel_search
+ *     sidecar check. Measured 2026-10-09 on a funded key: 41 checks, ~277 s,
+ *     ≈¥0.05 (before the sidecar check was added).
  * Every 2xx is recorded in the ledger printed by the final test, so "free" stays a
  * measured claim instead of a comment (pitfalls L35).
  *
@@ -26,10 +28,15 @@
  *      glm-4.5v honour thinking.type=disabled; glm-4.1v-thinking does not);
  *   7. output caps and the context-overflow code, both read from REJECTIONS on
  *      free models (a rejected request is not billed);
- *   8. cache hits are reported in usage.prompt_tokens_details.cached_tokens.
+ *   8. cache hits are reported in usage.prompt_tokens_details.cached_tokens;
+ *   9. the bigmodel_search sidecar answers end to end through the tool itself.
  *
  * Checks 6-8 were added 2026-10-09 after the docs/behaviour refresh; the raw
  * probe output of that session is in `research/evidence-2026-10-09.json`.
+ * Check 9 was added the same day; its error paths (billing and the silently
+ * skipped builtin search on a zero-balance key) were verified live on KEY1,
+ * while its success paths need a funded key (research/
+ * 2026-10-09-platform-services.md).
  *
  * Every test below is skipped unless BIGMODEL_API_KEY is set, so the file is
  * safe to leave in the tree: `npm test` never reaches the network.
@@ -44,6 +51,7 @@ import { CATALOG, CATALOG_BY_ID } from "../catalog.ts";
 import { DEFAULT_BASE_URL, entryToModel } from "../models.ts";
 import { parseModelIds } from "../discovery.ts";
 import { clarifyErrorMessage, remediateInBandResponse, shouldClarify } from "../errors.ts";
+import { buildSearchTool } from "../search.ts";
 
 const KEY = process.env.BIGMODEL_API_KEY?.trim();
 const BASE = process.env.BIGMODEL_BASE_URL?.trim() || DEFAULT_BASE_URL;
@@ -456,6 +464,30 @@ test("live: the completions surface still answers when the protocol is switched 
 	assert.equal(response.status, 200, JSON.stringify(json).slice(0, 200));
 	assert.equal(json?.usage?.completion_tokens_details?.reasoning_tokens ?? 0, 0, "thinking must be off on this surface");
 	assert.match(String(json?.choices?.[0]?.message?.content ?? ""), /OK/);
+});
+
+test("live: the bigmodel_search sidecar answers end to end (billed: two search_std calls)", { skip: !KEY && "set BIGMODEL_API_KEY" }, async () => {
+	// The tool itself, not a hand-rolled fetch: key resolution (env path — the
+	// agent dir points nowhere so the live run must resolve BIGMODEL_API_KEY),
+	// request building, parsing, formatting and the structured output. Cost on a
+	// funded key: ¥0.01 (search action) + ¥0.01 (ask's builtin search; the model
+	// itself is free-tier). On a zero-balance key both must fail loudly with the
+	// rewritten billing messages — which is also a live check, just of the error path.
+	const tool = buildSearchTool({}, { agentDir: () => "/nonexistent-live-probe" });
+
+	const search = await tool.execute("live-search", { action: "search", task: "智谱AI GLM 最新模型", engine: "search_std", count: 3 }, undefined, undefined, {} as never);
+	BILLED.push("websearch/search_std count=3");
+	const sc = search.structuredContent as { sources: unknown[]; intent?: string; engine: string };
+	assert.equal(sc.engine, "search_std");
+	assert.ok(Array.isArray(sc.sources) && sc.sources.length > 0, "no search results");
+	assert.ok(sc.intent, "no search intent");
+	assert.ok((search.content as Array<{ type: string; text: string }>)[0].text.includes("¥0.01"), "cost line missing");
+
+	const ask = await tool.execute("live-ask", { action: "ask", task: "智谱AI最新发布的模型是什么？一句话回答。" }, undefined, undefined, {} as never);
+	BILLED.push("chat-websearch/glm-4-flash-250414 (model free; search billed)");
+	const asc = ask.structuredContent as { result: string; sources: unknown[] };
+	assert.ok(asc.result.length > 0, "empty ask answer");
+	assert.ok(asc.sources.length > 0, "ask returned no sources — builtin search silently skipped");
 });
 
 test("live: spend ledger — every accepted (billed) call, itemized", { skip: !KEY && "set BIGMODEL_API_KEY" }, () => {

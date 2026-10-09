@@ -6,6 +6,10 @@
  * semantics), `/login` support, an additive live-discovery overlay from
  * `GET /models`, and readable messages for the gateway's Chinese-only errors.
  *
+ * Also registers `bigmodel_search`, a billed web-search sidecar (the
+ * pi-alibaba-models pattern): `exposure: "codemode"` by default, `/bigmodel`
+ * to configure, the same key as the provider. See search.ts.
+ *
  * Two wire protocols are available and one is registered per process
  * (`BIGMODEL_PROTOCOL`, default `responses`):
  *   - `openai-responses` — `POST https://open.bigmodel.cn/api/v1/responses`.
@@ -71,7 +75,7 @@
 // the only pi-runtime-only import in the package; everything else lives in
 // modules that plain Node can load, which is what makes them testable.
 import { openAICompletionsApi, openAIResponsesApi } from "@earendil-works/pi-ai";
-import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import type { ExtensionAPI, ExtensionCommandContext } from "@earendil-works/pi-coding-agent";
 import {
 	clarifyErrorMessage,
 	clarifyLimitErrorMessage,
@@ -83,6 +87,23 @@ import {
 } from "./errors.ts";
 import { PROVIDER_ID, resolveProtocol } from "./models.ts";
 import { buildBigModelProvider, withGatewayErrorRemediation } from "./provider.ts";
+import {
+	buildSearchTool,
+	codemodeSectionText,
+	fallbackAgentDir,
+	loadSearchConfig,
+	readStoredApiKey,
+	resolveAskModel,
+	resolveSearchEngine,
+	resolveSearchExposure,
+	saveSearchConfig,
+	searchConfigPath,
+	SEARCH_ENGINES,
+	SEARCH_ENGINE_PRICES,
+	SEARCH_EXPOSURES,
+	SEARCH_EXPOSURE_LABELS,
+	searchStatus,
+} from "./search.ts";
 
 export default function (pi: ExtensionAPI) {
   // Three rewrites, all guarded to this provider and to error-stop assistants,
@@ -161,6 +182,102 @@ export default function (pi: ExtensionAPI) {
     return {
       entries: [...event.entries, { type: "custom_message", customType, content, display: true }],
     };
+  });
+
+  // ── Search sidecar: bigmodel_search ────────────────────────────────────────
+  // A billed tool on the platform's /web_search surface (plus a free-model
+  // `ask` mode), exposed the pi-alibaba-models way: `codemode` by default —
+  // callable from codemode scripts, never declared every turn. Config lives in
+  // `{agentDir}/pi-bigmodel.json`; the agent dir mirrors pi's getAgentDir
+  // (config.js:491 on 1.1.0 — PI_CODING_AGENT_DIR, then ~/.pi/agent) because a
+  // runtime import of pi-coding-agent here would break the offline suite's
+  // plain-Node import of this module.
+  const agentDir = fallbackAgentDir();
+  const searchCfg = loadSearchConfig(agentDir);
+  const searchExposure = resolveSearchExposure(searchCfg);
+  if (searchExposure !== "off") {
+    pi.registerTool(buildSearchTool(searchCfg, { agentDir: () => agentDir }));
+  }
+  // A codemode-exposed tool is never declared, so the model would never learn
+  // it exists. One system-prompt section fixes that — only while codemode is
+  // the active exposure (direct/deferred declare themselves).
+  if (searchExposure === "codemode") {
+    pi.on("before_agent_start", (event) => {
+      event.systemPromptOptions.sections = {
+        ...event.systemPromptOptions.sections,
+        bigmodel: codemodeSectionText(),
+      };
+    });
+  }
+
+  // ── Command: /bigmodel ────────────────────────────────────────────────
+  pi.registerCommand("bigmodel", {
+    description: "Поиск BigModel: сайдкар bigmodel_search (экспозиция, движок, модель для ask)",
+    handler: async (_args: string, ctx: ExtensionCommandContext) => {
+      const dir = fallbackAgentDir();
+      const cfg = loadSearchConfig(dir);
+      const choice = await ctx.ui.select("BigModel:", [
+        "Статус",
+        `Поиск — экспозиция инструмента (сейчас: ${resolveSearchExposure(cfg)})`,
+        `Поиск — движок по умолчанию (сейчас: ${resolveSearchEngine(cfg)}, ¥${SEARCH_ENGINE_PRICES[resolveSearchEngine(cfg)].toFixed(2)}/вызов)`,
+        `Поиск — модель для action=ask (сейчас: ${resolveAskModel(cfg)})`,
+      ]);
+      if (!choice) return;
+
+      if (choice === "Статус") {
+        const s = searchStatus(cfg);
+        const key = readStoredApiKey(dir) ?? process.env?.BIGMODEL_API_KEY;
+        ctx.ui.notify(
+          `bigmodel_search: экспозиция ${s.exposure}, движок ${s.engine} (¥${SEARCH_ENGINE_PRICES[s.engine].toFixed(2)}/вызов), ` +
+            `модель ask ${s.askModel}. Ключ: ${key ? "есть" : "нет — /login bigmodel или BIGMODEL_API_KEY"}. ` +
+            `Конфиг: ${searchConfigPath(dir)}`,
+          "info",
+        );
+        return;
+      }
+
+      if (choice.includes("экспозиция")) {
+        const current = resolveSearchExposure(cfg);
+        const options = SEARCH_EXPOSURES.map((e) => `${current === e ? "• " : "  "}${SEARCH_EXPOSURE_LABELS[e]}`);
+        const sel = await ctx.ui.select(`Экспозиция bigmodel_search (сейчас ${current}):`, options);
+        if (!sel) return;
+        const picked = SEARCH_EXPOSURES[options.indexOf(sel)] ?? current;
+        saveSearchConfig(dir, { ...cfg, searchExposure: picked });
+        const note = picked === "codemode" ? " Требует включённого codemode в pi; без codemode инструмент недостижим." : "";
+        ctx.ui.notify(`Экспозиция bigmodel_search: ${picked}.${note} Перезагрузка…`, "info");
+        await ctx.reload();
+        return;
+      }
+
+      if (choice.includes("движок")) {
+        const current = resolveSearchEngine(cfg);
+        const options = SEARCH_ENGINES.map((e) => `${current === e ? "• " : "  "}${e} — ¥${SEARCH_ENGINE_PRICES[e].toFixed(2)}/вызов`);
+        const sel = await ctx.ui.select(`Движок по умолчанию (сейчас ${current}):`, options);
+        if (!sel) return;
+        const picked = SEARCH_ENGINES[options.indexOf(sel)] ?? current;
+        saveSearchConfig(dir, { ...cfg, searchEngine: picked });
+        ctx.ui.notify(`Движок по умолчанию: ${picked}. Перезагрузка…`, "info");
+        await ctx.reload();
+        return;
+      }
+
+      if (choice.includes("модель")) {
+        const entered = (await ctx.ui.input(
+          `Модель для action=ask (пусто = ${resolveAskModel({})} — бесплатная; сейчас ${resolveAskModel(cfg)}):`,
+        ))?.trim();
+        if (entered === undefined) return;
+        const next = { ...cfg };
+        if (entered) next.askModel = entered;
+        else delete next.askModel;
+        saveSearchConfig(dir, next);
+        ctx.ui.notify(
+          `Модель ask: ${resolveAskModel(next)}${entered && !/flash/i.test(entered) ? " (не flash — тарифицируется как обычный ход модели поверх поискового вызова)" : ""}. Перезагрузка…`,
+          "info",
+        );
+        await ctx.reload();
+        return;
+      }
+    },
   });
 
   // One wire protocol per registration (see models.ts / provider.ts for the
