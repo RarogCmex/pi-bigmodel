@@ -116,14 +116,17 @@ export function cnyToUsd(cny: number, rate: number): number {
  */
 export function resolveProtocol(
 	env: (name: string) => string | undefined = (n) => process.env[n],
-): { api: GatewayApi; requested?: string } {
+): { api: GatewayApi; requested?: string; recognized: boolean } {
 	const raw = env(PROTOCOL_ENV_VAR)?.trim();
-	if (!raw) return { api: DEFAULT_PROTOCOL };
+	if (!raw) return { api: DEFAULT_PROTOCOL, recognized: true };
 	const lowered = raw.toLowerCase();
-	if (lowered === "responses" || lowered === "openai-responses") return { api: "openai-responses", requested: raw };
+	if (lowered === "responses" || lowered === "openai-responses")
+		return { api: "openai-responses", requested: raw, recognized: true };
 	if (lowered === "completions" || lowered === "chat" || lowered === "openai-completions")
-		return { api: "openai-completions", requested: raw };
-	return { api: DEFAULT_PROTOCOL, requested: raw };
+		return { api: "openai-completions", requested: raw, recognized: true };
+	// `recognized: false` is what lets index.ts warn: falling back silently would
+	// put a user who typed "completio" on the surface with no thinking off-switch.
+	return { api: DEFAULT_PROTOCOL, requested: raw, recognized: false };
 }
 
 /**
@@ -254,88 +257,106 @@ const ZERO_COST: ModelCost = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 
  * auto-detects to false for zai URLs, while the gateway errors on
  * `reasoning_effort` for nothing and silently ignores it for most models.
  */
-function thinkingCompat(
-	entry: CatalogEntry,
-	api: GatewayApi,
-): {
+/**
+ * Per-entry reasoning wiring for the COMPLETIONS surface, where pi-ai sends
+ * `thinking: {type:"enabled", clear_thinking:false}` for a chosen level and
+ * `{type:"disabled"}` for "off" — measured to zero `reasoning_tokens` on this
+ * gateway. `supportsReasoningEffort` must be pinned per entry: it auto-detects to
+ * false for every zai URL, while the gateway errors on nothing and silently
+ * ignores `reasoning_effort` for most models, so probing cannot settle it.
+ */
+function chatThinking(entry: CatalogEntry): {
 	reasoning: boolean;
-	compat: OpenAICompletionsCompat | OpenAIResponsesCompat;
-	thinkingLevelMap?: Model<GatewayApi>["thinkingLevelMap"];
+	compat: OpenAICompletionsCompat;
+	levelMap?: Model<"openai-completions">["thinkingLevelMap"];
 } {
-	const thinking = entry.thinking;
-	if (api === "openai-responses") {
-		switch (thinking.kind) {
-			case "none":
-				return { reasoning: false, compat: { ...RESPONSES_COMPAT } };
-			case "dynamic":
-			case "effort":
-				// "off" would be a promise the surface cannot keep.
-				return { reasoning: true, compat: { ...RESPONSES_COMPAT }, thinkingLevelMap: RESPONSES_EFFORT };
-			case "always":
-				return {
-					reasoning: true,
-					compat: { ...RESPONSES_COMPAT },
-					thinkingLevelMap: thinking.levels ?? { off: null },
-				};
-		}
-	}
-	switch (thinking.kind) {
+	switch (entry.thinking.kind) {
 		case "none":
 			return { reasoning: false, compat: { supportsReasoningEffort: false } };
 		case "dynamic":
+			// "off" is real here: the gateway honours thinking.type=disabled
+			// (GLM-4.7 and GLM-4.5V stopped being forced thinkers on 2026-10-09).
 			return { reasoning: true, compat: { supportsReasoningEffort: false } };
 		case "effort":
 			return {
 				reasoning: true,
 				compat: { supportsReasoningEffort: true },
-				thinkingLevelMap: thinking.levels,
+				levelMap: entry.thinking.levels,
 			};
 		case "always":
 			return {
 				reasoning: true,
-				compat: { supportsReasoningEffort: thinking.levels ? true : false },
-				thinkingLevelMap: thinking.levels ?? { off: null },
+				compat: { supportsReasoningEffort: entry.thinking.levels ? true : false },
+				levelMap: entry.thinking.levels ?? { off: null },
 			};
 	}
+}
+
+/**
+ * Per-entry reasoning wiring for the RESPONSES surface, where the only control is
+ * `reasoning.effort` — and this gateway accepts every value and honours none of
+ * them for turning thinking OFF (`none` measured at 114-118 reasoning tokens on
+ * GLM-4.7, against 0 for completions' `thinking.type:"disabled"`). So `off` is
+ * null wherever the model can think: pi hides a switch the gateway would ignore
+ * and clamps "off" up to the lowest honest level instead of promising a saving.
+ * GLM-5.3 keeps its own map because that family's effort enum IS enforced
+ * (low|high|max; anything else is a 400).
+ */
+function responsesThinking(entry: CatalogEntry): {
+	reasoning: boolean;
+	levelMap?: Model<"openai-responses">["thinkingLevelMap"];
+} {
+	switch (entry.thinking.kind) {
+		case "none":
+			return { reasoning: false };
+		case "dynamic":
+		case "effort":
+			return { reasoning: true, levelMap: RESPONSES_EFFORT };
+		case "always":
+			return { reasoning: true, levelMap: entry.thinking.levels ?? { off: null } };
+	}
+}
+
+/** Fields identical on both surfaces; kept in one place so they cannot drift. */
+function sharedFields(entry: CatalogEntry, baseUrl: string, rate: number) {
+	return {
+		id: entry.id,
+		name: entry.name,
+		provider: PROVIDER_ID,
+		baseUrl,
+		input: entry.input,
+		cost: toCost(entry.cny, entry.cnyTiers, rate),
+		contextWindow: entry.contextWindow,
+		maxTokens: entry.maxTokens,
+		// Documented gateway caps so pi resizes before an image enters the
+		// transcript; text-only entries leave it unset and pi uses its own default.
+		...(entry.imageLimits ? { inputLimits: entry.imageLimits } : {}),
+	};
 }
 
 export type BigModelModel = Model<GatewayApi>;
 
 export function entryToModel(entry: CatalogEntry, baseUrl: string, rate: number, api: GatewayApi): BigModelModel {
-	const { reasoning, compat, thinkingLevelMap: map } = thinkingCompat(entry, api);
+	const shared = sharedFields(entry, baseUrl, rate);
 	if (api === "openai-responses") {
+		const { reasoning, levelMap } = responsesThinking(entry);
 		const model: Model<"openai-responses"> = {
-			id: entry.id,
-			name: entry.name,
+			...shared,
 			api,
-			provider: PROVIDER_ID,
-			baseUrl,
 			reasoning,
-			input: entry.input,
-			cost: toCost(entry.cny, entry.cnyTiers, rate),
-			contextWindow: entry.contextWindow,
-			maxTokens: entry.maxTokens,
-			compat: { ...(compat as OpenAIResponsesCompat) },
+			compat: { ...RESPONSES_COMPAT },
 		};
-		if (entry.imageLimits) model.inputLimits = entry.imageLimits;
-		if (map) model.thinkingLevelMap = map;
+		if (levelMap) model.thinkingLevelMap = levelMap;
 		return model;
 	}
+	const { reasoning, compat, levelMap } = chatThinking(entry);
 	const model: Model<"openai-completions"> = {
-		id: entry.id,
-		name: entry.name,
+		...shared,
 		api,
-		provider: PROVIDER_ID,
-		baseUrl,
 		reasoning,
-		input: entry.input,
-		cost: toCost(entry.cny, entry.cnyTiers, rate),
-		contextWindow: entry.contextWindow,
-		maxTokens: entry.maxTokens,
-		compat: { ...CHAT_COMPAT, ...(compat as OpenAICompletionsCompat) },
+		compat: { ...CHAT_COMPAT, ...compat },
 	};
-	if (entry.imageLimits) model.inputLimits = entry.imageLimits;
-	if (map) model.thinkingLevelMap = map;
+	if (levelMap) model.thinkingLevelMap = levelMap;
 	return model;
 }
 

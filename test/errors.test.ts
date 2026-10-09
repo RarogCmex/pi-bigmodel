@@ -6,6 +6,7 @@ import {
 	clarifyErrorMessage,
 	clarifyLimitErrorMessage,
 	classifyLimitError,
+	classifyRewritten,
 	normalizeOverflowError,
 	parseInBandError,
 	remediateInBandResponse,
@@ -64,6 +65,26 @@ describe("normalizeOverflowError", () => {
 		// that drops it is a test failure, not a silent regression.
 		assert.equal(isContextOverflow(errored(LIVE.overflow), 131_072), true);
 		assert.equal(isContextOverflow(errored(normalizeOverflowError(LIVE.overflow)!), 131_072), true);
+	});
+
+	test("the two-character 超长 matcher needs a length-ish context", () => {
+		// 超长 alone is short enough to false-positive on unrelated Chinese text, and
+		// a false positive here triggers auto-compaction — the most destructive
+		// mistake this layer can make. So the matcher requires a prompt/length word
+		// within 12 characters on one side, and these negatives are the proof.
+		assert.equal(normalizeOverflowError('400: {"code":"1261","message":"Prompt 超长"}'), 'context_length_exceeded: 400: {"code":"1261","message":"Prompt 超长"}');
+		assert.equal(normalizeOverflowError("输入超长，请缩短后重试"), "context_length_exceeded: 输入超长，请缩短后重试");
+		assert.equal(normalizeOverflowError("上下文超长"), "context_length_exceeded: 上下文超长");
+		for (const msg of [
+			'400: {"code":"1210","message":"max_tokens参数非法：限制数值范围[1,98304]"}',
+			'400: {"code":"1210","message":"该模型始终思考，不支持关闭思考；请使用 low、high 或 max。"}',
+			'400: {"code":"1301","message":"系统检测到输入或生成内容可能包含不安全或敏感内容"}',
+			"400: 模型不存在，请检查模型代码。",
+			"500: 内部错误",
+			"工具输出超长已被截断", // a truncation notice is not a prompt overflow
+		]) {
+			assert.equal(normalizeOverflowError(msg), null, msg);
+		}
 	});
 
 	test("parameter-range rejections are not overflow", () => {
@@ -307,5 +328,41 @@ describe("in-band HTTP-200 errors on the Responses surface", () => {
 			headers: { "content-type": "text/html" },
 		});
 		assert.equal(await remediateInBandResponse(html), html, "a proxy page is not ours to reinterpret");
+	});
+});
+
+describe("classifyRewritten — reading our own tags back after pi's in-place rewrite", () => {
+	// pi replaces the assistant message IN PLACE before turn_end
+	// (agent-session.js `_replaceMessageInPlace`), so a handler that classified the
+	// gateway body again would see the rewrite and find nothing. These assert the
+	// order-independent path; test/entry.test.ts runs the real hook sequence.
+	test("the limit tag carries the kind, and the deny-list phrase survives", () => {
+		const balance = clarifyLimitErrorMessage(LIVE.balance1113)!;
+		assert.match(balance, /\[billing 1113 balance\]/);
+		assert.deepEqual(classifyRewritten(balance), { type: "limit", kind: "balance" });
+		assert.equal(isRetryableAssistantError(errored(balance)), false);
+
+		const quota = clarifyLimitErrorMessage('429: {"code":"1310","message":"您已达到每周/每月使用上限"}')!;
+		assert.match(quota, /\[quota exceeded 1310 quota\]/);
+		assert.deepEqual(classifyRewritten(quota), { type: "limit", kind: "quota" });
+		assert.equal(isRetryableAssistantError(errored(quota)), false);
+
+		const plan = clarifyLimitErrorMessage('429: {"code":"1315","message":"该 API Key 仅限企业编程套餐场景使用"}')!;
+		assert.deepEqual(classifyRewritten(plan), { type: "limit", kind: "plan" });
+	});
+
+	test("the auth rewrite is recognisable without quoting the original body", () => {
+		const auth = clarifyErrorMessage(LIVE.auth1000)!;
+		assert.deepEqual(classifyRewritten(auth), { type: "auth" });
+	});
+
+	test("gateway text that is not ours is never claimed", () => {
+		for (const msg of [LIVE.balance1113, LIVE.auth1000, LIVE.modelOverload1305, LIVE.overflow, ""]) {
+			assert.equal(classifyRewritten(msg), undefined, msg);
+		}
+		// A user-visible string that merely mentions the words must not be mistaken
+		// for our tag: the bracket shape and the kind token are both required.
+		assert.equal(classifyRewritten("billing 1113 balance"), undefined);
+		assert.equal(classifyRewritten("[billing] something"), undefined);
 	});
 });

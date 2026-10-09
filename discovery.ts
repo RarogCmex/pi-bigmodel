@@ -23,7 +23,7 @@
 
 import type { RefreshModelsContext } from "@earendil-works/pi-ai";
 import { CATALOG_BY_ID, type GatewayApi } from "./catalog.ts";
-import { DEFAULT_BASE_URL, unknownModelToModel, type BigModelModel } from "./models.ts";
+import { unknownModelToModel, type BigModelModel } from "./models.ts";
 
 /** Payload of `GET /models` on open.bigmodel.cn. */
 interface ModelsResponse {
@@ -113,7 +113,9 @@ export async function fetchBigModelModels(
 
 	const { listingBaseUrl, baseUrl, api } = targets;
 	try {
-		const url = `${(listingBaseUrl || DEFAULT_BASE_URL).replace(/\/+$/, "")}/models`;
+		// No `|| DEFAULT_BASE_URL` fallback: an unwired listingBaseUrl is a bug in
+		// the caller and must fail visibly, not silently query another endpoint.
+		const url = `${listingBaseUrl.replace(/\/+$/, "")}/models`;
 		const response = await fetch(url, {
 			headers: { Authorization: `Bearer ${key}` },
 			signal: controller.signal,

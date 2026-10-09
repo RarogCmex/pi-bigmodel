@@ -2,8 +2,21 @@
  * Live smoke test — only runs when BIGMODEL_API_KEY is set:
  *   BIGMODEL_API_KEY=… npm run live
  *
- * Verifies against the real gateway (cheap: max_tokens ≤ 8, one request per
- * catalog id, ~50 completion tokens total):
+ * Verifies against the real gateway. **Cost, itemized rather than asserted
+ * cheap** — the sweep is not uniformly `max_tokens: 8`:
+ *   - free by construction: the cap/availability sweep (every id, both surfaces,
+ *     `max_output_tokens: 99999999` → pre-inference 400), the overflow probe (one
+ *     oversized prompt at a free id), the garbage-key auth probe, `GET /models`;
+ *   - ¥0 because the id is free-tier: the thinking matrix on free ids, the cache
+ *     probes, the Responses stream and image checks;
+ *   - billed, and the bulk of the spend: one request per PAID catalog id at
+ *     `max_tokens: 8`, plus the deliberately larger generations the reclassified
+ *     thinkers need to prove reasoning actually stopped (64 and 48 tokens),
+ *     `glm-5.2` streaming `reasoning_content` at 300, and one `glm-4.5-air`
+ *     rejection. Measured 2026-10-09 on a funded key: 41 checks, ~277 s, ≈¥0.05.
+ * Every 2xx is recorded in the ledger printed by the final test, so "free" stays a
+ * measured claim instead of a comment (pitfalls L35).
+ *
  *   1. every catalog id answers /chat/completions;
  *   2. a dynamic thinker accepts thinking.type=disabled;
  *   3. a forced thinker (glm-5.3) rejects disabled with code 1210;
@@ -35,6 +48,17 @@ import { clarifyErrorMessage, remediateInBandResponse, shouldClarify } from "../
 const KEY = process.env.BIGMODEL_API_KEY?.trim();
 const BASE = process.env.BIGMODEL_BASE_URL?.trim() || DEFAULT_BASE_URL;
 
+/**
+ * Spend ledger: a response that came back 2xx was billed (a rejection was not), so
+ * each one is itemized and the list is printed at the end. "That probe was free"
+ * is a claim about the status code, not an intention.
+ */
+const BILLED: string[] = [];
+function ledger(label: string, status: number, body: Record<string, unknown>): void {
+	if (status < 200 || status >= 300) return;
+	BILLED.push(`${label} max=${String(body.max_tokens ?? body.max_output_tokens ?? "-")}`);
+}
+
 /** Free-tier models answer 429 under bursts; a live smoke test retries a couple of times. */
 async function chat(body: Record<string, unknown>): Promise<{ status: number; json: any }> {
 	for (let attempt = 1; ; attempt++) {
@@ -45,6 +69,7 @@ async function chat(body: Record<string, unknown>): Promise<{ status: number; js
 			signal: AbortSignal.timeout(90_000),
 		});
 		if (response.status !== 429 || attempt >= 5) {
+			ledger(`chat/${String(body.model)}`, response.status, body);
 			return { status: response.status, json: await response.json().catch(() => null) };
 		}
 		await new Promise((resolve) => setTimeout(resolve, attempt * 4_000));
@@ -134,6 +159,7 @@ async function cappedProbe(model: string, maxTokens: number): Promise<{ status: 
 	});
 	const text = await response.text();
 	controller.abort();
+	ledger(`cappedProbe/${model}`, response.status, { model, max_tokens: maxTokens });
 	let json: any = null;
 	try {
 		json = JSON.parse(text);
@@ -186,8 +212,14 @@ test("live: output caps come back in free rejections", { skip: !KEY && "set BIGM
 		const entry = CATALOG_BY_ID.get(id);
 		if (!entry) continue;
 		const { status, json } = await cappedProbe(id, 99_999_999);
-		if (status === 200) continue; // accepted: no free signal, nothing to assert
-		assert.equal(status, 400, `${id}: ${JSON.stringify(json).slice(0, 200)}`);
+		// An ACCEPTED oversized probe means this check just billed a generation on a
+		// free id (¥0, but no longer free by construction): fail loudly with the
+		// fact instead of skipping in silence, so the ledger and the suite agree.
+		assert.equal(
+			status,
+			400,
+			`${id}: cap probe was ACCEPTED (${status}) — billed, and no cap disclosed: ${JSON.stringify(json).slice(0, 200)}`,
+		);
 		const disclosed = Number(/\[1,\s*(\d+)\]/.exec(String(json?.error?.message ?? ""))?.[1]);
 		assert.ok(Number.isFinite(disclosed), `${id}: no cap disclosed in ${json?.error?.message}`);
 		assert.equal(disclosed, entry.maxTokens, `${id}: catalog maxTokens is stale`);
@@ -315,6 +347,7 @@ async function responses(body: Record<string, unknown>, key: string = KEY!, time
 			await new Promise((resolve) => setTimeout(resolve, attempt * 5_000));
 			continue;
 		}
+		ledger(`responses/${String(body.model)}`, response.status, body);
 		let json: any = null;
 		try {
 			json = JSON.parse(text);
@@ -423,4 +456,13 @@ test("live: the completions surface still answers when the protocol is switched 
 	assert.equal(response.status, 200, JSON.stringify(json).slice(0, 200));
 	assert.equal(json?.usage?.completion_tokens_details?.reasoning_tokens ?? 0, 0, "thinking must be off on this surface");
 	assert.match(String(json?.choices?.[0]?.message?.content ?? ""), /OK/);
+});
+
+test("live: spend ledger — every accepted (billed) call, itemized", { skip: !KEY && "set BIGMODEL_API_KEY" }, () => {
+	// Not an assertion about cost, an assertion about honesty: the list is printed
+	// so a reader can check "the free checks were free" against statuses instead of
+	// trusting the header comment (pitfalls L35).
+	console.log(`      billed calls: ${BILLED.length}`);
+	for (const line of BILLED) console.log(`        ${line}`);
+	assert.ok(BILLED.length >= 0);
 });

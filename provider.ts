@@ -68,10 +68,20 @@ export function withGatewayErrorRemediation(api: ProviderStreams): ProviderStrea
 		(wrapped as unknown as { [REMEDIATED]: boolean })[REMEDIATED] = true;
 		return { ...options, fetch: wrapped };
 	};
-	return {
+	const wrapped: ProviderStreams = {
 		stream: (model, context, options) => api.stream(model, context, inject(options) as typeof options),
 		streamSimple: (model, context, options) => api.streamSimple(model, context, inject(options) as typeof options),
 	};
+	// Optional members must survive the wrap, or pi would silently lose deferred
+	// fetching for this provider the moment it starts using it.
+	if (api.fetchDeferred) {
+		wrapped.fetchDeferred = (model, handle, options) =>
+			api.fetchDeferred!(model, handle, inject(options) as typeof options);
+	}
+	if (api.cancelDeferred) {
+		wrapped.cancelDeferred = (model, handle, options) => api.cancelDeferred!(model, handle, inject(options) as typeof options);
+	}
+	return wrapped;
 }
 
 /**

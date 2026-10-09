@@ -10,17 +10,18 @@ import {
 	entryToModel,
 	PROVIDER_ID,
 	unknownModelToModel,
+	RESPONSES_BASE_URL,
 } from "../models.ts";
 import { CATALOG, CATALOG_BY_ID, type CatalogEntry } from "../catalog.ts";
+
+const CHAT = "openai-completions" as const;
+const RESP = "openai-responses" as const;
 
 const RATE = 7;
 
 function compatOf(entry: CatalogEntry): OpenAICompletionsCompat & Record<string, unknown> {
 	return entryToModel(entry, DEFAULT_BASE_URL, RATE, CHAT).compat as never;
 }
-
-const CHAT = "openai-completions" as const;
-const RESP = "openai-responses" as const;
 
 describe("buildModels / entryToModel", () => {
 	test("provider, api and base url are pinned on every model", () => {
@@ -214,8 +215,14 @@ describe("prompt-cache metadata and cost math", () => {
 		// warmer stops with "cache lifetime unavailable"
 		// (pi/dist/core/cache-warmer.js). Declaring a guessed TTL would make pi
 		// replay billed requests to keep alive a cache it cannot schedule.
-		for (const model of buildModels(CHAT, DEFAULT_BASE_URL)) {
-			assert.equal(model.promptCache, undefined, model.id);
+		// Both builds: the guard is about the catalog, and a future per-surface
+		// field must not sneak a TTL in on only one of them.
+		for (const api of [CHAT, RESP] as const) {
+			const baseUrl = api === CHAT ? DEFAULT_BASE_URL : RESPONSES_BASE_URL;
+			for (const model of buildModels(api, baseUrl)) {
+				assert.equal(model.promptCache, undefined, `${api}/${model.id}`);
+				assert.equal(model.cost.cacheWrite, 0, `${api}/${model.id}: storage is 限时免费`);
+			}
 		}
 	});
 

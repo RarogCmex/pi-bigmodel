@@ -35,7 +35,7 @@
  */
 
 const CONTEXT_OVERFLOW_RE =
-	/context_length_exceeded|exceed(?:s|ed)?[^.\n]{0,60}context|Input tokens exceed|exceed max message tokens|Prompt exceeds max length|Total tokens of image and text exceed|Range of (?:input|prompt) length|输入.{0,20}超出|超出.{0,30}(?:上下文|长度|限制)|上下文.{0,12}(?:超|限制)|超过.{0,20}(?:最大|长度)|超长/i;
+	/context_length_exceeded|exceed(?:s|ed)?[^.\n]{0,60}context|Input tokens exceed|exceed max message tokens|Prompt exceeds max length|Total tokens of image and text exceed|Range of (?:input|prompt) length|输入.{0,20}超出|超出.{0,30}(?:上下文|长度|限制)|上下文.{0,12}(?:超|限制)|超过.{0,20}(?:最大|长度)|(?:prompt|输入|上下文|长度|内容).{0,12}超长|超长.{0,12}(?:上下文|长度|限制|上限)/i;
 
 const RATE_LIMIT_RE =
 	/rate.?limit|too many requests|requests per (second|minute)|\bquota\b|\b429\b|频率|限流|过于频繁/i;
@@ -126,12 +126,17 @@ export const CODING_PLAN_URL = "https://bigmodel.cn/coding-plan/personal/overvie
  * Rewrites the opaque/Chinese auth failure into a readable, actionable message.
  * Always keeps the original text so nothing is hidden from the user.
  */
+/** Prefix every rewrite from this file starts with; also the idempotency guard. */
+export const REWRITE_PREFIX = "BigModel (Zhipu AI): ";
+/** Stable opening of the auth rewrite, so `turn_end` can recognise its own text. */
+export const AUTH_REWRITE_MARKER = `${REWRITE_PREFIX}ключ API недействителен`;
+
 export function clarifyErrorMessage(errorMessage: string): string | undefined {
 	if (!errorMessage) return undefined;
-	if (errorMessage.startsWith("BigModel (Zhipu AI):")) return undefined; // idempotent
+	if (errorMessage.startsWith(REWRITE_PREFIX)) return undefined; // idempotent
 	if (!AUTH_RE.test(errorMessage)) return undefined;
 	return (
-		`BigModel (Zhipu AI): ключ API недействителен, отозван или истёк (либо не передан). ` +
+		`${AUTH_REWRITE_MARKER}, отозван или истёк (либо не передан). ` +
 		`Проверьте ключ: ${API_KEYS_URL} — затем выполните \`/login bigmodel\` ` +
 		`или обновите \`BIGMODEL_API_KEY\`. Исходная ошибка: ${errorMessage}`
 	);
@@ -143,7 +148,7 @@ export function clarifyErrorMessage(errorMessage: string): string | undefined {
  */
 export function classifyLimitError(errorMessage: string): { kind: LimitKind; code?: string } | undefined {
 	if (!errorMessage) return undefined;
-	if (errorMessage.includes("BigModel (Zhipu AI):")) return undefined; // idempotent: already rewritten
+	if (errorMessage.includes(REWRITE_PREFIX)) return undefined; // idempotent: already rewritten
 	const stringCode = /"?(?:code|type)"?\s*:\s*"([a-z_]+)"/i.exec(errorMessage)?.[1];
 	if (stringCode) {
 		if (RESPONSES_TRANSIENT_CODES.test(stringCode)) return undefined;
@@ -163,12 +168,24 @@ export function classifyLimitError(errorMessage: string): { kind: LimitKind; cod
 	return undefined;
 }
 
-/** pi's non-retryable deny-list token for each class (`utils/retry.js`). */
+/**
+ * pi's non-retryable deny-list token for each class (`utils/retry.js`), plus the
+ * kind itself.
+ *
+ * The kind is in the tag on purpose. pi replaces an assistant message **in place**
+ * before `turn_end` runs (`agent-session.js` `_replaceMessageInPlace`), so a
+ * `turn_end` handler that re-classified `errorMessage` would see this rewrite
+ * rather than the gateway's body — which is exactly how the persistent billing
+ * hint became unreachable once. Reading the tag back is order-independent, and no
+ * other producer emits this shape (`[<deny-list phrase> <code> <kind>]`).
+ */
 const DENY_LIST_TAG: Record<LimitKind, string> = {
 	balance: "billing",
 	quota: "quota exceeded",
 	plan: "billing",
 };
+
+const LIMIT_TAG_RE = /\[(billing|quota exceeded) (\d{3,4}|[a-z_]+|-) (balance|quota|plan)\]/;
 
 const LIMIT_ADVICE: Record<LimitKind, string> = {
 	balance:
@@ -192,8 +209,26 @@ const LIMIT_ADVICE: Record<LimitKind, string> = {
 export function clarifyLimitErrorMessage(errorMessage: string): string | undefined {
 	const limit = classifyLimitError(errorMessage);
 	if (!limit) return undefined;
-	const tag = `[${DENY_LIST_TAG[limit.kind]}${limit.code ? ` ${limit.code}` : ""}]`;
+	const tag = `[${DENY_LIST_TAG[limit.kind]} ${limit.code ?? "-"} ${limit.kind}]`;
 	return `BigModel (Zhipu AI): ${LIMIT_ADVICE[limit.kind]} ${tag} Исходная ошибка: ${errorMessage}`;
+}
+
+/**
+ * What kind of hint a message from this file already carries, or undefined when
+ * the text is not one of ours.
+ *
+ * The order-independent half of the error layer: `message_end` classifies the
+ * gateway body, pi replaces the message in place, and `turn_end` reads the tag
+ * back instead of re-deriving it from text that no longer exists.
+ */
+export function classifyRewritten(
+	errorMessage: string,
+): { type: "limit"; kind: LimitKind } | { type: "auth" } | undefined {
+	if (!errorMessage) return undefined;
+	const tag = LIMIT_TAG_RE.exec(errorMessage);
+	if (tag) return { type: "limit", kind: tag[3] as LimitKind };
+	if (errorMessage.includes(AUTH_REWRITE_MARKER)) return { type: "auth" };
+	return undefined;
 }
 
 /** Short persistent-transcript version of the same hint (TUI only, see index.ts). */

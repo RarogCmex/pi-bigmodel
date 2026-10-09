@@ -25,25 +25,44 @@
  * Both were probed live on 2026-10-09; the evidence and the reasoning are in
  * `research/2026-10-09-refresh.md`.
  *
- * The gateway is OpenAI-chat-completions compatible, so streaming/tool calls/
- * usage accounting are delegated to pi-ai's `openAICompletionsApi` with the
- * "zai" thinking format — the same protocol as the built-in z.ai provider.
- * Live-verified on the CN endpoint 2026-09-24 and re-verified 2026-10-09 on
- * pi 1.1.0 (raw evidence: `research/evidence-2026-10-09.json`):
- *   - `thinking: {type: enabled|disabled}` (+`clear_thinking:false`) accepted;
+ * Streaming, tool calls and usage accounting are delegated to pi-ai's own
+ * adapters — one per wire protocol, chosen at registration time (bottom of this
+ * file). Live-verified on the CN endpoint 2026-09-24, re-verified 2026-10-09 on
+ * pi 1.1.0 (raw evidence: `research/evidence-2026-10-09{,-responses}.json`).
+ *
+ * `openAIResponsesApi` — `POST /api/v1/responses`, the DEFAULT:
+ *   - `input` items, `max_output_tokens`, `reasoning:{effort}`, output items and
+ *     `response.*` stream events, all as pi's adapter emits them;
+ *   - `prompt_cache_key` is documented here (cluster routing for cache hits) and
+ *     pi fills it from the session id — the completions spec has no such field;
+ *   - `reasoning` output items come back with `content[].type:"reasoning_text"`
+ *     and `encrypted_content:null`; pi stores the item as the thinking block's
+ *     signature and replays it verbatim, which the gateway accepts;
+ *   - images travel as `image_url: "<data url>"` — a STRING. The completions-style
+ *     `{url}` object is accepted with 200 and the image is silently dropped;
+ *   - there is NO working off switch for thinking (`effort:"none"`, an
+ *     undocumented `thinking:{type:"disabled"}` and `do_sample:false` are all
+ *     accepted and all ignored), so "off" is hidden on this surface;
+ *   - auth failures arrive as HTTP 200 with an in-band body, hence the fetch
+ *     wrapper (see `withGatewayErrorRemediation`).
+ *
+ * `openAICompletionsApi` — `POST /api/paas/v4/chat/completions` (`BIGMODEL_PROTOCOL=completions`):
+ *   - `thinking:{type:enabled|disabled}` (+`clear_thinking:false`), and
+ *     `disabled` really zeroes `reasoning_tokens` — the reason this surface stays;
  *   - `reasoning_effort` is GLM-5.2 / GLM-5.3-family only, and GLM-5.3 enforces
- *     low|high|max (`medium` → 400 code 1210). The gateway silently ACCEPTS the
- *     field on models that ignore it, so acceptance proves nothing;
+ *     low|high|max (`medium` → 400/1210). The gateway silently ACCEPTS the field
+ *     on models that ignore it, so acceptance proves nothing;
  *   - the GLM-5.3 family rejects `thinking.type:"disabled"` with 400/1210, so
- *     their level maps hide "off". GLM-4.7 and GLM-4.5V stopped being forced
- *     thinkers (turn-level thinking), so "off" is offered for them again;
+ *     their level maps hide "off"; GLM-4.7 and GLM-4.5V stopped being forced
+ *     thinkers (turn-level thinking), so "off" is offered for them here;
  *   - `reasoning_content` deltas arrive in stream chunks and pi replays them on
- *     the next turn — exactly what the gateway's preserved-thinking mode
- *     (`clear_thinking:false`) requires;
- *   - `tool_stream: true` and `strict: true` tool schemas accepted;
- *   - context overflow is 400/1261 "Prompt exceeds max length";
- *   - an empty balance arrives as HTTP 429 code 1113, which pi would otherwise
- *     retry until its budget runs out.
+ *     the next turn — what the gateway's preserved-thinking mode requires;
+ *   - `tool_stream: true` and `strict: true` tool schemas accepted.
+ *
+ * Shared by both surfaces: context overflow is 400 "Prompt exceeds max length"
+ * (code 1261 / `context_length_exceeded`), and an empty balance arrives as HTTP
+ * 429 (code 1113 / `insufficient_quota`), which pi would otherwise retry until its
+ * budget runs out.
  */
 
 // NOTE on this import: pi's extension loader aliases the bare
@@ -57,6 +76,7 @@ import {
 	clarifyErrorMessage,
 	clarifyLimitErrorMessage,
 	classifyLimitError,
+	classifyRewritten,
 	limitHelpEntryContent,
 	normalizeOverflowError,
 	shouldClarify,
@@ -117,14 +137,24 @@ export default function (pi: ExtensionAPI) {
     };
     if (msg.provider !== PROVIDER_ID) return;
 
-    const limit = classifyLimitError(msg.errorMessage ?? "");
-    const auth = !limit && shouldClarify(msg);
-    if (!limit && !auth) return;
+    // By now `message_end` has already run and pi has replaced this message IN
+    // PLACE (agent-session.js `_replaceMessageInPlace` deletes every key of the
+    // stored object and assigns the rewrite over it), so `errorMessage` is our own
+    // text, not the gateway's body. Classifying the body again therefore finds
+    // nothing — that is how this hint became unreachable for the billing class
+    // while the auth one survived only by quoting the original text. Read our own
+    // marker first; the raw-body path stays as a fallback for any ordering pi
+    // might introduce, and both are covered in test/entry.test.ts.
+    const raw = msg.errorMessage ?? "";
+    const rewritten = classifyRewritten(raw);
+    const limitKind = rewritten?.type === "limit" ? rewritten.kind : classifyLimitError(raw)?.kind;
+    const auth = rewritten?.type === "auth" || (!limitKind && shouldClarify(msg));
+    if (!limitKind && !auth) return;
 
-    const customType = limit ? "bigmodel-billing-help" : "bigmodel-auth-help";
+    const customType = limitKind ? "bigmodel-billing-help" : "bigmodel-auth-help";
     if (event.entries.some((e) => (e as { customType?: string }).customType === customType)) return;
-    const content = limit
-      ? limitHelpEntryContent(limit.kind)
+    const content = limitKind
+      ? limitHelpEntryContent(limitKind)
       : "BigModel (Zhipu AI): ключ недействителен, отозван или истёк. " +
         "Проверьте ключ и баланс: https://open.bigmodel.cn/usercenter/proj-mgmt/apikeys — " +
         "затем выполните `/login bigmodel` или обновите `BIGMODEL_API_KEY`.";
@@ -135,7 +165,23 @@ export default function (pi: ExtensionAPI) {
 
   // One wire protocol per registration (see models.ts / provider.ts for the
   // trade-off): `BIGMODEL_PROTOCOL=responses` (default) or `completions`.
-  const { api } = resolveProtocol();
+  const { api, requested, recognized } = resolveProtocol();
   const streams = api === "openai-responses" ? openAIResponsesApi() : openAICompletionsApi();
   pi.registerProvider(buildBigModelProvider(api, withGatewayErrorRemediation(streams)));
+
+  // A typo'd protocol must not pass silently: `BIGMODEL_PROTOCOL=completio` would
+  // otherwise land on Responses — the surface with no thinking off-switch — and
+  // the user would debug a cost mystery instead of an env var. There is no notify
+  // at registration time (`ui` lives on the handler context), so this rides the
+  // first session start, and only where a notice cannot corrupt output.
+  if (requested !== undefined && !recognized) {
+    pi.on("session_start", (_event, ctx) => {
+      if (!ctx.hasUI) return;
+      ctx.ui.notify(
+        `BigModel: BIGMODEL_PROTOCOL="${requested}" не распознано — зарегистрирован ${api}. ` +
+          `Допустимые значения: responses, completions.`,
+        "warning",
+      );
+    });
+  }
 }

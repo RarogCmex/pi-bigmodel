@@ -1,23 +1,23 @@
 import assert from "node:assert/strict";
 import test, { describe, afterEach } from "node:test";
 import type { AuthContext, ProviderAuthInteraction, ProviderStreams } from "@earendil-works/pi-ai";
-const CHAT = "openai-completions" as const;
-const RESP = "openai-responses" as const;
-
 import { CATALOG } from "../catalog.ts";
 import { DEFAULT_BASE_URL, PROVIDER_ID } from "../models.ts";
 import {
-	API_KEY_AUTH_NAME,
-	API_KEYS_URL,
-	API_KEY_ENV_VAR,
-	BASE_URL_ENV_VAR,
-	bigmodelApiKeyAuth,
-	buildBigModelProvider,
-	resolveBaseUrl,
-	withGatewayErrorRemediation,
+  API_KEY_AUTH_NAME,
+  API_KEYS_URL,
+  API_KEY_ENV_VAR,
+  BASE_URL_ENV_VAR,
+  bigmodelApiKeyAuth,
+  buildBigModelProvider,
+  resolveBaseUrl,
+  withGatewayErrorRemediation,
 } from "../provider.ts";
 import { RESPONSES_BASE_URL } from "../models.ts";
 import { API_KEYS_URL as ERR_URL } from "../errors.ts";
+
+const CHAT = "openai-completions" as const;
+const RESP = "openai-responses" as const;
 
 const unused: ProviderStreams = {
   stream: () => {
@@ -177,139 +177,139 @@ describe("buildBigModelProvider", () => {
 });
 
 describe("protocol-aware registration", () => {
-	test("the responses protocol registers every model on the /api/v1 base", () => {
-		const provider = buildBigModelProvider(RESP, unused, () => undefined);
-		assert.equal(provider.baseUrl, RESPONSES_BASE_URL);
-		const models = provider.getModels();
-		assert.equal(models.length, CATALOG.length);
-		for (const model of models) {
-			assert.equal(model.api, "openai-responses", model.id);
-			assert.equal(model.baseUrl, RESPONSES_BASE_URL, model.id);
-		}
-	});
+  test("the responses protocol registers every model on the /api/v1 base", () => {
+    const provider = buildBigModelProvider(RESP, unused, () => undefined);
+    assert.equal(provider.baseUrl, RESPONSES_BASE_URL);
+    const models = provider.getModels();
+    assert.equal(models.length, CATALOG.length);
+    for (const model of models) {
+      assert.equal(model.api, "openai-responses", model.id);
+      assert.equal(model.baseUrl, RESPONSES_BASE_URL, model.id);
+    }
+  });
 
-	test("the completions protocol still registers on /api/paas/v4", () => {
-		const provider = buildBigModelProvider(CHAT, unused, () => undefined);
-		assert.equal(provider.baseUrl, DEFAULT_BASE_URL);
-		for (const model of provider.getModels()) assert.equal(model.api, "openai-completions", model.id);
-	});
+  test("the completions protocol still registers on /api/paas/v4", () => {
+    const provider = buildBigModelProvider(CHAT, unused, () => undefined);
+    assert.equal(provider.baseUrl, DEFAULT_BASE_URL);
+    for (const model of provider.getModels()) assert.equal(model.api, "openai-completions", model.id);
+  });
 
-	test("BIGMODEL_PROTOCOL selects the surface, and an override applies to whichever wins", () => {
-		const responses = buildBigModelProvider(RESP, unused, (name) =>
-			name === "BIGMODEL_PROTOCOL" ? "completions" : undefined,
-		);
-		// The protocol is decided by the caller (index.ts) — the provider builds
-		// what it is told, so a mismatch here would be a wiring bug, not a config
-		// one. What the env DOES control here is the base URL default.
-		assert.equal(responses.baseUrl, RESPONSES_BASE_URL);
+  test("BIGMODEL_PROTOCOL selects the surface, and an override applies to whichever wins", () => {
+    const responses = buildBigModelProvider(RESP, unused, (name) =>
+      name === "BIGMODEL_PROTOCOL" ? "completions" : undefined,
+    );
+    // The protocol is decided by the caller (index.ts) — the provider builds
+    // what it is told, so a mismatch here would be a wiring bug, not a config
+    // one. What the env DOES control here is the base URL default.
+    assert.equal(responses.baseUrl, RESPONSES_BASE_URL);
 
-		const proxied = buildBigModelProvider(RESP, unused, (name) =>
-			name === "BIGMODEL_BASE_URL" ? "https://proxy.example.com/v1/" : undefined,
-		);
-		assert.equal(proxied.baseUrl, "https://proxy.example.com/v1");
-		for (const model of proxied.getModels()) assert.equal(model.baseUrl, "https://proxy.example.com/v1", model.id);
-	});
+    const proxied = buildBigModelProvider(RESP, unused, (name) =>
+      name === "BIGMODEL_BASE_URL" ? "https://proxy.example.com/v1/" : undefined,
+    );
+    assert.equal(proxied.baseUrl, "https://proxy.example.com/v1");
+    for (const model of proxied.getModels()) assert.equal(model.baseUrl, "https://proxy.example.com/v1", model.id);
+  });
 
-	test("discovery reads the listing from the completions base even on responses", async () => {
-		// GET /api/v1/models exists but returns three coding-plan entries with
-		// EMPTY id fields, so the overlay must keep reading the paas/v4 listing
-		// while stamping the active protocol on the models it builds.
-		const provider = buildBigModelProvider(RESP, unused, () => undefined);
-		const urls: string[] = [];
-		const realFetch = globalThis.fetch;
-		globalThis.fetch = (async (url: any) => {
-			urls.push(String(url));
-			return new Response(JSON.stringify({ object: "list", data: [{ id: "glm-6.9" }] }), {
-				status: 200,
-				headers: { "content-type": "application/json" },
-			});
-		}) as unknown as typeof fetch;
-		let published: any;
-		try {
-			await provider.refreshModels?.({
-				allowNetwork: true,
-				force: true,
-				signal: new AbortController().signal,
-				credential: { type: "api_key", key: "k" },
-				publish: async (publication: unknown) => {
-					published = publication;
-					return true;
-				},
-			} as never);
-		} finally {
-			globalThis.fetch = realFetch;
-		}
-		assert.deepEqual(urls, [`${DEFAULT_BASE_URL}/models`], "the listing must come from the completions base");
-		const overlay = published?.persist?.models ?? [];
-		const discovered = overlay.find((m: { id: string }) => m.id === "glm-6.9");
-		assert.ok(discovered, `glm-6.9 missing from the publication: ${JSON.stringify(overlay.map((m: { id: string }) => m.id))}`);
-		assert.equal(discovered.api, "openai-responses", "overlay models must carry the active protocol");
-		assert.equal(discovered.baseUrl, RESPONSES_BASE_URL);
-	});
+  test("discovery reads the listing from the completions base even on responses", async () => {
+    // GET /api/v1/models exists but returns three coding-plan entries with
+    // EMPTY id fields, so the overlay must keep reading the paas/v4 listing
+    // while stamping the active protocol on the models it builds.
+    const provider = buildBigModelProvider(RESP, unused, () => undefined);
+    const urls: string[] = [];
+    const realFetch = globalThis.fetch;
+    globalThis.fetch = (async (url: any) => {
+      urls.push(String(url));
+      return new Response(JSON.stringify({ object: "list", data: [{ id: "glm-6.9" }] }), {
+        status: 200,
+        headers: { "content-type": "application/json" },
+      });
+    }) as unknown as typeof fetch;
+    let published: any;
+    try {
+      await provider.refreshModels?.({
+        allowNetwork: true,
+        force: true,
+        signal: new AbortController().signal,
+        credential: { type: "api_key", key: "k" },
+        publish: async (publication: unknown) => {
+          published = publication;
+          return true;
+        },
+      } as never);
+    } finally {
+      globalThis.fetch = realFetch;
+    }
+    assert.deepEqual(urls, [`${DEFAULT_BASE_URL}/models`], "the listing must come from the completions base");
+    const overlay = published?.persist?.models ?? [];
+    const discovered = overlay.find((m: { id: string }) => m.id === "glm-6.9");
+    assert.ok(discovered, `glm-6.9 missing from the publication: ${JSON.stringify(overlay.map((m: { id: string }) => m.id))}`);
+    assert.equal(discovered.api, "openai-responses", "overlay models must carry the active protocol");
+    assert.equal(discovered.baseUrl, RESPONSES_BASE_URL);
+  });
 });
 
 describe("withGatewayErrorRemediation", () => {
-	const IN_BAND = '{"code":1000,"msg":"身份验证失败。","success":false}';
+  const IN_BAND = '{"code":1000,"msg":"身份验证失败。","success":false}';
 
-	function recordingApi(): { api: ProviderStreams; captured: () => unknown } {
-		let capturedOptions: any;
-		const api: ProviderStreams = {
-			stream: () => {
-				throw new Error("not used");
-			},
-			streamSimple: (_model, _context, options) => {
-				capturedOptions = options;
-				throw new Error("stop here");
-			},
-		};
-		return { api, captured: () => capturedOptions };
-	}
+  function recordingApi(): { api: ProviderStreams; captured: () => unknown } {
+    let capturedOptions: any;
+    const api: ProviderStreams = {
+      stream: () => {
+        throw new Error("not used");
+      },
+      streamSimple: (_model, _context, options) => {
+        capturedOptions = options;
+        throw new Error("stop here");
+      },
+    };
+    return { api, captured: () => capturedOptions };
+  }
 
-	test("injects a fetch that re-statuses an in-band 200 error", async () => {
-		const { api, captured } = recordingApi();
-		const wrapped = withGatewayErrorRemediation(api);
-		assert.throws(() => wrapped.streamSimple({} as never, {} as never, {} as never), /stop here/);
-		const injected = (captured() as { fetch: typeof fetch }).fetch;
-		assert.equal(typeof injected, "function");
+  test("injects a fetch that re-statuses an in-band 200 error", async () => {
+    const { api, captured } = recordingApi();
+    const wrapped = withGatewayErrorRemediation(api);
+    assert.throws(() => wrapped.streamSimple({} as never, {} as never, {} as never), /stop here/);
+    const injected = (captured() as { fetch: typeof fetch }).fetch;
+    assert.equal(typeof injected, "function");
 
-		const realFetch = globalThis.fetch;
-		globalThis.fetch = (async () =>
-			new Response(IN_BAND, { status: 200, headers: { "content-type": "application/json" } })) as unknown as typeof fetch;
-		try {
-			const response = await injected("https://open.bigmodel.cn/api/v1/responses", {} as never);
-			assert.equal(response.status, 401);
-			assert.deepEqual(JSON.parse(await response.text()), { error: { code: "1000", message: "身份验证失败。" } });
-		} finally {
-			globalThis.fetch = realFetch;
-		}
-	});
+    const realFetch = globalThis.fetch;
+    globalThis.fetch = (async () =>
+      new Response(IN_BAND, { status: 200, headers: { "content-type": "application/json" } })) as unknown as typeof fetch;
+    try {
+      const response = await injected("https://open.bigmodel.cn/api/v1/responses", {} as never);
+      assert.equal(response.status, 401);
+      assert.deepEqual(JSON.parse(await response.text()), { error: { code: "1000", message: "身份验证失败。" } });
+    } finally {
+      globalThis.fetch = realFetch;
+    }
+  });
 
-	test("chains onto a caller-supplied fetch instead of replacing it", async () => {
-		const { api, captured } = recordingApi();
-		const wrapped = withGatewayErrorRemediation(api);
-		const calls: string[] = [];
-		const inner = (async (url: any) => {
-			calls.push(String(url));
-			return new Response("event: response.created\n\n", {
-				status: 200,
-				headers: { "content-type": "text/event-stream" },
-			});
-		}) as unknown as typeof fetch;
-		assert.throws(() => wrapped.streamSimple({} as never, {} as never, { fetch: inner } as never), /stop here/);
-		const injected = (captured() as { fetch: typeof fetch }).fetch;
-		const response = await injected("https://open.bigmodel.cn/api/v1/responses", {} as never);
-		assert.deepEqual(calls, ["https://open.bigmodel.cn/api/v1/responses"]);
-		assert.equal(response.status, 200, "a real stream is passed through");
-	});
+  test("chains onto a caller-supplied fetch instead of replacing it", async () => {
+    const { api, captured } = recordingApi();
+    const wrapped = withGatewayErrorRemediation(api);
+    const calls: string[] = [];
+    const inner = (async (url: any) => {
+      calls.push(String(url));
+      return new Response("event: response.created\n\n", {
+        status: 200,
+        headers: { "content-type": "text/event-stream" },
+      });
+    }) as unknown as typeof fetch;
+    assert.throws(() => wrapped.streamSimple({} as never, {} as never, { fetch: inner } as never), /stop here/);
+    const injected = (captured() as { fetch: typeof fetch }).fetch;
+    const response = await injected("https://open.bigmodel.cn/api/v1/responses", {} as never);
+    assert.deepEqual(calls, ["https://open.bigmodel.cn/api/v1/responses"]);
+    assert.equal(response.status, 200, "a real stream is passed through");
+  });
 
-	test("does not double-wrap when applied twice", () => {
-		const { api, captured } = recordingApi();
-		const once = withGatewayErrorRemediation(api);
-		const twice = withGatewayErrorRemediation(once);
-		assert.throws(() => twice.streamSimple({} as never, {} as never, {} as never), /stop here/);
-		const options = captured() as { fetch: unknown };
-		const again = withGatewayErrorRemediation(api);
-		assert.throws(() => again.streamSimple({} as never, {} as never, options as never), /stop here/);
-		assert.equal((captured() as { fetch: unknown }).fetch, options.fetch, "the marked fetch was reused, not rewrapped");
-	});
+  test("does not double-wrap when applied twice", () => {
+    const { api, captured } = recordingApi();
+    const once = withGatewayErrorRemediation(api);
+    const twice = withGatewayErrorRemediation(once);
+    assert.throws(() => twice.streamSimple({} as never, {} as never, {} as never), /stop here/);
+    const options = captured() as { fetch: unknown };
+    const again = withGatewayErrorRemediation(api);
+    assert.throws(() => again.streamSimple({} as never, {} as never, options as never), /stop here/);
+    assert.equal((captured() as { fetch: unknown }).fetch, options.fetch, "the marked fetch was reused, not rewrapped");
+  });
 });
