@@ -1,0 +1,2485 @@
+{
+ "stage": "free",
+ "at": "2026-10-09T16:58:42.838Z",
+ "records": [
+  {
+   "label": "async submit glm-4.5-flash",
+   "url": "…/api/paas/v4/async/chat/completions",
+   "method": "POST",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say OK"
+     }
+    ],
+    "max_tokens": 8
+   },
+   "status": 200,
+   "keys": [
+    "id",
+    "model",
+    "request_id",
+    "task_status"
+   ],
+   "json": {
+    "id": "20261010005722dd102476a1894c3f",
+    "model": "glm-4.5-flash",
+    "request_id": "20261010005722dd102476a1894c3f",
+    "task_status": "PROCESSING"
+   }
+  },
+  {
+   "label": "async-result [poll 1]",
+   "url": "…/api/paas/v4/async-result/20261010005722dd102476a1894c3f",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "id",
+    "request_id",
+    "task_status"
+   ],
+   "json": {
+    "id": "20261010005722dd102476a1894c3f",
+    "request_id": "20261010005722dd102476a1894c3f",
+    "task_status": "PROCESSING"
+   }
+  },
+  {
+   "label": "async-result [poll 2]",
+   "url": "…/api/paas/v4/async-result/20261010005722dd102476a1894c3f",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "id",
+    "request_id",
+    "task_status"
+   ],
+   "json": {
+    "id": "20261010005722dd102476a1894c3f",
+    "request_id": "20261010005722dd102476a1894c3f",
+    "task_status": "PROCESSING"
+   }
+  },
+  {
+   "label": "async-result [poll 3]",
+   "url": "…/api/paas/v4/async-result/20261010005722dd102476a1894c3f",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "id",
+    "request_id",
+    "task_status"
+   ],
+   "json": {
+    "id": "20261010005722dd102476a1894c3f",
+    "request_id": "20261010005722dd102476a1894c3f",
+    "task_status": "PROCESSING"
+   }
+  },
+  {
+   "label": "async-result [poll 4]",
+   "url": "…/api/paas/v4/async-result/20261010005722dd102476a1894c3f",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "id",
+    "request_id",
+    "task_status"
+   ],
+   "json": {
+    "id": "20261010005722dd102476a1894c3f",
+    "request_id": "20261010005722dd102476a1894c3f",
+    "task_status": "PROCESSING"
+   }
+  },
+  {
+   "label": "async-result [poll 5]",
+   "url": "…/api/paas/v4/async-result/20261010005722dd102476a1894c3f",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "id",
+    "request_id",
+    "task_status"
+   ],
+   "json": {
+    "id": "20261010005722dd102476a1894c3f",
+    "request_id": "20261010005722dd102476a1894c3f",
+    "task_status": "PROCESSING"
+   }
+  },
+  {
+   "label": "async-result [poll 6]",
+   "url": "…/api/paas/v4/async-result/20261010005722dd102476a1894c3f",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "id",
+    "request_id",
+    "task_status"
+   ],
+   "json": {
+    "id": "20261010005722dd102476a1894c3f",
+    "request_id": "20261010005722dd102476a1894c3f",
+    "task_status": "PROCESSING"
+   }
+  },
+  {
+   "label": "async-result [poll 7]",
+   "url": "…/api/paas/v4/async-result/20261010005722dd102476a1894c3f",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "id",
+    "request_id",
+    "task_status"
+   ],
+   "json": {
+    "id": "20261010005722dd102476a1894c3f",
+    "request_id": "20261010005722dd102476a1894c3f",
+    "task_status": "PROCESSING"
+   }
+  },
+  {
+   "label": "async-result [poll 8]",
+   "url": "…/api/paas/v4/async-result/20261010005722dd102476a1894c3f",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "id",
+    "request_id",
+    "task_status"
+   ],
+   "json": {
+    "id": "20261010005722dd102476a1894c3f",
+    "request_id": "20261010005722dd102476a1894c3f",
+    "task_status": "PROCESSING"
+   }
+  },
+  {
+   "label": "async-result [poll 9]",
+   "url": "…/api/paas/v4/async-result/20261010005722dd102476a1894c3f",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "id",
+    "request_id",
+    "task_status"
+   ],
+   "json": {
+    "id": "20261010005722dd102476a1894c3f",
+    "request_id": "20261010005722dd102476a1894c3f",
+    "task_status": "PROCESSING"
+   }
+  },
+  {
+   "label": "async-result [poll 10]",
+   "url": "…/api/paas/v4/async-result/20261010005722dd102476a1894c3f",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "id",
+    "request_id",
+    "task_status"
+   ],
+   "json": {
+    "id": "20261010005722dd102476a1894c3f",
+    "request_id": "20261010005722dd102476a1894c3f",
+    "task_status": "PROCESSING"
+   }
+  },
+  {
+   "label": "async stream:true (expect reject)",
+   "url": "…/api/paas/v4/async/chat/completions",
+   "method": "POST",
+   "body": {
+    "model": "glm-4.5-flash",
+    "messages": [
+     {
+      "role": "user",
+      "content": "1"
+     }
+    ],
+    "max_tokens": 1,
+    "stream": true
+   },
+   "status": 429,
+   "keys": [
+    "error"
+   ],
+   "json": {
+    "error": {
+     "code": "1302",
+     "message": "您的账户已达到速率限制，请您控制请求频率"
+    }
+   }
+  },
+  {
+   "label": "async glm-4.7-flash (not in enum)",
+   "url": "…/api/paas/v4/async/chat/completions",
+   "method": "POST",
+   "body": {
+    "model": "glm-4.7-flash",
+    "messages": [
+     {
+      "role": "user",
+      "content": "1"
+     }
+    ],
+    "max_tokens": 1
+   },
+   "status": 429,
+   "keys": [
+    "error"
+   ],
+   "json": {
+    "error": {
+     "code": "1302",
+     "message": "您的账户已达到速率限制，请您控制请求频率"
+    }
+   }
+  },
+  {
+   "label": "files upload purpose=batch",
+   "url": "…/api/paas/v4/files",
+   "method": "POST",
+   "status": 400,
+   "keys": [
+    "error"
+   ],
+   "json": {
+    "error": {
+     "code": "1210",
+     "message": "[logID=20261010005755bf631fab29464f1a] 模型名称错误: glm-4-flash-250414, 目前支持的模型: glm-5.1, glm-5-turbo, glm-4, glm-4-0520, glm-4-plus, glm-4-long, glm-4-plus-0111, glm-4-air, glm-4-air-0111, glm-4-air-25041… (396 chars)"
+    }
+   }
+  },
+  {
+   "label": "web_search search_std (zero balance)",
+   "url": "…/api/paas/v4/web_search",
+   "method": "POST",
+   "body": {
+    "search_query": "智谱AI GLM 最新模型",
+    "search_engine": "search_std",
+    "search_intent": true,
+    "count": 1,
+    "content_size": "medium"
+   },
+   "status": 429,
+   "keys": [
+    "error"
+   ],
+   "json": {
+    "error": {
+     "code": "1113",
+     "message": "余额不足或无可用资源包,请充值。"
+    }
+   }
+  },
+  {
+   "label": "knowledge create (Embedding-2)",
+   "url": "…/api/llm-application/open/knowledge",
+   "method": "POST",
+   "body": {
+    "embedding_id": 3,
+    "name": "pi-bigmodel-probe",
+    "description": "temporary probe KB"
+   },
+   "status": 200,
+   "keys": [
+    "data",
+    "code",
+    "message",
+    "timestamp"
+   ],
+   "json": {
+    "data": {
+     "id": "2108602882139078656"
+    },
+    "code": 200,
+    "message": "请求成功",
+    "timestamp": 1791565077722
+   }
+  },
+  {
+   "label": "knowledge upload doc",
+   "url": "…/api/llm-application/open/document/upload_document/2108602882139078656",
+   "method": "POST",
+   "status": 200,
+   "keys": [
+    "data",
+    "code",
+    "message",
+    "timestamp"
+   ],
+   "json": {
+    "data": {
+     "successInfos": [
+      {
+       "documentId": "…",
+       "fileName": "…",
+       "url": "https://cdn-enterprise-document.bigmodel.cn/knowledge/AAA10FF7CAB84C2C96B5A64D52EB4CF0.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565079%3B1791601079&q-key-time… (314 chars)"
+      }
+     ],
+     "failedInfos": []
+    },
+    "code": 200,
+    "message": "请求成功",
+    "timestamp": 1791565079127
+   }
+  },
+  {
+   "label": "knowledge retrieve (empty/waiting)",
+   "url": "…/api/llm-application/open/knowledge/retrieve",
+   "method": "POST",
+   "body": {
+    "query": "platform probe",
+    "knowledge_ids": [
+     "2108602882139078656"
+    ],
+    "top_k": 3
+   },
+   "status": 200,
+   "keys": [
+    "data",
+    "code",
+    "message",
+    "timestamp"
+   ],
+   "json": {
+    "data": [],
+    "code": 200,
+    "message": "请求成功",
+    "timestamp": 1791565080089
+   }
+  },
+  {
+   "label": "managed: list agents",
+   "url": "….bigmodel.cn/api/agent/managed/v1/agents",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: create agent (glm-5.3-flash)",
+   "url": "….bigmodel.cn/api/agent/managed/v1/agents",
+   "method": "POST",
+   "body": {
+    "name": "pi-bigmodel-probe",
+    "model": "glm-5.3-flash",
+    "system": "You are a probe. Answer with one word."
+   },
+   "status": 201,
+   "keys": [
+    "id",
+    "type",
+    "name",
+    "model",
+    "system",
+    "description",
+    "tools",
+    "skills",
+    "mcp_servers",
+    "metadata",
+    "multiagent",
+    "version",
+    "created_at",
+    "updated_at"
+   ],
+   "json": {
+    "id": "agent_01a12199-b706-73e7-8f32-0a87432d420d",
+    "type": "agent",
+    "name": "pi-bigmodel-probe",
+    "model": {
+     "id": "glm-5.3-flash",
+     "effort": "high",
+     "speed": "standard"
+    },
+    "system": "You are a probe. Answer with one word.",
+    "description": null,
+    "tools": [],
+    "skills": [],
+    "mcp_servers": [],
+    "metadata": {},
+    "multiagent": null,
+    "version": 1,
+    "created_at": "2026-10-09T16:58:04.429Z",
+    "updated_at": "2026-10-09T16:58:04.429Z",
+    "archived_at": null
+   }
+  },
+  {
+   "label": "managed: create environment",
+   "url": "….bigmodel.cn/api/agent/managed/v1/environments",
+   "method": "POST",
+   "body": {
+    "name": "pi-probe-env",
+    "config": {
+     "type": "cloud",
+     "networking": {
+      "type": "unrestricted"
+     }
+    }
+   },
+   "status": 200,
+   "keys": [
+    "id",
+    "type",
+    "name",
+    "description",
+    "metadata",
+    "config",
+    "scope",
+    "state",
+    "archived_at",
+    "created_at",
+    "updated_at"
+   ],
+   "json": {
+    "id": "env_01a12199-bb92-7ff0-a38a-26228a62b0ee",
+    "type": "environment",
+    "name": "pi-probe-env",
+    "description": null,
+    "metadata": {},
+    "config": {
+     "type": "cloud",
+     "packages": {
+      "type": "packages",
+      "go": [],
+      "apt": [],
+      "gem": [],
+      "npm": [],
+      "pip": [],
+      "cargo": []
+     },
+     "networking": {
+      "type": "unrestricted"
+     }
+    },
+    "scope": "organization",
+    "state": "active",
+    "archived_at": null,
+    "created_at": "2026-10-09T16:58:05.594Z",
+    "updated_at": "2026-10-09T16:58:05.594Z"
+   }
+  },
+  {
+   "label": "managed: create session",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions",
+   "method": "POST",
+   "body": {
+    "agent": "agent_01a12199-b706-73e7-8f32-0a87432d420d",
+    "environment_id": "env_01a12199-bb92-7ff0-a38a-26228a62b0ee",
+    "title": "probe"
+   },
+   "status": 200,
+   "keys": [
+    "id",
+    "agent",
+    "environment_id",
+    "status",
+    "archived_at",
+    "budget",
+    "created_at",
+    "metadata",
+    "resources",
+    "outcome_evaluations",
+    "stats",
+    "title",
+    "type",
+    "updated_at"
+   ],
+   "json": {
+    "id": "sess_01a12199-c028-76e4-a017-3b2ba0e51cb4",
+    "agent": {
+     "id": "agent_01a12199-b706-73e7-8f32-0a87432d420d",
+     "type": "agent",
+     "name": "pi-bigmodel-probe",
+     "model": {
+      "id": "glm-5.3-flash",
+      "effort": "high",
+      "speed": "standard"
+     },
+     "system": "You are a probe. Answer with one word.",
+     "description": null,
+     "tools": [],
+     "skills": [],
+     "mcp_servers": [],
+     "multiagent": null,
+     "version": 1
+    },
+    "environment_id": "env_01a12199-bb92-7ff0-a38a-26228a62b0ee",
+    "status": "idle",
+    "archived_at": null,
+    "budget": null,
+    "created_at": "2026-10-09T16:58:06.763Z",
+    "metadata": {},
+    "resources": [],
+    "outcome_evaluations": [],
+    "stats": {
+     "duration_seconds": 0.012
+    },
+    "title": "probe",
+    "type": "session",
+    "updated_at": "2026-10-09T16:58:06.763Z",
+    "usage": {
+     "cache_read_input_tokens": 0,
+     "input_tokens": 0,
+     "output_tokens": 0,
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     }
+    },
+    "vault_ids": []
+   }
+  },
+  {
+   "label": "managed: send event (paid model, ¥0)",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a12199-c028-76e4-a017-3b2ba0e51cb4/events",
+   "method": "POST",
+   "body": {
+    "events": [
+     {
+      "type": "user.message",
+      "content": [
+       {
+        "type": "text",
+        "text": "Reply OK"
+       }
+      ]
+     }
+    ]
+   },
+   "status": 200,
+   "keys": [
+    "data"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a12199-c4b8-760a-9853-18656d93a471",
+      "type": "user.message",
+      "content": [
+       "…"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "label": "managed: events [poll 1]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a12199-c028-76e4-a017-3b2ba0e51cb4/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a12199-c537-78b9-aae4-0de15df5ad9c",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T16:58:08.055Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe",
+      "session_thread_id": "sthr_01a12199-c032-7d95-9bf7-5f450ccc2966",
+      "id": "sevt_01a12199-c537-78b9-aae4-12437354d00d",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T16:58:08.056Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a12199-c4b8-760a-9853-18656d93a471",
+      "type": "user.message",
+      "processed_at": "2026-10-09T16:58:08.066Z"
+     }
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events [poll 2]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a12199-c028-76e4-a017-3b2ba0e51cb4/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a12199-c537-78b9-aae4-0de15df5ad9c",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T16:58:08.055Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe",
+      "session_thread_id": "sthr_01a12199-c032-7d95-9bf7-5f450ccc2966",
+      "id": "sevt_01a12199-c537-78b9-aae4-12437354d00d",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T16:58:08.056Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a12199-c4b8-760a-9853-18656d93a471",
+      "type": "user.message",
+      "processed_at": "2026-10-09T16:58:08.066Z"
+     },
+     "+6 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events [poll 3]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a12199-c028-76e4-a017-3b2ba0e51cb4/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a12199-c537-78b9-aae4-0de15df5ad9c",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T16:58:08.055Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe",
+      "session_thread_id": "sthr_01a12199-c032-7d95-9bf7-5f450ccc2966",
+      "id": "sevt_01a12199-c537-78b9-aae4-12437354d00d",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T16:58:08.056Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a12199-c4b8-760a-9853-18656d93a471",
+      "type": "user.message",
+      "processed_at": "2026-10-09T16:58:08.066Z"
+     },
+     "+6 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events [poll 4]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a12199-c028-76e4-a017-3b2ba0e51cb4/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a12199-c537-78b9-aae4-0de15df5ad9c",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T16:58:08.055Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe",
+      "session_thread_id": "sthr_01a12199-c032-7d95-9bf7-5f450ccc2966",
+      "id": "sevt_01a12199-c537-78b9-aae4-12437354d00d",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T16:58:08.056Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a12199-c4b8-760a-9853-18656d93a471",
+      "type": "user.message",
+      "processed_at": "2026-10-09T16:58:08.066Z"
+     },
+     "+6 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events [poll 5]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a12199-c028-76e4-a017-3b2ba0e51cb4/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a12199-c537-78b9-aae4-0de15df5ad9c",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T16:58:08.055Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe",
+      "session_thread_id": "sthr_01a12199-c032-7d95-9bf7-5f450ccc2966",
+      "id": "sevt_01a12199-c537-78b9-aae4-12437354d00d",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T16:58:08.056Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a12199-c4b8-760a-9853-18656d93a471",
+      "type": "user.message",
+      "processed_at": "2026-10-09T16:58:08.066Z"
+     },
+     "+6 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events [poll 6]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a12199-c028-76e4-a017-3b2ba0e51cb4/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a12199-c537-78b9-aae4-0de15df5ad9c",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T16:58:08.055Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe",
+      "session_thread_id": "sthr_01a12199-c032-7d95-9bf7-5f450ccc2966",
+      "id": "sevt_01a12199-c537-78b9-aae4-12437354d00d",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T16:58:08.056Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a12199-c4b8-760a-9853-18656d93a471",
+      "type": "user.message",
+      "processed_at": "2026-10-09T16:58:08.066Z"
+     },
+     "+6 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events [poll 7]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a12199-c028-76e4-a017-3b2ba0e51cb4/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a12199-c537-78b9-aae4-0de15df5ad9c",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T16:58:08.055Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe",
+      "session_thread_id": "sthr_01a12199-c032-7d95-9bf7-5f450ccc2966",
+      "id": "sevt_01a12199-c537-78b9-aae4-12437354d00d",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T16:58:08.056Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a12199-c4b8-760a-9853-18656d93a471",
+      "type": "user.message",
+      "processed_at": "2026-10-09T16:58:08.066Z"
+     },
+     "+6 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events [poll 8]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a12199-c028-76e4-a017-3b2ba0e51cb4/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a12199-c537-78b9-aae4-0de15df5ad9c",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T16:58:08.055Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe",
+      "session_thread_id": "sthr_01a12199-c032-7d95-9bf7-5f450ccc2966",
+      "id": "sevt_01a12199-c537-78b9-aae4-12437354d00d",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T16:58:08.056Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a12199-c4b8-760a-9853-18656d93a471",
+      "type": "user.message",
+      "processed_at": "2026-10-09T16:58:08.066Z"
+     },
+     "+6 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: archive session",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a12199-c028-76e4-a017-3b2ba0e51cb4/archive",
+   "method": "POST",
+   "body": {},
+   "status": 200,
+   "keys": [
+    "id",
+    "agent",
+    "environment_id",
+    "status",
+    "archived_at",
+    "budget",
+    "created_at",
+    "metadata",
+    "resources",
+    "outcome_evaluations",
+    "stats",
+    "title",
+    "type",
+    "updated_at"
+   ],
+   "json": {
+    "id": "sess_01a12199-c028-76e4-a017-3b2ba0e51cb4",
+    "agent": {
+     "id": "agent_01a12199-b706-73e7-8f32-0a87432d420d",
+     "type": "agent",
+     "name": "pi-bigmodel-probe",
+     "model": {
+      "id": "glm-5.3-flash",
+      "effort": "high",
+      "speed": "standard"
+     },
+     "system": "You are a probe. Answer with one word.",
+     "description": null,
+     "tools": [],
+     "skills": [],
+     "mcp_servers": [],
+     "multiagent": null,
+     "version": 1
+    },
+    "environment_id": "env_01a12199-bb92-7ff0-a38a-26228a62b0ee",
+    "status": "terminated",
+    "archived_at": "2026-10-09T16:58:39.515Z",
+    "budget": null,
+    "created_at": "2026-10-09T16:58:06.763Z",
+    "metadata": {},
+    "resources": [],
+    "outcome_evaluations": [],
+    "stats": {
+     "duration_seconds": 32.752
+    },
+    "title": "probe",
+    "type": "session",
+    "updated_at": "2026-10-09T16:58:39.515Z",
+    "usage": {
+     "cache_read_input_tokens": 0,
+     "input_tokens": 0,
+     "output_tokens": 0,
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     }
+    },
+    "vault_ids": []
+   }
+  },
+  {
+   "label": "managed: delete environment",
+   "url": "….bigmodel.cn/api/agent/managed/v1/environments/env_01a12199-bb92-7ff0-a38a-26228a62b0ee",
+   "method": "DELETE",
+   "status": 200,
+   "keys": [
+    "id",
+    "type"
+   ],
+   "json": {
+    "id": "env_01a12199-bb92-7ff0-a38a-26228a62b0ee",
+    "type": "environment_deleted"
+   }
+  },
+  {
+   "label": "managed: archive agent",
+   "url": "….bigmodel.cn/api/agent/managed/v1/agents/agent_01a12199-b706-73e7-8f32-0a87432d420d/archive",
+   "method": "POST",
+   "body": {},
+   "status": 200,
+   "keys": [
+    "id",
+    "type",
+    "name",
+    "model",
+    "system",
+    "description",
+    "tools",
+    "skills",
+    "mcp_servers",
+    "metadata",
+    "multiagent",
+    "version",
+    "created_at",
+    "updated_at"
+   ],
+   "json": {
+    "id": "agent_01a12199-b706-73e7-8f32-0a87432d420d",
+    "type": "agent",
+    "name": "pi-bigmodel-probe",
+    "model": {
+     "id": "glm-5.3-flash",
+     "effort": "high",
+     "speed": "standard"
+    },
+    "system": "You are a probe. Answer with one word.",
+    "description": null,
+    "tools": [],
+    "skills": [],
+    "mcp_servers": [],
+    "metadata": {},
+    "multiagent": null,
+    "version": 1,
+    "created_at": "2026-10-09T16:58:04.429Z",
+    "updated_at": "2026-10-09T16:58:41.000Z",
+    "archived_at": "2026-10-09T16:58:41.000Z"
+   }
+  }
+ ]
+}
+---
+{
+ "stage": "followup-free",
+ "at": "2026-10-09T16:59:38.919Z",
+ "records": [
+  {
+   "label": "batch upload (full model list)",
+   "status": 400,
+   "text": "{\"error\":{\"code\":\"1210\",\"message\":\"[logID=202610100059234e459b141ddb4994] 模型名称错误: glm-4-flash-250414, 目前支持的模型: glm-5.1, glm-5-turbo, glm-4, glm-4-0520, glm-4-plus, glm-4-long, glm-4-plus-0111, glm-4-air, glm-4-air-0111, glm-4-air-250414, glm-4-flash, glm-4-flashx-250414, glm-3-turbo, glm-4v, glm-4v-plus, glm-5v-turbo, glm-4v-plus-0111, cogview-3, cogview-3-plus, cogview-4-250304, embedding-2, embedding-3, cogvideox, cogvideox-2\"}}"
+  },
+  {
+   "label": "async-result task1 (run1, glm-4.5-flash)",
+   "status": 200,
+   "text": "{\"choices\":[{\"finish_reason\":\"length\",\"index\":0,\"message\":{\"content\":\"\",\"reasoning_content\":\"\\nOkay, user just said \\\"\",\"role\":\"assistant\"}}],\"created\":1791565164,\"id\":\"202610100056374a369f478b294d05\",\"model\":\"GLM-4.5-Flash\",\"request_id\":\"202610100056374a369f478b294d05\",\"task_status\":\"SUCCESS\",\"usage\":{\"completion_tokens\":8,\"prompt_tokens\":7,\"prompt_tokens_details\":{\"cached_tokens\":4},\"total_tokens\":15}}"
+  },
+  {
+   "label": "async-result task2 (stream:true)",
+   "status": 200,
+   "text": "{\"choices\":[{\"finish_reason\":\"length\",\"index\":0,\"message\":{\"content\":\"\",\"role\":\"assistant\"}}],\"created\":1791565165,\"id\":\"20261010005654ab1f249e34c74cd5\",\"model\":\"GLM-4.5-Flash\",\"request_id\":\"20261010005654ab1f249e34c74cd5\",\"task_status\":\"SUCCESS\",\"usage\":{\"completion_tokens\":1,\"prompt_tokens\":6,\"prompt_tokens_details\":{\"cached_tokens\":4},\"total_tokens\":7}}"
+  },
+  {
+   "label": "async-result task3 (run2)",
+   "status": 200,
+   "text": "{\"choices\":[{\"finish_reason\":\"length\",\"index\":0,\"message\":{\"content\":\"\",\"reasoning_content\":\"\\nOkay, the user just said\",\"role\":\"assistant\"}}],\"created\":1791565166,\"id\":\"20261010005722dd102476a1894c3f\",\"model\":\"GLM-4.5-Flash\",\"request_id\":\"20261010005722dd102476a1894c3f\",\"task_status\":\"SUCCESS\",\"usage\":{\"completion_tokens\":8,\"prompt_tokens\":7,\"prompt_tokens_details\":{\"cached_tokens\":4},\"total_tokens\":15}}"
+  },
+  {
+   "label": "async-result task4 (glm-4.7-flash)",
+   "status": 200,
+   "text": "{\"choices\":[{\"finish_reason\":\"length\",\"index\":0,\"message\":{\"content\":\"\",\"reasoning_content\":\"The\",\"role\":\"assistant\"}}],\"created\":1791565167,\"id\":\"20261010005655289d40e0c780451a\",\"model\":\"GLM-4.7-Flash\",\"request_id\":\"20261010005655289d40e0c780451a\",\"task_status\":\"SUCCESS\",\"usage\":{\"completion_tokens\":1,\"completion_tokens_details\":{\"reasoning_tokens\":1},\"prompt_tokens\":6,\"prompt_tokens_details\":{\"cached_tokens\":2},\"total_tokens\":7}}"
+  },
+  {
+   "label": "async stream:true (KEY3)",
+   "status": 200,
+   "text": "{\"id\":\"202610100059289eaf12897ff84528\",\"model\":\"glm-4.5-flash\",\"request_id\":\"202610100059289eaf12897ff84528\",\"task_status\":\"PROCESSING\"}"
+  },
+  {
+   "label": "async glm-4.7-flash (KEY3)",
+   "status": 200,
+   "text": "{\"id\":\"2026101000593056f5aa655abe497e\",\"model\":\"glm-4.7-flash\",\"request_id\":\"2026101000593056f5aa655abe497e\",\"task_status\":\"PROCESSING\"}"
+  },
+  {
+   "label": "managed: archived session events",
+   "status": 200,
+   "text": "{\"data\":[{\"id\":\"sevt_01a12199-c537-78b9-aae4-0de15df5ad9c\",\"type\":\"session.status_running\",\"processed_at\":\"2026-10-09T16:58:08.055Z\"},{\"agent_name\":\"pi-bigmodel-probe\",\"session_thread_id\":\"sthr_01a12199-c032-7d95-9bf7-5f450ccc2966\",\"id\":\"sevt_01a12199-c537-78b9-aae4-12437354d00d\",\"type\":\"session.thread_status_running\",\"processed_at\":\"2026-10-09T16:58:08.056Z\"},{\"content\":[{\"text\":\"Reply OK\",\"type\":\"text\"}],\"id\":\"sevt_01a12199-c4b8-760a-9853-18656d93a471\",\"type\":\"user.message\",\"processed_at\":\"2026-10-09T16:58:08.066Z\"},{\"id\":\"sevt_01a12199-ce25-7777-90db-effc56d13bb9\",\"type\":\"span.model_request_start\",\"processed_at\":\"2026-10-09T16:58:10.341Z\"},{\"is_error\":true,\"model_usage\":{\"input_tokens\":0,\"output_tokens\":0,\"cache_read_input_tokens\":0,\"cache_creation_input_tokens\":0},\"model_request_start_id\":\"sevt_01a12199-ce25-7777-90db-effc56d13bb9\",\"id\":\"sevt_01a12199-cefd-76bb-bc8b-1da9c2cc11c9\",\"type\":\"span.model_request_end\",\"processed_at\":\"2026-10-09T16:58:10.557Z\"},{\"error\":{\"type\":\"unknown_error\",\"message\":\"余额不足或无可用资源包,请充值。\",\"retry_status\":{\"type\":\"exhausted\"}},\"id\":\"sevt_01a12199-d095-7416-be41-4ab8a43fc78f\",\"type\":\"session.error\",\"processed_at\":\"2026-10-09T16:58:10.965Z\"},{\"agent_name\":\"pi-bigmodel-probe\",\"stop_reason\":{\"type\":\"retries_exhausted\"},\"session_thread_id\":\"sthr_01a12199-c032-7d95-9bf7-5f450ccc2966\",\"id\":\"sevt_01a12199-d095-7416-be41-4d5a46d7cf88\",\"type\":\"session.thread_status_idle\",\"processed_at\":\"2026-10-09T16:58:10.966Z\"},{\"usage\":{\"input_tokens\":0,\"output_tokens\":0,\"server_tool_use\":{\"web_fetch_requests\":0,\"web_search_requests\":0},\"cache_read_input_tokens\":0},\"id\":\"sevt_01a12199-d095-7416-be41-50bb3ca6c653\",\"type\":\"session.usage\",\"processed_at\":\"2026-10-09T16:58:10.967Z\"},{\"stop_reason\":{\"type\":\"retries_exhausted\"},\"id\":\"sevt_01a12199-d095-7416-be41-57f081f0c781\",\"type\":\"session.status_idle\",\"processed_at\":\"2026-10-09T16:58:10.968Z\"},{\"id\":\"sevt_01a1219a-400f-76c4-872b-6611aac80572\",\"type\":\"session.status_terminated\",\"processed_at\":\"2026-10-09T16:58:39.503Z\"}],\"next_page\":null}"
+  },
+  {
+   "label": "knowledge retrieve KB run2",
+   "status": 200,
+   "text": "{\"data\":[],\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565173365}"
+  },
+  {
+   "label": "knowledge retrieve KB run1",
+   "status": 200,
+   "text": "{\"data\":[],\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565174536}"
+  },
+  {
+   "label": "knowledge doc list KB run2",
+   "status": 200,
+   "text": "{\"code\":400,\"message\":\"Required request parameter 'knowledge_id' for method parameter type String is not present\",\"timestamp\":1791565175603}"
+  },
+  {
+   "label": "knowledge delete KB run1",
+   "status": 200,
+   "text": "{\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565176770}"
+  },
+  {
+   "label": "knowledge delete KB run2",
+   "status": 200,
+   "text": "{\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565177879}"
+  }
+ ]
+}
+---
+{
+ "stage": "paid",
+ "at": "2026-10-09T17:02:42.314Z",
+ "records": [
+  {
+   "label": "web_search search_std (paid)",
+   "url": "…/api/paas/v4/web_search",
+   "method": "POST",
+   "body": {
+    "search_query": "智谱AI GLM 最新模型",
+    "search_engine": "search_std",
+    "search_intent": true,
+    "count": 2,
+    "content_size": "medium"
+   },
+   "status": 200,
+   "keys": [
+    "created",
+    "id",
+    "request_id",
+    "search_intent",
+    "search_result"
+   ],
+   "json": {
+    "created": 1791565200,
+    "id": "2026101000595945dc1b74f0b54e0e",
+    "request_id": "2026101000595945dc1b74f0b54e0e",
+    "search_intent": [
+     {
+      "intent": "SEARCH_ALL",
+      "keywords": "智谱ai glm 最新模型",
+      "query": "智谱AI GLM 最新模型"
+     }
+    ],
+    "search_result": [
+     {
+      "content": "近日，德国 AI 公司 Aleph Alpha 发布新一代开放权重模型 Kolibri，将其定位为面向政府、工业和航空航天等受监管领域的主权 AI”。 不过，随模型公开的 189 页技术报告披露，在监督微调（SFT）数据生产过程中，智谱 GLM-5.2、GLM-5.3 和阿里 Qwen3.8-27B，被列为生成数据以及重新生成部分开放数据的主要模型。 Kolibri 采用 MoE 架构，总参数量为… (1048 chars)",
+      "icon": "",
+      "link": "",
+      "media": "",
+      "publish_date": "2026-10-04",
+      "refer": "ref_1",
+      "title": "德国“主权 AI”自曝：GLM、Qwen 成主要数据生成模型"
+     },
+     {
+      "content": "恒智易为你带来AI行业最新要闻。 来源丨恒智易 1、智谱推出GLM-5.3-FlashX 财联社9月18日电，智谱正式宣布发布GLM-5.3-FlashX，API同步全面开放。据介绍，新版本推理速度最高可达200 tokens/s，较现有GLM-5.3-Flash提升5倍，定价提升至原版本的2.5倍。（财联社） 2、华为发布新AI计算架构，让百万处理器成为一台计算机 《科创板日报》17日讯，华为发… (1025 chars)",
+      "icon": "",
+      "link": "",
+      "media": "",
+      "publish_date": "2026-09-18",
+      "refer": "ref_2",
+      "title": "智谱推出GLM-5.3-FlashX，华为发布新AI计算架构，阿里通用医疗影像模型登上Science正刊"
+     }
+    ]
+   }
+  },
+  {
+   "label": "chat + web_search tool (glm-4.7-flash)",
+   "url": "…/api/paas/v4/chat/completions",
+   "method": "POST",
+   "body": {
+    "model": "glm-4.7-flash",
+    "messages": [
+     {
+      "role": "user",
+      "content": "智谱AI最新发布的模型是什么？请根据搜索结果回答。"
+     }
+    ],
+    "max_tokens": 200,
+    "tools": [
+     {
+      "type": "web_search",
+      "web_search": {
+       "enable": true,
+       "search_engine": "search_std",
+       "search_result": true,
+       "count": 3
+      }
+     }
+    ]
+   },
+   "status": "ERR",
+   "error": "TimeoutError: The operation was aborted due to timeout"
+  },
+  {
+   "label": "knowledge create (paid key)",
+   "url": "…/api/llm-application/open/knowledge",
+   "method": "POST",
+   "body": {
+    "embedding_id": 3,
+    "name": "pi-bigmodel-probe-paid",
+    "description": "temporary probe KB"
+   },
+   "status": 200,
+   "keys": [
+    "data",
+    "code",
+    "message",
+    "timestamp"
+   ],
+   "json": {
+    "data": {
+     "id": "2108603654155235328"
+    },
+    "code": 200,
+    "message": "请求成功",
+    "timestamp": 1791565261863
+   }
+  },
+  {
+   "label": "knowledge upload doc (paid)",
+   "url": "…/api/llm-application/open/document/upload_document/2108603654155235328",
+   "method": "POST",
+   "status": 200,
+   "keys": [
+    "data",
+    "code",
+    "message",
+    "timestamp"
+   ],
+   "json": {
+    "data": {
+     "successInfos": [
+      {
+       "documentId": "…",
+       "fileName": "…",
+       "url": "https://cdn-enterprise-document.bigmodel.cn/knowledge/6E90FDB28A79460F801889B3A681E14D.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565263%3B1791601263&q-key-time… (314 chars)"
+      }
+     ],
+     "failedInfos": []
+    },
+    "code": 200,
+    "message": "请求成功",
+    "timestamp": 1791565263248
+   }
+  },
+  {
+   "label": "knowledge retrieve [try 1]",
+   "url": "…/api/llm-application/open/knowledge/retrieve",
+   "method": "POST",
+   "body": {
+    "query": "какая модель принимается async-поверхностью?",
+    "knowledge_ids": [
+     "2108603654155235328"
+    ],
+    "top_k": 3
+   },
+   "status": 200,
+   "keys": [
+    "data",
+    "code",
+    "message",
+    "timestamp"
+   ],
+   "json": {
+    "data": [],
+    "code": 200,
+    "message": "请求成功",
+    "timestamp": 1791565269766
+   }
+  },
+  {
+   "label": "knowledge retrieve [try 2]",
+   "url": "…/api/llm-application/open/knowledge/retrieve",
+   "method": "POST",
+   "body": {
+    "query": "какая модель принимается async-поверхностью?",
+    "knowledge_ids": [
+     "2108603654155235328"
+    ],
+    "top_k": 3
+   },
+   "status": 200,
+   "keys": [
+    "data",
+    "code",
+    "message",
+    "timestamp"
+   ],
+   "json": {
+    "data": [],
+    "code": 200,
+    "message": "请求成功",
+    "timestamp": 1791565275924
+   }
+  },
+  {
+   "label": "knowledge retrieve [try 3]",
+   "url": "…/api/llm-application/open/knowledge/retrieve",
+   "method": "POST",
+   "body": {
+    "query": "какая модель принимается async-поверхностью?",
+    "knowledge_ids": [
+     "2108603654155235328"
+    ],
+    "top_k": 3
+   },
+   "status": 200,
+   "keys": [
+    "data",
+    "code",
+    "message",
+    "timestamp"
+   ],
+   "json": {
+    "data": [],
+    "code": 200,
+    "message": "请求成功",
+    "timestamp": 1791565282096
+   }
+  },
+  {
+   "label": "knowledge retrieve [try 4]",
+   "url": "…/api/llm-application/open/knowledge/retrieve",
+   "method": "POST",
+   "body": {
+    "query": "какая модель принимается async-поверхностью?",
+    "knowledge_ids": [
+     "2108603654155235328"
+    ],
+    "top_k": 3
+   },
+   "status": 200,
+   "keys": [
+    "data",
+    "code",
+    "message",
+    "timestamp"
+   ],
+   "json": {
+    "data": [],
+    "code": 200,
+    "message": "请求成功",
+    "timestamp": 1791565288393
+   }
+  },
+  {
+   "label": "knowledge retrieve [try 5]",
+   "url": "…/api/llm-application/open/knowledge/retrieve",
+   "method": "POST",
+   "body": {
+    "query": "какая модель принимается async-поверхностью?",
+    "knowledge_ids": [
+     "2108603654155235328"
+    ],
+    "top_k": 3
+   },
+   "status": 200,
+   "keys": [
+    "data",
+    "code",
+    "message",
+    "timestamp"
+   ],
+   "json": {
+    "data": [],
+    "code": 200,
+    "message": "请求成功",
+    "timestamp": 1791565294563
+   }
+  },
+  {
+   "label": "knowledge retrieve [try 6]",
+   "url": "…/api/llm-application/open/knowledge/retrieve",
+   "method": "POST",
+   "body": {
+    "query": "какая модель принимается async-поверхностью?",
+    "knowledge_ids": [
+     "2108603654155235328"
+    ],
+    "top_k": 3
+   },
+   "status": 200,
+   "keys": [
+    "data",
+    "code",
+    "message",
+    "timestamp"
+   ],
+   "json": {
+    "data": [],
+    "code": 200,
+    "message": "请求成功",
+    "timestamp": 1791565300781
+   }
+  },
+  {
+   "label": "knowledge delete",
+   "url": "…/api/llm-application/open/knowledge/2108603654155235328",
+   "method": "DELETE",
+   "status": 200,
+   "keys": [
+    "code",
+    "message",
+    "timestamp"
+   ],
+   "json": {
+    "code": 200,
+    "message": "请求成功",
+    "timestamp": 1791565301862
+   }
+  },
+  {
+   "label": "managed: create agent (paid)",
+   "url": "….bigmodel.cn/api/agent/managed/v1/agents",
+   "method": "POST",
+   "body": {
+    "name": "pi-bigmodel-probe-paid",
+    "model": "glm-5.3-flash",
+    "system": "Answer with exactly one word."
+   },
+   "status": 201,
+   "keys": [
+    "id",
+    "type",
+    "name",
+    "model",
+    "system",
+    "description",
+    "tools",
+    "skills",
+    "mcp_servers",
+    "metadata",
+    "multiagent",
+    "version",
+    "created_at",
+    "updated_at"
+   ],
+   "json": {
+    "id": "agent_01a1219d-10f0-7d0a-8a95-50d7c4977bfe",
+    "type": "agent",
+    "name": "pi-bigmodel-probe-paid",
+    "model": {
+     "id": "glm-5.3-flash",
+     "effort": "high",
+     "speed": "standard"
+    },
+    "system": "Answer with exactly one word.",
+    "description": null,
+    "tools": [],
+    "skills": [],
+    "mcp_servers": [],
+    "metadata": {},
+    "multiagent": null,
+    "version": 1,
+    "created_at": "2026-10-09T17:01:44.051Z",
+    "updated_at": "2026-10-09T17:01:44.051Z",
+    "archived_at": null
+   }
+  },
+  {
+   "label": "managed: create environment (paid)",
+   "url": "….bigmodel.cn/api/agent/managed/v1/environments",
+   "method": "POST",
+   "body": {
+    "name": "pi-probe-env-paid",
+    "config": {
+     "type": "cloud",
+     "networking": {
+      "type": "unrestricted"
+     }
+    }
+   },
+   "status": 200,
+   "keys": [
+    "id",
+    "type",
+    "name",
+    "description",
+    "metadata",
+    "config",
+    "scope",
+    "state",
+    "archived_at",
+    "created_at",
+    "updated_at"
+   ],
+   "json": {
+    "id": "env_01a1219d-1570-7bd9-86fc-c29b821ee555",
+    "type": "environment",
+    "name": "pi-probe-env-paid",
+    "description": null,
+    "metadata": {},
+    "config": {
+     "type": "cloud",
+     "packages": {
+      "type": "packages",
+      "go": [],
+      "apt": [],
+      "gem": [],
+      "npm": [],
+      "pip": [],
+      "cargo": []
+     },
+     "networking": {
+      "type": "unrestricted"
+     }
+    },
+    "scope": "organization",
+    "state": "active",
+    "archived_at": null,
+    "created_at": "2026-10-09T17:01:45.203Z",
+    "updated_at": "2026-10-09T17:01:45.203Z"
+   }
+  },
+  {
+   "label": "managed: create session (paid)",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions",
+   "method": "POST",
+   "body": {
+    "agent": "agent_01a1219d-10f0-7d0a-8a95-50d7c4977bfe",
+    "environment_id": "env_01a1219d-1570-7bd9-86fc-c29b821ee555",
+    "title": "probe-paid"
+   },
+   "status": 200,
+   "keys": [
+    "id",
+    "agent",
+    "environment_id",
+    "status",
+    "archived_at",
+    "budget",
+    "created_at",
+    "metadata",
+    "resources",
+    "outcome_evaluations",
+    "stats",
+    "title",
+    "type",
+    "updated_at"
+   ],
+   "json": {
+    "id": "sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a",
+    "agent": {
+     "id": "agent_01a1219d-10f0-7d0a-8a95-50d7c4977bfe",
+     "type": "agent",
+     "name": "pi-bigmodel-probe-paid",
+     "model": {
+      "id": "glm-5.3-flash",
+      "effort": "high",
+      "speed": "standard"
+     },
+     "system": "Answer with exactly one word.",
+     "description": null,
+     "tools": [],
+     "skills": [],
+     "mcp_servers": [],
+     "multiagent": null,
+     "version": 1
+    },
+    "environment_id": "env_01a1219d-1570-7bd9-86fc-c29b821ee555",
+    "status": "idle",
+    "archived_at": null,
+    "budget": null,
+    "created_at": "2026-10-09T17:01:46.355Z",
+    "metadata": {},
+    "resources": [],
+    "outcome_evaluations": [],
+    "stats": {
+     "duration_seconds": 0.007
+    },
+    "title": "probe-paid",
+    "type": "session",
+    "updated_at": "2026-10-09T17:01:46.355Z",
+    "usage": {
+     "cache_read_input_tokens": 0,
+     "input_tokens": 0,
+     "output_tokens": 0,
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     }
+    },
+    "vault_ids": []
+   }
+  },
+  {
+   "label": "managed: send event (paid)",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a/events",
+   "method": "POST",
+   "body": {
+    "events": [
+     {
+      "type": "user.message",
+      "content": [
+       {
+        "type": "text",
+        "text": "Reply with the single word OK"
+       }
+      ]
+     }
+    ]
+   },
+   "status": 200,
+   "keys": [
+    "data"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a1219d-1e70-7195-9352-bc450164a777",
+      "type": "user.message",
+      "content": [
+       "…"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "label": "managed: events (paid) [poll 1]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-37fe9ccc7005",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T17:01:47.572Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe-paid",
+      "session_thread_id": "sthr_01a1219d-19f7-752b-bab3-2d8d73c9222f",
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-3bf464851de7",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T17:01:47.573Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a1219d-1e70-7195-9352-bc450164a777",
+      "type": "user.message",
+      "processed_at": "2026-10-09T17:01:47.577Z"
+     }
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events (paid) [poll 2]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-37fe9ccc7005",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T17:01:47.572Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe-paid",
+      "session_thread_id": "sthr_01a1219d-19f7-752b-bab3-2d8d73c9222f",
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-3bf464851de7",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T17:01:47.573Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a1219d-1e70-7195-9352-bc450164a777",
+      "type": "user.message",
+      "processed_at": "2026-10-09T17:01:47.577Z"
+     },
+     "+7 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events (paid) [poll 3]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-37fe9ccc7005",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T17:01:47.572Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe-paid",
+      "session_thread_id": "sthr_01a1219d-19f7-752b-bab3-2d8d73c9222f",
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-3bf464851de7",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T17:01:47.573Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a1219d-1e70-7195-9352-bc450164a777",
+      "type": "user.message",
+      "processed_at": "2026-10-09T17:01:47.577Z"
+     },
+     "+7 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events (paid) [poll 4]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-37fe9ccc7005",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T17:01:47.572Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe-paid",
+      "session_thread_id": "sthr_01a1219d-19f7-752b-bab3-2d8d73c9222f",
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-3bf464851de7",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T17:01:47.573Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a1219d-1e70-7195-9352-bc450164a777",
+      "type": "user.message",
+      "processed_at": "2026-10-09T17:01:47.577Z"
+     },
+     "+7 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events (paid) [poll 5]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-37fe9ccc7005",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T17:01:47.572Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe-paid",
+      "session_thread_id": "sthr_01a1219d-19f7-752b-bab3-2d8d73c9222f",
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-3bf464851de7",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T17:01:47.573Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a1219d-1e70-7195-9352-bc450164a777",
+      "type": "user.message",
+      "processed_at": "2026-10-09T17:01:47.577Z"
+     },
+     "+7 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events (paid) [poll 6]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-37fe9ccc7005",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T17:01:47.572Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe-paid",
+      "session_thread_id": "sthr_01a1219d-19f7-752b-bab3-2d8d73c9222f",
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-3bf464851de7",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T17:01:47.573Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a1219d-1e70-7195-9352-bc450164a777",
+      "type": "user.message",
+      "processed_at": "2026-10-09T17:01:47.577Z"
+     },
+     "+7 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events (paid) [poll 7]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-37fe9ccc7005",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T17:01:47.572Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe-paid",
+      "session_thread_id": "sthr_01a1219d-19f7-752b-bab3-2d8d73c9222f",
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-3bf464851de7",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T17:01:47.573Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a1219d-1e70-7195-9352-bc450164a777",
+      "type": "user.message",
+      "processed_at": "2026-10-09T17:01:47.577Z"
+     },
+     "+7 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events (paid) [poll 8]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-37fe9ccc7005",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T17:01:47.572Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe-paid",
+      "session_thread_id": "sthr_01a1219d-19f7-752b-bab3-2d8d73c9222f",
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-3bf464851de7",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T17:01:47.573Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a1219d-1e70-7195-9352-bc450164a777",
+      "type": "user.message",
+      "processed_at": "2026-10-09T17:01:47.577Z"
+     },
+     "+7 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events (paid) [poll 9]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-37fe9ccc7005",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T17:01:47.572Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe-paid",
+      "session_thread_id": "sthr_01a1219d-19f7-752b-bab3-2d8d73c9222f",
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-3bf464851de7",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T17:01:47.573Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a1219d-1e70-7195-9352-bc450164a777",
+      "type": "user.message",
+      "processed_at": "2026-10-09T17:01:47.577Z"
+     },
+     "+7 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events (paid) [poll 10]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-37fe9ccc7005",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T17:01:47.572Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe-paid",
+      "session_thread_id": "sthr_01a1219d-19f7-752b-bab3-2d8d73c9222f",
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-3bf464851de7",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T17:01:47.573Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a1219d-1e70-7195-9352-bc450164a777",
+      "type": "user.message",
+      "processed_at": "2026-10-09T17:01:47.577Z"
+     },
+     "+7 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events (paid) [poll 11]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-37fe9ccc7005",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T17:01:47.572Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe-paid",
+      "session_thread_id": "sthr_01a1219d-19f7-752b-bab3-2d8d73c9222f",
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-3bf464851de7",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T17:01:47.573Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a1219d-1e70-7195-9352-bc450164a777",
+      "type": "user.message",
+      "processed_at": "2026-10-09T17:01:47.577Z"
+     },
+     "+7 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: events (paid) [poll 12]",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a/events",
+   "method": "GET",
+   "status": 200,
+   "keys": [
+    "data",
+    "next_page"
+   ],
+   "json": {
+    "data": [
+     {
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-37fe9ccc7005",
+      "type": "session.status_running",
+      "processed_at": "2026-10-09T17:01:47.572Z"
+     },
+     {
+      "agent_name": "pi-bigmodel-probe-paid",
+      "session_thread_id": "sthr_01a1219d-19f7-752b-bab3-2d8d73c9222f",
+      "id": "sevt_01a1219d-1eb4-7c9c-9e6d-3bf464851de7",
+      "type": "session.thread_status_running",
+      "processed_at": "2026-10-09T17:01:47.573Z"
+     },
+     {
+      "content": [
+       "…"
+      ],
+      "id": "sevt_01a1219d-1e70-7195-9352-bc450164a777",
+      "type": "user.message",
+      "processed_at": "2026-10-09T17:01:47.577Z"
+     },
+     "+7 more"
+    ],
+    "next_page": null
+   }
+  },
+  {
+   "label": "managed: archive session (paid)",
+   "url": "….bigmodel.cn/api/agent/managed/v1/sessions/sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a/archive",
+   "method": "POST",
+   "body": {},
+   "status": 200,
+   "keys": [
+    "id",
+    "agent",
+    "environment_id",
+    "status",
+    "archived_at",
+    "budget",
+    "created_at",
+    "metadata",
+    "resources",
+    "outcome_evaluations",
+    "stats",
+    "title",
+    "type",
+    "updated_at"
+   ],
+   "json": {
+    "id": "sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a",
+    "agent": {
+     "id": "agent_01a1219d-10f0-7d0a-8a95-50d7c4977bfe",
+     "type": "agent",
+     "name": "pi-bigmodel-probe-paid",
+     "model": {
+      "id": "glm-5.3-flash",
+      "effort": "high",
+      "speed": "standard"
+     },
+     "system": "Answer with exactly one word.",
+     "description": null,
+     "tools": [],
+     "skills": [],
+     "mcp_servers": [],
+     "multiagent": null,
+     "version": 1
+    },
+    "environment_id": "env_01a1219d-1570-7bd9-86fc-c29b821ee555",
+    "status": "terminated",
+    "archived_at": "2026-10-09T17:02:39.035Z",
+    "budget": null,
+    "created_at": "2026-10-09T17:01:46.355Z",
+    "metadata": {},
+    "resources": [],
+    "outcome_evaluations": [],
+    "stats": {
+     "duration_seconds": 52.68
+    },
+    "title": "probe-paid",
+    "type": "session",
+    "updated_at": "2026-10-09T17:02:39.035Z",
+    "usage": {
+     "cache_read_input_tokens": 0,
+     "input_tokens": 1716,
+     "output_tokens": 13,
+     "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+     }
+    },
+    "vault_ids": []
+   }
+  },
+  {
+   "label": "managed: delete environment (paid)",
+   "url": "….bigmodel.cn/api/agent/managed/v1/environments/env_01a1219d-1570-7bd9-86fc-c29b821ee555",
+   "method": "DELETE",
+   "status": 200,
+   "keys": [
+    "id",
+    "type"
+   ],
+   "json": {
+    "id": "env_01a1219d-1570-7bd9-86fc-c29b821ee555",
+    "type": "environment_deleted"
+   }
+  },
+  {
+   "label": "managed: archive agent (paid)",
+   "url": "….bigmodel.cn/api/agent/managed/v1/agents/agent_01a1219d-10f0-7d0a-8a95-50d7c4977bfe/archive",
+   "method": "POST",
+   "body": {},
+   "status": 200,
+   "keys": [
+    "id",
+    "type",
+    "name",
+    "model",
+    "system",
+    "description",
+    "tools",
+    "skills",
+    "mcp_servers",
+    "metadata",
+    "multiagent",
+    "version",
+    "created_at",
+    "updated_at"
+   ],
+   "json": {
+    "id": "agent_01a1219d-10f0-7d0a-8a95-50d7c4977bfe",
+    "type": "agent",
+    "name": "pi-bigmodel-probe-paid",
+    "model": {
+     "id": "glm-5.3-flash",
+     "effort": "high",
+     "speed": "standard"
+    },
+    "system": "Answer with exactly one word.",
+    "description": null,
+    "tools": [],
+    "skills": [],
+    "mcp_servers": [],
+    "metadata": {},
+    "multiagent": null,
+    "version": 1,
+    "created_at": "2026-10-09T17:01:44.051Z",
+    "updated_at": "2026-10-09T17:02:41.000Z",
+    "archived_at": "2026-10-09T17:02:41.000Z"
+   }
+  }
+ ]
+}
+---
+{
+ "stage": "followup-paid",
+ "at": "2026-10-09T17:05:45.845Z",
+ "records": [
+  {
+   "label": "managed: paid session events (archived)",
+   "status": 404,
+   "text": "{\"type\":\"error\",\"error\":{\"type\":\"not_found_error\",\"message\":\"Session not found\"},\"request_id\":\"req_0c27bdd6e76246d68791a6cf9bf85973\"}"
+  },
+  {
+   "label": "chat + web_search tool (retry, 180s)",
+   "status": 429,
+   "text": "{\"error\":{\"code\":\"1305\",\"message\":\"该模型当前访问量过大，请您稍后再试\"}}"
+  },
+  {
+   "label": "async-result KEY3 stream-task",
+   "status": 400,
+   "text": "{\"error\":{\"code\":\"1233\",\"message\":\"任务：202610100059289eaf12897ff84528不存在。\"}}"
+  },
+  {
+   "label": "async-result KEY3 enum-task",
+   "status": 400,
+   "text": "{\"error\":{\"code\":\"1233\",\"message\":\"任务：2026101000593056f5aa655abe497e不存在。\"}}"
+  },
+  {
+   "label": "knowledge create (e2e)",
+   "status": 200,
+   "text": "{\"data\":{\"id\":\"2108604253353484288\"},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565404736}"
+  },
+  {
+   "label": "knowledge upload doc (e2e)",
+   "status": 200,
+   "text": "{\"data\":{\"successInfos\":[{\"documentId\":\"2108604259632402432\",\"fileName\":\"probe.md\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/25EC1CE1D1494C6F8A18190E6144D162.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565406%3B1791601406&q-key-time=1791565406%3B1791601406&q-header-list=host&q-url-param-list=&q-signature=REDACTED\"}],\"failedInfos\":[]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565406150}"
+  },
+  {
+   "label": "knowledge doc list [try 1]",
+   "status": 200,
+   "text": "{\"data\":{\"total\":1,\"list\":[{\"id\":\"2108604259632402432\",\"name\":\"probe.md\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/25EC1CE1D1494C6F8A18190E6144D162.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565417%3B1791601417&q-key-time=1791565417%3B1791601417&q-header-list=host&q-url-param-list=&q-signature=REDACTED\",\"length\":128,\"min_chunk_size\":1,\"max_chunk_size\":500,\"chunk_overlap\":50,\"knowledge_type\":0,\"custom_separator\":[\"\\n\"],\"embedding_stat\":2,\"word_num\":0,\"parse_image\":0,\"failInfo\":{\"embedding_code\":10001,\"embedding_msg\":\"知识不可用，文档损坏\"}}]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565417479}"
+  },
+  {
+   "label": "knowledge doc list [try 2]",
+   "status": 200,
+   "text": "{\"data\":{\"total\":1,\"list\":[{\"id\":\"2108604259632402432\",\"name\":\"probe.md\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/25EC1CE1D1494C6F8A18190E6144D162.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565428%3B1791601428&q-key-time=1791565428%3B1791601428&q-header-list=host&q-url-param-list=&q-signature=REDACTED\",\"length\":128,\"min_chunk_size\":1,\"max_chunk_size\":500,\"chunk_overlap\":50,\"knowledge_type\":0,\"custom_separator\":[\"\\n\"],\"embedding_stat\":2,\"word_num\":0,\"parse_image\":0,\"failInfo\":{\"embedding_code\":10001,\"embedding_msg\":\"知识不可用，文档损坏\"}}]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565428824}"
+  },
+  {
+   "label": "knowledge doc list [try 3]",
+   "status": 200,
+   "text": "{\"data\":{\"total\":1,\"list\":[{\"id\":\"2108604259632402432\",\"name\":\"probe.md\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/25EC1CE1D1494C6F8A18190E6144D162.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565440%3B1791601440&q-key-time=1791565440%3B1791601440&q-header-list=host&q-url-param-list=&q-signature=REDACTED\",\"length\":128,\"min_chunk_size\":1,\"max_chunk_size\":500,\"chunk_overlap\":50,\"knowledge_type\":0,\"custom_separator\":[\"\\n\"],\"embedding_stat\":2,\"word_num\":0,\"parse_image\":0,\"failInfo\":{\"embedding_code\":10001,\"embedding_msg\":\"知识不可用，文档损坏\"}}]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565440267}"
+  },
+  {
+   "label": "knowledge doc list [try 4]",
+   "status": 200,
+   "text": "{\"data\":{\"total\":1,\"list\":[{\"id\":\"2108604259632402432\",\"name\":\"probe.md\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/25EC1CE1D1494C6F8A18190E6144D162.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565451%3B1791601451&q-key-time=1791565451%3B1791601451&q-header-list=host&q-url-param-list=&q-signature=REDACTED\",\"length\":128,\"min_chunk_size\":1,\"max_chunk_size\":500,\"chunk_overlap\":50,\"knowledge_type\":0,\"custom_separator\":[\"\\n\"],\"embedding_stat\":2,\"word_num\":0,\"parse_image\":0,\"failInfo\":{\"embedding_code\":10001,\"embedding_msg\":\"知识不可用，文档损坏\"}}]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565451513}"
+  },
+  {
+   "label": "knowledge doc list [try 5]",
+   "status": 200,
+   "text": "{\"data\":{\"total\":1,\"list\":[{\"id\":\"2108604259632402432\",\"name\":\"probe.md\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/25EC1CE1D1494C6F8A18190E6144D162.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565462%3B1791601462&q-key-time=1791565462%3B1791601462&q-header-list=host&q-url-param-list=&q-signature=REDACTED\",\"length\":128,\"min_chunk_size\":1,\"max_chunk_size\":500,\"chunk_overlap\":50,\"knowledge_type\":0,\"custom_separator\":[\"\\n\"],\"embedding_stat\":2,\"word_num\":0,\"parse_image\":0,\"failInfo\":{\"embedding_code\":10001,\"embedding_msg\":\"知识不可用，文档损坏\"}}]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565462944}"
+  },
+  {
+   "label": "knowledge doc list [try 6]",
+   "status": 200,
+   "text": "{\"data\":{\"total\":1,\"list\":[{\"id\":\"2108604259632402432\",\"name\":\"probe.md\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/25EC1CE1D1494C6F8A18190E6144D162.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565474%3B1791601474&q-key-time=1791565474%3B1791601474&q-header-list=host&q-url-param-list=&q-signature=REDACTED\",\"length\":128,\"min_chunk_size\":1,\"max_chunk_size\":500,\"chunk_overlap\":50,\"knowledge_type\":0,\"custom_separator\":[\"\\n\"],\"embedding_stat\":2,\"word_num\":0,\"parse_image\":0,\"failInfo\":{\"embedding_code\":10001,\"embedding_msg\":\"知识不可用，文档损坏\"}}]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565474203}"
+  },
+  {
+   "label": "knowledge doc list [try 7]",
+   "status": 200,
+   "text": "{\"data\":{\"total\":1,\"list\":[{\"id\":\"2108604259632402432\",\"name\":\"probe.md\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/25EC1CE1D1494C6F8A18190E6144D162.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565485%3B1791601485&q-key-time=1791565485%3B1791601485&q-header-list=host&q-url-param-list=&q-signature=REDACTED\",\"length\":128,\"min_chunk_size\":1,\"max_chunk_size\":500,\"chunk_overlap\":50,\"knowledge_type\":0,\"custom_separator\":[\"\\n\"],\"embedding_stat\":2,\"word_num\":0,\"parse_image\":0,\"failInfo\":{\"embedding_code\":10001,\"embedding_msg\":\"知识不可用，文档损坏\"}}]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565485833}"
+  },
+  {
+   "label": "knowledge doc list [try 8]",
+   "status": 200,
+   "text": "{\"data\":{\"total\":1,\"list\":[{\"id\":\"2108604259632402432\",\"name\":\"probe.md\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/25EC1CE1D1494C6F8A18190E6144D162.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565497%3B1791601497&q-key-time=1791565497%3B1791601497&q-header-list=host&q-url-param-list=&q-signature=REDACTED\",\"length\":128,\"min_chunk_size\":1,\"max_chunk_size\":500,\"chunk_overlap\":50,\"knowledge_type\":0,\"custom_separator\":[\"\\n\"],\"embedding_stat\":2,\"word_num\":0,\"parse_image\":0,\"failInfo\":{\"embedding_code\":10001,\"embedding_msg\":\"知识不可用，文档损坏\"}}]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565497121}"
+  },
+  {
+   "label": "knowledge doc list [try 9]",
+   "status": 200,
+   "text": "{\"data\":{\"total\":1,\"list\":[{\"id\":\"2108604259632402432\",\"name\":\"probe.md\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/25EC1CE1D1494C6F8A18190E6144D162.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565508%3B1791601508&q-key-time=1791565508%3B1791601508&q-header-list=host&q-url-param-list=&q-signature=REDACTED\",\"length\":128,\"min_chunk_size\":1,\"max_chunk_size\":500,\"chunk_overlap\":50,\"knowledge_type\":0,\"custom_separator\":[\"\\n\"],\"embedding_stat\":2,\"word_num\":0,\"parse_image\":0,\"failInfo\":{\"embedding_code\":10001,\"embedding_msg\":\"知识不可用，文档损坏\"}}]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565508493}"
+  },
+  {
+   "label": "knowledge doc list [try 10]",
+   "status": 200,
+   "text": "{\"data\":{\"total\":1,\"list\":[{\"id\":\"2108604259632402432\",\"name\":\"probe.md\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/25EC1CE1D1494C6F8A18190E6144D162.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565519%3B1791601519&q-key-time=1791565519%3B1791601519&q-header-list=host&q-url-param-list=&q-signature=REDACTED\",\"length\":128,\"min_chunk_size\":1,\"max_chunk_size\":500,\"chunk_overlap\":50,\"knowledge_type\":0,\"custom_separator\":[\"\\n\"],\"embedding_stat\":2,\"word_num\":0,\"parse_image\":0,\"failInfo\":{\"embedding_code\":10001,\"embedding_msg\":\"知识不可用，文档损坏\"}}]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565519789}"
+  },
+  {
+   "label": "knowledge doc list [try 11]",
+   "status": 200,
+   "text": "{\"data\":{\"total\":1,\"list\":[{\"id\":\"2108604259632402432\",\"name\":\"probe.md\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/25EC1CE1D1494C6F8A18190E6144D162.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565531%3B1791601531&q-key-time=1791565531%3B1791601531&q-header-list=host&q-url-param-list=&q-signature=REDACTED\",\"length\":128,\"min_chunk_size\":1,\"max_chunk_size\":500,\"chunk_overlap\":50,\"knowledge_type\":0,\"custom_separator\":[\"\\n\"],\"embedding_stat\":2,\"word_num\":0,\"parse_image\":0,\"failInfo\":{\"embedding_code\":10001,\"embedding_msg\":\"知识不可用，文档损坏\"}}]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565531255}"
+  },
+  {
+   "label": "knowledge doc list [try 12]",
+   "status": 200,
+   "text": "{\"data\":{\"total\":1,\"list\":[{\"id\":\"2108604259632402432\",\"name\":\"probe.md\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/25EC1CE1D1494C6F8A18190E6144D162.md?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565542%3B1791601542&q-key-time=1791565542%3B1791601542&q-header-list=host&q-url-param-list=&q-signature=REDACTED\",\"length\":128,\"min_chunk_size\":1,\"max_chunk_size\":500,\"chunk_overlap\":50,\"knowledge_type\":0,\"custom_separator\":[\"\\n\"],\"embedding_stat\":2,\"word_num\":0,\"parse_image\":0,\"failInfo\":{\"embedding_code\":10001,\"embedding_msg\":\"知识不可用，文档损坏\"}}]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565542575}"
+  },
+  {
+   "label": "knowledge retrieve (e2e)",
+   "status": 200,
+   "text": "{\"data\":[],\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565543682}"
+  },
+  {
+   "label": "knowledge delete (e2e)",
+   "status": 200,
+   "text": "{\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565544839}"
+  }
+ ]
+}
+---
+{
+ "stage": "followup-paid-2",
+ "at": "2026-10-09T17:06:46.440Z",
+ "records": [
+  {
+   "label": "managed: paid session events (KEY6)",
+   "status": 200,
+   "text": "{\"data\":[{\"id\":\"sevt_01a1219d-1eb4-7c9c-9e6d-37fe9ccc7005\",\"type\":\"session.status_running\",\"processed_at\":\"2026-10-09T17:01:47.572Z\"},{\"agent_name\":\"pi-bigmodel-probe-paid\",\"session_thread_id\":\"sthr_01a1219d-19f7-752b-bab3-2d8d73c9222f\",\"id\":\"sevt_01a1219d-1eb4-7c9c-9e6d-3bf464851de7\",\"type\":\"session.thread_status_running\",\"processed_at\":\"2026-10-09T17:01:47.573Z\"},{\"content\":[{\"text\":\"Reply with the single word OK\",\"type\":\"text\"}],\"id\":\"sevt_01a1219d-1e70-7195-9352-bc450164a777\",\"type\":\"user.message\",\"processed_at\":\"2026-10-09T17:01:47.577Z\"},{\"id\":\"sevt_01a1219d-2a0e-7647-bba3-c2848cd3b217\",\"type\":\"span.model_request_start\",\"processed_at\":\"2026-10-09T17:01:50.478Z\"},{\"id\":\"sevt_01a1219d-2c53-70b2-b06a-f39c844ef74a\",\"type\":\"agent.thinking\",\"processed_at\":\"2026-10-09T17:01:51.059Z\"},{\"content\":[{\"text\":\"OK\",\"type\":\"text\"}],\"id\":\"sevt_01a1219d-2d6e-7e9b-8075-c2166d102f14\",\"type\":\"agent.message\",\"processed_at\":\"2026-10-09T17:01:51.406Z\"},{\"is_error\":false,\"model_usage\":{\"input_tokens\":1716,\"output_tokens\":13,\"cache_read_input_tokens\":0,\"cache_creation_input_tokens\":0},\"model_request_start_id\":\"sevt_01a1219d-2a0e-7647-bba3-c2848cd3b217\",\"id\":\"sevt_01a1219d-2dae-70c3-87ef-8ba5428cc789\",\"type\":\"span.model_request_end\",\"processed_at\":\"2026-10-09T17:01:51.407Z\"},{\"agent_name\":\"pi-bigmodel-probe-paid\",\"stop_reason\":{\"type\":\"end_turn\"},\"session_thread_id\":\"sthr_01a1219d-19f7-752b-bab3-2d8d73c9222f\",\"id\":\"sevt_01a1219d-2f69-7798-9d2a-2bdac49ac66b\",\"type\":\"session.thread_status_idle\",\"processed_at\":\"2026-10-09T17:01:51.849Z\"},{\"usage\":{\"input_tokens\":1716,\"output_tokens\":13,\"server_tool_use\":{\"web_fetch_requests\":0,\"web_search_requests\":0},\"cache_read_input_tokens\":0},\"id\":\"sevt_01a1219d-2f69-7798-9d2a-2e438b156cb6\",\"type\":\"session.usage\",\"processed_at\":\"2026-10-09T17:01:51.850Z\"},{\"stop_reason\":{\"type\":\"end_turn\"},\"id\":\"sevt_01a1219d-2f69-7798-9d2a-333113d13f1f\",\"type\":\"session.status_idle\",\"processed_at\":\"2026-10-09T17:01:51.851Z\"},{\"id\":\"sevt_01a1219d-e7b6-7fa5-923e-5904f61b4369\",\"type\":\"session.status_terminated\",\"processed_at\":\"2026-10-09T17:02:39.030Z\"}],\"next_page\":null}"
+  },
+  {
+   "label": "managed: paid session GET (KEY6)",
+   "status": 200,
+   "text": "{\"id\":\"sess_01a1219d-19f2-7f0c-89e3-8d2ca5d9c31a\",\"agent\":{\"id\":\"agent_01a1219d-10f0-7d0a-8a95-50d7c4977bfe\",\"type\":\"agent\",\"name\":\"pi-bigmodel-probe-paid\",\"model\":{\"id\":\"glm-5.3-flash\",\"effort\":\"high\",\"speed\":\"standard\"},\"system\":\"Answer with exactly one word.\",\"description\":null,\"tools\":[],\"skills\":[],\"mcp_servers\":[],\"multiagent\":null,\"version\":1},\"environment_id\":\"env_01a1219d-1570-7bd9-86fc-c29b821ee555\",\"status\":\"terminated\",\"archived_at\":\"2026-10-09T17:02:39.035Z\",\"budget\":null,\"created_at\":\"2026-10-09T17:01:46.355Z\",\"metadata\":{},\"resources\":[],\"outcome_evaluations\":[],\"stats\":{\"active_seconds\":4.29,\"duration_seconds\":52.68},\"title\":\"probe-paid\",\"type\":\"session\",\"updated_at\":\"2026-10-09T17:02:39.035Z\",\"usage\":{\"cache_read_input_tokens\":0,\"input_tokens\":1716,\"output_tokens\":13,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0}},\"vault_ids\":[]}"
+  },
+  {
+   "label": "async-result KEY3 stream-task (KEY3)",
+   "status": 200,
+   "text": "{\"choices\":[{\"finish_reason\":\"length\",\"index\":0,\"message\":{\"content\":\"\",\"role\":\"assistant\"}}],\"created\":1791565585,\"id\":\"202610100059289eaf12897ff84528\",\"model\":\"GLM-4.5-Flash\",\"request_id\":\"202610100059289eaf12897ff84528\",\"task_status\":\"SUCCESS\",\"usage\":{\"completion_tokens\":1,\"prompt_tokens\":6,\"prompt_tokens_details\":{\"cached_tokens\":5},\"total_tokens\":7}}"
+  },
+  {
+   "label": "async-result KEY3 enum-task (KEY3)",
+   "status": 200,
+   "text": "{\"choices\":[{\"finish_reason\":\"length\",\"index\":0,\"message\":{\"content\":\"\",\"reasoning_content\":\"The\",\"role\":\"assistant\"}}],\"created\":1791565586,\"id\":\"2026101000593056f5aa655abe497e\",\"model\":\"GLM-4.7-Flash\",\"request_id\":\"2026101000593056f5aa655abe497e\",\"task_status\":\"SUCCESS\",\"usage\":{\"completion_tokens\":1,\"completion_tokens_details\":{\"reasoning_tokens\":1},\"prompt_tokens\":6,\"prompt_tokens_details\":{\"cached_tokens\":2},\"total_tokens\":7}}"
+  },
+  {
+   "label": "chat + web_search tool (retry 2)",
+   "status": 429,
+   "text": "{\"error\":{\"code\":\"1305\",\"message\":\"该模型当前访问量过大，请您稍后再试\"}}"
+  },
+  {
+   "label": "knowledge create (txt)",
+   "status": 200,
+   "text": "{\"data\":{\"id\":\"2108605025923350528\"},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565588921}"
+  },
+  {
+   "label": "knowledge upload doc (.txt)",
+   "status": 200,
+   "text": "{\"data\":{\"successInfos\":[{\"documentId\":\"2108605032223117312\",\"fileName\":\"probe.txt\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/5998DFBC1E244338B0726476D6F27A23.txt?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565590%3B1791601590&q-key-time=1791565590%3B1791601590&q-header-list=host&q-url-param-list=&q-signature=REDACTED\"}],\"failedInfos\":[]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565590351}"
+  },
+  {
+   "label": "knowledge doc list [try 1]",
+   "status": 200,
+   "text": "{\"data\":{\"total\":1,\"list\":[{\"id\":\"2108605032223117312\",\"name\":\"probe.txt\",\"url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/5998DFBC1E244338B0726476D6F27A23.txt?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565601%3B1791601601&q-key-time=1791565601%3B1791601601&q-header-list=host&q-url-param-list=&q-signature=REDACTED\",\"length\":497,\"min_chunk_size\":1,\"max_chunk_size\":500,\"chunk_overlap\":50,\"knowledge_type\":1,\"custom_separator\":[\"\\n\"],\"embedding_stat\":1,\"word_num\":0,\"parse_image\":0}]},\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565601845}"
+  },
+  {
+   "label": "knowledge retrieve (.txt)",
+   "status": 200,
+   "text": "{\"data\":[{\"id\":\"d572aea6-daa8-4e76-8248-8d4096aff580\",\"text\":\"# pi-bigmodel platform probe\\n\\n\\n\\nThe async chat completions surface accepts glm-4.5-flash and glm-4.7-flash. Answers arrive via GET /api/paas/v4/async-result/{id} with task_status SUCCESS.\\n\\n\\n\\nThe managed agents API lives on agent-api.bigmodel.cn and requires zai-beta headers. It bills model usage from the API balance; a zero-balance key produces session.error with retries_exhausted.\\n\\n\\n\\nThe batch API supports a fixed legacy model list including glm-4-flash and embedding-2, but not the GLM-5.3 family.\\n\",\"score\":0.34,\"metadata\":{\"_id\":\"d572aea6-daa8-4e76-8248-8d4096aff580\",\"knowledge_id\":\"2108605025923350528\",\"know_id\":\"2108605025923350528\",\"doc_id\":\"2108605032223117312\",\"doc_name\":\"probe.txt\",\"doc_url\":\"https://cdn-enterprise-document.bigmodel.cn/knowledge/5998DFBC1E244338B0726476D6F27A23.txt?q-sign-algorithm=sha1&q-ak=REDACTED-CDN-KEY&q-sign-time=1791565603%3B1791601603&q-key-time=1791565603%3B1791601603&q-header-list=host&q-url-param-list=&q-signature=REDACTED\",\"doc_type\":\"txt\",\"index\":0},\"medias\":[]}],\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565603180}"
+  },
+  {
+   "label": "chat + retrieval tool (.txt)",
+   "status": 429,
+   "text": "{\"error\":{\"code\":\"1305\",\"message\":\"该模型当前访问量过大，请您稍后再试\"}}"
+  },
+  {
+   "label": "knowledge delete (.txt)",
+   "status": 200,
+   "text": "{\"code\":200,\"message\":\"请求成功\",\"timestamp\":1791565605404}"
+  }
+ ]
+}
+---
+{
+ "stage": "followup-paid-3",
+ "at": "2026-10-09T17:08:21.319Z",
+ "records": [
+  {
+   "label": "chat + web_search (glm-4-flash-250414)",
+   "body": {
+    "model": "glm-4-flash-250414",
+    "messages": [
+     {
+      "role": "user",
+      "len": 25
+     }
+    ],
+    "max_tokens": 200,
+    "tools": [
+     {
+      "type": "web_search",
+      "web_search": {
+       "enable": true,
+       "search_engine": "search_std",
+       "search_result": true,
+       "count": 3
+      }
+     }
+    ]
+   },
+   "status": 200,
+   "text": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"content\":\"智谱AI最新发布的模型是GLM-6.0。\",\"role\":\"assistant\"}}],\"created\":1791565692,\"id\":\"2026101001080604e9d6d218684552\",\"model\":\"glm-4-flash-250414\",\"object\":\"chat.completion\",\"request_id\":\"2026101001080604e9d6d218684552\",\"usage\":{\"completion_tokens\":16,\"prompt_tokens\":1863,\"total_tokens\":1879},\"web_search\":[{\"content\":\"01 智谱AI首席科学家：唐杰 各位投资者、分析师，大家晚上好。非常感谢大家参加 2026 年中期业绩会。下面我简要介绍智谱的基本情况、近期思考及未来技术布局。大模型已发展近 10 年。自去年起，智谱意识到大模型正从对话”转向做事”，并较早布局，重点加强模型的 Coding 能力。去年年中，我们发布了 GLM-4.5，这是首个在 Coding 能力上取得良好效果的模型。今年以来，我们陆续发布 GLM-5.0、5.1、5.2 和 5.3，这些模型均在同一基础上持续迭代。 首先，Scaling 是否意味着必须大幅增加参数？Scaling 是通向更高智能的关键路径，但其本质并非简单扩大参数规模。今年以来，我们在基座规模、后训练和任务环境方面均大幅加强。在扩大参数规模的同时，还需要提升模型的有效深度，例如通过 Loop Transformer 让模型在推理过程中思考得更深，我们近期也在推进相关工作。另一方面，后训练仍有很大提升空间。因此，我们在 GLM-5.3 上投入了大量工作，显著加强了后训练。 同时，Coding 包含多种不同任务。强化各类 Coding 任务，能够系统提升模型的整体能力。我们围绕不同任务环境开展了大量工作，使 GLM-5.3 的效果显著提升，达到 SOTA 水平和当前智能上界。 另一方面，模型不仅要能力强，还要让用户用得起、用得上。设计模型时，既要考虑模型规模和激活参数，也要考虑推理及基础设施效率，降低推理成本，才能让技术更广泛地普惠大众。 因此，在设计 GLM-5 系列时，我们重点加强了推理能力。面对英伟达及多种国产芯片并存的算力环境，我们借助外部力量，并收购了一家推理技术公司，进一步强化推理能力，使 GLM-5.1、5.2 和 5.3 更易部署和使用。 目前模型用量较大，在 OpenRouter 上的调用量一度位居第一。每次新模型发布后，MaaS 平台调用量基本都能实现成倍增长。以上是我们今年整体布局和进展的基本情况。 对于模型研发公司而言，核心仍是不断提升智能上界，这也回到智谱最本质的愿景。2019 年，我们为智谱确定了唯一愿景：让机器像人一样思考。直到今天，我们仍在探索智能上界。探索上界并非只训练模型，还要思考模型未来应具备怎样的智能、能够完成哪些事情。围绕下一阶段的布局，我们形成了多方面思考。 第一，今年初我们看到，Coding 已成为行业普遍认可的方向。我们进一步思考如何让模型在 Coding 基础上完成更多任务。\",\"icon\":\"\",\"link\":\"\",\"media\":\"\",\"publish_date\":\"2026-09-14\",\"refer\":\"ref_1\",\"title\":\"智谱AI首席科学家唐杰首次披露GLM-6.0：下一代模型走向全自训练\"},{\"content\":\"2026 年 9 月 17 日，智谱（Z.ai）发布技术文章《GLM Built Its Inference Infrastructure》，披露 GLM-5.3-Flash 背后的大规模推理基础设施，以及 GLM-5.3 驱动的 Infra Agent 如何参与这套系统的建设和优化。 这套生产级推理系统从零开始搭建，运行在超过 10 万张国产 AI 加速卡组成的集群上。 目前，GLM-5.3-Flash 的全部生产推理均运行在这套系统中。 从模型首次成功运行在新硬件上，到具备生产环境要求，整个过程不到两周。 经过一系列系统级优化，GLM-5.3-Flash 的端到端吞吐相较最初基线提升约 3 倍。 智谱称，最终系统的硬件利用效率和单 Token 成本已经达到与主流 NVIDIA GPU 相当的水平。端到端吞吐则相较初始基线提升约 3 倍。 更特别的是，这套系统的大量工程工作并非完全由传统基础设施团队完成。 智谱为此构建了一套由 GLM-5.3 驱动的 Infra Agent，让模型直接参与推理系统分析、问题定位、代码修改和性能优化。 按照智谱的描述，一个过去可能需要有经验的基础设施工程团队花费数周完成的任务，这一次有相当一部分由 Infra Agent 参与完成。 模型开始参与建设运行自己的系统 GLM-5.3-Flash 的部署并不轻松。 一方面，这是一套超过 10 万张国产 AI 加速卡的大规模集群。 智谱称，此前还没有人在如此规模上部署国产加速器。 另一方面，团队面临相对有限的芯"
+  },
+  {
+   "label": "chat + retrieval (glm-4-flash-250414)",
+   "body": {
+    "model": "glm-4-flash-250414",
+    "messages": [
+     {
+      "role": "user",
+      "len": 8
+     }
+    ],
+    "max_tokens": 20,
+    "tools": [
+     {
+      "type": "retrieval",
+      "retrieval": {
+       "knowledge_id": "0000000000000000000",
+       "prompt_template": "{{knowledge}} {{question}}"
+      }
+     }
+    ]
+   },
+   "status": 200,
+   "text": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"content\":\"OK\",\"role\":\"assistant\"}}],\"created\":1791565700,\"id\":\"202610100108136bd49d5f57324635\",\"model\":\"glm-4-flash-250414\",\"object\":\"chat.completion\",\"request_id\":\"202610100108136bd49d5f57324635\",\"usage\":{\"completion_tokens\":3,\"prompt_tokens\":7,\"total_tokens\":10}}"
+  }
+ ]
+}
+---
+{
+ "stage": "batch-e2e-free",
+ "at": "2026-10-09T17:10:51.271Z",
+ "records": [
+  {
+   "label": "batch upload glm-4-flash",
+   "status": 200,
+   "text": "{\"id\":\"1791565720_20040ae4bf3e4f93bff7658067209a81\",\"object\":\"file\",\"bytes\":330,\"filename\":\"probe-batch.jsonl\",\"purpose\":\"batch\",\"created_at\":1791565720}"
+  },
+  {
+   "label": "batch create",
+   "status": 200,
+   "text": "{\"id\":\"batch_2108605584417751040\",\"object\":\"batch\",\"endpoint\":\"/v4/chat/completions\",\"input_file_id\":\"1791565720_20040ae4bf3e4f93bff7658067209a81\",\"completion_window\":null,\"status\":\"validating\",\"output_file_id\":null,\"error_file_id\":null,\"created_at\":1791565721979,\"in_progress_at\":null,\"expires_at\":null,\"finalizing_at\":null,\"completed_at\":null,\"failed_at\":null,\"expired_at\":null,\"cancelling_at\":null,\"cancelled_at\":null,\"request_counts\":{\"total\":2,\"completed\":null,\"failed\":null},\"metadata\":{\"probe\":\"pi-bigmodel\"}}"
+  },
+  {
+   "label": "batch poll 1",
+   "status": 200,
+   "text": "{\"status\":\"validating\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  },
+  {
+   "label": "batch poll 2",
+   "status": 200,
+   "text": "{\"status\":\"validating\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  },
+  {
+   "label": "batch poll 3",
+   "status": 200,
+   "text": "{\"status\":\"in_progress\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  },
+  {
+   "label": "batch poll 4",
+   "status": 200,
+   "text": "{\"status\":\"in_progress\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  },
+  {
+   "label": "batch poll 5",
+   "status": 200,
+   "text": "{\"status\":\"in_progress\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  },
+  {
+   "label": "batch poll 6",
+   "status": 200,
+   "text": "{\"status\":\"in_progress\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  },
+  {
+   "label": "batch poll 7",
+   "status": 200,
+   "text": "{\"status\":\"in_progress\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  },
+  {
+   "label": "batch poll 8",
+   "status": 200,
+   "text": "{\"status\":\"in_progress\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  },
+  {
+   "label": "batch poll 9",
+   "status": 200,
+   "text": "{\"status\":\"finalizing\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  },
+  {
+   "label": "batch poll 10",
+   "status": 200,
+   "text": "{\"status\":\"finalizing\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  },
+  {
+   "label": "batch poll 11",
+   "status": 200,
+   "text": "{\"status\":\"finalizing\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  },
+  {
+   "label": "batch poll 12",
+   "status": 200,
+   "text": "{\"status\":\"finalizing\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  },
+  {
+   "label": "batch poll 13",
+   "status": 200,
+   "text": "{\"status\":\"finalizing\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  },
+  {
+   "label": "batch poll 14",
+   "status": 200,
+   "text": "{\"status\":\"finalizing\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  },
+  {
+   "label": "batch poll 15",
+   "status": 200,
+   "text": "{\"status\":\"finalizing\",\"counts\":{\"total\":2,\"completed\":0,\"failed\":0},\"output_file_id\":\"\"}"
+  }
+ ]
+}
+---
+{
+ "stage": "batch-e2e-check",
+ "at": "2026-10-09T17:12:27.805Z",
+ "records": [
+  {
+   "label": "batch final check",
+   "status": 200,
+   "text": "{\"id\":\"batch_2108605584417751040\",\"object\":\"batch\",\"endpoint\":\"/v4/chat/completions\",\"input_file_id\":\"1791565720_20040ae4bf3e4f93bff7658067209a81\",\"completion_window\":\"\",\"status\":\"completed\",\"output_file_id\":\"1791565920_10ff440733414e98af4091413921c95d\",\"error_file_id\":\"\",\"created_at\":1791565721000,\"in_progress_at\":1791565740000,\"expires_at\":null,\"finalizing_at\":1791565800000,\"completed_at\":1791565920000,\"failed_at\":null,\"expired_at\":null,\"cancelling_at\":null,\"cancelled_at\":null,\"request_counts\":{\"total\":2,\"completed\":2,\"failed\":0},\"metadata\":{\"probe\":\"pi-bigmodel\"}}"
+  }
+ ]
+}
+---
+{
+ "stage": "search-tool-validation",
+ "at": "2026-10-09T17:23:59.437Z",
+ "records": [
+  {
+   "label": "web_search invalid engine (free reject)",
+   "status": 400,
+   "text": "{\"error\":{\"code\":\"1211\",\"message\":\"模型不存在，请检查模型代码。\"}}"
+  },
+  {
+   "label": "web_search invalid recency (free reject)",
+   "status": 429,
+   "text": "{\"error\":{\"code\":\"1113\",\"message\":\"余额不足或无可用资源包,请充值。\"}}"
+  },
+  {
+   "label": "web_search search_pro (paid ¥0.03)",
+   "status": 200,
+   "text": "{\"created\":1791566638,\"id\":\"20261010012358a54dced5edb94dc2\",\"request_id\":\"20261010012358a54dced5edb94dc2\",\"search_intent\":[{\"intent\":\"SEARCH_ALL\",\"keywords\":\"glm-5.3 发布\",\"query\":\"GLM-5.3 发布\"}],\"search_result\":[{\"content\":\"2026 年 9 月 29 日，Anthropic 发布了一篇关于智谱 GLM-5.3 网络安全能力的研究文章，警告这款开放权重模型已经具备较强的自主漏洞利用能力，而且安全限制可以被相对简单的方法绕过。 不过，整篇文章中一个颇具反差的细节是 Anthropic 自己的安全研究人员已经直接使用 GLM-5.3 挖漏洞，而且实际效果相当突出。 这篇文章发布后，也迅速引发安全圈关注。 安全研究员 Andrew Case 转发 Anthropic 文章时调侃称，自己非常困惑为什么 Anthropic 写了一篇博客文章，宣传网络安全团队切换到 GLM”。 Anthropic 表示，为测试 GLM-5.3 在真实漏洞研究场景中的能力，其研究人员在隔离环境中向模型提供了一台 Linux 计算机，以及一款主流浏览器的本地版本。 研究人员事先并不知道目标中存在哪些漏洞，而是让 GLM-5.3 自己寻找此前未知的安全问题。 整个实验持续一天左右，人工实际投入不到 1 小时，GLM-5.3 最终在浏览器的 JavaScript 引擎中发现了多个此前未知漏洞，并将其中多个 0day 串联成一条完整攻击链。 Anthropic 展示的实验中，GLM-5.3 生成了一个恶意网页，用户访问后，攻击链可以突破浏览器沙箱并读取计算机上的任意文件。 Anthropic 公布的截图显示，这套攻击成功读取了测试设备中的 SSH 私钥。Anthropic 已将相关漏洞披露给浏览器维护方。 随后，研究人员继续借助 GLM-5.3，在无线驱动、图形驱动以及面向网络的设备软件中发现了其他可利用漏洞。 Anthropic 表示，目前仍在审查这些结果，并将在适当情况下向相关软件维护方披露。 Anthropic 还测试了性能更弱的 GLM-5.3-Flash。 研究人员向模型提供了近期披露的 Chrome 漏洞 CVE-2026-11645，以及另一个已知漏洞的公开资料。 在没有研究人员大量指导的情况下，GLM-5.3-Flash 将两个漏洞组合起来，为 ARM64 平台构建出一条可靠的攻击链，并绕过了指针认证 PAC 防护。 整个过程只需要约 20 分钟人工操作，随后 GLM-5.3-Flash 自主运行约 8 小时。 按照智谱当时的 API 价格计算，成本仅为 20.40 美元。 因此，Anthropic 这篇原本用于警告 GLM-5.3 网络安全风险的文章，出现了一个相当微妙的场面。\",\"icon\":\"\",\"link\":\"\",\"media\":\"\",\"publish_date\":\"2026-09-30\",\"refer\":\"ref_1\",\"title\":\"Anthropic 一篇警告文，将 GLM-5.3 写成了“最强安全工具”\"},{\"content\":\"美国时间9月29日，Anthropic发布GLM-5.3网络安全能力研究报告。在ExploitBench端到端漏洞利用测试中，智谱GLM-5.3在410次尝试中成功50次，Claude Mythos Preview为56次，表现接近。 Anthropic报告还披露，研究人员借助GLM-5.3发现了浏览器中的未知漏洞，并在隔离环境中完成攻击链验证。 此前，美国NIST旗下CAISI将GLM-5.3评为迄今为止网络安全能力最强的开放权重模型。这份旨在提示安全风险的报告，也通过具体测试成绩，展现了国产开源模型在网络安全任务上的能力进展。 （科创板日报记者 李明明）\",\"icon\":\"\",\"link\":\"\",\"media\":\"\",\"publish_date\":\"2026-09-30\",\"refer\":\"ref_2\",\"title\":\"Anthropic实测智谱GLM-5.3\"}]}"
+  }
+ ]
+}
+---
