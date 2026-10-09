@@ -1,0 +1,2232 @@
+{
+ "at": "2026-10-09T01:42:33.015Z",
+ "records": [
+  {
+   "label": "baseline free model",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 18,
+    "input_tokens_details": {
+     "cached_tokens": 6
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 34
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:\nThe user is asking me to say hi. This i",
+   "outputSample": "[{\"content\":[{\"text\":\"\\nThe user is asking me to say hi. This is a simple greeting\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_2026100909410266a2d13849b3498f\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "reasoning.effort none",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "reasoning": {
+     "effort": "none"
+    }
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 18,
+    "input_tokens_details": {
+     "cached_tokens": 17
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 34
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:\nThe user is asking me to say hi. I'll r",
+   "outputSample": "[{\"content\":[{\"text\":\"\\nThe user is asking me to say hi. I'll respond with a\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_202610090941043472b691ff834ec4\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "reasoning.effort low + summary:auto",
+   "body": {
+    "model": "glm-4.7-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "reasoning": {
+     "effort": "low",
+     "summary": "auto"
+    }
+   },
+   "status": 429,
+   "error": {
+    "code": "overloaded",
+    "message": "该模型当前访问量过大，请您稍后再试",
+    "param": null,
+    "type": "overloaded"
+   },
+   "outputTypes": [],
+   "text": "",
+   "outputSample": "[]"
+  },
+  {
+   "label": "include:[reasoning.encrypted_content]",
+   "body": {
+    "model": "glm-4.7-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "reasoning": {
+     "effort": "low",
+     "summary": "auto"
+    },
+    "include": [
+     "reasoning.encrypted_content"
+    ]
+   },
+   "status": 429,
+   "error": {
+    "code": "overloaded",
+    "message": "该模型当前访问量过大，请您稍后再试",
+    "param": null,
+    "type": "overloaded"
+   },
+   "outputTypes": [],
+   "text": "",
+   "outputSample": "[]"
+  },
+  {
+   "label": "tools with strict:false",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "tools": [
+     {
+      "type": "function",
+      "name": "get_weather",
+      "description": "Look up the weather for a city.",
+      "parameters": {
+       "type": "object",
+       "required": [
+        "city"
+       ],
+       "properties": {
+        "city": {
+         "type": "string"
+        }
+       }
+      },
+      "strict": false
+     }
+    ]
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 170,
+    "input_tokens_details": {
+     "cached_tokens": 43
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 186
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:\nThe user is asking me to say hi. This i",
+   "outputSample": "[{\"content\":[{\"text\":\"\\nThe user is asking me to say hi. This is a simple greeting\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_20261009094107c7b27f12db034f5a\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "tools with strict:true",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "tools": [
+     {
+      "type": "function",
+      "name": "get_weather",
+      "description": "Look up the weather for a city.",
+      "parameters": {
+       "type": "object",
+       "required": [
+        "city"
+       ],
+       "properties": {
+        "city": {
+         "type": "string"
+        }
+       }
+      },
+      "strict": true
+     }
+    ]
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 170,
+    "input_tokens_details": {
+     "cached_tokens": 169
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 186
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:\nThe user is asking me to say hi. This i",
+   "outputSample": "[{\"content\":[{\"text\":\"\\nThe user is asking me to say hi. This is a simple greeting\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_20261009094109b8642b447a6f4130\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "tools without strict",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "tools": [
+     {
+      "type": "function",
+      "name": "get_weather",
+      "description": "Look up the weather for a city.",
+      "parameters": {
+       "type": "object",
+       "required": [
+        "city"
+       ],
+       "properties": {
+        "city": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    ]
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 170,
+    "input_tokens_details": {
+     "cached_tokens": 169
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 186
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:\nThe user is just greeting me with \"Say ",
+   "outputSample": "[{\"content\":[{\"text\":\"\\nThe user is just greeting me with \\\"Say hi.\\\" This is a\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_20261009094111bdb92e56b3b44c31\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "prompt_cache_key + store:false",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "prompt_cache_key": "pi-probe-session",
+    "store": false
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 18,
+    "input_tokens_details": {
+     "cached_tokens": 17
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 34
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:\nThe user is asking me to say hi. As a c",
+   "outputSample": "[{\"content\":[{\"text\":\"\\nThe user is asking me to say hi. As a coding agent named\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_20261009094113bf7c7d8143db4a7c\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "text.format json_object",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Return JSON {\"ok\":true}"
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 32,
+    "text": {
+     "format": {
+      "type": "json_object"
+     }
+    }
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 74,
+    "input_tokens_details": {
+     "cached_tokens": 58
+    },
+    "output_tokens": 32,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 106
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:\nThe user is asking me to return a JSON ",
+   "outputSample": "[{\"content\":[{\"text\":\"\\nThe user is asking me to return a JSON object with the structure {\\\"ok\\\": true}. This is a straightforward request where I need to output a JSON\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_20261009094114d3c3fa9e9f9c4b76\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "temperature + top_p",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "temperature": 1,
+    "top_p": 0.95
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 18,
+    "input_tokens_details": {
+     "cached_tokens": 17
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 34
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:\nThe user is asking me to say \"hi\". This",
+   "outputSample": "[{\"content\":[{\"text\":\"\\nThe user is asking me to say \\\"hi\\\". This is a very\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_20261009094117b0680469241d4429\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "developer role",
+   "body": {
+    "model": "glm-4.7-flash",
+    "input": [
+     {
+      "role": "developer",
+      "content": "You are pi."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16
+   },
+   "status": 429,
+   "error": {
+    "code": "overloaded",
+    "message": "该模型当前访问量过大，请您稍后再试",
+    "param": null,
+    "type": "overloaded"
+   },
+   "outputTypes": [],
+   "text": "",
+   "outputSample": "[]"
+  },
+  {
+   "label": "stop sequence",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "stop": [
+     "###"
+    ]
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 18,
+    "input_tokens_details": {
+     "cached_tokens": 17
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 34
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:\nThe user has asked me to say hi. As an ",
+   "outputSample": "[{\"content\":[{\"text\":\"\\nThe user has asked me to say hi. As an AI assistant,\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_20261009094119129de3cac27842ca\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "input as plain string",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": "Say hi.",
+    "max_output_tokens": 16
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 8,
+    "input_tokens_details": {
+     "cached_tokens": 4
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 24
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:\nHmm, the user just said \"Say hi.\" That'",
+   "outputSample": "[{\"content\":[{\"text\":\"\\nHmm, the user just said \\\"Say hi.\\\" That's a very\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_2026100909412146cb1e65c2624880\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "instructions instead of system item",
+   "body": {
+    "model": "glm-4.5-flash",
+    "instructions": "You are pi.",
+    "input": [
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 14,
+    "input_tokens_details": {
+     "cached_tokens": 7
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 30
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:\nI'm asked to say hi. This is a simple g",
+   "outputSample": "[{\"content\":[{\"text\":\"\\nI'm asked to say hi. This is a simple greeting, so\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_202610090941224ceb9c543a2b4e35\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "input_image data url + detail:auto",
+   "body": {
+    "model": "glm-4.6v-flash",
+    "input": [
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "What colour is this pixel?"
+       },
+       {
+        "type": "input_image",
+        "detail": "auto",
+        "image_url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8AAAwAB/AF+p7RLAAAAAElFTkSuQmCC"
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16
+   },
+   "status": 400,
+   "error": {
+    "code": "invalid_request",
+    "message": "图片输入格式/解析错误",
+    "param": null,
+    "type": "invalid_request"
+   },
+   "outputTypes": [],
+   "text": "",
+   "outputSample": "[]"
+  },
+  {
+   "label": "input_image without detail",
+   "body": {
+    "model": "glm-4.6v-flash",
+    "input": [
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "What colour is this pixel?"
+       },
+       {
+        "type": "input_image",
+        "image_url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8AAAwAB/AF+p7RLAAAAAElFTkSuQmCC"
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16
+   },
+   "status": 429,
+   "error": {
+    "code": "overloaded",
+    "message": "该模型当前访问量过大，请您稍后再试",
+    "param": null,
+    "type": "overloaded"
+   },
+   "outputTypes": [],
+   "text": "",
+   "outputSample": "[]"
+  },
+  {
+   "label": "stream glm-4.7-flash thinking low",
+   "body": {
+    "model": "glm-4.7-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 32,
+    "reasoning": {
+     "effort": "low"
+    }
+   },
+   "status": 200,
+   "events": [
+    "response.failed",
+    "error"
+   ],
+   "tail": "event: response.failed\ndata: {\"response\":{\"created_at\":0,\"error\":{\"code\":\"overloaded\",\"message\":\"该模型当前访问量过大，请您稍后再试[20261009094137b208258f8d584178]\"},\"id\":\"resp_20261009094137b208258f8d584178\",\"incomplete_details\":null,\"metadata\":{},\"model\":\"glm-4.7-flash\",\"object\":\"response\",\"output\":[],\"previous_response_id\":null,\"status\":\"failed\",\"usage\":null},\"sequence_number\":0,\"type\":\"response.failed\"}\n\nevent: error\ndata: {\"code\":\"overloaded\",\"message\":\"该模型当前访问量过大，请您稍后再试[20261009094137b208258f8d584178]\",\"param\":null,\"sequence_number\":1,\"type\":\"error\"}\n\ndata: [DONE]\n\n"
+  },
+  {
+   "label": "stream glm-4.5-flash + tool",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Weather in Berlin? Use the tool."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 64,
+    "tools": [
+     {
+      "type": "function",
+      "name": "get_weather",
+      "description": "Look up the weather for a city.",
+      "parameters": {
+       "type": "object",
+       "required": [
+        "city"
+       ],
+       "properties": {
+        "city": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    ]
+   },
+   "status": 200,
+   "events": [
+    "response.created",
+    "response.in_progress",
+    "response.output_item.added",
+    "response.content_part.added",
+    "response.reasoning_text.delta",
+    "response.reasoning_text.done",
+    "response.content_part.done",
+    "response.output_item.done",
+    "response.incomplete"
+   ],
+   "usageRaw": "{\"input_tokens\":175,\"input_tokens_details\":{\"cached_tokens\":166}",
+   "tail": "nd specifically wants me to use the tool. I have access to a weather function called \\\"get_weather\\\" that takes a city parameter. The user has provided \\\"Berlin\\\" as the city name, so I have all the required parameters to make the function call.\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_resp_2026100909413839bbce2cd28f429d\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}],\"parallel_tool_calls\":true,\"previous_response_id\":\"\",\"status\":\"incomplete\",\"usage\":{\"input_tokens\":175,\"input_tokens_details\":{\"cached_tokens\":166},\"output_tokens\":64,\"output_tokens_details\":{\"reasoning_tokens\":0},\"total_tokens\":239}},\"sequence_number\":69,\"type\":\"response.incomplete\"}\n\ndata: [DONE]\n\n"
+  },
+  {
+   "label": "max_output_tokens 99999999",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 99999999
+   },
+   "status": 400,
+   "error": {
+    "code": "invalid_request",
+    "message": "max_tokens参数非法：限制数值范围[1,98304]",
+    "param": null,
+    "type": "invalid_request"
+   },
+   "outputTypes": [],
+   "text": "",
+   "outputSample": "[]"
+  },
+  {
+   "label": "unknown model",
+   "body": {
+    "model": "definitely-not-a-model",
+    "input": "hi",
+    "max_output_tokens": 16
+   },
+   "status": 400,
+   "error": {
+    "code": "model_not_found",
+    "message": "模型不存在，请检查模型代码。",
+    "param": null,
+    "type": "model_not_found"
+   },
+   "outputTypes": [],
+   "text": "",
+   "outputSample": "[]"
+  },
+  {
+   "label": "unsupported field",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "thinking": {
+     "type": "enabled"
+    }
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 18,
+    "input_tokens_details": {
+     "cached_tokens": 17
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 34
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:\nI'm asked to say hi. As a coding agent ",
+   "outputSample": "[{\"content\":[{\"text\":\"\\nI'm asked to say hi. As a coding agent named pi,\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_2026100909414371cddf254d6b4622\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "tool_choice required (not in enum)",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "tools": [
+     {
+      "type": "function",
+      "name": "get_weather",
+      "description": "Look up the weather for a city.",
+      "parameters": {
+       "type": "object",
+       "required": [
+        "city"
+       ],
+       "properties": {
+        "city": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    ],
+    "tool_choice": "required"
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 170,
+    "input_tokens_details": {
+     "cached_tokens": 169
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 186
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:\nThe user just said \"Say hi.\" which is a",
+   "outputSample": "[{\"content\":[{\"text\":\"\\nThe user just said \\\"Say hi.\\\" which is a simple greeting.\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_20261009094145eb3b7ab7c2e54b5a\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "tool call round trip: first turn",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "What is the weather in Berlin? Call the tool."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 128,
+    "tools": [
+     {
+      "type": "function",
+      "name": "get_weather",
+      "description": "Look up the weather for a city.",
+      "parameters": {
+       "type": "object",
+       "required": [
+        "city"
+       ],
+       "properties": {
+        "city": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    ],
+    "reasoning": {
+     "effort": "low"
+    }
+   },
+   "status": 200,
+   "status2": "completed",
+   "usage": {
+    "input_tokens": 178,
+    "input_tokens_details": {
+     "cached_tokens": 166
+    },
+    "output_tokens": 88,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 266
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [
+    "reasoning",
+    "message",
+    "function_call"
+   ],
+   "text": "reasoning_text:\nThe user is asking for the weather in B | output_text:\nI'll get the weather information for Be",
+   "outputSample": "[{\"content\":[{\"text\":\"\\nThe user is asking for the weather in Berlin and specifically wants me to call the tool. I have access to a get_weather function that takes a city parameter. The user has provided \\\"Berlin\\\" as the city name, so I have all the required parameters to make the function call.\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_20261009094147c9bf4927f9bf4437\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"},{\"content\":[{\"annotations\":[],\"text\":\"\\nI'll get the we"
+  },
+  {
+   "label": "glm-5.3 reasoning low + include",
+   "body": {
+    "model": "glm-5.3",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "reasoning": {
+     "effort": "low",
+     "summary": "auto"
+    },
+    "include": [
+     "reasoning.encrypted_content"
+    ]
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 24,
+    "input_tokens_details": {
+     "cached_tokens": 0
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 40
+   },
+   "model": "glm-5.3",
+   "outputTypes": [
+    "message"
+   ],
+   "text": "output_text:Hey! 👋 How's it going? What can I help ",
+   "outputSample": "[{\"content\":[{\"annotations\":[],\"text\":\"Hey! 👋 How's it going? What can I help you with\",\"type\":\"output_text\"}],\"id\":\"msg_202610090941511319dd3024ac4e9a\",\"role\":\"assistant\",\"status\":\"completed\",\"type\":\"message\"}]"
+  },
+  {
+   "label": "glm-5.3 reasoning medium (docs: only low/high/max)",
+   "body": {
+    "model": "glm-5.3",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "reasoning": {
+     "effort": "medium"
+    }
+   },
+   "status": 400,
+   "error": {
+    "code": "invalid_request",
+    "message": "该模型始终思考，不支持关闭思考；请使用 low、high 或 max。",
+    "param": null,
+    "type": "invalid_request"
+   },
+   "outputTypes": [],
+   "text": "",
+   "outputSample": "[]"
+  },
+  {
+   "label": "glm-4.7 reasoning none",
+   "body": {
+    "model": "glm-4.7",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "reasoning": {
+     "effort": "none"
+    }
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 17,
+    "input_tokens_details": {
+     "cached_tokens": 0
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 16
+    },
+    "total_tokens": 33
+   },
+   "model": "glm-4.7",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:The user is asking me to say hi. I'll re",
+   "outputSample": "[{\"content\":[{\"text\":\"The user is asking me to say hi. I'll respond with a friendly greeting\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_20261009094155bba5e202a6b54309\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "glm-5.3-flash (VLM) text only",
+   "body": {
+    "model": "glm-5.3-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16,
+    "reasoning": {
+     "effort": "low"
+    }
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 24,
+    "input_tokens_details": {
+     "cached_tokens": 0
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 16
+    },
+    "total_tokens": 40
+   },
+   "model": "glm-5.3-flash",
+   "outputTypes": [
+    "reasoning"
+   ],
+   "text": "reasoning_text:The user sent \"Say hi.\" — a trivial gree",
+   "outputSample": "[{\"content\":[{\"text\":\"The user sent \\\"Say hi.\\\" — a trivial greeting request. I'm pi\",\"type\":\"reasoning_text\"}],\"encrypted_content\":null,\"id\":\"rs_20261009094200b1f82856627b4c6b\",\"status\":\"completed\",\"summary\":[],\"type\":\"reasoning\"}]"
+  },
+  {
+   "label": "zero-balance key on paid model (1113?)",
+   "body": {
+    "model": "glm-4.5-air",
+    "input": [
+     {
+      "role": "system",
+      "content": "You are pi, a coding agent."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "Say hi."
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 16
+   },
+   "status": 429,
+   "error": {
+    "code": "insufficient_quota",
+    "message": "余额不足或无可用资源包,请充值。",
+    "param": null,
+    "type": "insufficient_quota"
+   },
+   "outputTypes": [],
+   "text": "",
+   "outputSample": "[]"
+  },
+  {
+   "label": "cache without prompt_cache_key #1",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "0. Stable prefix line for the Responses prompt_cache_key routing probe.\n1. Stable prefix line for the Responses prompt_cache_key routing probe.\n2. Stable prefix line for the Responses prompt_cache_key routing probe.\n3. Stable prefix line for the Responses prompt_cache_key routing probe.\n4. Stable prefix line for the Responses prompt_cache_key routing probe.\n5. Stable prefix line for the Responses prompt_cache_key routing probe.\n6. Stable prefix line for the Responses prompt_cache_key routing probe.\n7. Stable prefix line for the Responses prompt_cache_key routing probe.\n8. Stable prefix line for the Responses prompt_cache_key routing probe.\n9. Stable prefix line for the Responses prompt_cache_key routing probe.\n10. Stable prefix line for the Responses prompt_cache_key routing probe.\n11. Stable prefix line for the Responses prompt_cache_key routing probe.\n12. Stable prefix line for the Responses prompt_cache_key routing probe.\n13. Stable prefix line for the Responses prompt_cache_key routing probe.\n14. Stable prefix line for the Responses prompt_cache_key routing probe.\n15. Stable prefix line for the Responses prompt_cache_key routing probe.\n16. Stable prefix line for the Responses prompt_cache_key routing probe.\n17. Stable prefix line for the Responses prompt_cache_key routing probe.\n18. Stable prefix line for the Responses prompt_cache_key routing probe.\n19. Stable prefix line for the Responses prompt_cache_key routing probe.\n20. Stable prefix line for the Responses prompt_cache_key routing probe.\n21. Stable prefix line for the Responses prompt_cache_key routing probe.\n22. Stable prefix line for the Responses prompt_cache_key routing probe.\n23. Stable prefix line for the Responses prompt_cache_key routing probe.\n24. Stable prefix line for the Responses prompt_cache_key routing probe.\n25. Stable prefix line for the Responses prompt_cache_key routing probe.\n26. Stable prefix line for the Responses prompt_cache_key routing probe.\n27. Stable prefix line for the Responses prompt_cache_key routing probe.\n28. Stable prefix line for the Responses prompt_cache_key routing probe.\n29. Stable prefix line for the Responses prompt_cache_key routing probe.\n30. Stable prefix line for the Responses prompt_cache_key routing probe.\n31. Stable prefix line for the Responses prompt_cache_key routing probe.\n32. Stable prefix line for the Responses prompt_cache_key routing probe.\n33. Stable prefix line for the Responses prompt_cache_key routing probe.\n34. Stable prefix line for the Responses prompt_cache_key routing probe.\n35. Stable prefix line for the Responses prompt_cache_key routing probe.\n36. Stable prefix line for the Responses prompt_cache_key routing probe.\n37. Stable prefix line for the Responses prompt_cache_key routing probe.\n38. Stable prefix line for the Responses prompt_cache_key routing probe.\n39. Stable prefix line for the Responses prompt_cache_key routing probe.\n40. Stable prefix line for the Responses prompt_cache_key routing probe.\n41. Stable prefix line for the Responses prompt_cache_key routing probe.\n42. Stable prefix line for the Responses prompt_cache_key routing probe.\n43. Stable prefix line for the Responses prompt_cache_key routing probe.\n44. Stable prefix line for the Responses prompt_cache_key routing probe.\n45. Stable prefix line for the Responses prompt_cache_key routing probe.\n46. Stable prefix line for the Responses prompt_cache_key routing probe.\n47. Stable prefix line for the Responses prompt_cache_key routing probe.\n48. Stable prefix line for the Responses prompt_cache_key routing probe.\n49. Stable prefix line for the Responses prompt_cache_key routing probe.\n50. Stable prefix line for the Responses prompt_cache_key routing probe.\n51. Stable prefix line for the Responses prompt_cache_key routing probe.\n52. Stable prefix line for the Responses prompt_cache_key routing probe.\n53. Stable prefix line for the Responses prompt_cache_key routing probe.\n54. Stable prefix line for the Responses prompt_cache_key routing probe.\n55. Stable prefix line for the Responses prompt_cache_key routing probe.\n56. Stable prefix line for the Responses prompt_cache_key routing probe.\n57. Stable prefix line for the Responses prompt_cache_key routing probe.\n58. Stable prefix line for the Responses prompt_cache_key routing probe.\n59. Stable prefix line for the Responses prompt_cache_key routing probe."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "q1"
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 1
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 849,
+    "input_tokens_details": {
+     "cached_tokens": 4
+    },
+    "output_tokens": 1,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 850
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [],
+   "text": "",
+   "outputSample": "[]"
+  },
+  {
+   "label": "cache without prompt_cache_key #2",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "0. Stable prefix line for the Responses prompt_cache_key routing probe.\n1. Stable prefix line for the Responses prompt_cache_key routing probe.\n2. Stable prefix line for the Responses prompt_cache_key routing probe.\n3. Stable prefix line for the Responses prompt_cache_key routing probe.\n4. Stable prefix line for the Responses prompt_cache_key routing probe.\n5. Stable prefix line for the Responses prompt_cache_key routing probe.\n6. Stable prefix line for the Responses prompt_cache_key routing probe.\n7. Stable prefix line for the Responses prompt_cache_key routing probe.\n8. Stable prefix line for the Responses prompt_cache_key routing probe.\n9. Stable prefix line for the Responses prompt_cache_key routing probe.\n10. Stable prefix line for the Responses prompt_cache_key routing probe.\n11. Stable prefix line for the Responses prompt_cache_key routing probe.\n12. Stable prefix line for the Responses prompt_cache_key routing probe.\n13. Stable prefix line for the Responses prompt_cache_key routing probe.\n14. Stable prefix line for the Responses prompt_cache_key routing probe.\n15. Stable prefix line for the Responses prompt_cache_key routing probe.\n16. Stable prefix line for the Responses prompt_cache_key routing probe.\n17. Stable prefix line for the Responses prompt_cache_key routing probe.\n18. Stable prefix line for the Responses prompt_cache_key routing probe.\n19. Stable prefix line for the Responses prompt_cache_key routing probe.\n20. Stable prefix line for the Responses prompt_cache_key routing probe.\n21. Stable prefix line for the Responses prompt_cache_key routing probe.\n22. Stable prefix line for the Responses prompt_cache_key routing probe.\n23. Stable prefix line for the Responses prompt_cache_key routing probe.\n24. Stable prefix line for the Responses prompt_cache_key routing probe.\n25. Stable prefix line for the Responses prompt_cache_key routing probe.\n26. Stable prefix line for the Responses prompt_cache_key routing probe.\n27. Stable prefix line for the Responses prompt_cache_key routing probe.\n28. Stable prefix line for the Responses prompt_cache_key routing probe.\n29. Stable prefix line for the Responses prompt_cache_key routing probe.\n30. Stable prefix line for the Responses prompt_cache_key routing probe.\n31. Stable prefix line for the Responses prompt_cache_key routing probe.\n32. Stable prefix line for the Responses prompt_cache_key routing probe.\n33. Stable prefix line for the Responses prompt_cache_key routing probe.\n34. Stable prefix line for the Responses prompt_cache_key routing probe.\n35. Stable prefix line for the Responses prompt_cache_key routing probe.\n36. Stable prefix line for the Responses prompt_cache_key routing probe.\n37. Stable prefix line for the Responses prompt_cache_key routing probe.\n38. Stable prefix line for the Responses prompt_cache_key routing probe.\n39. Stable prefix line for the Responses prompt_cache_key routing probe.\n40. Stable prefix line for the Responses prompt_cache_key routing probe.\n41. Stable prefix line for the Responses prompt_cache_key routing probe.\n42. Stable prefix line for the Responses prompt_cache_key routing probe.\n43. Stable prefix line for the Responses prompt_cache_key routing probe.\n44. Stable prefix line for the Responses prompt_cache_key routing probe.\n45. Stable prefix line for the Responses prompt_cache_key routing probe.\n46. Stable prefix line for the Responses prompt_cache_key routing probe.\n47. Stable prefix line for the Responses prompt_cache_key routing probe.\n48. Stable prefix line for the Responses prompt_cache_key routing probe.\n49. Stable prefix line for the Responses prompt_cache_key routing probe.\n50. Stable prefix line for the Responses prompt_cache_key routing probe.\n51. Stable prefix line for the Responses prompt_cache_key routing probe.\n52. Stable prefix line for the Responses prompt_cache_key routing probe.\n53. Stable prefix line for the Responses prompt_cache_key routing probe.\n54. Stable prefix line for the Responses prompt_cache_key routing probe.\n55. Stable prefix line for the Responses prompt_cache_key routing probe.\n56. Stable prefix line for the Responses prompt_cache_key routing probe.\n57. Stable prefix line for the Responses prompt_cache_key routing probe.\n58. Stable prefix line for the Responses prompt_cache_key routing probe.\n59. Stable prefix line for the Responses prompt_cache_key routing probe."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "q2"
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 1
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 849,
+    "input_tokens_details": {
+     "cached_tokens": 847
+    },
+    "output_tokens": 1,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 850
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [],
+   "text": "",
+   "outputSample": "[]"
+  },
+  {
+   "label": "cache with prompt_cache_key #1",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "0. Stable prefix line for the Responses prompt_cache_key routing probe.\n1. Stable prefix line for the Responses prompt_cache_key routing probe.\n2. Stable prefix line for the Responses prompt_cache_key routing probe.\n3. Stable prefix line for the Responses prompt_cache_key routing probe.\n4. Stable prefix line for the Responses prompt_cache_key routing probe.\n5. Stable prefix line for the Responses prompt_cache_key routing probe.\n6. Stable prefix line for the Responses prompt_cache_key routing probe.\n7. Stable prefix line for the Responses prompt_cache_key routing probe.\n8. Stable prefix line for the Responses prompt_cache_key routing probe.\n9. Stable prefix line for the Responses prompt_cache_key routing probe.\n10. Stable prefix line for the Responses prompt_cache_key routing probe.\n11. Stable prefix line for the Responses prompt_cache_key routing probe.\n12. Stable prefix line for the Responses prompt_cache_key routing probe.\n13. Stable prefix line for the Responses prompt_cache_key routing probe.\n14. Stable prefix line for the Responses prompt_cache_key routing probe.\n15. Stable prefix line for the Responses prompt_cache_key routing probe.\n16. Stable prefix line for the Responses prompt_cache_key routing probe.\n17. Stable prefix line for the Responses prompt_cache_key routing probe.\n18. Stable prefix line for the Responses prompt_cache_key routing probe.\n19. Stable prefix line for the Responses prompt_cache_key routing probe.\n20. Stable prefix line for the Responses prompt_cache_key routing probe.\n21. Stable prefix line for the Responses prompt_cache_key routing probe.\n22. Stable prefix line for the Responses prompt_cache_key routing probe.\n23. Stable prefix line for the Responses prompt_cache_key routing probe.\n24. Stable prefix line for the Responses prompt_cache_key routing probe.\n25. Stable prefix line for the Responses prompt_cache_key routing probe.\n26. Stable prefix line for the Responses prompt_cache_key routing probe.\n27. Stable prefix line for the Responses prompt_cache_key routing probe.\n28. Stable prefix line for the Responses prompt_cache_key routing probe.\n29. Stable prefix line for the Responses prompt_cache_key routing probe.\n30. Stable prefix line for the Responses prompt_cache_key routing probe.\n31. Stable prefix line for the Responses prompt_cache_key routing probe.\n32. Stable prefix line for the Responses prompt_cache_key routing probe.\n33. Stable prefix line for the Responses prompt_cache_key routing probe.\n34. Stable prefix line for the Responses prompt_cache_key routing probe.\n35. Stable prefix line for the Responses prompt_cache_key routing probe.\n36. Stable prefix line for the Responses prompt_cache_key routing probe.\n37. Stable prefix line for the Responses prompt_cache_key routing probe.\n38. Stable prefix line for the Responses prompt_cache_key routing probe.\n39. Stable prefix line for the Responses prompt_cache_key routing probe.\n40. Stable prefix line for the Responses prompt_cache_key routing probe.\n41. Stable prefix line for the Responses prompt_cache_key routing probe.\n42. Stable prefix line for the Responses prompt_cache_key routing probe.\n43. Stable prefix line for the Responses prompt_cache_key routing probe.\n44. Stable prefix line for the Responses prompt_cache_key routing probe.\n45. Stable prefix line for the Responses prompt_cache_key routing probe.\n46. Stable prefix line for the Responses prompt_cache_key routing probe.\n47. Stable prefix line for the Responses prompt_cache_key routing probe.\n48. Stable prefix line for the Responses prompt_cache_key routing probe.\n49. Stable prefix line for the Responses prompt_cache_key routing probe.\n50. Stable prefix line for the Responses prompt_cache_key routing probe.\n51. Stable prefix line for the Responses prompt_cache_key routing probe.\n52. Stable prefix line for the Responses prompt_cache_key routing probe.\n53. Stable prefix line for the Responses prompt_cache_key routing probe.\n54. Stable prefix line for the Responses prompt_cache_key routing probe.\n55. Stable prefix line for the Responses prompt_cache_key routing probe.\n56. Stable prefix line for the Responses prompt_cache_key routing probe.\n57. Stable prefix line for the Responses prompt_cache_key routing probe.\n58. Stable prefix line for the Responses prompt_cache_key routing probe.\n59. Stable prefix line for the Responses prompt_cache_key routing probe."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "q1"
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 1,
+    "prompt_cache_key": "pi-cache-probe-fixed-key"
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 849,
+    "input_tokens_details": {
+     "cached_tokens": 848
+    },
+    "output_tokens": 1,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 850
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [],
+   "text": "",
+   "outputSample": "[]"
+  },
+  {
+   "label": "cache with prompt_cache_key #2",
+   "body": {
+    "model": "glm-4.5-flash",
+    "input": [
+     {
+      "role": "system",
+      "content": "0. Stable prefix line for the Responses prompt_cache_key routing probe.\n1. Stable prefix line for the Responses prompt_cache_key routing probe.\n2. Stable prefix line for the Responses prompt_cache_key routing probe.\n3. Stable prefix line for the Responses prompt_cache_key routing probe.\n4. Stable prefix line for the Responses prompt_cache_key routing probe.\n5. Stable prefix line for the Responses prompt_cache_key routing probe.\n6. Stable prefix line for the Responses prompt_cache_key routing probe.\n7. Stable prefix line for the Responses prompt_cache_key routing probe.\n8. Stable prefix line for the Responses prompt_cache_key routing probe.\n9. Stable prefix line for the Responses prompt_cache_key routing probe.\n10. Stable prefix line for the Responses prompt_cache_key routing probe.\n11. Stable prefix line for the Responses prompt_cache_key routing probe.\n12. Stable prefix line for the Responses prompt_cache_key routing probe.\n13. Stable prefix line for the Responses prompt_cache_key routing probe.\n14. Stable prefix line for the Responses prompt_cache_key routing probe.\n15. Stable prefix line for the Responses prompt_cache_key routing probe.\n16. Stable prefix line for the Responses prompt_cache_key routing probe.\n17. Stable prefix line for the Responses prompt_cache_key routing probe.\n18. Stable prefix line for the Responses prompt_cache_key routing probe.\n19. Stable prefix line for the Responses prompt_cache_key routing probe.\n20. Stable prefix line for the Responses prompt_cache_key routing probe.\n21. Stable prefix line for the Responses prompt_cache_key routing probe.\n22. Stable prefix line for the Responses prompt_cache_key routing probe.\n23. Stable prefix line for the Responses prompt_cache_key routing probe.\n24. Stable prefix line for the Responses prompt_cache_key routing probe.\n25. Stable prefix line for the Responses prompt_cache_key routing probe.\n26. Stable prefix line for the Responses prompt_cache_key routing probe.\n27. Stable prefix line for the Responses prompt_cache_key routing probe.\n28. Stable prefix line for the Responses prompt_cache_key routing probe.\n29. Stable prefix line for the Responses prompt_cache_key routing probe.\n30. Stable prefix line for the Responses prompt_cache_key routing probe.\n31. Stable prefix line for the Responses prompt_cache_key routing probe.\n32. Stable prefix line for the Responses prompt_cache_key routing probe.\n33. Stable prefix line for the Responses prompt_cache_key routing probe.\n34. Stable prefix line for the Responses prompt_cache_key routing probe.\n35. Stable prefix line for the Responses prompt_cache_key routing probe.\n36. Stable prefix line for the Responses prompt_cache_key routing probe.\n37. Stable prefix line for the Responses prompt_cache_key routing probe.\n38. Stable prefix line for the Responses prompt_cache_key routing probe.\n39. Stable prefix line for the Responses prompt_cache_key routing probe.\n40. Stable prefix line for the Responses prompt_cache_key routing probe.\n41. Stable prefix line for the Responses prompt_cache_key routing probe.\n42. Stable prefix line for the Responses prompt_cache_key routing probe.\n43. Stable prefix line for the Responses prompt_cache_key routing probe.\n44. Stable prefix line for the Responses prompt_cache_key routing probe.\n45. Stable prefix line for the Responses prompt_cache_key routing probe.\n46. Stable prefix line for the Responses prompt_cache_key routing probe.\n47. Stable prefix line for the Responses prompt_cache_key routing probe.\n48. Stable prefix line for the Responses prompt_cache_key routing probe.\n49. Stable prefix line for the Responses prompt_cache_key routing probe.\n50. Stable prefix line for the Responses prompt_cache_key routing probe.\n51. Stable prefix line for the Responses prompt_cache_key routing probe.\n52. Stable prefix line for the Responses prompt_cache_key routing probe.\n53. Stable prefix line for the Responses prompt_cache_key routing probe.\n54. Stable prefix line for the Responses prompt_cache_key routing probe.\n55. Stable prefix line for the Responses prompt_cache_key routing probe.\n56. Stable prefix line for the Responses prompt_cache_key routing probe.\n57. Stable prefix line for the Responses prompt_cache_key routing probe.\n58. Stable prefix line for the Responses prompt_cache_key routing probe.\n59. Stable prefix line for the Responses prompt_cache_key routing probe."
+     },
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "input_text",
+        "text": "q2"
+       }
+      ]
+     }
+    ],
+    "max_output_tokens": 1,
+    "prompt_cache_key": "pi-cache-probe-fixed-key"
+   },
+   "status": 200,
+   "status2": "incomplete",
+   "usage": {
+    "input_tokens": 849,
+    "input_tokens_details": {
+     "cached_tokens": 848
+    },
+    "output_tokens": 1,
+    "output_tokens_details": {
+     "reasoning_tokens": 0
+    },
+    "total_tokens": 850
+   },
+   "model": "glm-4.5-flash",
+   "outputTypes": [],
+   "text": "",
+   "outputSample": "[]"
+  }
+ ]
+}
+
+---
+{
+ "stage": "responses-round-2",
+ "at": "2026-10-09T01:46:53.263Z",
+ "records": [
+  {
+   "label": "control: completions + valid png",
+   "url": "…/api/paas/v4/chat/completions",
+   "status": 429
+  },
+  {
+   "label": "responses: valid png, detail:auto",
+   "url": "…/api/v1/responses",
+   "status": 400
+  },
+  {
+   "label": "responses: valid png, no detail",
+   "url": "…/api/v1/responses",
+   "status": 429
+  },
+  {
+   "label": "responses: remote url, detail:auto",
+   "url": "…/api/v1/responses",
+   "status": 200
+  },
+  {
+   "label": "responses: glm-5.3-flash + valid png",
+   "url": "…/api/v1/responses",
+   "status": 400
+  },
+  {
+   "label": "reasoning shape (glm-4.7, effort low)",
+   "url": "…/api/v1/responses",
+   "status": 200
+  },
+  {
+   "label": "stream: completed text response",
+   "url": "…/api/v1/responses",
+   "status": 200,
+   "events": [
+    "response.created",
+    "response.in_progress",
+    "response.output_item.added",
+    "response.content_part.added",
+    "response.reasoning_text.delta",
+    "response.reasoning_text.done",
+    "response.content_part.done",
+    "response.output_item.done",
+    "response.output_text.delta",
+    "response.output_text.done",
+    "response.incomplete"
+   ],
+   "tail": "[],\"text\":\"Hello! I'm Pi, your coding assistant. How can I help you with\",\"type\":\"output_text\"}],\"id\":\"msg_resp_2026100909460052eda8bb5fad457b\",\"role\":\"assistant\",\"status\":\"completed\",\"type\":\"message\""
+  },
+  {
+   "label": "stream: completed with tool call",
+   "url": "…/api/v1/responses",
+   "status": 200,
+   "events": [
+    "response.created",
+    "response.in_progress",
+    "response.output_item.added",
+    "response.content_part.added",
+    "response.reasoning_text.delta",
+    "response.reasoning_text.done",
+    "response.content_part.done",
+    "response.output_item.done",
+    "response.output_text.delta",
+    "response.output_text.done",
+    "response.function_call_arguments.delta",
+    "response.function_call_arguments.done",
+    "response.completed"
+   ],
+   "tail": "ype\":\"message\"},{\"arguments\":\"{\\\"city\\\":\\\"Berlin\\\"}\",\"call_id\":\"call_cfea04cc3c6947e28d684d51\",\"id\":\"fc_call_cfea04cc3c6947e28d684d51\",\"name\":\"get_weather\",\"status\":\"completed\",\"type\":\"function_call\"}"
+  },
+  {
+   "label": "glm-4.7 effort=none (64 tokens)",
+   "url": "…/api/v1/responses",
+   "status": 200
+  },
+  {
+   "label": "glm-4.7 effort=minimal (64 tokens)",
+   "url": "…/api/v1/responses",
+   "status": 200
+  },
+  {
+   "label": "glm-4.7 effort=low (64 tokens)",
+   "url": "…/api/v1/responses",
+   "status": 200
+  },
+  {
+   "label": "glm-4.7 without a reasoning field",
+   "url": "…/api/v1/responses",
+   "status": 200
+  },
+  {
+   "label": "control: completions thinking:disabled",
+   "url": "…/api/paas/v4/chat/completions",
+   "status": 200
+  },
+  {
+   "label": "overflow ~200K tokens (free model)",
+   "url": "…/api/v1/responses",
+   "status": 400
+  },
+  {
+   "label": "tool round trip: turn 1",
+   "url": "…/api/v1/responses",
+   "status": 200
+  },
+  {
+   "label": "tool round trip: replay + output",
+   "url": "…/api/v1/responses",
+   "status": 200
+  }
+ ]
+}
+
+---
+{
+ "stage": "responses-round-3",
+ "at": "2026-10-09T01:51:00.036Z",
+ "availability": {
+  "glm-5.3": "present (invalid_request: max_tokens参数非法：限制数值范围[1,131072])",
+  "glm-5.3-flash": "present (invalid_request: max_tokens参数非法：限制数值范围[1,131072])",
+  "glm-5.3-flashx": "present (invalid_request: max_tokens参数非法：限制数值范围[1,131072])",
+  "glm-5.2": "present (invalid_request: max_tokens参数非法：限制数值范围[1,131072])",
+  "glm-5.1": "present (invalid_request: max_tokens参数非法：限制数值范围[1,131072])",
+  "glm-5-turbo": "present (invalid_request: max_tokens参数非法：限制数值范围[1,131072])",
+  "glm-5": "present (invalid_request: max_tokens参数非法：限制数值范围[1,131072])",
+  "glm-4.7": "present (invalid_request: max_tokens参数非法：限制数值范围[1,131072])",
+  "glm-4.7-flashx": "present (invalid_request: max_tokens参数非法：限制数值范围[1,131072])",
+  "glm-4.7-flash": "present (invalid_request: max_tokens参数非法：限制数值范围[1,131072])",
+  "glm-4.6": "present (invalid_request: max_tokens参数非法：限制数值范围[1,131072])",
+  "glm-4.5": "present (invalid_request: max_tokens参数非法：限制数值范围[1,131072])",
+  "glm-4.5-air": "present (invalid_request: max_tokens参数非法：限制数值范围[1,98304])",
+  "glm-4.5-airx": "present (invalid_request: max_tokens参数非法：限制数值范围[1,98304])",
+  "glm-4.5-flash": "present (invalid_request: max_tokens参数非法：限制数值范围[1,98304])",
+  "glm-4-flash-250414": "present (invalid_request: max_tokens参数非法：限制数值范围[1,16384])",
+  "glm-4-flashx-250414": "present (invalid_request: max_tokens参数非法：限制数值范围[1,16384])",
+  "glm-5v-turbo": "present (invalid_request: max_tokens参数非法：限制数值范围[1,131072])",
+  "glm-4.6v": "present (invalid_request: max_tokens参数非法：限制数值范围[1,32768])",
+  "glm-4.6v-flashx": "present (invalid_request: max_tokens参数非法：限制数值范围[1,32768])",
+  "glm-4.6v-flash": "present (invalid_request: max_tokens参数非法：限制数值范围[1,32768])",
+  "glm-4.5v": "present (invalid_request: max_tokens参数非法：限制数值范围[1,16384])",
+  "glm-4.1v-thinking-flash": "present (invalid_request: max_tokens参数非法：限制数值范围[1,16384])",
+  "glm-4.1v-thinking-flashx": "present (invalid_request: max_tokens参数非法：限制数值范围[1,16384])",
+  "glm-5.4": "ABSENT",
+  "glm-4v-flash": "present (invalid_request: max_tokens参数非法：限制数值范围[1,1024])",
+  "glm-4-long": "present (invalid_request: max_tokens参数非法：限制数值范围[1,4095])"
+ },
+ "records": [
+  {
+   "label": "glm-5.3",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,131072]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-5.3-flash",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,131072]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-5.3-flashx",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,131072]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-5.2",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,131072]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-5.1",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,131072]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-5-turbo",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,131072]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-5",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,131072]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4.7",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,131072]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4.7-flashx",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,131072]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4.7-flash",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,131072]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4.6",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,131072]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4.5",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,131072]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4.5-air",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,98304]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4.5-airx",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,98304]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4.5-flash",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,98304]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4-flash-250414",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,16384]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4-flashx-250414",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,16384]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-5v-turbo",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,131072]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4.6v",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,32768]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4.6v-flashx",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,32768]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4.6v-flash",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,32768]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4.5v",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,16384]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4.1v-thinking-flash",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,16384]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4.1v-thinking-flashx",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,16384]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-5.4 (extra)",
+   "status": 400,
+   "code": "model_not_found",
+   "message": "模型不存在，请检查模型代码。",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4v-flash (extra)",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,1024]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "glm-4-long (extra)",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "max_tokens参数非法：限制数值范围[1,4095]",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "control completions base64 png",
+   "status": 429,
+   "code": "1305",
+   "message": "该模型当前访问量过大，请您稍后再试",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "responses base64 png again",
+   "status": 400,
+   "code": "invalid_request",
+   "message": "图片输入格式/解析错误",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "responses base64 png, image_url object",
+   "status": 200,
+   "message": "",
+   "usage": {
+    "input_tokens": 9,
+    "input_tokens_details": {
+     "cached_tokens": 0
+    },
+    "output_tokens": 16,
+    "output_tokens_details": {
+     "reasoning_tokens": 15
+    },
+    "total_tokens": 25
+   },
+   "out": [
+    "reasoning"
+   ],
+   "text": "\"The user is asking \\\"What colour?\\\" which is a question abo"
+  },
+  {
+   "label": "401 with a revoked key",
+   "status": 200,
+   "message": "",
+   "out": [],
+   "text": "\"\""
+  },
+  {
+   "label": "1113 with a zero-balance key",
+   "status": 429,
+   "code": "insufficient_quota",
+   "message": "余额不足或无可用资源包,请充值。",
+   "out": [],
+   "text": "\"\""
+  }
+ ]
+}
+
+---
+{
+ "stage": "responses-round-4-pi-adapter",
+ "at": "2026-10-09T02:05:47.667Z",
+ "records": [
+  {
+   "label": "garbage key",
+   "payloadKeys": [
+    "model",
+    "input",
+    "stream",
+    "prompt_cache_key",
+    "prompt_cache_retention",
+    "prompt_cache_options",
+    "store",
+    "max_output_tokens",
+    "reasoning"
+   ],
+   "reasoningField": {
+    "effort": "none"
+   },
+   "cacheKey": "pi-probe-session",
+   "stopReason": "error",
+   "errorMessage": "OpenAI Responses stream ended before a terminal response event",
+   "usage": {
+    "input": 0,
+    "output": 0,
+    "cacheRead": 0,
+    "cacheWrite": 0,
+    "totalTokens": 0,
+    "cost": {
+     "input": 0,
+     "output": 0,
+     "cacheRead": 0,
+     "cacheWrite": 0,
+     "total": 0
+    }
+   },
+   "content": "[]"
+  },
+  {
+   "label": "revoked KEY2",
+   "payloadKeys": [
+    "model",
+    "input",
+    "stream",
+    "prompt_cache_key",
+    "prompt_cache_retention",
+    "prompt_cache_options",
+    "store",
+    "max_output_tokens",
+    "reasoning"
+   ],
+   "reasoningField": {
+    "effort": "none"
+   },
+   "cacheKey": "pi-probe-session",
+   "stopReason": "error",
+   "errorMessage": "OpenAI Responses stream ended before a terminal response event",
+   "usage": {
+    "input": 0,
+    "output": 0,
+    "cacheRead": 0,
+    "cacheWrite": 0,
+    "totalTokens": 0,
+    "cost": {
+     "input": 0,
+     "output": 0,
+     "cacheRead": 0,
+     "cacheWrite": 0,
+     "total": 0
+    }
+   },
+   "content": "[]"
+  },
+  {
+   "label": "glm-4.7 level=off",
+   "payloadKeys": [
+    "model",
+    "input",
+    "stream",
+    "prompt_cache_key",
+    "prompt_cache_retention",
+    "prompt_cache_options",
+    "store",
+    "max_output_tokens",
+    "reasoning"
+   ],
+   "reasoningField": {
+    "effort": "none"
+   },
+   "cacheKey": "pi-probe-session",
+   "stopReason": "stop",
+   "usage": {
+    "input": 27,
+    "output": 4,
+    "cacheRead": 0,
+    "cacheWrite": 0,
+    "reasoning": 2,
+    "totalTokens": 31,
+    "cost": {
+     "input": 0.000012044241000000001,
+     "output": 0.000008326888,
+     "cacheRead": 0,
+     "cacheWrite": 0,
+     "total": 0.000020371129
+    }
+   },
+   "content": "[{\"type\":\"thinking\",\"thinking\":\"156\",\"thinkingSignature\":\"{\\\"content\\\":[{\\\"text\\\":\\\"156\\\",\\\"type\\\":\\\"reasoning_text\\\"}],\\\"encrypted_content\\\":null,\\\"id\\\":\\\"rs_resp_202610091005104df5c9aab7024a6c\\\",\\\"status\\\":\\\"completed\\"
+  },
+  {
+   "label": "glm-4.7 level=low",
+   "payloadKeys": [
+    "model",
+    "input",
+    "stream",
+    "prompt_cache_key",
+    "prompt_cache_retention",
+    "prompt_cache_options",
+    "store",
+    "max_output_tokens",
+    "reasoning",
+    "include"
+   ],
+   "reasoningField": {
+    "effort": "low",
+    "summary": "auto"
+   },
+   "include": [
+    "reasoning.encrypted_content"
+   ],
+   "cacheKey": "pi-probe-session",
+   "stopReason": "stop",
+   "usage": {
+    "input": 27,
+    "output": 10,
+    "cacheRead": 0,
+    "cacheWrite": 0,
+    "reasoning": 8,
+    "totalTokens": 37,
+    "cost": {
+     "input": 0.000012044241000000001,
+     "output": 0.000020817220000000003,
+     "cacheRead": 0,
+     "cacheWrite": 0,
+     "total": 0.000032861461000000004
+    }
+   },
+   "content": "[{\"type\":\"thinking\",\"thinking\":\"12 * 13 = 156\",\"thinkingSignature\":\"{\\\"content\\\":[{\\\"text\\\":\\\"12 * 13 = 156\\\",\\\"type\\\":\\\"reasoning_text\\\"}],\\\"encrypted_content\\\":null,\\\"id\\\":\\\"rs_resp_20261009100515f465029f49374e98\\\",\\\"s"
+  },
+  {
+   "label": "glm-4.7 level=medium",
+   "payloadKeys": [
+    "model",
+    "input",
+    "stream",
+    "prompt_cache_key",
+    "prompt_cache_retention",
+    "prompt_cache_options",
+    "store",
+    "max_output_tokens",
+    "reasoning",
+    "include"
+   ],
+   "reasoningField": {
+    "effort": "medium",
+    "summary": "auto"
+   },
+   "include": [
+    "reasoning.encrypted_content"
+   ],
+   "cacheKey": "pi-probe-session",
+   "stopReason": "stop",
+   "usage": {
+    "input": 27,
+    "output": 37,
+    "cacheRead": 0,
+    "cacheWrite": 0,
+    "reasoning": 35,
+    "totalTokens": 64,
+    "cost": {
+     "input": 0.000012044241000000001,
+     "output": 0.000077023714,
+     "cacheRead": 0,
+     "cacheWrite": 0,
+     "total": 0.000089067955
+    }
+   },
+   "content": "[{\"type\":\"thinking\",\"thinking\":\"The user is asking me to calculate 12*13.\\n\\n12*13 = 12*10 + 12*3 = 120 + 36 = 156\",\"thinkingSignature\":\"{\\\"content\\\":[{\\\"text\\\":\\\"The user is asking me to calculate 12*13.\\\\n\\\\n12*13 = 12"
+  },
+  {
+   "label": "glm-4.7 level=high",
+   "payloadKeys": [
+    "model",
+    "input",
+    "stream",
+    "prompt_cache_key",
+    "prompt_cache_retention",
+    "prompt_cache_options",
+    "store",
+    "max_output_tokens",
+    "reasoning",
+    "include"
+   ],
+   "reasoningField": {
+    "effort": "high",
+    "summary": "auto"
+   },
+   "include": [
+    "reasoning.encrypted_content"
+   ],
+   "cacheKey": "pi-probe-session",
+   "stopReason": "stop",
+   "usage": {
+    "input": 27,
+    "output": 10,
+    "cacheRead": 0,
+    "cacheWrite": 0,
+    "reasoning": 8,
+    "totalTokens": 37,
+    "cost": {
+     "input": 0.000012044241000000001,
+     "output": 0.000020817220000000003,
+     "cacheRead": 0,
+     "cacheWrite": 0,
+     "total": 0.000032861461000000004
+    }
+   },
+   "content": "[{\"type\":\"thinking\",\"thinking\":\"12 * 13 = 156\",\"thinkingSignature\":\"{\\\"content\\\":[{\\\"text\\\":\\\"12 * 13 = 156\\\",\\\"type\\\":\\\"reasoning_text\\\"}],\\\"encrypted_content\\\":null,\\\"id\\\":\\\"rs_resp_20261009100527e8bb212048c44ba1\\\",\\\"s"
+  },
+  {
+   "label": "glm-4.7 level=max",
+   "payloadKeys": [
+    "model",
+    "input",
+    "stream",
+    "prompt_cache_key",
+    "prompt_cache_retention",
+    "prompt_cache_options",
+    "store",
+    "max_output_tokens",
+    "reasoning",
+    "include"
+   ],
+   "reasoningField": {
+    "effort": "high",
+    "summary": "auto"
+   },
+   "include": [
+    "reasoning.encrypted_content"
+   ],
+   "cacheKey": "pi-probe-session",
+   "stopReason": "stop",
+   "usage": {
+    "input": 27,
+    "output": 4,
+    "cacheRead": 0,
+    "cacheWrite": 0,
+    "reasoning": 2,
+    "totalTokens": 31,
+    "cost": {
+     "input": 0.000012044241000000001,
+     "output": 0.000008326888,
+     "cacheRead": 0,
+     "cacheWrite": 0,
+     "total": 0.000020371129
+    }
+   },
+   "content": "[{\"type\":\"thinking\",\"thinking\":\"156\",\"thinkingSignature\":\"{\\\"content\\\":[{\\\"text\\\":\\\"156\\\",\\\"type\\\":\\\"reasoning_text\\\"}],\\\"encrypted_content\\\":null,\\\"id\\\":\\\"rs_resp_20261009100532a548f9f54527437f\\\",\\\"status\\\":\\\"completed\\"
+  },
+  {
+   "label": "glm-5.3 level=low",
+   "payloadKeys": [
+    "model",
+    "input",
+    "stream",
+    "prompt_cache_key",
+    "prompt_cache_retention",
+    "prompt_cache_options",
+    "store",
+    "max_output_tokens",
+    "reasoning",
+    "include"
+   ],
+   "reasoningField": {
+    "effort": "low",
+    "summary": "auto"
+   },
+   "include": [
+    "reasoning.encrypted_content"
+   ],
+   "cacheKey": "pi-probe-session",
+   "stopReason": "stop",
+   "usage": {
+    "input": 34,
+    "output": 3,
+    "cacheRead": 0,
+    "cacheWrite": 0,
+    "reasoning": 0,
+    "totalTokens": 37,
+    "cost": {
+     "input": 0.000040444904,
+     "output": 0.000012490335,
+     "cacheRead": 0,
+     "cacheWrite": 0,
+     "total": 0.000052935239
+    }
+   },
+   "content": "[{\"type\":\"text\",\"text\":\"156\",\"textSignature\":\"{\\\"v\\\":1,\\\"id\\\":\\\"msg_resp_20261009100536d1a47502ae6e45ca\\\"}\"}]"
+  },
+  {
+   "label": "glm-5.3 level=high",
+   "payloadKeys": [
+    "model",
+    "input",
+    "stream",
+    "prompt_cache_key",
+    "prompt_cache_retention",
+    "prompt_cache_options",
+    "store",
+    "max_output_tokens",
+    "reasoning",
+    "include"
+   ],
+   "reasoningField": {
+    "effort": "high",
+    "summary": "auto"
+   },
+   "include": [
+    "reasoning.encrypted_content"
+   ],
+   "cacheKey": "pi-probe-session",
+   "stopReason": "stop",
+   "usage": {
+    "input": 34,
+    "output": 3,
+    "cacheRead": 0,
+    "cacheWrite": 0,
+    "reasoning": 0,
+    "totalTokens": 37,
+    "cost": {
+     "input": 0.000040444904,
+     "output": 0.000012490335,
+     "cacheRead": 0,
+     "cacheWrite": 0,
+     "total": 0.000052935239
+    }
+   },
+   "content": "[{\"type\":\"text\",\"text\":\"156\",\"textSignature\":\"{\\\"v\\\":1,\\\"id\\\":\\\"msg_resp_20261009100538e3f2c2f861e14b92\\\"}\"}]"
+  },
+  {
+   "label": "glm-5.3 level=max",
+   "payloadKeys": [
+    "model",
+    "input",
+    "stream",
+    "prompt_cache_key",
+    "prompt_cache_retention",
+    "prompt_cache_options",
+    "store",
+    "max_output_tokens",
+    "reasoning",
+    "include"
+   ],
+   "reasoningField": {
+    "effort": "max",
+    "summary": "auto"
+   },
+   "include": [
+    "reasoning.encrypted_content"
+   ],
+   "cacheKey": "pi-probe-session",
+   "stopReason": "stop",
+   "usage": {
+    "input": 34,
+    "output": 10,
+    "cacheRead": 0,
+    "cacheWrite": 0,
+    "reasoning": 7,
+    "totalTokens": 44,
+    "cost": {
+     "input": 0.000040444904,
+     "output": 0.000041634450000000006,
+     "cacheRead": 0,
+     "cacheWrite": 0,
+     "total": 0.000082079354
+    }
+   },
+   "content": "[{\"type\":\"thinking\",\"thinking\":\"12 * 13 = 156\",\"thinkingSignature\":\"{\\\"content\\\":[{\\\"text\\\":\\\"12 * 13 = 156\\\",\\\"type\\\":\\\"reasoning_text\\\"}],\\\"encrypted_content\\\":null,\\\"id\\\":\\\"rs_resp_20261009100541eef2761d4c2e4cf3\\\",\\\"s"
+  },
+  {
+   "label": "glm-4.6v-flash + image",
+   "payloadKeys": [
+    "model",
+    "input",
+    "stream",
+    "prompt_cache_key",
+    "prompt_cache_retention",
+    "prompt_cache_options",
+    "store",
+    "max_output_tokens",
+    "reasoning"
+   ],
+   "reasoningField": {
+    "effort": "none"
+   },
+   "cacheKey": "pi-probe-session",
+   "stopReason": "error",
+   "errorMessage": "overloaded: 该模型当前访问量过大，请您稍后再试[20261009100543b45fe11b64fe4988]",
+   "usage": {
+    "input": 0,
+    "output": 0,
+    "cacheRead": 0,
+    "cacheWrite": 0,
+    "totalTokens": 0,
+    "cost": {
+     "input": 0,
+     "output": 0,
+     "cacheRead": 0,
+     "cacheWrite": 0,
+     "total": 0
+    }
+   },
+   "content": "[]"
+  },
+  {
+   "label": "glm-4.5-flash turn 1 with tool",
+   "payloadKeys": [
+    "model",
+    "input",
+    "stream",
+    "prompt_cache_key",
+    "prompt_cache_retention",
+    "prompt_cache_options",
+    "store",
+    "max_output_tokens",
+    "tools",
+    "reasoning"
+   ],
+   "reasoningField": {
+    "effort": "none"
+   },
+   "cacheKey": "pi-probe-session",
+   "stopReason": "length",
+   "usage": {
+    "input": 132,
+    "output": 64,
+    "cacheRead": 43,
+    "cacheWrite": 0,
+    "reasoning": 0,
+    "totalTokens": 239,
+    "cost": {
+     "input": 0,
+     "output": 0,
+     "cacheRead": 0,
+     "cacheWrite": 0,
+     "total": 0
+    }
+   },
+   "content": "[{\"type\":\"thinking\",\"thinking\":\"\\nThe user is asking for the weather in Berlin and wants me to call the tool. I have access to a weather lookup function called \\\"get_weather\\\" that requires a \\\"city\\\" parameter. The user"
+  }
+ ]
+}
