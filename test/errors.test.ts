@@ -7,6 +7,8 @@ import {
 	clarifyLimitErrorMessage,
 	classifyLimitError,
 	normalizeOverflowError,
+	parseInBandError,
+	remediateInBandResponse,
 	shouldClarify,
 } from "../errors.ts";
 
@@ -196,5 +198,114 @@ describe("permanent 429s (balance / quota / plan)", () => {
 		for (const msg of [LIVE.overflow, LIVE.auth1000, LIVE.forcedThinking1210, LIVE.modelMissing1211]) {
 			assert.equal(clarifyLimitErrorMessage(msg), undefined, msg);
 		}
+	});
+});
+
+describe("the Responses surface reports limits with OpenAI-style codes", () => {
+	test("insufficient_quota is a balance problem, and pi already refuses to retry it", () => {
+		// Live body, 2026-10-09: 429 {"error":{"code":"insufficient_quota",
+		// "message":"余额不足或无可用资源包,请充值。"}}
+		const msg = '429: {"code":"insufficient_quota","message":"余额不足或无可用资源包,请充值。"}';
+		assert.equal(classifyLimitError(msg)?.kind, "balance");
+		const rewritten = clarifyLimitErrorMessage(msg)!;
+		assert.equal(isRetryableAssistantError(errored(rewritten)), false);
+		// pi's own deny-list already contains insufficient_quota, so even the raw
+		// body would not be retried here — the rewrite is for the human, not for
+		// the retry logic.
+		assert.equal(isRetryableAssistantError(errored(msg)), false);
+	});
+
+	test("overloaded stays transient", () => {
+		const msg = '429: {"code":"overloaded","message":"该模型当前访问量过大，请您稍后再试"}';
+		assert.equal(classifyLimitError(msg), undefined);
+		assert.equal(isRetryableAssistantError(errored(msg)), true);
+	});
+
+	test("context_length_exceeded from this surface still means compaction", () => {
+		// Live body, 2026-10-09: 400 {"code":"context_length_exceeded",
+		// "message":"Prompt exceeds max length"} — the code alone is enough for pi.
+		const msg = '400: {"code":"context_length_exceeded","message":"Prompt exceeds max length"}';
+		assert.equal(isContextOverflow(errored(msg), 131_072), true);
+		assert.equal(normalizeOverflowError(msg), null, "already carries the marker: must stay idempotent");
+		assert.equal(classifyLimitError(msg), undefined, "and must not be mistaken for a limit error");
+	});
+});
+
+describe("in-band HTTP-200 errors on the Responses surface", () => {
+	// Recorded live 2026-10-09. The Responses endpoint answers a bad or missing
+	// credential with HTTP 200 and this body, which pi (streaming) would otherwise
+	// report as "stream ended before a terminal response event" — retryable, and
+	// silent about the actual problem.
+	const REVOKED = '{"code":1000,"msg":"身份验证失败。","success":false}';
+	const NO_HEADER = '{"code":1001,"msg":"Header中未收到Authorization参数，无法进行身份验证。","success":false}';
+
+	function json200(body: string): Response {
+		return new Response(body, { status: 200, headers: { "content-type": "application/json" } });
+	}
+	function sse200(body: string): Response {
+		return new Response(body, { status: 200, headers: { "content-type": "text/event-stream" } });
+	}
+
+	test("parseInBandError only accepts the documented shape", () => {
+		assert.deepEqual(parseInBandError(REVOKED), { code: 1000, msg: "身份验证失败。" });
+		assert.equal(parseInBandError('{"object":"response","status":"completed"}'), undefined);
+		assert.equal(parseInBandError('{"code":1000,"msg":"x"}'), undefined, "success:false is required");
+		assert.equal(parseInBandError('{"code":"1000","msg":"x","success":false}'), undefined, "code must be numeric");
+		assert.equal(parseInBandError("event: response.created\n"), undefined);
+		assert.equal(parseInBandError(""), undefined);
+		assert.equal(parseInBandError("{truncated"), undefined);
+	});
+
+	test("a 200 in-band auth error becomes a real 401 with the standard envelope", async () => {
+		const remediated = await remediateInBandResponse(json200(REVOKED));
+		assert.equal(remediated.status, 401);
+		assert.deepEqual(JSON.parse(await remediated.text()), { error: { code: "1000", message: "身份验证失败。" } });
+	});
+
+	test("the documented status is restored per code", async () => {
+		assert.equal((await remediateInBandResponse(json200(NO_HEADER))).status, 401);
+		assert.equal(
+			(await remediateInBandResponse(json200('{"code":1113,"msg":"您的账户已欠费，请充值后重试","success":false}'))).status,
+			429,
+		);
+		assert.equal(
+			(await remediateInBandResponse(json200('{"code":1261,"msg":"Prompt 超长","success":false}'))).status,
+			400,
+		);
+		assert.equal(
+			(await remediateInBandResponse(json200('{"code":1220,"msg":"您无权访问","success":false}'))).status,
+			403,
+		);
+	});
+
+	test("the remediated body flows into the existing auth rewrite", async () => {
+		const remediated = await remediateInBandResponse(json200(REVOKED));
+		const surfaced = `${remediated.status}: ${JSON.stringify((await remediated.json()).error)}`;
+		assert.equal(shouldClarify({ errorMessage: surfaced }), true);
+		const clarified = clarifyErrorMessage(surfaced)!;
+		assert.match(clarified, /\/login bigmodel/);
+		assert.ok(clarified.includes("身份验证失败"), "the gateway's own wording survives");
+	});
+
+	test("everything that is not an in-band error passes through untouched", async () => {
+		// A successful stream must keep its body: the wrapper reads via clone().
+		const stream = sse200("event: response.created\ndata: {}\n\n");
+		assert.equal(await remediateInBandResponse(stream), stream);
+		assert.match(await stream.text(), /response\.created/);
+
+		const ok = json200('{"object":"response","status":"completed","output":[]}');
+		assert.equal(await remediateInBandResponse(ok), ok);
+
+		const alreadyError = new Response('{"error":{"code":"1000","message":"x"}}', {
+			status: 401,
+			headers: { "content-type": "application/json" },
+		});
+		assert.equal(await remediateInBandResponse(alreadyError), alreadyError, "non-200 is left alone");
+
+		const html = new Response("<html>502 Bad Gateway</html>", {
+			status: 200,
+			headers: { "content-type": "text/html" },
+		});
+		assert.equal(await remediateInBandResponse(html), html, "a proxy page is not ours to reinterpret");
 	});
 });
