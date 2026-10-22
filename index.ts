@@ -200,7 +200,12 @@ export default function (pi: ExtensionAPI) {
   }
   // A codemode-exposed tool is never declared, so the model would never learn
   // it exists. One system-prompt section fixes that — only while codemode is
-  // the active exposure (direct/deferred declare themselves).
+  // the active exposure (direct/deferred declare themselves). No
+  // `event.messageType === "user"` guard, even though the event has been a union
+  // on messageType since pi 1.2.0: this handler writes only `systemPromptOptions`
+  // (on both variants), and a run started by `pi.sendMessage(…, { triggerTurn: true })`
+  // needs the section just as much as a user prompt does — pi 1.2.0 also fixed
+  // such runs dropping sections added here after their first tool call (#10267).
   if (searchExposure === "codemode") {
     pi.on("before_agent_start", (event) => {
       event.systemPromptOptions.sections = {

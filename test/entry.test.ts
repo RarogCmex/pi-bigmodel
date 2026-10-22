@@ -152,9 +152,21 @@ describe("extension wiring", () => {
 		assert.equal((pi.tools[0] as { exposure?: string }).exposure, "codemode");
 		assert.equal(pi.commands.length, 1);
 		assert.equal((pi.commands[0] as { name?: string }).name, "bigmodel");
-		const event: any = { systemPromptOptions: { sections: {} } };
+		const event: any = { messageType: "user", prompt: "hi", systemPromptOptions: { sections: {} } };
 		pi.emit("before_agent_start", event);
 		assert.ok(event.systemPromptOptions.sections.bigmodel.includes("bigmodel_search"));
+		// Since pi 1.2.0 the event is a union on `messageType`, and a run started by
+		// `pi.sendMessage(…, { triggerTurn: true })` arrives as "custom" with no
+		// `prompt`. The handler writes only `systemPromptOptions` (present on both
+		// variants), so it deliberately carries no `messageType === "user"` guard: a
+		// custom run needs the section exactly as much as a prompt does.
+		const custom: any = {
+			messageType: "custom",
+			message: { role: "custom", customType: "bigmodel-test", content: [], display: false },
+			systemPromptOptions: { sections: {} },
+		};
+		pi.emit("before_agent_start", custom);
+		assert.ok(custom.systemPromptOptions.sections.bigmodel.includes("bigmodel_search"), "custom run lost the section");
 	});
 
 	test("search sidecar: exposure=off registers neither tool nor section", () => {
@@ -162,7 +174,7 @@ describe("extension wiring", () => {
 		writeFileSync(join(tmpAgentDir, "pi-bigmodel.json"), JSON.stringify({ searchExposure: "off" }), "utf8");
 		extension(off as never);
 		assert.equal(off.tools.length, 0);
-		const event: any = { systemPromptOptions: { sections: {} } };
+		const event: any = { messageType: "user", prompt: "hi", systemPromptOptions: { sections: {} } };
 		off.emit("before_agent_start", event);
 		assert.equal(event.systemPromptOptions.sections.bigmodel, undefined);
 	});

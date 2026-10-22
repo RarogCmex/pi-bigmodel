@@ -304,26 +304,44 @@ describe("preserved thinking: clear_thinking:false must be paired with a replay"
 		assert.equal(replayed.content, "156", "the visible answer must not absorb the reasoning text");
 	});
 
-	test("a cross-model transcript folds reasoning into text instead of replaying it", () => {
+	test("a cross-model transcript drops the reasoning instead of replaying it", async () => {
 		// Guard for the fixture above: pi-ai only replays signed thinking when the
 		// assistant message came from the SAME provider/api/model
-		// (api/transform-messages.js `isSameModel`). If that ever changes, the
+		// (api/transform-messages.js `isSameModel`). What happens to the foreign
+		// block changed in pi 1.3.0 (#10995): it is now DROPPED instead of being
+		// folded into text, so a new model no longer sees the old model's reasoning
+		// as part of its visible reply. Both halves are pinned — a thinking-only
+		// assistant message leaves the wire entirely, and a text sibling survives
+		// without the reasoning attached. If this ever changes again, the
 		// preserved-thinking contract with the gateway changes with it.
-		const assistant = {
-			role: "assistant",
-			api: "anthropic-messages",
-			provider: "bigmodel",
-			model: "glm-4.7",
-			content: [{ type: "thinking", thinking: "stale reasoning", thinkingSignature: "reasoning_content" }],
-		} as unknown as AssistantMessage;
-		return capture(model("glm-4.7"), {
+		const foreign = (content: unknown[]) =>
+			({
+				role: "assistant",
+				api: "anthropic-messages",
+				provider: "bigmodel",
+				model: "glm-4.7",
+				content,
+			}) as unknown as AssistantMessage;
+		const stale = { type: "thinking", thinking: "stale reasoning", thinkingSignature: "reasoning_content" };
+
+		const thinkingOnly = await capture(model("glm-4.7"), {
 			reasoning: "high",
-			messages: [{ role: "user", content: "hi", timestamp: Date.now() }, assistant],
-		}).then((body) => {
-			const replayed = body.messages.find((m: any) => m.role === "assistant");
-			assert.equal(replayed.reasoning_content, undefined);
-			assert.match(JSON.stringify(replayed.content), /stale reasoning/);
+			messages: [{ role: "user", content: "hi", timestamp: Date.now() }, foreign([stale])],
 		});
+		assert.equal(
+			thinkingOnly.messages.some((m: any) => m.role === "assistant"),
+			false,
+			"a foreign thinking-only turn must not reach the wire at all",
+		);
+
+		const withText = await capture(model("glm-4.7"), {
+			reasoning: "high",
+			messages: [{ role: "user", content: "hi", timestamp: Date.now() }, foreign([stale, { type: "text", text: "the visible answer" }])],
+		});
+		const replayed = withText.messages.find((m: any) => m.role === "assistant");
+		assert.equal(replayed.reasoning_content, undefined);
+		assert.equal(replayed.content, "the visible answer");
+		assert.equal(/stale reasoning/.test(JSON.stringify(withText.messages)), false);
 	});
 });
 
