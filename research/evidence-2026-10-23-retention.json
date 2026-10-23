@@ -1,0 +1,57 @@
+{
+  "probedAt": "2026-10-23T18:48:56.746Z",
+  "model": "glm-4.5-flash",
+  "create": {
+    "status": 200,
+    "id": "resp_20261024024855cc1bdf45d0c44757",
+    "store": false,
+    "usage": {
+      "input_tokens": 20,
+      "input_tokens_details": {
+        "cached_tokens": 19
+      },
+      "output_tokens": 32,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 52
+    },
+    "error": null
+  },
+  "chain": {
+    "status": 400,
+    "previous_response_id_echo": null,
+    "output": null,
+    "usage": null,
+    "error": {
+      "code": "not_found",
+      "message": "previous_response_id 'resp_20261024024855cc1bdf45d0c44757' not found",
+      "param": null,
+      "type": "not_found"
+    }
+  },
+  "control": {
+    "store": true,
+    "createStatus": 200,
+    "id": "resp_20261024024857beabc43e842d4e46",
+    "chainStatus": 200,
+    "chainOutput": [
+      {
+        "content": [
+          {
+            "text": "\nHmm, the user is testing my memory with a very specific request. They first asked me to remember \"CHERRY77\" exactly, and then immediately",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": null,
+        "id": "rs_20261024024858cc0e68fbd7b04a0f",
+        "status": "completed",
+        "summary": [],
+        "type": "reasoning"
+      }
+    ],
+    "chainError": null,
+    "quotedEarlierTurn": true
+  },
+  "verdict": "store:false IS honoured, and the control proves it: the same id pattern chains and quotes the earlier turn when store:true, and is `not_found` when store:false"
+}

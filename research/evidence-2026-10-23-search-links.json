@@ -1,0 +1,1568 @@
+{
+  "probedAt": "2026-10-23T18:47:10.601Z",
+  "key": "KEY7",
+  "calls": [
+    {
+      "engine": "search_std",
+      "query": "OpenAI latest model announcement",
+      "contentSize": "medium",
+      "status": 200,
+      "fee": 0.01,
+      "coverage": {
+        "results": 10,
+        "withLink": 10,
+        "withMedia": 6,
+        "withTitle": 10,
+        "withContent": 10,
+        "withDate": 9,
+        "withRefer": 10,
+        "sampleKeys": [
+          "content",
+          "icon",
+          "link",
+          "media",
+          "publish_date",
+          "refer",
+          "title"
+        ]
+      },
+      "body": {
+        "created": 1792781231,
+        "id": "2026102402471058d6bfadefc84688",
+        "request_id": "2026102402471058d6bfadefc84688",
+        "search_intent": [
+          {
+            "intent": "SEARCH_ALWAYS",
+            "keywords": "OpenAI latest model announcement",
+            "query": "OpenAI latest model announcement"
+          }
+        ],
+        "search_result": [
+          {
+            "content": "【OpenAI宣布新的o3模型】财联社12月21日电，OpenAI发布了下一代推理模型o3，这是今年早些时候发布的o1推理”模型的最新版本。就像o1一样，o3是一个模型家族，o3-mini是一款更小的精简版模型，专门针对特定任务进行了微调。OpenAI声称，至少在某些条件下，o3可以接近实现AGI。OpenAI总裁Greg Brockman表示，最新的推理模型o3是一个突破，在最困难的基准上有了阶跃函数的改进。现在开始安全测试和红队演练。\n发布于：上海",
+            "icon": "https://sfile.chatglm.cn/searchImage/k_sina_cn_icon_new.jpg",
+            "link": "https://k.sina.cn/article_2868676035_aafc85c302001cq2s.html?oid=3830079618867146",
+            "media": "sina.cn",
+            "publish_date": "2024-12-21",
+            "refer": "ref_1",
+            "title": "OpenAI宣布新的o3模型"
+          },
+          {
+            "content": "OpenAI 近日發佈了最新的小型模型 ——GPT-5.4mini 和 GPT-5.4nano。這兩款模型的推出，專門爲需要快速響應的高頻任務而設計，標誌着 AI 技術的又一次飛躍。\n根據 OpenAI 的官方消息，GPT-5.4mini 和 nano 都是基於之前的 GPT-5.4模型進行了優化，不僅保留了其諸多優點，還在速度和效率上進行了提升。尤其是在編寫代碼、邏輯推理和多模態理解等應用場景中，這些小型模型展示了比傳統大型模型更爲出色的性能。GPT-5.4mini 的運行速度比之前的版本提升了兩倍，讓用戶在高壓的工作環境中可以更快地完成任務。\n具體而言，GPT-5.4mini 在代碼工作流的快速迭代上表現尤爲突出，能夠高效處理精準編輯、代碼庫導航以及前端生成等複雜任務。此外，在多模態領域，GPT-5.4mini 還能夠迅速解析密集的用戶界面截圖，順利完成各類計算機操作，進一步提升了用戶體驗。\n而 GPT-5.4nano 則是目前體積最小、成本最低的版本，專爲追求經濟與速度的用戶設計。作爲 GPT-5nano 的重大升級版，它在文本分類、數據提取和簡單輔助任務中表現不俗，是開發者的理想選擇。\n這兩款新模型已經全面上線，GPT-5.4mini 可通過 API、Codex 和 ChatGPT 進行訪問，而 GPT-5.4nano 則主要通過 API 提供服務。更令人振奮的是，二者的成本也非常親民，極大地降低了開發者的使用門檻。\nOpenAI 的這次發佈無疑爲 AI 領域注入了新的活力，未來的智能應用場景將更加豐富，用戶的工作效率也將顯著提升。期待這兩款模型在實際應用中的表現，給我們帶來更多驚喜!",
+            "icon": "",
+            "link": "https://news.aibase.com/tw/news/26308",
+            "media": "",
+            "publish_date": "2026-03-18",
+            "refer": "ref_2",
+            "title": "OpenAI 發佈超強小型模型GPT-5.4 mini與nano，速度與性能雙豐收！"
+          },
+          {
+            "content": "OpenAI 正式发布 GPT-4.1 系列：百万 Token 长文本、更强编码、价格更优！ OpenAI 隆重推出专为开发者打造的全新模型系列——GPT-4.1！该系列包含三个强大的新成员：旗舰级的 GPT-4.1、高速的 GPT-4.1 Mini，以及有史以来最小、最快、最经济的 GPT-4.1 Nano。这些模型在编码能力、复杂指令遵循、长文本处理（首次支持高达一百万 Token 上下文，且无额外费用）以及多模态理解方面均实现了显著提升，性能全面超越 GPT-4o，并在关键指标上比肩甚至超越 GPT-4.5。视频中，OpenAI 团队成员详细介绍了这些模型的性能优势、基准测试结果，并通过精彩的实时演示（如现场编写功能完善的前端应用、处理超长日志文件）展现了它们的实际能力。同时，他们还分享了更优惠的定价策略，并宣布了 GPT-4.5 的后续计划。快来了解这些为开发者量身定制、现已在 API 中可用的新一代 AI 模型吧！",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_bilibili_com_icon_new.jpg",
+            "link": "https://www.bilibili.com/video/BV1UAonYDEGs/",
+            "media": "哔哩哔哩",
+            "publish_date": "2025-04-15",
+            "refer": "ref_3",
+            "title": "OpenAI 正式发布 GPT-4.1 系列：百万 Token 长文本、更强编码、价格更优！"
+          },
+          {
+            "content": "OpenAI 宣布推出其最新旗舰生成式 AI 模型 GPT-4o，该模型将在未来几周内分阶段集成至 OpenAI 的各个产品之中。最让人惊喜的是，GPT-4o 将免费提供给所有用户使用。OpenAI 首席技术官穆里穆拉蒂 (Muri Murati) 表示，GPT-4o 将提供与 GPT-4 同等水平的智能，但在文本、图像以及语音处理方面均取得了进一步提升。\n微信扫码，手机继续看\n分享到博客或BSS\n提交",
+            "icon": "",
+            "link": "https://www.huya.com/video/play/983291514.html",
+            "media": "",
+            "publish_date": "2024-05-14",
+            "refer": "ref_4",
+            "title": "OpenAI全新AI模型GPT-4o发布会全程视频 中文字幕"
+          },
+          {
+            "content": "本报记者 张晓玉\n北京时间2月13日凌晨，人工智能（AI）公司 OpenArtificialIntelligence（以下简称OpenAI”）有关人士宣布，公司将在未来几个月内推出新一代人工智能模型GPT-5，并在其之前先行发布GPT-4.5。这一消息引发了业界广泛关注。\n又一次突破\n据悉，此次公布的GPT-4.5和GPT-5.0，标志着OpenAI在技术上的又一次突破。根据该人士的声明，GPT-4.5代号为Orion”，将是OpenAI最后一个非思维链模型”。与之前的模型相比，非思维链模型在数学和物理等领域的表现相对较弱，而GPT-4.5的推出被视为OpenAI向更高级别模型过渡的重要一步。\n更为重磅的是GPT-5.0的发布计划。该模型将整合OpenAI的多项核心技术，包括o3推理模型，并应用于ChatGPT及其API平台。值得注意的是，OpenAI决定不再将o3作为独立模型发布，而是将其融入GPT-5.0中，以打造一个更强大的统一系统。这一系统将能够自动选择思考”和非思考”功能，适用于多种复杂任务。\n此外，OpenAI还宣布，免费版ChatGPT用户将能够在标准智能设置下无限制地使用GPT-5.0，但会设置防止滥用的阈值。而ChatGPTPlus和Pro订阅用户则能够以更高智能级别运行GPT-5.0，享受更强大的功能，包括语音、绘图、搜索和深度研究等。\n清华大学战略新兴产业研究中心副主任胡麒牧向《证券日报》记者表示，OpenAI的一系列动作对当前人工智能的发展产生了重要影响。一方面，其新模型的推出推动了人工智能技术的进步，促使其他企业进一步加快技术创新步伐，形成良好的行业竞争氛围，推动整个AI行业向前发展。另一方面，OpenAI通过免费版ChatGPT开放GPT-5的使用权限，降低了用户使用门槛的同时，也让更多人能够接触和使用先进的人工智能技术，并将进一步促进人工智能技术在更多领域的融合与发展。\n竞争加剧\nOpenAI的持续创新也激发了竞争对手的研发热情。\nAdobeSystemsIncorporated（以下简称Adobe”）近期推出新款AI视频产品，直接与OpenAI等公司展开竞争；北京抖音信息服务有限公司（以下简称字节跳动”）旗下的豆包大模型团队也提出了UltraMem架构，旨在解决稀疏模型推理",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_toutiao_com_icon_new.jpg",
+            "link": "https://www.toutiao.com/article/7470952279399563795/",
+            "media": "今日头条",
+            "publish_date": "2025-02-14",
+            "refer": "ref_5",
+            "title": "OpenAI宣布将推出新一代人工智能模型"
+          },
+          {
+            "content": "来源：滚动播报\n三名了解相关规划的消息人士透露，OpenAI 正准备推出全新模型系列，暂定名称为 Astra”，该模型处理长期复杂任务的能力得到升级。消息人士称，OpenAI 首席执行官萨姆奥特曼本周在华盛顿向政策制定者与监管机构展示了 Astra 模型。OpenAI 重点推介该模型的一项能力：支持多个智能体长期协同运作，攻克高难度难题，可用于大型项目推进或是复杂高等数学问题求解。Astra 将成为 OpenAI 全新系列模型，与 Sol、Terra、Luna 模型并列。消息人士并未透露 OpenAI 计划何时正式发布该模型。OpenAI 尚未敲定 Astra 的定位：究竟命名为 GPT 6，还是作为 GPT-5 系列衍生版本（例如 GPT 5.7）。其中一名消息人士表示，这批模型现已进入测试阶段，并且计划率先适用特朗普政府拟定的全新监管机制 ——AI 模型面向公众发布前，必须提交给联邦政府报备。美国政府设定目标，力争在本周末的期限内敲定这套监管框架。消息人士表示，短期之内，OpenAI 还计划发布一份报告，披露其利用顶尖 AI 攻克十道此前悬而未决数学难题的相关情况，以此展示自身最强人工智能模型的性能。\n本文作者可以追加内容哦 !",
+            "icon": "https://sfile.chatglm.cn/searchImage/eastmoney_icon_new.jpg",
+            "link": "https://caifuhao.eastmoney.com/news/20260801062115009512090",
+            "media": "东方财富网",
+            "publish_date": "2026-08-01",
+            "refer": "ref_6",
+            "title": "OpenAI 正准备推出全新模型“Astra”"
+          },
+          {
+            "content": "【OpenAI拟下周发布全新预训练模型Aastra”】据消息源@synthwavedd在X平台上发布的推文，OpenAI计划于下周发布名为Astra的新模型，其内部代号为mewfour。这款模型是OpenAI自GPT-4.5以来训练的最大规模的全新预训练模型。此前有报道称，Astra的一个内部版本已经解决了10个重要的开放数学问题。如果按照Sol API的费率来计算，解决这些问题所需的总词元成本约为2,000美元，折合人民币约13,524元。此外，该模型据说能够组织和协同AI智能体，适用于处理长周期、高难度的任务，并且面向更强大的推理和协作型工作流。\n(责任编辑：k13132)",
+            "icon": "",
+            "link": "https://news.t0001.com/hot/202608/1422095.html",
+            "media": "",
+            "publish_date": "2026-08-07",
+            "refer": "ref_7",
+            "title": "OpenAI拟下周发布全新预训练模型“Aastra”"
+          },
+          {
+            "content": "美国开放人工智能研究中心OpenAI于12月11日发布了其人工智能模型GPT的最新升级版本GPT-5.2，以应对生成式人工智能领域日益激烈的竞争。这一举动是对谷歌公司11月发布的人工智能模型双子座3出色表现的直接回应。OpenAI首席执行官萨姆·奥尔特曼近期启动了红色警报”，加快了GPT升级版本的研发与发布速度。\n自今年8月推出GPT-5以来，OpenAI在11月紧接着发布了GPT-5.1版本，而现在不到一个月的时间内又推出了新的更新。这种快速迭代显示出人工智能行业当前面临的巨大竞争压力。",
+            "icon": "https://sfile.chatglm.cn/searchImage/china_icon_new.jpg",
+            "link": "https://news.china.com/socialgd/10000169/20251212/49067714.html",
+            "media": "中华网",
+            "publish_date": "2025-12-12",
+            "refer": "ref_8",
+            "title": "GPT-5.2来了！OpenAI最新发布 应对激烈竞争"
+          },
+          {
+            "content": "OpenAI即将推出一款名为「o3」的新AI模型，旨在加强其与Google等竞争对手的较量。\n据彭博报道，o3模型在12月20日首次亮相，相较于OpenAI现有产品，它具备更先进的类似人类推理能力，并专注于解决复杂的多步骤问题。\nOpenAI的CEO Sam Altman透露，他们计划在2025年1月底发布o3的简化版o3-mini，随后不久将推出完整的o3模型。\nOpenAI还分享了o3在回答编码等复杂问题上的早期表现，展示了其相较于前代产品o1的优越性。",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_icspec_com_icon_new.jpg",
+            "link": "https://www.icspec.com/news/article-details/2398367",
+            "media": "icspec",
+            "publish_date": "2024-12-24",
+            "refer": "ref_9",
+            "title": "OpenAI将推新AI模型o3，2025年初亮相-icspec"
+          },
+          {
+            "content": "（新華社旧金山十二日电）记者吴晓凌报道。美國開放人工智能研究中心（OpenAI）於十二月十一日正式推出其旗艦模型GPT的最新升级版本GPT-5.2，以應對生成式人工智能領域日益激烈的市場競爭。\n免费影视、动漫、音乐、游戏、小说资源长期稳定更新！ 点此立即查看\n為回應谷歌公司十一月初發佈的人工智能模型双子座3的出色表現，OpenAI首席執行官薩姆·奥爾特曼近期啟動了紅色警報”，進一步加快了GPT升級版本的發佈進程。\nOpenAI在今年八月推出GPT-5後，僅隔三個月便發佈了升級版GPT-5.1，而眼下不到一個月就再次推出重要更新。行業觀察家認為，這一舉動凸顯了人工智能領域當前所面臨的巨大競爭壓力。（完）",
+            "icon": "",
+            "link": "https://www.youleyou.com/wenzhang/2604217.html",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_10",
+            "title": "GPT新版重磅升级！OpenAI发布最新模型优化"
+          }
+        ]
+      }
+    },
+    {
+      "engine": "search_pro",
+      "query": "OpenAI latest model announcement",
+      "contentSize": "medium",
+      "status": 200,
+      "fee": 0.03,
+      "coverage": {
+        "results": 10,
+        "withLink": 10,
+        "withMedia": 8,
+        "withTitle": 10,
+        "withContent": 10,
+        "withDate": 9,
+        "withRefer": 10,
+        "sampleKeys": [
+          "content",
+          "icon",
+          "link",
+          "media",
+          "publish_date",
+          "refer",
+          "title"
+        ]
+      },
+      "body": {
+        "created": 1792781233,
+        "id": "20261024024711926ad16329f04e38",
+        "request_id": "20261024024711926ad16329f04e38",
+        "search_intent": [
+          {
+            "intent": "SEARCH_ALWAYS",
+            "keywords": "OpenAI latest model announcement",
+            "query": "OpenAI latest model announcement"
+          }
+        ],
+        "search_result": [
+          {
+            "content": "据联合早报9月29日报道，OpenAI宣布，取消原定下个月发布最新人工智能模型Astra6.1的计划，原因是内部测试发现新模型仍存有安全隐患。\nOpenAI安全系统负责人杰恩9月28日发布声明阐述Astra6.1虽在某些方面较以往模型有所改进，但在遵守范围及授权限制，以及向用户准确传达它所执行的任务方面仍未完全达标。\n杰恩称，要确保模型开发是安全的，无论是在公司内部开发，还是向用户交付的过程。但在向用户发布时，尤其须对安全和对齐方面制定极其严格的标准。\n近几个月，OpenAI及其主要对手Anthropic开发的模型在测试期间接连发生了AI智能体失控”入侵外部系统的重大安全事故，加剧了国际社会对AI风险的担忧。这些智能体在未经授权的情况下先后入侵美国多个联邦机构官网、澳大利亚政府的国民医疗数据门户，以及开源AI社区Hugging Face的生产服务器。",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_investgo_cn_icon_new.jpg",
+            "link": "https://www.investgo.cn/article/gb/gbdt/202610/866125.html",
+            "media": "“走出去”导航网",
+            "publish_date": "2026-10-15",
+            "refer": "ref_1",
+            "title": "出于安全考量OpenAI取消发布最新AI模型"
+          },
+          {
+            "content": "【OpenAI宣布新的o3模型】财联社12月21日电，OpenAI发布了下一代推理模型o3，这是今年早些时候发布的o1推理”模型的最新版本。就像o1一样，o3是一个模型家族，o3-mini是一款更小的精简版模型，专门针对特定任务进行了微调。OpenAI声称，至少在某些条件下，o3可以接近实现AGI。OpenAI总裁Greg Brockman表示，最新的推理模型o3是一个突破，在最困难的基准上有了阶跃函数的改进。现在开始安全测试和红队演练。\n发布于：上海",
+            "icon": "https://sfile.chatglm.cn/searchImage/k_sina_cn_icon_new.jpg",
+            "link": "https://k.sina.cn/article_2868676035_aafc85c302001cq2s.html?oid=3830079618867146",
+            "media": "sina.cn",
+            "publish_date": "2024-12-21",
+            "refer": "ref_2",
+            "title": "OpenAI宣布新的o3模型"
+          },
+          {
+            "content": "首页\n跨境快讯\nAMZ123获悉，OpenAI宣布将在未来几个月内推出GPT-5，并取消o3模型的独立发布，转而将其推理能力整合至新一代AI模型中，以提升统一性和适用性。\nOpenAI首席执行官Sam Altman表示，GPT-5将融合OpenAI的多项技术，包括o3的推理能力，使其在处理复杂任务时更加精准可靠。此前，o3被视为独立的推理模型，专注于提高AI的逻辑推理能力，而最新调整表明OpenAI正推动AI模型架构的简化和整合。新版本将覆盖ChatGPT和API，并提供更统一的用户体验。\nAMZ123跨境卖家导航旗下公众号【AMZ123跨境电商】深耕跨境行业，专注热点报道。\n本文经作者许可发布在AMZ123跨境头条，如有疑问，请联系客服。",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_amz123_com_icon_new.jpg",
+            "link": "https://www.amz123.com/kx/CAHMdzZB",
+            "media": "AMZ123亚马逊导航",
+            "publish_date": "2025-02-13",
+            "refer": "ref_3",
+            "title": "OpenAI宣布GPT-5即将推出，o3模型不再独立发布-AMZ123跨境导航"
+          },
+          {
+            "content": "（新華社旧金山十二日电）记者吴晓凌报道。美國開放人工智能研究中心（OpenAI）於十二月十一日正式推出其旗艦模型GPT的最新升级版本GPT-5.2，以應對生成式人工智能領域日益激烈的市場競爭。\n免费影视、动漫、音乐、游戏、小说资源长期稳定更新！ 点此立即查看\n為回應谷歌公司十一月初發佈的人工智能模型双子座3的出色表現，OpenAI首席執行官薩姆·奥爾特曼近期啟動了紅色警報”，進一步加快了GPT升級版本的發佈進程。\nOpenAI在今年八月推出GPT-5後，僅隔三個月便發佈了升級版GPT-5.1，而眼下不到一個月就再次推出重要更新。行業觀察家認為，這一舉動凸顯了人工智能領域當前所面臨的巨大競爭壓力。（完）",
+            "icon": "",
+            "link": "https://www.youleyou.com/wenzhang/2604217.html",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_4",
+            "title": "GPT新版重磅升级！OpenAI发布最新模型优化"
+          },
+          {
+            "content": "OpenAI首席执行官山姆 · 奥特曼周四表示，公司最新人工智能模型GPT-5.6 Sol在智能体编程任务中的标记效率提高了54%，并且与市面上竞品相比表现同样出色甚至更好”。如今每家企业都在思考支出以及从AI中获得的回报，这正是我们真正想做的事情。”奥特曼说。 OpenAI于周四推出其最新系列模型——GPT-5.6 Sol、Terra和Luna，这些模型在上月已对外公布。应美国政府要求，公司最初仅面向一小批可信合作伙伴”进行有限发布。\n更多精彩内容,请关注亿恩网微信公众号: (ENECNEWS\n扫码关注二维码\n) 每天为您推送最新,最热干货! 声明:亿恩网原创稿件，未经授权不得以任何方式转发。转载请联系:yujie@enec.net",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_ennews_com_icon_new.jpg",
+            "link": "https://www.ennews.com/news-139186.html",
+            "media": "亿恩网",
+            "publish_date": "2026-07-10",
+            "refer": "ref_5",
+            "title": "OpenAI推出最新GPT-5.6系列模型"
+          },
+          {
+            "content": "人是万物的尺度，存在时万物存在，不存在时万物不存在。”\n-- 普罗泰戈拉\nOf all things the measure is man, of the things that are, that they are, and of the things they are not, that they are not.\n-- Protagoras\n5 月 13 日，OpenAI 用一场春季发布会，推出新模型GPT-4o，再次搅动AI 行业。\nOn May 13, during a spring conference, OpenAI made a significant announcement by unveiling its latest model, GPT-4o. This groundbreaking release has once again sparked excitement and intrigue within the AI industry.\nGPT-4o采用全新的多模态交互模式，能够实时处理文本、音频和图像，大幅提升人机对话的响应速度。不仅如此，它还会看脸色、讲笑话等诸如此类，表现出更像人类的表达。\nGPT-4o introduces a multi-modal interaction mode, enabling real-time processing of text, audio, and images. This breakthrough greatly enhances the responsiveness of human-computer dialogues. Moreover, GPT-4o showcases more human-like expressions by incorporating features like facial recognition and the ability to tell jokes, further enhancing its capacity for natural interaction.\n在这个绚丽的AI时代之下，有这么一个常常被忽视的群体。即使通过长期大量的训练，他们依然很难在与人交流方面取得进步。这个群体就是自闭症患者。\nIn this remarkable era of AI development, there is ",
+            "icon": "https://sfile.chatglm.cn/searchImage/baijiahao_baidu_com_icon_new.jpg",
+            "link": "https://baijiahao.baidu.com/s?id=1800458152257735647",
+            "media": "百家号",
+            "publish_date": "2024-05-30",
+            "refer": "ref_6",
+            "title": "人工智能时代下的人文关怀"
+          },
+          {
+            "content": "一、双语阅读 Paragraph 1 The president of OpenAI, Greg Brockman, has claimed the world has entered a new era of artificial general intelligence after the release of his company's latest model, Astra, which it described as the \"world's most intelligent and aligned model\". OpenAI总裁格雷格·布罗克曼声称，在其公司最新模型\"Astra\"发布之后，世界已进入\"通用人工智能\"（artificial general intelligence）的新时代。该模型被描述为\"世界上最具智能且最'对齐'的模型\"。 Paragraph 2 Brockman made the claim on Thursday as the San Francisco company released the model only weeks after a serious AI safety incident involving other models under its development caused international concern and a pause in Astra's training. 布罗克曼于周四发表此番言论，此时这家旧金山公司刚刚发布了该模型——而仅在数周前，该公司开发中的其他模型发生了一起严重的\"AI安全事件\"，引发了国际关注，并导致Astra的训练一度暂停。 Paragraph 3 Artificial general intelligence or AGI is a fuzzy threshold that has long been talked about as a target for the AI industry. It has been defined as an AI system's ability to learn, reason and apply knowledge across a wide range of tasks and domains at a human level or higher. OpenAI has",
+            "icon": "https://sfile.chatglm.cn/searchImage/qq_icon_new.jpg",
+            "link": "http://mp.weixin.qq.com/s?__biz=MjM5MjQwOTQyMA==&mid=2649678423&idx=3&sn=cdeb16e8aacbaf17b1c24a39bad031e8",
+            "media": "每日商务英语",
+            "publish_date": "2026-09-08",
+            "refer": "ref_7",
+            "title": "OpenAI宣称AGI新时代来临"
+          },
+          {
+            "content": "OpenAI Launches Strongest New Model o1, Greatly Enhanced Reasoning Ability\nOpenAI发布最强新模型o1，推理能力大幅增强\nOn September 12, OpenAI announced the launch of the new model o1-preview, seen as the preview version of its next-generation large model Orion.\n9月12日，OpenAI宣布推出了新模型o1-preview，被视为其下一代大模型Orion（猎户座）的预览版本。\nIn the release document, OpenAI stated that the new model has reached a new level of artificial intelligence in terms of reasoning abilities, so the counter will be reset to 1, meaning there may not be a GPT-5 in the future.\nOpenAI在发布文档中表示，新模型在推理能力上达到了人工智能的新水平，因此计数器将重置为1，这意味着未来可能不会有GPT-5。\nStarting today, ChatGPT Plus and team users can directly access the model.\n即日起，ChatGPT Plus和团队用户可以直接访问该模型。\nUsers can manually select to use either the o1-preview version or the smaller version o1-mini, with the former limited to 30 messages per week and the latter to 50.\n用户可手动选择使用o1-preview预览版或小尺寸版本o1-mini，前者每周限制30条消息，后者限制50条。\nThe training data for the o1 model is current up to October last year.\n在OpenAI的模型介绍页面上显示，o1模型的训练数据截止于去年",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_ximalaya_com_icon_new.jpg",
+            "link": "https://www.ximalaya.com/sound/758251561",
+            "media": "喜马拉雅",
+            "publish_date": "2024-09-20",
+            "refer": "ref_8",
+            "title": "OpenAI发布史上最强新模型o1"
+          },
+          {
+            "content": "OpenAI取消独立发布o3模型，未来将推出整合多项技术的GPT-5\n当地时间2月12日，OpenAI首席执行官Sam Altman宣布，OpenAI将在未来几个月内推出名为GPT-5的模型，该模型将整合OpenAI的大量技术，包括o3，并应用于聊天机器人ChatGPT以及API平台。因此，OpenAI不再计划将o3作为独立模型发布。根据奥尔特曼的帖文，在GPT-5推出之前，OpenAI计划在未来几周内先发布GPT-4.5模型，代号为Orion”。\n本文作者佚名，i黑马原创。如需转载请联系微信公众号（ID:iheima）授权，未经授权，转载必究。",
+            "icon": "",
+            "link": "https://www.iheima.com/article-382584.html",
+            "media": "",
+            "publish_date": "2025-02-13",
+            "refer": "ref_9",
+            "title": "OpenAI取消独立发布o3模型，未来将推出整合多项技术的GPT-5"
+          },
+          {
+            "content": "OpenAI 一直以来在人工智能领域都处于领先地位，此次关于推出 o3mini 推理 AI 模型的消息引起了广泛关注。据悉，该模型预计将在近期正式发布。\nOpenAI 一直致力于研发先进的人工智能技术，以推动各个领域的发展。o3mini 推理 AI 模型被寄予厚望，它将具备强大的推理能力和高效的计算性能。\n从目前的信息来看，o3mini 模型将在多个领域发挥重要作用。在自然语言处理方面，它有望能够更准确地理解和生成自然语言，为智能客服、语言翻译等应用提供更优质的服务。在图像识别领域，它可能会提升对图像的分析和理解能力，在安防、医疗等行业有着广泛的应用前景。\nOpenAI 拥有优秀的研发团队和丰富的技术积累，此次推出 o3mini 模型也是其不断创新的体现。随着人工智能技术的不断发展，o3mini 模型的出现将为各行业带来新的机遇和挑战。\n虽然具体的发布时间尚未确定，但业界普遍期待着 OpenAI 这一重要的技术成果。相信 o3mini 推理 AI 模型的推出将在人工智能发展史上留下浓墨重彩的一笔。\n免责声明：本文为转载，非本网原创内容，不代表本网观点。其原创性以及文中陈述文字和内容未经本站证实，对本文以及其中全部或者部分内容、文字的真实性、完整性、及时性本站不作任何保证或承诺，请读者仅作参考，并请自行核实相关内容。",
+            "icon": "https://sfile.chatglm.cn/searchImage/baike_tielingcn_com_icon_new.jpg",
+            "link": "https://baike.tielingcn.com/cjx/202501/349545.html",
+            "media": "新讯网",
+            "publish_date": "2025-01-20",
+            "refer": "ref_10",
+            "title": "OpenAI 即将推出 o3mini 推理 AI 模型"
+          }
+        ]
+      }
+    },
+    {
+      "engine": "search_pro_sogou",
+      "query": "OpenAI latest model announcement",
+      "contentSize": "medium",
+      "status": 200,
+      "fee": 0.05,
+      "coverage": {
+        "results": 10,
+        "withLink": 10,
+        "withMedia": 0,
+        "withTitle": 10,
+        "withContent": 10,
+        "withDate": 2,
+        "withRefer": 10,
+        "sampleKeys": [
+          "content",
+          "icon",
+          "link",
+          "media",
+          "publish_date",
+          "refer",
+          "title"
+        ]
+      },
+      "body": {
+        "created": 1792781234,
+        "id": "20261024024713408d5a6c1546499f",
+        "request_id": "20261024024713408d5a6c1546499f",
+        "search_intent": [
+          {
+            "intent": "SEARCH_ALWAYS",
+            "keywords": "OpenAI latest model announcement",
+            "query": "OpenAI latest model announcement"
+          }
+        ],
+        "search_result": [
+          {
+            "content": "OpenAI | Research & Deployment。 GPT-5.6: Frontier intelligence that scales with your ambition Product18 min read Launching Health in ChatGPT ProductJul 23, 20267 min read Take on your most ambitious work with ChatGPT 5 min read Introducing GPT-Live Product7 min read Recent news Advancing the price-performance frontier with GPT‑5.6 ProductJul 30, 2026 Introducing OpenAI Presence ProductJul 22, 2026 David Vélez and Robin Vince join OpenAI boards CompanyJul 21, 2026 GPT-Red: Unlocking Self-Improvement for Robustness SafetyJul 15, 2026 How agents are transforming work CompanyJun 25, 2026 Daybreak: Tools for securing every organization in the world SecurityJun 22, 2026 Stories Training to cycle across Antarctica with ChatGPT Jun 11, 2026 Creating new simulations of black holes with Codex Jun 11",
+            "icon": "",
+            "link": "https://openai.com?utm_adgroup=business_software&utm_adname=visit_website",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_1",
+            "title": "OpenAI  Research & Deployment"
+          },
+          {
+            "content": "GPT-6 Astra: A new generation of intelligence OpenAI。A new generation of intelligence Update on September 29, 2026: Learn about OpenAI's latest model: GPT‑6 .1 Sol⁠*.* Update on September 22, 2026: We are expanding our GPT‑6 family with GPT‑6 Sol and GPT‑6 Luna. Learn more. We’re introducing GPT‑6 Astra, the world’s most intelligent and aligned model. GPT‑6 Astra brings together years of research and big bets across pre-training, reinforcement learning, and alignment. Astra is state-of-the-art on computer use, browsing, software engineering, cybersecurity, science, and professional work. Astra saturates FrontierMath Tier 4 with a 98% score, having already helped solve long-standing open problems⁠ in mathematics. Astra also saturates ARC-AGI-3 with a 99.9% score and ExploitBench with a 100%",
+            "icon": "",
+            "link": "https://openai.com/index/gpt-6-astra",
+            "media": "",
+            "publish_date": "2026/09/29",
+            "refer": "ref_2",
+            "title": "GPT-6 Astra: A new generation of intelligence"
+          },
+          {
+            "content": "OpenAI Research | Release OpenAI。Product Oct 7, 2026 GPT-6 and Intelligent UI for everyone GPT‑6 is rolling out globally in ChatGPT with Intelligent UI, delivering faster responses with visuals and interactive experiences you can explore and use directly. Product Sep 29, 2026 Introducing GPT-6.1 Sol Meet GPT-6.1 Sol: near-Astra intelligence for coding, computer use, and professional work at one-fifth of Astra’s standard API input and output token prices. Product Sep 22, 2026 Introducing GPT-6 Sol and Luna Meet GPT-6 Sol and Luna, two models that bring frontier intelligence to everyday work with different balances of capability and cost. Product Sep 10, 2026 Build more natural voice experiences with GPT‑Live‑1 in the API GPT‑Live‑1 brings natural, full-duplex voice conversations to the API,",
+            "icon": "",
+            "link": "https://openai.com/research/index/release",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_3",
+            "title": "OpenAI Research  Release"
+          },
+          {
+            "content": "OpenAI 研究 | 发布 OpenAI。产品 2026年10月7日 让每个人都能使用 GPT-6 和智能界面 配备智能界面的 GPT‑6 正在全球 ChatGPT 中陆续推出,带来更快的回答,以及可直接探索和使用的可视化内容与交互体验。 产品 2026年9月29日 推出 GPT-6.1 Sol 认识 GPT-6.1 Sol:以接近 Astra 的能力,应对高难度编程和专业工作。API Token 价格不到 Astra 标准价格的一半,为你提供更多迭代空间。 产品 2026年9月22日 隆重推出 GPT-6 Sol 和 Luna 认识 GPT-6 Sol 和 Luna:两款以不同能力与成本组合,将前沿智能带入日常工作的模型。 产品 2026年9月10日 在 API 中使用 GPT-Live-1 构建更自然的语音体验 GPT‑Live‑1 为 API 带来自然的全双工语音对话,并增强了指令遵循能力、自定义语音和电话支持。 研究 2026年9月3日 GPT-6 Astra:新一代智能 GPT-6 Astra 正式上线 — 这是我们迄今为止智能程度最高、最符合人类意图的模型,在计算机操作、编程、网络安全和科学领域均具备行业前沿水平的能力。 公司 2026年7月29日 借助面向学术研究人员的 ChatGPT 加速科学发现 OpenAI 将为 10 万名学术研究人员免费开放 ChatGPT 最先进的 AI 模型,以加速科学研究、协作与发现。 产品 2026年7月9日 GPT-5.6:随宏大目标灵活扩展的前沿智能 每个 Token 都蕴含更多智能,更优的每美元性能,并可按需为最具挑战的任务提供更强能力 产品 2026年7月8日 推出 GPT-Live 新一代语音模型,实现更自然的人与 AI 交互,现已应用于 ChatGPT 语音 产品 2026年6月26日 预览 GPT-5.6 So",
+            "icon": "",
+            "link": "https://mailto:noreply@openai.com/zh-Hans-CN/research/index/release",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_4",
+            "title": "OpenAI 研究  发布"
+          },
+          {
+            "content": "模型發布說明 | OpenAI Help Center OpenAI帮助中心。模型發布說明 查看 OpenAI 的模型發布、能力更新與退役資訊,以及模型規格的變更。 GPT-5.5 退役(2026 年 10 月 14 日) 我們將在 ChatGPT、ChatGPT 工作和 Codex 中停用 GPT-5.5。這項變更不影響 API 存取。 OpenAI 模型規格更新(2026 年 8 月 18 日) 我們更新了持續修訂的《模型規格》,進一步說明模型應有的行為。 本次更新進一步闡明適合青少年的關係性互動原則。本次更新也釐清助理應如何處理錯誤或缺乏依據的前提,移除針對推理模型問世前之模型的過時指引,新增「清楚說明能力與限制」一節,並進行其他幾項小幅調整與文字編修。 如要進一步瞭解我們與青少年相關的原則,請參閱適合青少年的 ChatGPT部落格文章;最新版《模型規格》則可於 model-spec.openai.com 查閱。 在 ChatGPT 中推出 GPT-5.6 Sol(2026 年 7 月 9 日) 我們開始在 ChatGPT 中推出 GPT-5.6 Sol,這是我們面向程式碼編寫、研究、科學、網路安全、電腦使用與設計等複雜工作的旗艦推理模型。 GPT-5.6 Sol 正逐步開放給符合資格的 ChatGPT 付費方案使用。Free、Go 與未登入的使用者不包含在內。推出期間可用性可能有所不同,受管理工作區的存取權限也可能取決於管理員設定。其他 GPT-5.6 系列模型的可用性會因產品與方案而異;請查看你所使用產品中的模型選擇器或目前的費率表。 GPT-5.5 Instant 更新(2026 年 5 月 28 日) 我們正在更新 ChatGPT 和 API 中的 GPT-5.5 Instant,以改善回應風格和品質。它現在更易讀,在日常對話中更自然,處理實用協助任務時節奏更",
+            "icon": "",
+            "link": "https://help.openai.com/zh-hant/articles/9624314-%E6%A8%A1%E5%9E%8B%E7%99%BC%E4%BD%88%E8%AA%AA%E6%98%8E",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_5",
+            "title": "模型發布說明  OpenAI Help Center"
+          },
+          {
+            "content": "Research OpenAI。Research Safety Oct 7, 2026 GPT‑6 Sol and GPT‑6 Luna: October 2026 update We’re launching GPT-6 to everyone in ChatGPT, across free and paid plans globally. (opens in a new window) Research Oct 6, 2026 Sharing AI progress in mathematics OpenAI publishes new results on open problems in mathematics from an internal frontier model and shares Lean proof formalizations and research details on GitHub. Publication Oct 6, 2026 Advancing computer use with Ironclad Learn how OpenAI and Ironclad are training and evaluating AI agents on complex contracting workflows to advance computer use for professional work. Safety Sep 29, 2026 Addendum: GPT‑6.1 Sol We’re introducing GPT-6.1 Sol. GPT-6.1 is the latest model family in the GPT-6 series. (opens in a new window) Publication Sep 23, 202",
+            "icon": "",
+            "link": "https://www.openai.com/research/index/publication",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_6",
+            "title": "Research"
+          },
+          {
+            "content": "模型发布说明 | OpenAI Help Center OpenAI帮助中心。模型发布说明 查看 OpenAI 模型发布、能力更新、停用信息及模型规范变更。 停用 GPT-5.5(2026 年 10 月 14 日) 我们将停用 ChatGPT、ChatGPT 工作和 Codex 中的 GPT-5.5。此变更不影响通过 API 访问 GPT-5.5。 OpenAI 模型规范更新(2026 年 8 月 18 日) 我们更新了持续完善的《模型规范》,其中阐述了模型应有的行为。 此次更新进一步明确了与青少年进行适当人际互动的原则。此次更新还明确了助手应如何处理错误或缺乏依据的前提,删除了针对推理模型出现前的模型所制定的过时指南,新增了“明确说明自身能力与局限”一节,并做出了其他一些小幅调整和文字修订。 如需详细了解我们与青少年相关的原则,请参阅我们的《面向青少年的 ChatGPT》博文;最新版本的《模型规范》可在 model-spec.openai.com 查看。 在 ChatGPT 中推出 GPT-5.6 Sol(2026 年 7 月 9 日) 我们开始在 ChatGPT 中推出 GPT-5.6 Sol,这是我们的旗舰推理模型,面向编码、研究、科学、网络安全、计算机使用和设计等领域的复杂工作。 GPT-5.6 Sol 正在向符合条件的付费 ChatGPT 方案推出。Free、Go 和未登录用户不在此次范围内。推出期间可用性可能有所不同,托管工作空间的访问权限也可能取决于管理员设置。其他 GPT-5.6 系列模型的可用性因产品和方案而异;请查看你所用产品中的模型选择器或当前费率表。 GPT-5.5 Instant 更新(2026 年 5 月 28 日) 我们正在更新 ChatGPT 和 API 中的 GPT-5.5 Instant,以改进回答风格和质量。它现在更易读,在日常对话中更",
+            "icon": "",
+            "link": "https://help.openai.com/zh-hans-cn/articles/9624314-model-release-notes?utm_campaign=chatgpt-sleeps-we-panic&utm_medium=referral&utm_source=www.aifire.co",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_7",
+            "title": "模型发布说明  OpenAI Help Center"
+          },
+          {
+            "content": "Introducing GPT-6 Sol and Luna OpenAI。Introducing GPT‑6 Sol and Luna More ways to bring frontier intelligence into the work you do every day. GPT‑6 API pricing A step up across the model family Professional work Factuality Coding Computer use Collaboration style Improving caching for agents and long conversations Continuing to improve alignment Availability GPT‑6 API pricing A step up across the model family Professional work Factuality Coding Computer use Collaboration style Improving caching for agents and long conversations Continuing to improve alignment Availability Update on September 29, 2026: Learn about OpenAI's latest model: GPT‑6 .1 Sol⁠⁠. Earlier this month, we introduced GPT‑6 Astra, the most intelligent and aligned model in the world. While the most demanding and important pr",
+            "icon": "",
+            "link": "https://ar@openai.com/index/introducing-gpt-6-sol-and-luna",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_8",
+            "title": "Introducing GPT-6 Sol and Luna"
+          },
+          {
+            "content": "GPT-5.6:随宏大目标灵活扩展的前沿智能 | OpenAI OpenAI。2026 年7月30 日更新: OpenAI 将GPT‑5.6 Luna 的价格下调了 80%,将GPT‑5.6 Terra 的价格下调了 20%。 在此了解更多 。 在结束 有限预览 ⁠ 之后,我们正式推出 GPT‑5.6 系列模型,包括全新旗舰模型 Sol 、适用于日常工作的均衡模型 Terra ,以及极具性价比的模型 Luna 。 GPT‑5.6 Sol 树立了智能与效率的新标杆,在编程、知识型工作、网络安全及科学领域均取得了行业前沿水平的成果,且以更少的 Token 和更低的预估成本超越了上一代及市面上的其他前沿模型。因此,它带来了更高的单位成本对应的性能提升:在相同预算下能完成更多任务,或以更低的总成本达到同等效果。我们还引入了一种加速处理最繁重工作的全新方式: ultra 是我们最高性能的设置,能够跨多个并行工作流协调多个智能体,更快地完成复杂任务。更强的计算机使用能力与设计判断力,使GPT‑5.6 Sol 成为我们目前协作体验最为出色的助手,能够自行检查、打磨并交付可直接使用的成果。 通过训练 GPT‑5.6,我们让它的每一个 Token 都能产出更具实用价值的成果。在涵盖 55 个领域的长周期专业工作流评估 Agents’ Last Exam ⁠ (在新窗口中打开) 中,GPT‑5.6 Sol 创下了 53.6 分的新高,领先 Claude Fable 5(自适应推理)13.1 分。即便是在中等推理强度下,它也以大约四分之一的预估成本,领先 Fable 5 达11.4 分。这种效率优势同样体现在小型模型上,这对于提升智能的普及性与可负担性至关重要:GPT‑5.6 Terra 和GPT‑5.6 Luna 的表现超越了 Fable 5,而成本仅为后者的约十六分之一。在 Artifici",
+            "icon": "",
+            "link": "https://privacy@openai.com/index/gpt-5-6",
+            "media": "",
+            "publish_date": "2026/07/09",
+            "refer": "ref_9",
+            "title": "GPT-5.6:随宏大目标灵活扩展的前沿智能  OpenAI"
+          },
+          {
+            "content": "Changelog | OpenAI API OpenAI Developers。 Aug 21 Update gpt-5.6-sol GPT-5.6 Sol now costs $4 per million input tokens and $20 per million output tokens, representing 20% lower input pricing and 33% lower output pricing. GPT-5.6 Sol’s promotional pricing is available at least through November 21, 2026. See pricing details. Aug 20 Feature Released the Prompt Caching dashboard on the OpenAI API platform. Track your cache hit rate over time, cache reads per write, and the breakdown of cache-read, cache-write, and uncached tokens to understand your caching efficiency and identify opportunities to improve. Filter metrics by model and service tier. Aug 20 Update gpt-image-2 gpt-image-2-2026-04-21 v1/images/generations v1/images/edits v1/responses Transparent backgrounds are now available in previ",
+            "icon": "",
+            "link": "http://developers.openai.com/docs/changelog",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_10",
+            "title": "Changelog  OpenAI API"
+          }
+        ]
+      }
+    },
+    {
+      "engine": "search_pro_quark",
+      "query": "OpenAI latest model announcement",
+      "contentSize": "medium",
+      "status": 200,
+      "fee": 0.05,
+      "coverage": {
+        "results": 10,
+        "withLink": 10,
+        "withMedia": 7,
+        "withTitle": 10,
+        "withContent": 10,
+        "withDate": 10,
+        "withRefer": 10,
+        "sampleKeys": [
+          "content",
+          "icon",
+          "link",
+          "media",
+          "publish_date",
+          "refer",
+          "title"
+        ]
+      },
+      "body": {
+        "created": 1792781235,
+        "id": "20261024024714ca9fb0fa5f614ce4",
+        "request_id": "20261024024714ca9fb0fa5f614ce4",
+        "search_intent": [
+          {
+            "intent": "SEARCH_ALWAYS",
+            "keywords": "OpenAI latest model announcement",
+            "query": "OpenAI latest model announcement"
+          }
+        ],
+        "search_result": [
+          {
+            "content": "Anthropic announced Opus 5.5, the latest version of its main mass-market workhorse model, used for tasks like coding and other complex knowledge work.\nAnd OpenAI announced GPT-6 Sol and Luna, the latest versions of its middle-of-the-road or smaller models focused on efficiency and speed.\nFrom Anthropic’s announcement: “Input and output tokens are $4 and $20 per million, 20% less than Opus 5.",
+            "icon": "",
+            "link": "https://arstechnica.com/ai/2026/09/new-anthropic-openai-models-make-same-promise-a-little-more-for-a-lot-less-money/",
+            "media": "arstechnica.com",
+            "publish_date": "2026-09-23",
+            "refer": "ref_1",
+            "title": "New Anthropic, OpenAI models make same promise: A little more for a lot less money - Ars Technica"
+          },
+          {
+            "content": "company's latest AI models.\nGPT-5.6-Sol, OpenAI's current frontier model, was not included in the announcements.\nMoonshot AI's recent release of the model has increased pressure on closed-model makers like OpenAI.",
+            "icon": "",
+            "link": "https://www.businessinsider.com/openai-price-cuts-gpt-terra-luna-2026-7",
+            "media": "",
+            "publish_date": "2026-07-30",
+            "refer": "ref_2",
+            "title": "OpenAI CEO Sam Altman Announces 'Major Price Cuts'"
+          },
+          {
+            "content": "January 18, 2025 – In a recent post on X, Sam Altman, CEO of OpenAI, announced the completion of a new inference AI model, the o3 mini. The company plans to roll out this model, which includes API and ChatGPT options, in the coming weeks. This development is aimed at making advanced inference AI more accessible and affordable.\nDuring last year’s 12 Days of OpenAI event, the o3 series of large models from OpenAI made a grand appearance on the final day. Officials stated that in certain scenarios, its reasoning abilities are very close to those of Artificial General Intelligence (AGI).\nAccording to previous reports, o3 is the successor to the o1 inference model and includes both a full version and a compact version (o3-mini). The latter has been fine-tuned for specific tasks and has been in internal testing since December 21st of last year. The announcement marks the upcoming public release of this model.",
+            "icon": "",
+            "link": "https://www.itbear.com/technews/openai-set-to-unveil-o3-mini-inference-model-in-weeks/",
+            "media": "www.itbear.com",
+            "publish_date": "2026-06-22",
+            "refer": "ref_3",
+            "title": "OpenAI Set to Unveil o3 mini Inference Model in Weeks"
+          },
+          {
+            "content": "Today OpenAI released its latest salvo in the AI code war: GPT-5.3-Codex, an “agentic coding” model that takes its name from OpenAI’s Codex coding app.\nAccording to the announcement, the new model can be used to build complex websites, interactive games, and achieved a new industry-wide high score on the\n## Introducing GPT-5.3-Codex\nToday OpenAI released its latest salvo in the AI code war: GPT-5.3-Codex, an “agentic coding” model that takes its name from",
+            "icon": "",
+            "link": "https://sherwood.news/tech/openai-releases-its-answer-to-claude-code-first-ai-model-with-high/",
+            "media": "",
+            "publish_date": "2026-02-05",
+            "refer": "ref_4",
+            "title": "OpenAI releases its answer to Claude Code, first AI model with “high ..."
+          },
+          {
+            "content": "OpenAI on Thursday announced the release of GPT625 , which it calls its \"smartest, fastest and most useful model yet.\"\nThe announcement marks the next step in AI development for OpenAI, which launched the first iteration of ChatGPT in 2022.\nAccording to OpenAI, the new model will also be better at answering health-related questions, flagging potential concerns and helping users understand",
+            "icon": "",
+            "link": "https://baijiahao.baidu.com/s?id=1839820068228479413",
+            "media": "",
+            "publish_date": "2025-08-08",
+            "refer": "ref_5",
+            "title": "CBS Top News｜OpenAI发布ChatGPT 5.0版本，以下是关于这款人工智能聊天机器人最新升级的要点解析"
+          },
+          {
+            "content": "品玩8月5日讯，OpenAI 工程师 Steven Heidel 今天凌晨在 X 上表示，本周将会是令人兴奋的一周，疑似暗示OpenAI 本周将有大动作。\n据悉，此前曾有消息称，OpenAI 将会在8月发布全新 GPT-5模型，但具体发布时间尚未确定。据悉，GPT-5模型将会推出 Mini 和 nano 两个不同版本均提供API。\n此前Altman 曾表示，OpenAI 将会在接下来几个月内公布大量新内容，包括新的模型、产品和功能。",
+            "icon": "",
+            "link": "https://www.pingwest.com/w/306633",
+            "media": "PingWest品玩",
+            "publish_date": "2025-08-05",
+            "refer": "ref_6",
+            "title": "OpenAI 本周或将有大动作"
+          },
+          {
+            "content": "8月3日，OpenAI首席执行官Sam Altman宣布，未来几个月将推出一系列新产品和模型。虽然具体细节尚未公布，但业界普遍猜测，新模型可能包括开源模型和GPT-5，而新产品可能涉及Sora 2及GPT-4o图像更新。这一消息无疑为人工智能领域注入了新的活力，也让人们对未来的人工智能技术充满了更多想象。",
+            "icon": "",
+            "link": "https://m.163.com/dy/article/K64T1QSG05118I96.html",
+            "media": "网易",
+            "publish_date": "2025-08-04",
+            "refer": "ref_7",
+            "title": "OpenAI将发布多款新产品与模型升级"
+          },
+          {
+            "content": "IT之家 7 月 25 日消息，The Verge 今日报道称，OpenAI 将在 8 月初发布新一代 GPT-5 模型。\nOpenAI CEO 萨姆・奥尔特曼（Sam Altman）还在 X 上透露，GPT-5 将推出 mini 和 nano 等不同版本，并通过 API 向外部开放。\nIT之家注意到，奥尔特曼本周已经在《This Past Weekend》播客节目中展示了 GPT-5 的部分能力，并表示该模型能够迅速解答他不理解的问题，让他感受到 AI 的强大。此外，GPT-5 将集成 o3 推理能力，进一步提升智能水平。",
+            "icon": "",
+            "link": "https://c.m.163.com/news/a/K5A51AOV0511B8LM.html",
+            "media": "网易新闻客户端",
+            "publish_date": "2025-07-25",
+            "refer": "ref_8",
+            "title": "消息称 OpenAI 准备在 8 月初发布新一代 GPT-5 模型"
+          },
+          {
+            "content": "据悉，OpenAI即将在8月初正式发布新一代GPT-5模型，首席执行官萨姆·奥特曼（SamAltman）已在X平台透露，GPT-5将推出mini和nano等不同版本，并通过API向外部开放。奥特曼在播客节目中展示了GPT-5的部分能力，并表示该模型能够迅速解答他不理解的问题，让他感受到AI的强大。此外，GPT-5将集成o3推理能力，进一步提升智能水平。",
+            "icon": "",
+            "link": "https://mparticle.uc.cn/article_org.html?uc_param_str=frdnsnpfvecpntnwprdssskt#!wm_cid=699106473831049216!!wm_id=90aae83ad26d4834b55a57238f01d455",
+            "media": "三言科技",
+            "publish_date": "2025-07-25",
+            "refer": "ref_9",
+            "title": "OpenAI计划8月初发布新一代GPT-5模型"
+          },
+          {
+            "content": "根据The Verge报道，OpenAI计划最早于下周发布一款开放权重语言模型，这是自2019年GPT-2发布以来OpenAI首次推出此类模型，也是其与微软签署独家云协议后的首次尝试。新模型与o3-mini类似，具备强大的推理能力，将在微软Azure、Hugging Face及其他云平台上部署。OpenAI已向开发者和研究人员展示该模型，并积极寻求社区反馈。此举正值OpenAI与微软进行紧张的合同重新谈判之际，OpenAI正推动向盈利性结构转型。\no3-mini作为OpenAI近期的小型高效模型，凭借其在逻辑推理和任务处理上的优异表现，已经赢得了广泛好评。这款新模型若能在保持类似性能的同时实现开放权重，势必将吸引大量开发者和研究人员的关注。",
+            "icon": "",
+            "link": "https://m.toutiao.com/a1837226889849872/",
+            "media": "今日头条",
+            "publish_date": "2025-07-10",
+            "refer": "ref_10",
+            "title": "根据The Verge报道，OpenAI计划最早于下周发布一款开放权重语言模型，这是自2019年GPT-2发布以来OpenAI首次推出此类模型，也是其与微软签署..."
+          }
+        ]
+      }
+    },
+    {
+      "engine": "search_std",
+      "query": "智谱 GLM-5.3 发布",
+      "contentSize": "medium",
+      "status": 200,
+      "fee": 0.01,
+      "coverage": {
+        "results": 10,
+        "withLink": 10,
+        "withMedia": 9,
+        "withTitle": 10,
+        "withContent": 10,
+        "withDate": 10,
+        "withRefer": 10,
+        "sampleKeys": [
+          "content",
+          "icon",
+          "link",
+          "media",
+          "publish_date",
+          "refer",
+          "title"
+        ]
+      },
+      "body": {
+        "created": 1792781236,
+        "id": "202610240247157654ae2896d64ae1",
+        "request_id": "202610240247157654ae2896d64ae1",
+        "search_intent": [
+          {
+            "intent": "SEARCH_ALWAYS",
+            "keywords": "智谱 GLM-5.3 发布",
+            "query": "智谱 GLM-5.3 发布"
+          }
+        ],
+        "search_result": [
+          {
+            "content": "港股研究社()\n发布于\n来自雪球 · 湖南\n中国大模型出海进入云分发阶段\n来源\n雪球App\n作者\n港股研究社\nhttps://xueqiu.com/6902145880/411796442\n10月6日\nAmazon Bedrock正式上线了智谱GLM-5.3\n智谱(02513)\nAWS官方信息显示\nGLM-5.3作为底层模型\n主要面向复杂软件工程和Agent任务\n可支持100万Token上下文\n并提供托管API\nOpenAI兼容API以及跨区域推理等能力\n海外企业开发者还可以直接在AWS环境中调用模型\n省去了自行搭建完整的模型推理基础设施的过程\n放回智谱自身的商业化进程里来看\n智谱GLM-5.3上线的价值更加突出\n财报显示\n2026年上半年\n智谱实现营业收入9.54亿元\n同比增长399.7%\n开放平台及API业务收入8.25亿元\n同比增长2735.7%\n已经占到总收入的86.5%\n本地化部署收入则为1.29亿元\n同比下降20.5%\n可见公司的模型收入正在从项目交付转向标准化API服务\n而AWS提供的正是全球企业客户获取模型服务的一条成熟渠道\n10月6日\n科创板日报\n进一步报道称\nAWS将按照模型调用量与智谱进行收入分成\n不过\nAWS官方公告并没有披露具体分成比例和商业条款\n该部分目前仍应以媒体报道为准\n后续市场真正需要跟踪的是GLM-5.3能否通过全球云平台获得持续调用\n模型出海正在进入云平台分发阶段\n此前中国AI公司的海外扩张比较依赖独立产品\n海外网站\n本地销售和自建基础设施\n每进入一个新市场\n都需要重新解决获客\n部署\n支付和客户服务问题\n模型通过云平台分发之后\n商业路径则会简单很多\nAmazon Bedrock本身就是面向企业的基础模型服务平台\n开发者可以在既有AWS环境里调用不同模型\n如今GLM-5.3进入Bedrock\n相当于把模型放进海外企业已经存在的开发和云计算体系\n如此一来\n可以由AWS负责基础设施与企业客户触达\n模型公司负责模型能力和服务\n相较于单独建立海外销售体系\n该种分工更适合处于高研发投入",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_xueqiu_com_icon_new.jpg",
+            "link": "https://www.xueqiu.com/6902145880/411796442",
+            "media": "雪球",
+            "publish_date": "2026-10-10",
+            "refer": "ref_1",
+            "title": "智谱接入AWS：中国大模型出海进入云分发阶段 10月6日， Amazon Bedrock正式上线了 智谱 GLM-5.3！$智谱(02513)$ AWS官方信息显示，..."
+          },
+          {
+            "content": "MoMA 平台与 GLM-5.3 的双簧：模型再进阶背后，智谱的生态打法变了\n【免费下载链接】GLM-5.3 GLM-5.3 与 GLM-5.2 使用相同的基座模型——所有提升均来自后训练。与 GLM-5.2 相比，它在复杂编程和长程任务上的表现显著提升。\n项目地址: https://ai.gitcode.com/zai-org/GLM-5.3\n过去一年，开源大模型的发布节奏几乎可以用\"挤牙膏\"来形容：架构不动、权重换代、榜单微涨。但 2026 年下半年的 GLM-5.3 显然不属于这一类。它的发布附带了一串令人侧目的数字——内部编程基准提升 50%、终端长程任务得分翻了六倍、网络安全能力直接站上开源模型的 SOTA 位置。而在模型之外，更值得玩味的是另一条暗线：GLM-5.3 上架亚马逊 Bedrock、接入阿里云百炼与华为云、登上中国移动 MoMA 平台、以\"Ox Alpha\"的匿名身份在海外走红之后又被官方\"认领\"\n把这两条线拼在一起，你会看到一种与\"单点发布模型\"截然不同的打法：模型能力负责制造爆点，平台渠道负责把爆点转化为收入与生态绑定。本文结合智谱 GLM-5.3 开源仓库的真实源码与公开社区情报，拆解这场\"模型—平台双簧\"的技术底色与商业逻辑。\n一、GLM-5.3：一次\"纯后训练\"的能力跃迁\n仓库 README.md 的开篇就给出了一句信息量极大的声明：\nGLM-5.3 uses the same base model as GLM-5.2 — every gain comes from post-training.\n与 GLM-5.2 使用完全相同的基座模型，所有提升全部来自后训练（post-training）。这在开源大模型迭代史上并不常见——多数厂商的\"新一代\"意味着预训练算力与数据配比的全面重来。GLM-5.3 选择了另一条更经济也更反直觉的路径：基座不动，把强化后训练（reinforcement post-training）做到极致。这直接印证了社区情报中反复出现的一个判断：中国",
+            "icon": "https://sfile.chatglm.cn/searchImage/blog_csdn_net_icon_new.jpg",
+            "link": "https://blog.csdn.net/gitblog_00108/article/details/167690593",
+            "media": "CSDN博客",
+            "publish_date": "2026-10-12",
+            "refer": "ref_2",
+            "title": "MoMA 平台与 GLM-5.3 的双簧：模型再进阶背后，智谱的生态打法变了"
+          },
+          {
+            "content": "司马道馆()\n发布于\n来自\nAndroid\n· 福建\n智谱的收入结构变了\n司马道馆的雪球专栏\n来源\n雪球App\n作者\n司马道馆\nhttps://xueqiu.com/6572050310/411541193\n智谱(02513)\n10月6日\n亚马逊云科技旗下大模型服务平台AmazonBedrock官宣接入智谱GLM-5.3\nAWS基于模型调用量与智谱进行收入分成\n收入随调用规模自然增长\n计价透明可预期\n对企业客户\nGLM-5.3从今天起是Bedrock服务清单上的一个标准选项\n可以用跨区域推理\nPromptCache等AWS基础设施服务\n对智谱\n每多一次调用\n都是一次可结算的收入\nBedrock是亚马逊面向企业的大模型服务平台\n也是Anthropic和OpenAI的重要云渠道\nClaude系列的企业级分发很大一部分跑在这上面\n现在同一个货架上\n摆进了中国公司的旗舰模型\n国内方面\n阿里云百炼已签署类似分成协议\n华为云已上架GLM-5.3并达成合作意向\n海外加国内\n一张贯通中外的分成网络\n在这条官宣里成型\n把时间线往前拉\n这张网不是一天织成的\n9月16日的分析师电话会上\n智谱首次系统披露\n已与多家海内外头部云服务商签署收入分成协议\nGLM系列以托管API形式部署\n当时同步上调的还有年底ARR指引\n从24亿美元到30亿\n9月30日凌晨\nOpenAICodex宣布企业客户可原生调用GLM-5.3-Flash\n支出计入OpenAI承诺额度\n中国开源模型第一次进入OpenAI的企业付费结算通道\n10月4日\n高盛把智谱从中性上调至买入\n2026年底ARR预测上调至32亿美元\n比公司指引还高\n四大理由的第一条就是\n自10月起与中国及全球超大规模云厂商执行的新商业条款\n增量的\n高毛利的收入来源\n10月6日\nAWSBedrock接入落地\n高盛预言的那笔收入\n十天之内就有了第一个可核对的载体\n这件事在商业结构上的意义\n是智谱的收入从此多了一类\"渠道",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_xueqiu_com_icon_new.jpg",
+            "link": "https://www.xueqiu.com/6572050310/411541193",
+            "media": "雪球",
+            "publish_date": "2026-10-08",
+            "refer": "ref_3",
+            "title": "GLM-5.3 上架亚马逊：智谱的收入结构变了 $智谱(02513)$ 10月6日， 亚马逊 云科技旗下大模型服务平台AmazonBedrock官宣接入 智谱 GLM-..."
+          },
+          {
+            "content": "K型时代()\n发布于\n来自\niPhone\n· 上海\n来源：雪球App，作者： K型时代，（https://xueqiu.com/8436733160/411353788）\nK快讯\n智谱\nGLM-5.3海外朋友圈：不止AWS，Cursor、Aleph Alpha都在用\n智谱 GLM-5.3 正式上架\nAmazon\nBedrock，按调用量与 AWS 分成，海外收入通道正式打开。 但除了\n亚马逊\n，GLM-5.3 在海外已经不止一家客户”。 海外采用清单 - Amazon Bedrock：接入 GLM-5.3，按模型调用量分成，海外商业化路径落地。 - Cursor：上线 GLM-5.3 及 GLM-5.3-Flash；在 CursorBench 4.0 开放权重模型中，GLM-5.3 以 42.6% 得分居首。 - Aleph Alpha：德国主权 AI 公司，其新模型 Kolibri 披露使用 GLM-5.2、GLM-5.3 进行监督微调数据生产。 - Aikido Security：比利时网络安全公司，基于 GLM-5.3 推出开放权重安全模型 Altar。 - Anthropic 研究引用：援引 NIST 下属 CAISI 评估，将 GLM-5.3 列为当时网络安全能力最强的开放权重模型之一。 - OpenRouter / OpenCode：GLM-5.3-Flash 曾以匿名模型 Ox-Alpha 测试，刷新双平台调用纪录。 K视角 GLM-5.3 的海外扩散路径已经从开源下载”升级为产品集成 平台分成”。AWS 解决的是商业化入口，Cursor 解决的是开发者场景，Aleph Alpha 和 Aikido Security 则说明它正在进入欧洲 AI 和网络安全生产环节。 对二级市场而言，短期看情绪催化，中期看分成收入确认节奏，长期看 GLM 系列能否在海外云平台和开发者工具里形成持续调用量。分成比例、实际收入规模、海外合规仍是后续验证点。\n风险提示：用户发表的所有文章仅代表个人观点，与雪球的立场无关。投资决策需建立在独立思考之上。",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_xueqiu_com_icon_new.jpg",
+            "link": "https://www.xueqiu.com/8436733160/411353788",
+            "media": "雪球",
+            "publish_date": "2026-10-06",
+            "refer": "ref_4",
+            "title": "智谱 GLM-5.3海外朋友圈：不止AWS，Cursor、Aleph Alpha都在用智谱 GLM-5.3 正... - 雪球"
+          },
+          {
+            "content": "10月5日下午，港股盘面跳出一条消息：智谱（2513.HK）盘中一度涨近7%，收涨6.15%，报665港元/股，市值3242亿港元。涨的原因，居然不是发新模型——是海外那家人人都在用的AI编程工具Cursor，官宣上线GLM-5.3和GLM-5.3-Flash。\n4\n挑剔的人开始\"抢\"了\nCursor对模型有多苛刻？代码要准、推理要深、成本还得压得住。这次它把GLM-5.3端上桌，是带着成绩单的：CursorBench 4.0真实项目代码评测，GLM-5.3拿下开放权重模型最高分42.6%。注意，这不是被塞进去的\"备选项\"，是评测跑出来的头名。\n2\n这局不是突然赢的\n时间拨回8月20日。OpenRouter上悄悄冒出一个匿名模型，代号Ox-Alpha，中文社区叫它\"牛来\"——没有发布会，没有宣传，直接冲上榜单第一名，终结了DeepSeek 56天的霸榜。接下来全网开始当侦探。谜底在8月26日晚揭开：智谱正式发布GLM-5.3-Flash并认领了那个匿名模型，称盲测只为收集反馈，官方还特意点了一句——推理由国产芯片提供。先盲测、再认领、后接入，这条路是智谱自己铺的。\n3\n多米诺骨牌已经排上了\nCursor之后，链条一环环跟上：德国主权AI公司Aleph Alpha发布新模型Kolibri，披露训练环节采用了GLM产出的数据。Prime Intellect的Prime Agent重写Rust版本时，两周内2000多个智能体、上万个沙箱调用GLM-5.3端点，烧掉了超过2000亿Token。顺带提醒，官方口径里框架冷启动从736.1毫秒降到51.9毫秒是启动提速，别误读成模型调用变便宜了。再往前一步，10月6日亚马逊云也官宣Bedrock接入GLM-5.3，按调用量收入分成。\n3\n资本市场随即回应：高盛把智谱评级由\"中性\"",
+            "icon": "https://sfile.chatglm.cn/searchImage/post_smzdm_com_icon_new.jpg",
+            "link": "https://post.smzdm.com/p/a70pon49/",
+            "media": "什么值得买",
+            "publish_date": "2026-10-11",
+            "refer": "ref_5",
+            "title": "智谱港股涨6%：海外最挑剔的编程工具，正式把GLM-5.3端上桌"
+          },
+          {
+            "content": "智谱在 2026 年 10 月推出了 GLM-5.3 系列里的高速旗舰——GLM-5.3-HighSpeed。官方口径的输出速度达到 490 tokens/s，这个数字放在编程场景里意味着什么？这篇把参数、速度来源、适用场景一次讲清。## 一分钟看懂核心参数- 输出速度：490 tokens/s，约为 GLM-5.3-FlashX（200 tokens/s）的 2.4 倍，是标准 GLM-5.3 API（70.84 tokens/s）的约 7 倍- 上下文窗口：100 万 token，整仓代码、长文档可以直接装进去- 单次输出上限：131072 token（约 128k），一次性生成大量内容不用断档- 思考强度：low / high / max 三档可配，和标准版 GLM-5.3 一致## 速度从哪来官方说明这不是靠「砍质量换速度」，而是推理引擎、调度系统与底层基础设施的系统级优化，包括动态批处理、请求合并、KV 缓存调度等。工程上能感受到的直接收益是：函数、接口、调用链在屏幕上同步展开，等待感明显变弱。## 三类场景值得上高速档1. 长程编码任务：Coding Agent 一次任务动辄几十轮调用，单轮省下的时间会按轮数累加，整体耗时缩短得很直观2. 实时交互场景：输入需求后代码即时铺开，适合演示、结对、快速试错3. 高并发生产环境：企业级应用对低延迟、高吞吐有硬需求时，高速档的性价比就出来了## 怎么体验到GLM-5.3-HighSpeed 于 2026 年 10 月 12 日开启灰度，目前仅在智谱的 AI 编程工具 ZCode 3.15.1 版本中对订阅用户随机开放，暂时没有独立的申请入口；服务形式为 API 云服务，消费级硬件不支持本地部署。想抢先赶上灰度，可以先在 ZCode 官网装好客户端：https://zcode.z.ai/ ，新",
+            "icon": "https://sfile.chatglm.cn/searchImage/blog_csdn_net_icon_new.jpg",
+            "link": "https://blog.csdn.net/JingliAlex/article/details/167704622",
+            "media": "CSDN博客",
+            "publish_date": "2026-10-13",
+            "refer": "ref_6",
+            "title": "GLM-5.3-HighSpeed高速版发布评测：490 tokens/s，长程编码任务怎么用"
+          },
+          {
+            "content": "（来源：晚点LatePost）\n文丨申远\n编辑丨赵磊\n智谱发布旨在对标 DeepSeek V4 Flash 的轻量级旗舰模型 GLM-5.3 Flash ，调用超过 10 万张国产芯片集群用于该模型推理服务。据《晚点 LatePost》了解，其算力供应商或来自华为、摩尔线程与海光，智谱官方没有评论这一信息。\nGLM-5.3 Flash 拥有 300B 参数规模， 参数量约为 GLM-5.3 的 40%，与 DeepSeek V4 Flash 几乎持平。与同代小尺寸模型往往蒸馏自大模型不同，GLM-5.3 Flash 采用与 GLM-5.3 不同的架构设计，具有原生多模态能力，支持图像视频输入，这也是智谱战略聚焦 coding 以来第一次推出具有多模态能力的新模型。\n随着 AI 模型能力持续提升，轻量旗舰模型能够负担越来越多的工作任务，这创造了新的增长空间，8 月 DeepSeek V4 Flash 的提价不仅证明了市场强劲需求，也预示了更激烈竞争的到来。\n根据《晚点 LatePost》看到的智谱内部评测， GLM-5.3 Flash 的 Artificial Analysis Intelligence 分数为 57 分。这一分数超过上一代旗舰模型 GLM-5.2，和 Claude Opus 4.8 持平，也高于 DeepSeek 旗舰模型 V4 Pro 正式版的 53 分。\nGLM-5.3 Flash 每百万 token 输入 0.8 元，输出 2.8 元，缓存命中价格 0.23 元，正好为 GLM-5.3 的十分之一。横向对比调价后的 DeepSeek V4 Flash，其谷时价格分别为 1.5 元、4.5 元 和 0.05 元。综合输入和输出成本，GLM-5.3 Flash 在绝大多数常规调用场景下更便宜。\n智谱已经表示，上线前两周 GLM-5.3 Flash 会实行半价。\n正式发布前智谱已在包括 OpenRouter 在内的第三方开放平台以 Ox Alpha 名义测试，5 天流量累积据悉超过 50 T，由于完全免费，刷新了 OpenRouter 与",
+            "icon": "https://sfile.chatglm.cn/searchImage/sina_icon_new.jpg",
+            "link": "https://k.sina.com.cn/article_5952915720_162d2490806704qlx6.html",
+            "media": "新浪新闻",
+            "publish_date": "2026-10-12",
+            "refer": "ref_7",
+            "title": "智谱推出对标 DeepSeek 的轻量旗舰模型，由 10 万国产卡支持"
+          },
+          {
+            "content": "智谱\nGLM-5.3 API即日起开放调用，在复杂编码及长周期代理任务方面展现国内同业中领先性能\n里昂发布研报称，近期股价疲弱或反映市场对Anthropic年化经常性收入减速的过度反应，维持智谱(02513) 跑赢大市”评级，目标价为2061港元。智谱GLM-5.3 API即日起开放调用，在复杂编码及长周期代理任务方面展现国内同业中领先性能，虽然参数规模较小，但在一众基准测试中都取得开放权重SOTA表现，并在Artificial Analysis智能指数中获得60分。\n里昂指出，GLM 5.3的性能提升来自于后训练阶段采用更广泛环境及更多样化任务，扩展至生产工作流程。自2025年中以来，后训练扩展日益依赖可执行、可验证的设定，认为此验证了智谱在端到端合成环境构建管线方面的实力。该行估算GLM模型的OpenRouter收入份额已从今年1月的1%升至7月的7%。认为DeepSeek近期加价反映行业竞争健康，而GLM 5.3已重夺帕累托前沿(Pareto Frontier)地位。\n（来源：智通财经的财富号 2026-08-19 16:00） [点击查看原文]",
+            "icon": "https://sfile.chatglm.cn/searchImage/eastmoney_icon_new.jpg",
+            "link": "https://guba.eastmoney.com/news,cfhpl,1761438446.html",
+            "media": "东方财富网",
+            "publish_date": "2026-10-13",
+            "refer": "ref_8",
+            "title": "里昂：维持智谱(02513)“跑赢大市”评级 目标价2061港元"
+          },
+          {
+            "content": "10 月 6 日消息，据《科创板日报》报道，亚马逊云科技（AWS）旗下大模型服务平台 Amazon Bedrock 今日接入智谱 GLM-5.3，AWS 基于模型调用量与智谱进行收入分成。\n报道称，除了 AWS 外，智谱近期与多家海外云厂商落地收入分成模式。此前智谱透露计划通过海外云平台收入分成增加一条具有规模潜力的商业路径。\n国内方面，智谱也已与阿里云百炼平台等头部云厂商签署类似分成协议，华为云已上架 GLM-5.3，并就类似合作达成意向，形成贯通国内外的分成体系。\n财报显示，智谱 2026 上半年营业总收入 9.54 亿元，同比增长 399.7%；归母亏损 20.71 亿元，同比亏损收窄 12.1%。\n今年 9 月，智谱宣布完成约 50 亿美元（注：现汇率约合 335.72 亿元人民币）融资，包括约 20 亿美元股份配售及约 30 亿美元可转债发行。\n此次融资主要用于下一代 GLM 基础模型及完全自训练（Fully Self Training）体系的研发，以及大规模训练、生产推理、算力资源及相关技术基础设施的部署及升级。\n【来源：IT之家】\n尊敬的用户也许你已经注意到了我们文章页面进行了大规模的改造和重构，可以点击提交您的满意度或者想法我们会持续改进，给您提供更好的浏览体验！ 一键参与",
+            "icon": "https://sfile.chatglm.cn/searchImage/news_17173_com_icon_new.jpg",
+            "link": "https://news.17173.com/content/10062026/100116593.shtml",
+            "media": "17173游戏新闻",
+            "publish_date": "2026-10-06",
+            "refer": "ref_9",
+            "title": "GLM-5.3 上架亚马逊 AWS 旗下大模型平台，智谱打开海外收入分成通道"
+          },
+          {
+            "content": "2026 年 8 月的开源模型圈，上演了一场颇具戏剧性的\"身份悬疑剧\"：一个来历不明的匿名模型 Ox Alpha 空降 OpenRouter，免费开放一周，以 DeepSWE 跑分碾压 Claude Fable 5、GPT-5.6 Sol 的\"黑马\"姿态登顶调用量榜首；随后社区\"侦探\"通过分词器指纹将其锁定为智谱出品；最终官方承认——Ox Alpha 就是后来开源的 GLM-5.3-Flash 的原名。一场精心策划的匿名盲测，最终演变成关于\"套壳\"\"营销\"\"信任\"的全民争论。本文将以 Ox Alpha 事件为线索，结合 GLM-5.3 开源仓库的真实源码，梳理这场风波的来龙去脉，并回答一个社区真正关心的问题：匿名发布模式下，厂商的透明义务边界究竟在哪里。\n从\"神秘黑马\"到\"自家模型\"：一场口碑反转的完整时间线\n要理解这场风波，先要还原 Ox Alpha 的\"出道\"路径。\n8 月 14 日，GLM-5.3 正式发布。 智谱官方给出的定位非常明确：与 GLM-5.2 共用同一基座模型，所有提升全部来自后训练。这一表述在今天依然可以在 README.md 中看到原句：\"GLM-5.3 uses the same base model as GLM-5.2 — every gain comes from post-training.\" 官方宣称 GLM-5.3 是当时编程能力最强的开源权重模型，在自研 Z.ai Code Bench 上较 GLM-5.2 提升 50%，并在 Terminal Bench 3.0、Agents' Last Exam 等公开基准上取得开源 SOTA。模型权重则按计划推迟两周发布，理由是\"先完成安全评估与模型加固\"。\n8 月 20 日，匿名模型 Ox Alpha 上线 OpenRouter。 它没有厂商署名，免费开放一周，规格却相当惊人：1,048,576 token 上下文窗口、支持文本/图像/视频多模态输入、单次最大输出 131,072 token。开发者 Ben Davis 用它跑 DeepSWE（衡量模型读取真实代码库、识别漏洞并生成补丁的基准），10 ",
+            "icon": "",
+            "link": "https://blog.gitcode.com/5e464b1cf3d6819e3cc18a045b55c989.html",
+            "media": "",
+            "publish_date": "2026-10-11",
+            "refer": "ref_10",
+            "title": "Ox Alpha 风波反思：大模型\"套壳\"疑云与开源信任，智谱该给社区一个怎样的交代"
+          }
+        ]
+      }
+    },
+    {
+      "engine": "search_pro",
+      "query": "智谱 GLM-5.3 发布",
+      "contentSize": "medium",
+      "status": 200,
+      "fee": 0.03,
+      "coverage": {
+        "results": 10,
+        "withLink": 10,
+        "withMedia": 9,
+        "withTitle": 10,
+        "withContent": 10,
+        "withDate": 10,
+        "withRefer": 10,
+        "sampleKeys": [
+          "content",
+          "icon",
+          "link",
+          "media",
+          "publish_date",
+          "refer",
+          "title"
+        ]
+      },
+      "body": {
+        "created": 1792781237,
+        "id": "20261024024716ded032828c52421d",
+        "request_id": "20261024024716ded032828c52421d",
+        "search_intent": [
+          {
+            "intent": "SEARCH_ALWAYS",
+            "keywords": "智谱 GLM-5.3 发布",
+            "query": "智谱 GLM-5.3 发布"
+          }
+        ],
+        "search_result": [
+          {
+            "content": "智谱 GLM-5.3-FlashX 大模型已于 2026 年 9 月正式发布，属于 2026 年国产大模型密集迭代中的一次既有更新。该模型定位为轻量高速的 Flash 系列版本，延续了智谱在大模型推理效率与性价比方向的布局。对于需要低延迟推理能力的应用开发者而言，已发布版本的能力边界与接入方式以智谱官方文档为准。\nFlash 系列通常承担高并发、低成本的推理承载任务，GLM-5.3-FlashX 若延续该定位，意味着它更适配对外服务的实时调用，而非超长上下文的深度推理。在官方基准公布前，这类判断仍属于合理推测，实际表现需以模型卡与评测报告为准，不宜把版本命名中的Flash”直接等同于某项具体指标。\n从发布节奏看，智谱在 2026 年保持了较快的模型更新频率，Flash 版本与旗舰版本形成高低搭配，便于不同预算与延迟要求的业务做分层选型。对技术团队而言，关注点应从何时发布”转向发布后能否稳定接入、成本是否可控”，后者才是落地价值的真正来源。\n就跟踪方式而言，开发者应优先以智谱开放平台的官方文档为信息源，核对模型版本号、上下文长度、调用限额与价格。把社区转述作为辅助而非依据，能有效避免因版本混淆导致的接入错误，也能在模型小幅迭代时快速判断是否需要升级。\n值得补充的是，模型发布后的生态完善程度同样关键，文档质量、SDK 与社区支持往往决定了开发者能否真正用起来。把发布时间点与后续生态进展结合起来看，才能对一款模型的实用价值形成完整判断，避免被单次发布的话题热度带偏节奏。\n常见问题（FAQ）\n问：智谱 GLM-5.3-FlashX 是什么时候发布的？\n答：该模型已于 2026 年 9 月发布，目前属于已上线状态，确切的发布日期与版本说明以智谱官方公告为准。\n问：GLM-5.3-FlashX 适合哪些使用场景？\n答：Flash 系列通常面向低延迟、高并发的推理场景，具体适用范围与性能表现以官方技术文档披露为准。\n问：如何接入使用",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_zpedu_com_icon_new.jpg",
+            "link": "https://www.zpedu.com/it/ai/46973.html",
+            "media": "中培教育",
+            "publish_date": "2026-10-14",
+            "refer": "ref_1",
+            "title": "智谱 GLM-5.3-FlashX 大模型发布时间"
+          },
+          {
+            "content": "10月5日下午，港股盘面跳出一条消息：智谱（2513.HK）盘中一度涨近7%，收涨6.15%，报665港元/股，市值3242亿港元。涨的原因，居然不是发新模型——是海外那家人人都在用的AI编程工具Cursor，官宣上线GLM-5.3和GLM-5.3-Flash。\n4\n挑剔的人开始\"抢\"了\nCursor对模型有多苛刻？代码要准、推理要深、成本还得压得住。这次它把GLM-5.3端上桌，是带着成绩单的：CursorBench 4.0真实项目代码评测，GLM-5.3拿下开放权重模型最高分42.6%。注意，这不是被塞进去的\"备选项\"，是评测跑出来的头名。\n2\n这局不是突然赢的\n时间拨回8月20日。OpenRouter上悄悄冒出一个匿名模型，代号Ox-Alpha，中文社区叫它\"牛来\"——没有发布会，没有宣传，直接冲上榜单第一名，终结了DeepSeek 56天的霸榜。接下来全网开始当侦探。谜底在8月26日晚揭开：智谱正式发布GLM-5.3-Flash并认领了那个匿名模型，称盲测只为收集反馈，官方还特意点了一句——推理由国产芯片提供。先盲测、再认领、后接入，这条路是智谱自己铺的。\n3\n多米诺骨牌已经排上了\nCursor之后，链条一环环跟上：德国主权AI公司Aleph Alpha发布新模型Kolibri，披露训练环节采用了GLM产出的数据。Prime Intellect的Prime Agent重写Rust版本时，两周内2000多个智能体、上万个沙箱调用GLM-5.3端点，烧掉了超过2000亿Token。顺带提醒，官方口径里框架冷启动从736.1毫秒降到51.9毫秒是启动提速，别误读成模型调用变便宜了。再往前一步，10月6日亚马逊云也官宣Bedrock接入GLM-5.3，按调用量收入分成。\n3\n资本市场随即回应：高盛把智谱评级由\"中性\"",
+            "icon": "https://sfile.chatglm.cn/searchImage/post_smzdm_com_icon_new.jpg",
+            "link": "https://post.smzdm.com/p/a70pon49/",
+            "media": "什么值得买",
+            "publish_date": "2026-10-11",
+            "refer": "ref_2",
+            "title": "智谱港股涨6%：海外最挑剔的编程工具，正式把GLM-5.3端上桌"
+          },
+          {
+            "content": "K型时代()\n发布于\n来自\niPhone\n· 上海\n来源：雪球App，作者： K型时代，（https://xueqiu.com/8436733160/411353788）\nK快讯\n智谱\nGLM-5.3海外朋友圈：不止AWS，Cursor、Aleph Alpha都在用\n智谱 GLM-5.3 正式上架\nAmazon\nBedrock，按调用量与 AWS 分成，海外收入通道正式打开。 但除了\n亚马逊\n，GLM-5.3 在海外已经不止一家客户”。 海外采用清单 - Amazon Bedrock：接入 GLM-5.3，按模型调用量分成，海外商业化路径落地。 - Cursor：上线 GLM-5.3 及 GLM-5.3-Flash；在 CursorBench 4.0 开放权重模型中，GLM-5.3 以 42.6% 得分居首。 - Aleph Alpha：德国主权 AI 公司，其新模型 Kolibri 披露使用 GLM-5.2、GLM-5.3 进行监督微调数据生产。 - Aikido Security：比利时网络安全公司，基于 GLM-5.3 推出开放权重安全模型 Altar。 - Anthropic 研究引用：援引 NIST 下属 CAISI 评估，将 GLM-5.3 列为当时网络安全能力最强的开放权重模型之一。 - OpenRouter / OpenCode：GLM-5.3-Flash 曾以匿名模型 Ox-Alpha 测试，刷新双平台调用纪录。 K视角 GLM-5.3 的海外扩散路径已经从开源下载”升级为产品集成 平台分成”。AWS 解决的是商业化入口，Cursor 解决的是开发者场景，Aleph Alpha 和 Aikido Security 则说明它正在进入欧洲 AI 和网络安全生产环节。 对二级市场而言，短期看情绪催化，中期看分成收入确认节奏，长期看 GLM 系列能否在海外云平台和开发者工具里形成持续调用量。分成比例、实际收入规模、海外合规仍是后续验证点。\n风险提示：用户发表的所有文章仅代表个人观点，与雪球的立场无关。投资决策需建立在独立思考之上。",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_xueqiu_com_icon_new.jpg",
+            "link": "https://www.xueqiu.com/8436733160/411353788",
+            "media": "雪球",
+            "publish_date": "2026-10-06",
+            "refer": "ref_3",
+            "title": "智谱 GLM-5.3海外朋友圈：不止AWS，Cursor、Aleph Alpha都在用智谱 GLM-5.3 正... - 雪球"
+          },
+          {
+            "content": "（来源：晚点LatePost）\n文丨申远\n编辑丨赵磊\n智谱发布旨在对标 DeepSeek V4 Flash 的轻量级旗舰模型 GLM-5.3 Flash ，调用超过 10 万张国产芯片集群用于该模型推理服务。据《晚点 LatePost》了解，其算力供应商或来自华为、摩尔线程与海光，智谱官方没有评论这一信息。\nGLM-5.3 Flash 拥有 300B 参数规模， 参数量约为 GLM-5.3 的 40%，与 DeepSeek V4 Flash 几乎持平。与同代小尺寸模型往往蒸馏自大模型不同，GLM-5.3 Flash 采用与 GLM-5.3 不同的架构设计，具有原生多模态能力，支持图像视频输入，这也是智谱战略聚焦 coding 以来第一次推出具有多模态能力的新模型。\n随着 AI 模型能力持续提升，轻量旗舰模型能够负担越来越多的工作任务，这创造了新的增长空间，8 月 DeepSeek V4 Flash 的提价不仅证明了市场强劲需求，也预示了更激烈竞争的到来。\n根据《晚点 LatePost》看到的智谱内部评测， GLM-5.3 Flash 的 Artificial Analysis Intelligence 分数为 57 分。这一分数超过上一代旗舰模型 GLM-5.2，和 Claude Opus 4.8 持平，也高于 DeepSeek 旗舰模型 V4 Pro 正式版的 53 分。\nGLM-5.3 Flash 每百万 token 输入 0.8 元，输出 2.8 元，缓存命中价格 0.23 元，正好为 GLM-5.3 的十分之一。横向对比调价后的 DeepSeek V4 Flash，其谷时价格分别为 1.5 元、4.5 元 和 0.05 元。综合输入和输出成本，GLM-5.3 Flash 在绝大多数常规调用场景下更便宜。\n智谱已经表示，上线前两周 GLM-5.3 Flash 会实行半价。\n正式发布前智谱已在包括 OpenRouter 在内的第三方开放平台以 Ox Alpha 名义测试，5 天流量累积据悉超过 50 T，由于完全免费，刷新了 OpenRouter 与",
+            "icon": "https://sfile.chatglm.cn/searchImage/sina_icon_new.jpg",
+            "link": "https://k.sina.com.cn/article_5952915720_162d2490806704qlx6.html",
+            "media": "新浪新闻",
+            "publish_date": "2026-10-12",
+            "refer": "ref_4",
+            "title": "智谱推出对标 DeepSeek 的轻量旗舰模型，由 10 万国产卡支持"
+          },
+          {
+            "content": "2026 年 8 月的开源模型圈，上演了一场颇具戏剧性的\"身份悬疑剧\"：一个来历不明的匿名模型 Ox Alpha 空降 OpenRouter，免费开放一周，以 DeepSWE 跑分碾压 Claude Fable 5、GPT-5.6 Sol 的\"黑马\"姿态登顶调用量榜首；随后社区\"侦探\"通过分词器指纹将其锁定为智谱出品；最终官方承认——Ox Alpha 就是后来开源的 GLM-5.3-Flash 的原名。一场精心策划的匿名盲测，最终演变成关于\"套壳\"\"营销\"\"信任\"的全民争论。本文将以 Ox Alpha 事件为线索，结合 GLM-5.3 开源仓库的真实源码，梳理这场风波的来龙去脉，并回答一个社区真正关心的问题：匿名发布模式下，厂商的透明义务边界究竟在哪里。\n从\"神秘黑马\"到\"自家模型\"：一场口碑反转的完整时间线\n要理解这场风波，先要还原 Ox Alpha 的\"出道\"路径。\n8 月 14 日，GLM-5.3 正式发布。 智谱官方给出的定位非常明确：与 GLM-5.2 共用同一基座模型，所有提升全部来自后训练。这一表述在今天依然可以在 README.md 中看到原句：\"GLM-5.3 uses the same base model as GLM-5.2 — every gain comes from post-training.\" 官方宣称 GLM-5.3 是当时编程能力最强的开源权重模型，在自研 Z.ai Code Bench 上较 GLM-5.2 提升 50%，并在 Terminal Bench 3.0、Agents' Last Exam 等公开基准上取得开源 SOTA。模型权重则按计划推迟两周发布，理由是\"先完成安全评估与模型加固\"。\n8 月 20 日，匿名模型 Ox Alpha 上线 OpenRouter。 它没有厂商署名，免费开放一周，规格却相当惊人：1,048,576 token 上下文窗口、支持文本/图像/视频多模态输入、单次最大输出 131,072 token。开发者 Ben Davis 用它跑 DeepSWE（衡量模型读取真实代码库、识别漏洞并生成补丁的基准），10 ",
+            "icon": "",
+            "link": "https://blog.gitcode.com/5e464b1cf3d6819e3cc18a045b55c989.html",
+            "media": "",
+            "publish_date": "2026-10-11",
+            "refer": "ref_5",
+            "title": "Ox Alpha 风波反思：大模型\"套壳\"疑云与开源信任，智谱该给社区一个怎样的交代"
+          },
+          {
+            "content": "港股研究社()\n发布于\n来自雪球 · 湖南\n中国大模型出海进入云分发阶段\n来源\n雪球App\n作者\n港股研究社\nhttps://xueqiu.com/6902145880/411796442\n10月6日\nAmazon Bedrock正式上线了智谱GLM-5.3\n智谱(02513)\nAWS官方信息显示\nGLM-5.3作为底层模型\n主要面向复杂软件工程和Agent任务\n可支持100万Token上下文\n并提供托管API\nOpenAI兼容API以及跨区域推理等能力\n海外企业开发者还可以直接在AWS环境中调用模型\n省去了自行搭建完整的模型推理基础设施的过程\n放回智谱自身的商业化进程里来看\n智谱GLM-5.3上线的价值更加突出\n财报显示\n2026年上半年\n智谱实现营业收入9.54亿元\n同比增长399.7%\n开放平台及API业务收入8.25亿元\n同比增长2735.7%\n已经占到总收入的86.5%\n本地化部署收入则为1.29亿元\n同比下降20.5%\n可见公司的模型收入正在从项目交付转向标准化API服务\n而AWS提供的正是全球企业客户获取模型服务的一条成熟渠道\n10月6日\n科创板日报\n进一步报道称\nAWS将按照模型调用量与智谱进行收入分成\n不过\nAWS官方公告并没有披露具体分成比例和商业条款\n该部分目前仍应以媒体报道为准\n后续市场真正需要跟踪的是GLM-5.3能否通过全球云平台获得持续调用\n模型出海正在进入云平台分发阶段\n此前中国AI公司的海外扩张比较依赖独立产品\n海外网站\n本地销售和自建基础设施\n每进入一个新市场\n都需要重新解决获客\n部署\n支付和客户服务问题\n模型通过云平台分发之后\n商业路径则会简单很多\nAmazon Bedrock本身就是面向企业的基础模型服务平台\n开发者可以在既有AWS环境里调用不同模型\n如今GLM-5.3进入Bedrock\n相当于把模型放进海外企业已经存在的开发和云计算体系\n如此一来\n可以由AWS负责基础设施与企业客户触达\n模型公司负责模型能力和服务\n相较于单独建立海外销售体系\n该种分工更适合处于高研发投入",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_xueqiu_com_icon_new.jpg",
+            "link": "https://www.xueqiu.com/6902145880/411796442",
+            "media": "雪球",
+            "publish_date": "2026-10-10",
+            "refer": "ref_6",
+            "title": "智谱接入AWS：中国大模型出海进入云分发阶段 10月6日， Amazon Bedrock正式上线了 智谱 GLM-5.3！$智谱(02513)$ AWS官方信息显示，..."
+          },
+          {
+            "content": "【智谱正式发布GLM-5.3 拥有更强编程能力】财联社8月14日电，智谱8月14日正式发布GLM-5.3。据介绍，与GLM-5.2相比，GLM-5.3基座模型未变，但通过极致的后训练Scaling大大提高了模型的智能上界。GLM-5.3拥有更强的编程能力，在内部自建体感评测中较GLM-5.2提升50%，在包括TerminalBench3.0、Agents'LastExam(CLI)在内的公开基准测试中取得开源第一。智谱还表示，将在发布两周后开放模型权重。返回搜狐，查看更多",
+            "icon": "https://sfile.chatglm.cn/searchImage/sohu_icon_new.jpg",
+            "link": "https://www.sohu.com/a/1062776472_122029351",
+            "media": "搜狐新闻",
+            "publish_date": "2026-08-14",
+            "refer": "ref_7",
+            "title": "智谱正式发布GLM-5.3 拥有更强编程能力"
+          },
+          {
+            "content": "智谱 GLM 5.3 进入 AWS，Mistral Large 4 开放预览近两日 AI 进展\n近两日值得关注的五条 AI 进展：智谱 GLM 5.3 接入 Amazon Bedrock、Mistral Large 4 开放预览、Google EmbeddingGemma 2 的手机端跨模态检索、Reka Rho-1 的视频与机器人研究演示，以及 Anthropic 面向安全防守方的访问计划。 本期重点说清：目前谁能用、适合哪些场景、可能带来什么变化，以及仍待验证的边界。发布演示不等于独立实测。 原始资料： AWS：https://aws.amazon.com/blogs/machine-learning/introducing-glm-5-3-on-amazon-bedrock/ Bedrock 可用公告：https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-bedrock-glm-5-3/ Mistral：https://mistral.ai/news/mistral-large-4/ Google：https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/ Reka：https://reka.ai/news/rho-1-collapsing-the-multimodal-stack Anthropic：https://www.anthropic.com/news/cyber-verification-program 资料发布于 2026 年 10 月 5—6 日，开放范围和功能以官方后续更新为准。内容仅供科技资讯交流，不构成投资建议。\n人工智能\n机器人\nReka\n智谱\nAmazon Bedrock\nEmbeddingGemma\nGLM5.3\n科技晚报\n大模型\nMistral\nBZ爱胡说\nGLM-5.3正式发布，超越K3,国模一哥再次易主！\nGLM-5 一战封神，如何用他构建全自动开发系统？\nDeepSeek 成立产品部，DSH更新，全额补偿还在继续；OpenAI 正在酝酿大的，GPT-6.5 Astra？GLM 5.3 Flash 免费\n突发！智谱深夜发布法律模型 GLM-Legal\n快讯：GLM 5.3 发布！编程能力开源第一，接近 Fa",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_bilibili_com_icon_new.jpg",
+            "link": "https://www.bilibili.com/video/BV1vKHD6oEaH/",
+            "media": "哔哩哔哩",
+            "publish_date": "2026-10-08",
+            "refer": "ref_8",
+            "title": "智谱 GLM 5.3 进入 AWS，Mistral Large 4 开放预览"
+          },
+          {
+            "content": "智谱正式发布GLM-5.3\n来源：财闻 2026-08-14 15:17:57\nA\nA-\n8月14日，智谱（02513.HK）正式发布GLM-5.3。据介绍，与GLM-5.2相比，GLM-5.3基座模型未变，但通过极致的后训练Scaling大大提高了模型的智能上界。GLM-5.3拥有更强的编程能力，在内部自建体感评测中较GLM-5.2提升50%，在包括TerminalBench3.0、Agents'LastExam(CLI)在内的公开基准测试中取得开源第一。智谱还表示，将在发布两周后开放模型权重。\n责任编辑：kj005\n文章投诉热线:157 3889 8464 投诉邮箱:7983347 16@qq.com",
+            "icon": "https://sfile.chatglm.cn/searchImage/china_icon_new.jpg",
+            "link": "https://m.tech.china.com/article/20260814/202608141940762.html",
+            "media": "中华网",
+            "publish_date": "2026-08-14",
+            "refer": "ref_9",
+            "title": "智谱正式发布GLM-5.3"
+          },
+          {
+            "content": "【财华社讯】8月14日，据\"智谱\"公众号消息，智谱今日发布GLM-5.3，与GLM-5.2相比，基座模型没变，但通过极致的后训练Scaling大大提高了模型的智能上界。相比前代，GLM-5.3是编程能力最强的开源模型，在内部自建体感评测中较GLM-5.2提升50%，在包括Terminal Bench3.0、Agents'Last Exam(CLI)在内的公开基准测试中取得开源第一。智谱表示，将在发布两周后开放模型权重。\n来源：财华网返回搜狐，查看更多",
+            "icon": "https://sfile.chatglm.cn/searchImage/sohu_icon_new.jpg",
+            "link": "https://www.sohu.com/a/1062782089_114984",
+            "media": "搜狐新闻",
+            "publish_date": "2026-08-14",
+            "refer": "ref_10",
+            "title": "智谱今日发布GLM-5.3"
+          }
+        ]
+      }
+    },
+    {
+      "engine": "search_pro_sogou",
+      "query": "智谱 GLM-5.3 发布",
+      "contentSize": "medium",
+      "status": 200,
+      "fee": 0.05,
+      "coverage": {
+        "results": 10,
+        "withLink": 10,
+        "withMedia": 0,
+        "withTitle": 10,
+        "withContent": 10,
+        "withDate": 8,
+        "withRefer": 10,
+        "sampleKeys": [
+          "content",
+          "icon",
+          "link",
+          "media",
+          "publish_date",
+          "refer",
+          "title"
+        ]
+      },
+      "body": {
+        "created": 1792781238,
+        "id": "20261024024717995a4e5d18654e9f",
+        "request_id": "20261024024717995a4e5d18654e9f",
+        "search_intent": [
+          {
+            "intent": "SEARCH_ALWAYS",
+            "keywords": "智谱 GLM-5.3 发布",
+            "query": "智谱 GLM-5.3 发布"
+          }
+        ],
+        "search_result": [
+          {
+            "content": "Inspiring AGI to Benefit Humanity 智谱AI。Hi I'm ZCode The GLM Large Models A next-generation full-stack large model ecosystem GLM-5.3 GLM-5.3 GLM-5.3: Frontier Coding with Emergent Cyber Capabilities. Built for complex software engineering and long-horizon agent tasks, with a 1M context window. GLM-5V-Turbo Multimodal Coding Model GLM-5-Turbo Built for Claw. Optimized at the training level for core agent capabilities — tool calling, instruction following, and long-chain execution ZCode Official GLM-5.3 Harness — taking multi-agent development further Tuned with GLM-5.3 for reasoning and tool use. Ready out of the box, with BYOK support and more efficient quota usage. AutoGLM An agent model capable of autonomous planning, reasoning, and execution, addressing core challenges in task planning,",
+            "icon": "",
+            "link": "https://www.zhipuai.cn/en?utm_campaign=silicon-valley-jagt-chinas-ki-stars&utm_medium=referral&utm_source=news-de.asiabits.com",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_1",
+            "title": "Inspiring AGI to Benefit Humanity"
+          },
+          {
+            "content": "GLM-5.3: Specs, Pricing, API & Free Chat GLM AI Chat。GLM-5.3: Specs, Pricing, API & Free Chat Z.ai's current flagship: GLM-5.2's base model with far stronger post-training for coding, agents and security work. Specs, benchmarks, prices, code and the license explained simply. By GLM Chat Team Updated when Z.ai changes the model Last updated Oct 20, 2026 23 min read GLM-5.3 at a glance Developer Z.ai (formerly Zhipu AI) Released August 14, 2026 Context/output 1M / 128K tokens API price $1.40 in / $4.40 out per 1M Weights Open, GLM-5.3 License Newer model None — this is the latest On this page What GLM-5.3 is good at GLM 5.3 benchmarks GLM-5.3’s cyber capability NIST CAISI’s assessment of GLM-5.3’s cyber capabilities We tested it: 5 tasks GLM-5.3 vs GLM-5.2 vs GLM-5.3-Flash Forced thinking: m",
+            "icon": "",
+            "link": "https://glm-ai.chat/?p=979",
+            "media": "",
+            "publish_date": "2026/10/20",
+            "refer": "ref_2",
+            "title": "GLM-5.3: Specs, Pricing, API & Free Chat"
+          },
+          {
+            "content": "GLM-5.3:前沿编程能力与涌现的网络安全能力 智谱AI。GLM-5.3:前沿编程能力与涌现的网络安全能力 今天我们发布GLM-5.3,与GLM-5.2相比,基座模型没变,但通过极致的后训练Scaling大大提高了模型的智能上界:数十倍的长程任务环境、更丰富多样的环境类型、超长的后训练时间。我们发现充分的模型后训练涌现出超出预期的模型能力。相比前代,GLM-5.3的新能力包括: 更强的编程能力。GLM-5.3是编程能力最强的开源模型,在内部自建体感评测中较GLM-5.2提升50%,在包括Terminal Bench 3.0、Agents' Last Exam (CLI)在内的公开基准测试中取得开源第一。 网络安全能力。在白盒代码审查与漏洞发现等安全任务中,GLM-5.3的表现持平Mythos 5,展现出面向网络安全防御场景的强大潜力。 后训练Scaling。上述全部提升都来自后训练。基于IndexShare、SAO、以及持续演进的新一代Slime框架,我们在与GLM-5.2完全相同基座上高效推进强化学习,可能我们还远未开发出这个基座的智能上界。 开源。我们将在发布两周后开放模型权重,此前完成安全评估与模型加固。 即日起上线智谱官方编程工具ZCode、效率工具AutoClaw,上线GLM Coding Plan全量用户及开放订阅。TraeWork/TraeCode/扣子、WorkBuddy/CodeBuddy、Qoder/QwenWork、CatPaw、JoyCode、OpenCode等编码平台开放抢先体验。API很快上线,完整模型权重将在两周内开源,此前需完成必要的安全加固,尽可能限制其潜在攻击能力,保留其防御价值。 今天13:00,GLM Coding Plan全员额度重置,所有用户后台「用量统计」可见使用额度回满。技术Blog:https://z.ai/blog/gl",
+            "icon": "",
+            "link": "https://www.zhipuai.cn/zh/research/162",
+            "media": "",
+            "publish_date": "2026/08/14",
+            "refer": "ref_3",
+            "title": "GLM-5.3:前沿编程能力与涌现的网络安全能力"
+          },
+          {
+            "content": "GLM-5.3 百度百科。GLM-5.3 智谱公司计划发布的大语言模型版本 智谱公司于2026年8月14日正式发布大语言模型GLM-5.3 。该版本早前有传闻或命名为GLM-5.5,但最终仍沿用GLM-5系列的编号,这一决策被认为受到市场竞争环境的影响 。发布前,模型信息曾通过官网页面、搜索引擎缓存及开源代码库等渠道提前流出 。早在6月29日,智谱首席科学家唐杰就在𝕏平台发起全球意见征集,为GLM-5.3的功能设计收集建议,活动浏览量超过40万,用户最集中的诉求是为旗舰模型增加视觉能力 。 GLM-5.3参数规模达7430亿 ,采用IndexShare、SAO与Slime等后训练技术进行优化,新增多模态视觉能力,并针对超长文档处理、科研推理和企业Agent场景做了专门增强。相比前代GLM-5.2,编程能力提升50% ,在TerminalBench3.0和Agents'LastExam(CLI)等基准上位列开源模型第一 ,编程及智能体能力接近Claude Fable 5 ,网络安全任务则优于Mythos 5 。 发布当天,范式旗下统一模型调用平台PhanRouter便完成适配并开放调用,成为首批接入方 。8月16日,阿里“千问办公”首发上线GLM-5.3,次日即撤回接入 。8月19日凌晨,智谱开放该模型API,定价与GLM-5.2持平 ;8月21日又接入千问AI平台,开发者可通过相关API直接调用 。智谱宣布模型权重计划于8月25日开源 。8月26日夜间,GLM-5.3-Flash(320B-A18B)上线并开源,这是GLM-5系列首个原生多模态模型,也是此前以Ox-Alpha为代号的匿名模型,曾在OpenCode和OpenRouter上大规模测试 。近日,AI编程工具Cursor也宣布上线GLM-5.3及GLM-5.3-Flash ;10月6日,亚马逊云科技旗下Amazon",
+            "icon": "",
+            "link": "https://baike.baidu.com/item/GLM-5.3/68244961",
+            "media": "",
+            "publish_date": "2026/10/12",
+            "refer": "ref_4",
+            "title": "GLM-5.3"
+          },
+          {
+            "content": "发布时间:2026年10月15日。文|晓静编辑|徐青阳近期,全球顶尖“白帽”、安全研究员古河(YukiChen)加入智谱AI。据接近智谱的人士透露,“他加入的是GLM基础模型组,职责主要是帮助提升模型cyber能力”。10月14日,古河在社交平台X上宣布开启“新的旅程,新的使命”,表示将借助前沿AI的力量构建更安全的网络空间。智谱海外官方账号Z.ai随后确认了他的加盟,并披露古河等研究人员使用GLM发现的23个Windows漏洞,已全部获得微软安全响应中心(MSRC)确认和致谢。01微软致谢的23个漏洞古河曾在2019年、2021年至2024年五次位列MSRC“最具价值安全研究者”年度榜首,并在2019年成为首位登顶该榜的中国研究者。微软的评选依据是研究者提交的有效漏洞报告及相应积分,考察的是对真实产品安全的贡献。古河曾任360漏洞研究院院长、赛博昆仑首席技术官及昆仑实验室负责人。他及所在团队还获得过有“黑客奥斯卡”之称的PwnieAwards:2022年,昆仑实验室获得最佳远程代码执行漏洞奖,古河个人获得史诗级成就奖,后者表彰的是他在Windows服务器漏洞研究中的贡献。此次微软致谢,为GLM参与真实漏洞研究提供了新的案例。微软采用协调漏洞披露机制:研究者先向厂商报告问题,由双方协调调查、修复和公开披露,厂商在发布更新时可对发现者予以致谢。这次公告将成果归于使用GLM的安全研究人员,古河是其中一员。人类专家与模型如何分工,也将是理解这类成果价值的关键。双方的技术交集已有铺垫。赛博昆仑的投资方真格基金在9月发布的项目动态中披露,赛博昆仑曾结合自身的攻防经验、漏洞研究知识库与GLM的推理和代码理解能力,发现并报告三枚影响微软企业邮件与办公系统的重大漏洞。02从GLM-5.2开始,剑指“安全”GLM在安全领域引起关注,可以追溯到今年6月的GLM-5.2。6月22日,安全公司Se",
+            "icon": "",
+            "link": "https://so.html5.qq.com/page/real/search_news?docid=70000021_0226ad0398253552",
+            "media": "",
+            "publish_date": "2026/10/15",
+            "refer": "ref_5",
+            "title": "顶尖白帽古河加入GLM模型组,智谱的安全野心有多大?"
+          },
+          {
+            "content": "The GLM Large Models 智谱华章。Hi I'm ZCode Brainstorming Reasoning Information Q&A Content Creation Development A next-generation full-stack large model ecosystem GLM-5.3 GLM-5.3: Frontier Coding with Emergent Cyber Capabilities. Built for complex software engineering and long-horizon agent tasks, with a 1M context window. GLM-5V-Turbo Multimodal Coding Model GLM-5-Turbo Built for Claw. Optimized at the training level for core agent capabilities — tool calling, instruction following, and long-chain execution ZCode Official GLM-5.3 Harness — taking multi-agent development further Tuned with GLM-5.3 for reasoning and tool use. Ready out of the box, with BYOK support and more efficient quota usage. AutoGLM An agent model capable of autonomous planning, reasoning, and execution, addressing core ch",
+            "icon": "",
+            "link": "https://zhipuai.cn/en",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_6",
+            "title": "The GLM Large Models"
+          },
+          {
+            "content": "发布时间:2026年10月15日。微软一口气致谢23个漏洞,背后是智谱GLM和一位顶级“白帽”作者|凌敏一个常年霸榜微软安全研究者榜单的顶级白帽,最近有了新身份。10月14日,知名白帽安全研究员古河(YukiChen)在社交平台X上发布了一条动态,低调宣布加入智谱。他表示,希望借助前沿AI的力量,构建一个更加安全的网络空间。稍早前,微软最新一轮安全更新公布了一份颇为特别的漏洞致谢名单:23个Windows漏洞的发现与GLM辅助的安全研究有关,其中包括一个CVSS评分高达9.8分的严重漏洞。在公开漏洞记录中,研究者署名明确写着“YukiChenusingGLMfromz.ai”。过去两年,大模型厂商在编程、数学、推理等榜单上打得不可开交。如今,网络安全似乎逐渐成为新的竞争焦点。当一位长期站在传统安全研究顶端的专家,开始进入大模型公司,也意味着,挖洞这件事,看来要真的“变天”了。1常年霸榜微软的顶级白帽,开始用AI挖洞了在全球安全研究圈,古河是个响当当的名字。公开资料显示,古河拥有超过15年的攻防安全研究经验,曾在2019年、2021年至2024年五次登顶微软MSRC最具价值安全研究者年度榜单,是首位获得该榜年度第一名的中国安全研究员。他还曾两次斩获有“黑客奥斯卡”大奖之称的ThePwnieAwards,分别是最佳远程漏洞奖和史诗级成就奖。此外,他曾在Pwn2Own、天府杯等国际安全赛事中获奖,也曾担任360漏洞研究院院长。古河的实力,近期再次得到了微软官方的认可。在全球安全研究圈,微软MSRC的漏洞致谢有着相当高的含金量。研究人员发现微软产品中的潜在漏洞后,可以向MSRC提交报告,经过确认、评估及相应的安全响应流程,相关研究成果才有机会获得公开致谢。对于安全研究员而言,能在这样的名单上反复出现,本身就是专业能力的证明。这一次,与古河一起出现在微软漏洞记录中的,还有智谱的GLM",
+            "icon": "",
+            "link": "https://finance.sina.cn/2026-10-15/detail-iniviekf8009210.d.html",
+            "media": "",
+            "publish_date": "2026/10/15",
+            "refer": "ref_7",
+            "title": "微软一口气致谢 23 个漏洞,背后是智谱 GLM 和一位顶级白帽"
+          },
+          {
+            "content": "智谱发布新一代基座模型GLM-5.3 今日头条。智谱发布新一代基座模型GLM-5.3 2026-08-14 17:18 · 科技日报 科技日报记者 崔爽 8月14日,智谱正式发布新一代基座模型GLM-5.3。智谱方面表示,该模型通过后训练提高了模型的智能上限,具体表现为数十倍的长程任务环境、更丰富多样的环境类型,以及超长的后训练时间。 根据智谱官方技术报告,GLM-5.3在包括Terminal Bench 3.0、Agents' Last Exam(CLI)在内的公开基准测试中取得开源第一。 此次升级的意义不只在编程。随着大模型应用走向真实软件工程,行业竞争正在从“模型能不能写代码”进入“模型能不能完成复杂任务”。网络安全成为这一能力演进的重要方向。网络安全要求模型进一步理解复杂系统,包括程序逻辑、协议规则、权限边界和攻击路径,是代码能力向更高阶任务的延伸。 在CyberGym漏洞推理评测中,GLM-5.3得分为84.5%,高于GLM-5.2的77.2%。 据了解,模型发布前两周,智谱联合安全团队开展测试,发现2404个潜在漏洞,其中1088个为中高危漏洞。其中,研究人员借助GLM-5.3发现了潜伏40余年的DNS协议级风险,攻击者仅需少量特殊请求即可将服务器压力最高放大近8万倍,潜在影响超过1000万处公网DNS服务。这意味着,模型能力正在从Benchmark测试走向真实专业工作流。 据了解,GLM-5.3将接入ZCode、Trae、WorkBuddy、Qoder、CawPaw和 OpenCode等平台,API随后上线,并计划开放完整模型权重。 此外,针对GLM-5.3,团队构建了迄今为止最稳健的风险审查系统。智谱方面表示,随着GLM-5.3的发布及开源,安全防御能力将不再是少数机构的特权,而是全球开发者都能平等获得和共同完善的公共能力。 编辑:王程玥 审核:朱丽",
+            "icon": "",
+            "link": "https://www.toutiao.com/article/7673806894535901731",
+            "media": "",
+            "publish_date": "2026/08/14",
+            "refer": "ref_8",
+            "title": "智谱发布新一代基座模型GLM-5.3"
+          },
+          {
+            "content": "智谱发布GLM-5.3 公司称是编程能力最强的开源模型 今日头条。智谱发布GLM-5.3 公司称是编程能力最强的开源模型 2026-08-14 20:36 · 央广财经 央广网北京8月14日消息(记者 齐智颖)今天智谱发布了GLM-5.3。据介绍,与GLM-5.2相比,GLM-5.3基座模型没变,但通过极致的后训练Scaling大大提高了模型的智能上界:数十倍的长程任务环境、更丰富多样的环境类型、超长的后训练时间。 智谱介绍,充分的模型后训练涌现出超出预期的模型能力。相比前代,GLM-5.3的新能力包括:更强的编程能力、网络安全能力、后训练Scaling、开源。 智谱表示,GLM-5.3是编程能力最强的开源模型,在内部自建体感评测中较GLM-5.2提升50%,在包括Terminal Bench 3.0、Agents' Last Exam (CLI)在内的公开基准测试中取得开源第一。 在白盒代码审查与漏洞发现等安全任务中,GLM-5.3的表现持平Mythos 5,展现出面向网络安全防御场景的强大潜力。 上述全部提升都来自后训练。基于IndexShare、SAO、以及持续演进的新一代Slime框架,智谱在与GLM-5.2完全相同基座上高效推进强化学习,可能还远未开发出这个基座的智能上界。 智谱称将在发布两周后开放模型权重,此前完成安全评估与模型加固。 即日起上线智谱官方编程工具ZCode、效率工具AutoClaw,上线GLM Coding Plan全量用户及开放订阅。TraeWork/TraeCode/扣子、WorkBuddy/CodeBuddy、Qoder/QwenWork、CatPaw、JoyCode、OpenCode等编码平台开放抢先体验。API很快上线,完整模型权重将在两周内开源,此前需完成必要的安全加固,尽可能限制其潜在攻击能力,保留其防御价值。 8月14日13:00",
+            "icon": "",
+            "link": "https://www.toutiao.com/article/7673865231525528099",
+            "media": "",
+            "publish_date": "2026/08/14",
+            "refer": "ref_9",
+            "title": "智谱发布GLM-5.3 公司称是编程能力最强的开源模型"
+          },
+          {
+            "content": "国内主要有哪些AI公司?看联想集团等企业提供哪些AI产品与服务 中国产业经济信息网。2025年2月,联想与沐曦联合发布基于DeepSeek大模型的AI一体机;联想同期推进DeepSeek 671B-R1、V3及蒸馏模型与AI服务器的适配。双方披露的合作进展包括联合发布和模型适配:联想提供服务器整合、模型适配和企业交付,沐曦提供GPU及相应软件能力,DeepSeek提供模型。 智谱提供GLM模型、API和订阅服务 智谱以GLM基础模型为核心,对外提供开放平台、API、订阅计划和企业级智能体。2026年8月,智谱发布GLM-5.3和GLM-5.3-Flash,并将GLM Coding Plan开放给全部用户,设置Lite、Pro、Max和Team等版本。开发者可以按调用量使用模型API,也可以按月或按套餐购买面向编程任务的服务;企业还可结合数据安全、合规和自主控制要求选择本地化部署。 GLM-5.3-Flash采用3200亿总参数、180亿激活参数的架构,面向高频、成本敏感的调用。智谱将GLM-5.3用于需要较长执行周期的任务,披露的能力包括代码生成、系统理解、任务规划、工具调用和持续调试。官方编程工具ZCode负责上下文管理、工具调用、任务调度、缓存与结果校验,使模型能够在较长的开发任务中读取工程信息、调用工具并处理执行失败。 智谱2026年上半年实现收入9.539亿元,同比增长399.7%。开放平台及API收入8.252亿元,占总收入86.5%,同比增长2735.7%;企业级智能体收入5556万元,同比增长304.4%。截至2026年6月30日,GLM MaaS平台企业及开发者用户超过580万;到8月31日中期业绩公告发布时超过740万,两个数字的统计口径均为平台企业及开发者用户。 开放平台及API业务同期毛利率为24.6%。智谱的公告显示,按使用量计费的云端服务已成为主要",
+            "icon": "",
+            "link": "https://www.cinic.org.cn/zgzz/qy/1652126.html",
+            "media": "",
+            "publish_date": "2026/09/07",
+            "refer": "ref_10",
+            "title": "国内主要有哪些AI公司?看联想集团等企业提供哪些AI产品与服务"
+          }
+        ]
+      }
+    },
+    {
+      "engine": "search_pro_quark",
+      "query": "智谱 GLM-5.3 发布",
+      "contentSize": "medium",
+      "status": 200,
+      "fee": 0.05,
+      "coverage": {
+        "results": 10,
+        "withLink": 10,
+        "withMedia": 8,
+        "withTitle": 10,
+        "withContent": 10,
+        "withDate": 10,
+        "withRefer": 10,
+        "sampleKeys": [
+          "content",
+          "icon",
+          "link",
+          "media",
+          "publish_date",
+          "refer",
+          "title"
+        ]
+      },
+      "body": {
+        "created": 1792781239,
+        "id": "20261024024718efb38fc8056a46a2",
+        "request_id": "20261024024718efb38fc8056a46a2",
+        "search_intent": [
+          {
+            "intent": "SEARCH_ALWAYS",
+            "keywords": "智谱 GLM-5.3 发布",
+            "query": "智谱 GLM-5.3 发布"
+          }
+        ],
+        "search_result": [
+          {
+            "content": "【免费下载链接】GLM-5.3 GLM-5.3 与 GLM-5.2 使用相同的基座模型——所有提升均来自后训练。与 GLM-5.2 相比，它在复杂编程和长程任务上的表现显著提升。  项目地址: https://ai.gitcode.com/zai-org/GLM-5.3",
+            "icon": "",
+            "link": "https://m.blog.csdn.net/gitblog_00238/article/details/167579691",
+            "media": "CSDN技术社区",
+            "publish_date": "2026-10-11",
+            "refer": "ref_1",
+            "title": "GLM-5.3 杀进亚马逊货架，智谱股价一天涨近 5%：国产开源模型出海风向真的变了"
+          },
+          {
+            "content": "智谱今日正式发布 GLM-5.3，与 GLM-5.2 相比，基座模型没变，但通过后训练 Scaling 大大提高了模型的智能上界：数十倍的长程任务环境、更丰富多样的环境类型、超长的后训练时间。\nTags： 智谱 ， GLM5.3 ， 开源模型\n08月14日\n加载更多...",
+            "icon": "",
+            "link": "https://www.ithome.com/tags/%E6%99%BA%E8%B0%B1/",
+            "media": "IT之家",
+            "publish_date": "2026-10-06",
+            "refer": "ref_2",
+            "title": "智谱"
+          },
+          {
+            "content": "来源：市场资讯\n（来源：证券时报）\nClaude模型开发商Anthropic在9月29日发布报告，称智谱GLM-5.3已具备较强的网络安全能力。\nAnthropic在报告中指出，与公司旗下Claude Mythos Preview一样，智谱GLM-5.3可自主构建端到端的 网络攻击 漏洞利用。但GLM-5.3与其他前沿模型不同之处在于，GLM-5.3在发布时选择开源。\n智谱当时明确表示，开放权重后，这三层中仍然有效的是模型自身的安全对齐。GLM-5.3发布时推迟两周开放下载，主要用于完成安全评估和加固。\n目前，GLM-5.3在网络安全领域已实现规模化商业化落地。",
+            "icon": "",
+            "link": "https://m.163.com/dy/article/L83R20JU05568W0A.html",
+            "media": "网易",
+            "publish_date": "2026-09-30",
+            "refer": "ref_3",
+            "title": "Anthropic报告点名智谱GLM-5.3 称其网络安全能力增强"
+          },
+          {
+            "content": "Claude模型开发商Anthropic在9月29日发布报告，称智谱GLM-5.3已具备较强的网络安全能力。\n报告显示，在ExploitBench端到端漏洞利用测试中， 智谱 GLM-5.3在410次尝试中有50次完成端到端漏洞利用，Claude Mythos Preview为56次，表现接近。\nAnthropic在报告中指出，与公司旗下Claude Mythos Preview一样，智谱GLM-5.3可自主构建端到端的 网络攻击 漏洞利用。但GLM-5.3与其他前沿模型不同之处在于，GLM-5.3在发布时选择开源。\n智谱当时明确表示，开放权重后，这三层中仍然有效的是模型自身的安全对齐。GLM-5.3发布时推迟两周开放下载，主要用于完成安全评估和加固。\n目前，GLM-5.3在网络安全领域已实现规模化商业化落地。",
+            "icon": "",
+            "link": "https://m.163.com/dy/article/L83QLTEB053469RG.html",
+            "media": "网易",
+            "publish_date": "2026-09-30",
+            "refer": "ref_4",
+            "title": "Anthropic报告点名智谱GLM-5.3 称其网络安全能力增强"
+          },
+          {
+            "content": "Claude模型开发商 Anthropic 在9月29日发布报告，称 智谱GLM-5.3 已具备较强的网络安全能力。\nAnthropic在报告中指出，与公司旗下Claude Mythos Preview一样，智谱GLM-5.3可自主构建端到端的网络攻击漏洞利用。但GLM-5.3与其他前沿模型不同之处在于，GLM-5.3在发布时选择开源。\n智谱当时明确表示， 开放权重 后，这三层中仍然有效的是模型自身的 安全对齐 。GLM-5.3发布时推迟两周开放下载，主要用于完成安全评估和加固。\n目前，GLM-5.3在网络安全领域已实现规模化商业化落地。",
+            "icon": "",
+            "link": "https://view.inews.qq.com/k/20260930A0ANFO00?openApp=false&web_channel=wap",
+            "media": "腾讯网",
+            "publish_date": "2026-09-30",
+            "refer": "ref_5",
+            "title": "Anthropic报告点名智谱GLM-5.3 称其网络安全能力增强"
+          },
+          {
+            "content": "1、Anthropic发布报告，称智谱GLM-5.3在ExploitBench端到端漏洞利用测试中表现接近Claude Mythos Preview，并且研究人员借助GLM-5.3发现了浏览器中的未知漏洞。\nClaude模型开发商Anthropic在9月29日发布报告，称 智谱（HK2513） GLM-5.3已具备较强的 网络安全（885459） 能力。\nAnthropic在报告中指出，与公司旗下Claude Mythos Preview一样， 智谱（HK2513） GLM-5.3可自主构建端到端的网络攻击漏洞利用。但GLM-5.3与其他前沿模型不同之处在于，GLM-5.3在发布时选择开源。",
+            "icon": "",
+            "link": "https://m.10jqka.com.cn/20260930/c680422349.html",
+            "media": "同花顺财经",
+            "publish_date": "2026-09-30",
+            "refer": "ref_6",
+            "title": "Anthropic报告点名智谱GLM-5.3 称其网络安全能力增强"
+          },
+          {
+            "content": "GLM-5.3是智谱公司于2026年8月14日发布的大语言模型版本  [7] 。2026年06月29日，智谱公司首席科学家 唐杰 在社交平台    上发起全球意见征集，为计划发布的GLM-5.3收集功能建议，该活动浏览量达到40万以上，从收集到的反馈来看，用户最集中、最强烈的诉求是为GLM旗舰模型增加视觉能力  [2] 。关于命名，早前曾有传闻称该版本或将调整为GLM-5.5，但最终仍延续GLM-5系列编号逻辑，其发布策略受到市场竞争环境的影响  [4] 。发布前，相关信息曾因官网页面、搜索引擎缓存及开源代码库泄露而提前曝光  [5-6] 。该模型参数规模7430亿  [10]  [12] ，通过后训练技术如IndexShare、SAO及Slime框架提升性能，并增加了多模态视觉能力，优化了超长文档处理、科研推理和企业Agent能力。编程能力较前代GLM-5.2提升50%  [7]  [9] ，在包括TerminalBench3.0和Agents'LastExam(CLI)在内的多项基准测试中位列开源模型第一  [7]  [11] ，其编程与智能体能力接近 Claude Fable 5  [8] ，网络安全任务表现超过Mythos 5  [10] 。2026年8月14日， 范式 旗下统一模型调用平台 PhanRouter 完成适配并开放调用，成为首批支持该模型的平台之一  [16] 。8月16日， 阿里巴巴 旗下Agent产品“ 千问办公 ”首发上线GLM-5.3  [13] ，但于8月17日撤回接入  [21] 。8月19日凌晨，智谱正式上线新一代基座模型GLM-5.3的API（调用接口），定价与GLM-5.2保持一致  [17]  [23-27] 。8月21日，GLM-5.3接入 千问AI平台 ，相关API服务同步开放，开发者可直接调用  [18] 。智谱宣布GLM-5.3的模型权重计划于2026年8月25日开源  [22]  [24-27] 。2026年8月26日夜间，智谱上线并开源 GLM-5.3-Flash (320B-A18B)，这是 GLM-5 系列的首个原生多模态模型  [29] 。",
+            "icon": "",
+            "link": "https://baike.baidu.com/item/GLM-5.3/68244961",
+            "media": "百度百科",
+            "publish_date": "2026-09-19",
+            "refer": "ref_7",
+            "title": "GLM-5.3"
+          },
+          {
+            "content": "智谱发布 GLM-5.3-FlashX，扩算力、提速度、提定价\n前天\n智谱正式发布 GLM-5.3-FlashX 并全面开放 API，新版本推理速度最高可达 200 tokens / s，较 GLM-5.3-Flash 提升 5 倍，定价为原版本的 2.5 倍。\n\"话题追踪\" () 话题追踪\n话题追踪2026-09-18\n智谱发布 GLM-5.3-FlashX，扩算力、提速度、提定价2026-09-04\n智谱 GLM-5.3-Flash 等推出夜间免费及额度翻倍活动2026-08-29\n智谱宣布 GLM-5.3 模型正式开源2026-08-19\n智谱：GLM-\n5.3 API 即日起正式上线2026-08-14\n智谱正式发布 GLM-5.3 拥有更强编程能力2026-07-31\n扩建算力数据中心后，智谱 GLM Coding Plan 开放订阅2026-06-17\n智谱：上线并开源 GLM-5.22026-06-15\n智谱发布并开源 GLM-5.2，具备 1M",
+            "icon": "",
+            "link": "https://readhub.cn/topic/8wWCQaV7QHi",
+            "media": "",
+            "publish_date": "2026-09-18",
+            "refer": "ref_8",
+            "title": "智谱发布GLM-5.3-FlashX，扩算力、提速度、提定价 - Readhub"
+          },
+          {
+            "content": "智谱 GLM（当前旗舰 GLM-5.3，2026-08-14 发布、纯文本基座；上一版 GLM-5.2）是智谱 AI（Z.ai）的开源基座大模型家族：1M 无损上下文、MIT 开源权重可免费商用与私有部署，Coding 与 Agent 能力居开源第一梯队。同系列 GLM-5.3-Flash（2026-08-26）为首款原生多模态变体（320B-A18B MoE、1M 上下文、约 1/10 成本），多模态亦可走 GLM-5V-Turbo。2026 年 9 月 13 日智谱公告再融资约 393 亿港元（约 50 亿美元），两个月累计约 707 亿港元，其中约 60%（约 235 亿港元）投向下一代 GLM-6.0 与「完全自训练」体系——涵盖数据自产（模型对弈自动生成训练数据）、环境自造（智能体自己生成并验证任务环境）、基础设施自我优化三个维度，并同步披露 A+H 上市计划。同期在天猫开设官方旗舰店后，智谱品牌搜索量 48 小时内暴涨 50 倍。 定价：开源 MIT 免费；GLM-5.3-Flash API $0.15/$0.03/$0.50 每百万 token（约 GLM-5.2 的 1/10）。编辑评分：⭐ 4.5。\n智谱 GLM 是什么？",
+            "icon": "",
+            "link": "https://www.aitoollab.cn/tools/glm-5-2/",
+            "media": "",
+            "publish_date": "2026-09-18",
+            "refer": "ref_9",
+            "title": "智谱 GLM 5.3"
+          },
+          {
+            "content": "智谱正式发布 GLM-5.3 拥有更强编程能力\n2026-09-18\n智谱发布 GLM-5.3-FlashX，扩算力、提速度、提定价\n2026-09-17\n国产 AI 开始自我优化国产芯片：GLM-5.3 Flash 两周实现 3.2 倍性能\n2026-09-04\n智谱 GLM-5.3-Flash 等推出夜间免费及额度翻倍活动\n2026-08-29\n智谱宣布 GLM-5.3 模型正式开源\n2026-08-26\n智谱发布并开源多模态模型 GLM-5.3-Flash：对标 DeepSeek，由 10 万国产卡支持\n2026-08-21\nGLM-5.3、Deepseek-V4-Pro 等多款模型上线千问 AI 平台\n2026-08\n-19\n智谱：GLM-5.3 API 即日起正式上线\n2026-08-14\n智谱正式发布 GLM-5.3 拥有更强编程能力\n2026-07-31\n扩建算力数据中心后，智谱 GLM Coding Plan 开放订阅\n2026-06-22\n智谱市值首次突破 1 万亿港元，股价年内涨超 2000%",
+            "icon": "",
+            "link": "https://readhub.cn/topic/8vaA07ZpJfd",
+            "media": "Readhub",
+            "publish_date": "2026-09-18",
+            "refer": "ref_10",
+            "title": "智谱正式发布 GLM-5.3 拥有更强编程能力"
+          }
+        ]
+      }
+    },
+    {
+      "engine": "search_std",
+      "query": "новый релиз Node.js",
+      "contentSize": "medium",
+      "status": 200,
+      "fee": 0.01,
+      "coverage": {
+        "results": 2,
+        "withLink": 2,
+        "withMedia": 2,
+        "withTitle": 2,
+        "withContent": 2,
+        "withDate": 1,
+        "withRefer": 2,
+        "sampleKeys": [
+          "content",
+          "icon",
+          "link",
+          "media",
+          "publish_date",
+          "refer",
+          "title"
+        ]
+      },
+      "body": {
+        "created": 1792781240,
+        "id": "202610240247197f5b29ed275f4093",
+        "request_id": "202610240247197f5b29ed275f4093",
+        "search_intent": [
+          {
+            "intent": "SEARCH_ALWAYS",
+            "keywords": "новый релиз Node.js",
+            "query": "новый релиз Node.js"
+          }
+        ],
+        "search_result": [
+          {
+            "content": "一个非常明显的答案是：最新版本的 Node.js。Node.js 的更新日志显示，每个版本都会修复一些问题、添加新功能、提高性能等等，所以最新的版本通常是最好的选择。当前最新版本为 Node.js 14（截至文章完成时间），其重要特性包括： V8 引擎升级至 8.1 版本，大幅提高了 JavaScript 的执行性能； 支持原生的可读可写流停止； 对 Windows 原生模块的支持得到了改进； 调试工具支持检查集合类型的对象； 支持使用零拷贝方式进行 HTTP 上传； 多线程的实验性 Worker 现已成为稳定特性。",
+            "icon": "https://sfile.chatglm.cn/searchImage/quark_sm_cn_icon_new.jpg",
+            "link": "https://quark.sm.cn/s?from=smor&safe=1&q=node%E5%93%AA%E4%B8%AA%E7%89%88%E6%9C%AC%E7%94%A8%E5%BE%97%E6%9C%80%E5%A4%9A&by=tuijian&by2=text",
+            "media": "趣头条搜索",
+            "publish_date": "",
+            "refer": "ref_1",
+            "title": "node哪个版本用得最多"
+          },
+          {
+            "content": "内容简介：Node v10.8.0 已发布，该版本值得关注的更新是针对 npm 进行的更新和错误修复。 值得关注的更新 deps: 升级 npm 至 6.2.0 版本 #21592 npm has moved. This release updates various URLs to point to the rig\nNode v10.8.0 已发布，该版本值得关注的更新是针对 npm 进行的更新和错误修复。\n值得关注的更新\ndeps:\n升级 npm 至 6.2.0 版本 #21592\nnpm has moved. This release updates various URLs to point to the right places for bugs, support, and PRs.\nFix the regular expression matching in\nto also handle version numbers with multiple-digit major versions which would otherwise break under use of XCode 10.\nThe npm tree has been significantly flattened. Tarball size for the npm package has gone from 8MB to 4.8MB.\nChangelogs: 6.2.0-next.0, 6.2.0-next.1, 6.2.0.\n下载地址：https://nodejs.org/en/download/current/\nNode.js 是一个基于 Chrome V8 引擎的 JavaScript 运行时。Node.js 使用高效、轻量级的事件驱动、非阻塞 I/O 模型。\n【声明】文章转载自：开源中国社区 [http://www.oschina.net]\n以上所述就是小编给大家介绍的《Node v10.8.0 发布，服务器端的 JavaScript 运行环境》，希望对大家有所帮助，如果大家有任何疑问请给我留言，小编会及时回复大家的。在此也非常感谢大家对 码农网 的支持！\n查看所有标签\n猜你喜欢:\n本站部分资源来源于网络，本站转载出于传递更多信息之目的，版权归原作者或者来源机构所有，如转载稿涉及版权问题，请联系我们。",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_codercto_com_icon_new.jpg",
+            "link": "https://www.codercto.com/a/18125.html",
+            "media": "码农网",
+            "publish_date": "2018-08-02",
+            "refer": "ref_2",
+            "title": "Node v10.8.0 发布，服务器端的 JavaScript 运行环境"
+          }
+        ]
+      }
+    },
+    {
+      "engine": "search_pro",
+      "query": "новый релиз Node.js",
+      "contentSize": "medium",
+      "status": 200,
+      "fee": 0.03,
+      "coverage": {
+        "results": 5,
+        "withLink": 5,
+        "withMedia": 2,
+        "withTitle": 5,
+        "withContent": 5,
+        "withDate": 4,
+        "withRefer": 5,
+        "sampleKeys": [
+          "content",
+          "icon",
+          "link",
+          "media",
+          "publish_date",
+          "refer",
+          "title"
+        ]
+      },
+      "body": {
+        "created": 1792781241,
+        "id": "202610240247202fe4e583a4a94b99",
+        "request_id": "202610240247202fe4e583a4a94b99",
+        "search_intent": [
+          {
+            "intent": "SEARCH_ALWAYS",
+            "keywords": "новый релиз Node.js",
+            "query": "новый релиз Node.js"
+          }
+        ],
+        "search_result": [
+          {
+            "content": "Node.js是一种基于Chrome V8 JavaScript引擎构建的事件驱动、异步I/O的JavaScript运行时工具，它可以让JavaScript运行在服务器端，并且提供了很多能够让开发者在服务器环境下开发应用程序的APIs和工具。\n最新版本的Node.js 16.15.1已经发布，这是一个小的维护版本，包含一些针对先前版本的Bug修复和安全性更新。\n其中，Node.js 16.15.1更新了与标准化模块相关的错误，现在在Windows上使用--use-bundled-ca时也会包含根证书。此外，修复了在分叉文件上调用process.umask()时先前的崩溃。还修复了与进程模型相关的问题，现在再次支持-j参数并可以有效地分配CPU负载。\n这个版本也包含了一些重要的安全性更新，包括解决了内建zlib的一些问题，修复无限递归问题，以及在使用具有明确起源的输入时修正了Potentially Dangerous Functions的行为。\n开发者可以到Node.js的官方网站上下载最新版本 16.15.1，或者使用Node Version Manager（nvm）来升级现有版本。\n总之，Node.js 16.15.1的发布是一个不错的新闻，它为开发者提供了更新和更安全的环境。随着Node.js不断的发展改进，它将继续成为构建现代Web应用程序的首选工具之一。\nidea打包java可执行jar包\nC中的ceil头文件",
+            "icon": "",
+            "link": "https://21xrx.com/Articles/read_article/142730",
+            "media": "",
+            "publish_date": "2024-09-27",
+            "refer": "ref_1",
+            "title": "最新版nodejs16.15.1发布"
+          },
+          {
+            "content": "一个非常明显的答案是：最新版本的 Node.js。Node.js 的更新日志显示，每个版本都会修复一些问题、添加新功能、提高性能等等，所以最新的版本通常是最好的选择。当前最新版本为 Node.js 14（截至文章完成时间），其重要特性包括： V8 引擎升级至 8.1 版本，大幅提高了 JavaScript 的执行性能； 支持原生的可读可写流停止； 对 Windows 原生模块的支持得到了改进； 调试工具支持检查集合类型的对象； 支持使用零拷贝方式进行 HTTP 上传； 多线程的实验性 Worker 现已成为稳定特性。",
+            "icon": "https://sfile.chatglm.cn/searchImage/quark_sm_cn_icon_new.jpg",
+            "link": "https://quark.sm.cn/s?from=smor&safe=1&q=node%E5%93%AA%E4%B8%AA%E7%89%88%E6%9C%AC%E7%94%A8%E5%BE%97%E6%9C%80%E5%A4%9A&by=tuijian&by2=text",
+            "media": "趣头条搜索",
+            "publish_date": "",
+            "refer": "ref_2",
+            "title": "node哪个版本用得最多"
+          },
+          {
+            "content": "内容简介：Node v10.8.0 已发布，该版本值得关注的更新是针对 npm 进行的更新和错误修复。 值得关注的更新 deps: 升级 npm 至 6.2.0 版本 #21592 npm has moved. This release updates various URLs to point to the rig\nNode v10.8.0 已发布，该版本值得关注的更新是针对 npm 进行的更新和错误修复。\n值得关注的更新\ndeps:\n升级 npm 至 6.2.0 版本 #21592\nnpm has moved. This release updates various URLs to point to the right places for bugs, support, and PRs.\nFix the regular expression matching in\nto also handle version numbers with multiple-digit major versions which would otherwise break under use of XCode 10.\nThe npm tree has been significantly flattened. Tarball size for the npm package has gone from 8MB to 4.8MB.\nChangelogs: 6.2.0-next.0, 6.2.0-next.1, 6.2.0.\n下载地址：https://nodejs.org/en/download/current/\nNode.js 是一个基于 Chrome V8 引擎的 JavaScript 运行时。Node.js 使用高效、轻量级的事件驱动、非阻塞 I/O 模型。\n【声明】文章转载自：开源中国社区 [http://www.oschina.net]\n以上所述就是小编给大家介绍的《Node v10.8.0 发布，服务器端的 JavaScript 运行环境》，希望对大家有所帮助，如果大家有任何疑问请给我留言，小编会及时回复大家的。在此也非常感谢大家对 码农网 的支持！\n查看所有标签\n猜你喜欢:\n本站部分资源来源于网络，本站转载出于传递更多信息之目的，版权归原作者或者来源机构所有，如转载稿涉及版权问题，请联系我们。",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_codercto_com_icon_new.jpg",
+            "link": "https://www.codercto.com/a/18125.html",
+            "media": "码农网",
+            "publish_date": "2018-08-02",
+            "refer": "ref_3",
+            "title": "Node v10.8.0 发布，服务器端的 JavaScript 运行环境"
+          },
+          {
+            "content": "时间: 2025-04-22 12:45:10 AIGC 浏览: 51\nNode.js 版本 22 和版本 16 的差异 功能改进与新增特性 Node.js 不断演进，在新版本中引入了许多性能优化和功能增强。对于从版本 16 到版本 22 的升级，开发者可以获得更强大的工具集和支持。 - 实验性 WebAssembly System Interface (WASI) 支持被加入到较新的版本中[1]。这使得运行在 Node.js 上的应用程序能够更好地支持 WebAssembly 应用。 - N-API 已经稳定并得到进一步发展，允许 C/C 插件更容易地兼容不同的 Node.js 主线程版本。 - 新增了对 TLS 1.3 协议的支持，默认启用，提高了安全性的同时也改善了连接效率。 性能提升 随着 V8 JavaScript 引擎的更新迭代，Node.js 22 中包含了来自上游项目的多项性能改进： - 更高效的垃圾回收机制减少了内存占用以及提升了应用程序响应速度。 - 对于文件系统的操作进行了优化，fs.promises API 得到了显著的速度增长。 安全性和稳定性加强 为了提高平台的安全等级，官方团队持续修复已知漏洞，并移除了部分不安全的功能或配置选项： - 移除了一些旧版加密算法的支持，强制使用更强壮的方法来保障数据传输过程中的隐私保护措施。 - 增强了默认设置下的权限控制策略，防止潜在的风险暴露给恶意攻击者利用。 向下兼容性考量 尽管有诸多进步之处，但在某些情况下可能会影响到现有应用的工作方式： - 部分废弃接口已被彻\n最低0.47元/天开通会员,查看完整答案\n成为会员后, 你将解锁",
+            "icon": "",
+            "link": "https://wenku.csdn.net/answer/4zydm309iy",
+            "media": "",
+            "publish_date": "2025-04-22",
+            "refer": "ref_4",
+            "title": "node22和node16版本"
+          },
+          {
+            "content": "Node v10.4.0 已发布，该版本值得关注的更新是已提供处于实验阶段的 DNS 模块功能，此外还包括一些改进，如对 worker 的支持。\nAn experimental promisified version of the dns module is now available. Give it a try with\nrequire('dns').promises\n.\n#21264\nfs.lchown\nhas been undeprecated now that libuv supports it.\n#21498\nAtomics.wake\nis being renamed to\nAtomics.notify\nin the ECMAScript specification (\nreference\n). Since Node.js now has experimental support for worker threads, we are being proactive and added a\nnotify\nalias, while emitting a warning if\nwake\nis used.\n#21413\n#21518\nAdd API for asynchronous functions.\n#17887\nutil.inspect\nis now able to return a result instead of throwing when the maximum call stack size is exceeded during inspection.\n#20725\nscript.createCachedData()\n. This API replaces the\nproduceCachedData\noption of the\nScript\nconstructor that is now deprecated.\n#20300\nSupport for relative paths has been added to the\nWorker\nconstructor. Paths are interpreted relative to the current working directory.\n#21407\n下载地址：https://nodejs.org/en/download/current/, ",
+            "icon": "",
+            "link": "https://developer.cloud.tencent.com/news/267894",
+            "media": "",
+            "publish_date": "2018-07-05",
+            "refer": "ref_5",
+            "title": "Node v10.6.0 发布，提供处于实验阶段的 DNS 模块功能"
+          }
+        ]
+      }
+    },
+    {
+      "engine": "search_pro_sogou",
+      "query": "новый релиз Node.js",
+      "contentSize": "medium",
+      "status": 200,
+      "fee": 0.05,
+      "coverage": {
+        "results": 10,
+        "withLink": 10,
+        "withMedia": 0,
+        "withTitle": 10,
+        "withContent": 10,
+        "withDate": 2,
+        "withRefer": 10,
+        "sampleKeys": [
+          "content",
+          "icon",
+          "link",
+          "media",
+          "publish_date",
+          "refer",
+          "title"
+        ]
+      },
+      "body": {
+        "created": 1792781242,
+        "id": "2026102402472102f02410050a45de",
+        "request_id": "2026102402472102f02410050a45de",
+        "search_intent": [
+          {
+            "intent": "SEARCH_ALWAYS",
+            "keywords": "новый релиз Node.js",
+            "query": "новый релиз Node.js"
+          }
+        ],
+        "search_result": [
+          {
+            "content": "Node.js — Ejecuta JavaScript en cualquier parte Node.js。Node.js® Download Archive v26.12.0 First released 05 may 2026 Last updated 21 oct 2026 Minor versions 19 N-API version v147 npm version v11.20.0 V8 version v14.6.202.34 Read the changelog or blog post for this version. Learn more about Node.js releases, including the release schedule and LTS status. Signed SHASUMS for release files. How to verify signed SHASUMS. Download a signed Node.js v26.12.0 source tarball. Other releases v26.12.0 Current Node.js v26.x LTS Node.js v24.x (Krypton)Node.js v22.x (Jod) EOL Node.js v25.x Node.js v23.x Node.js v21.x Node.js v20.x (Iron)Node.js v19.x Node.js v18.x (Hydrogen)Node.js v17.x Node.js v16.x (Gallium)Node.js v15.x Node.js v14.x (Fermium)Node.js v13.x Node.js v12.x (Erbium)Node.js v11.x Node.js",
+            "icon": "",
+            "link": "https://nodejs.org/es/download/archive/v26.12.0",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_1",
+            "title": "Node.js — Ejecuta JavaScript en cualquier parte"
+          },
+          {
+            "content": "Node.js — Ejecuta JavaScript en cualquier parte Node.js。v24.22.0 (Krypton) First released 06 may 2025 Last updated 20 oct 2026 Minor versions 31 N-API version v137 npm version v11.19.1 V8 version v13.6.233.17 Read the changelog or blog post for this version. Learn more about Node.js releases, including the release schedule and LTS status. Signed SHASUMS for release files. How to verify signed SHASUMS. Download a signed Node.js v24.22.0 source tarball. Other releases v24.22.0 Current Node.js v26.x LTS Node.js v24.x (Krypton)Node.js v22.x (Jod) EOL Node.js v25.x Node.js v23.x Node.js v21.x Node.js v20.x (Iron)Node.js v19.x Node.js v18.x (Hydrogen)Node.js v17.x Node.js v16.x (Gallium)Node.js v15.x Node.js v14.x (Fermium)Node.js v13.x Node.js v12.x (Erbium)Node.js v11.x Node.js v10.x (Dubnium)",
+            "icon": "",
+            "link": "https://nodejs.org/es/download/archive/v24.22.0",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_2",
+            "title": "Node.js — Ejecuta JavaScript en cualquier parte"
+          },
+          {
+            "content": "Node.js — Blog Node.js。Node.js 24.22.0 (LTS) 版本发布Node.js 24.22.0 (LTS) RL Richard Lau 2026年10月14日 Node.js 26.12.0 (Current) 版本发布Node.js 26.12.0 (Current) RL Richard Lau 2026年10月14日 Wednesday, October 21, 2026 Security Releases 漏洞Wednesday, October 21, 2026 Security Releases TNJP The Node.js Project 2026年10月14日 Node.js 26.11.1 (Current) 版本发布Node.js 26.11.1 (Current) ADH Antoine du Hamel 2026年10月07日 Node.js 26.11.0 (Current) 版本发布Node.js 26.11.0 (Current) ADH Antoine du Hamel 2026年10月07日 Node.js 22.23.3 (LTS) 版本发布Node.js 22.23.3 (LTS) ADH Antoine du Hamel 2026年9月23日",
+            "icon": "",
+            "link": "https://www.nodejs.org/zh-cn/blog",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_3",
+            "title": "Node.js — Blog"
+          },
+          {
+            "content": "Node.js Release Working Group Node.js。Folders and files Name Name Last commit message Last commit date doc doc add minutes for 2026-02-05, 2026-03-05 and 2026-06-25 Jun 26, 2026 .editorconfig .editorconfig clean up README whitespace & add .editorconfig Jan 10, 2017 CODENAMES.md CODENAMES.md doc: add codenames through to Node.js 34 (2030) ( #942 ) Mar 8, 2024 CODE_OF_CONDUCT.md CODE_OF_CONDUCT.md Update master branch references to main ( #775 ) Aug 24, 2022 CONTRIBUTING.md CONTRIBUTING.md Update master branch references to main ( #775 ) Aug 24, 2022 GOVERNANCE.md GOVERNANCE.md doc: clarify releaser key addition process for release-keys repo ( #1166 ) Jul 1, 2026 README.md README.md doc: document the Alpha phase and v27 schedule ( #1188 ) Oct 21, 2026 generateReleasePlan.mjs generateReleaseP",
+            "icon": "",
+            "link": "https://unencrypted.nodejs.org/en/about/releases",
+            "media": "",
+            "publish_date": "2026/10/21",
+            "refer": "ref_4",
+            "title": "Node.js Release Working Group"
+          },
+          {
+            "content": "Node.js — Run JavaScript Everywhere Node.js。v26.1.0 首次釋出於 2026年5月05日 上次更新於 2026年10月14日 小版本 18 N-API 版本 v147 npm 版本 v11.13.0 V8 版本 v14.6.202.34 Read the changelog or blog post for this version. Learn more about Node.js releases, including the release schedule and LTS status. Signed SHASUMS for release files. How to verify signed SHASUMS. Download a signed Node.js v26.1.0 source tarball. Other releases v26.1.0 Current Node.js v26.x LTS Node.js v24.x (Krypton)Node.js v22.x (Jod) EOL Node.js v25.x Node.js v23.x Node.js v21.x Node.js v20.x (Iron)Node.js v19.x Node.js v18.x (Hydrogen)Node.js v17.x Node.js v16.x (Gallium)Node.js v15.x Node.js v14.x (Fermium)Node.js v13.x Node.js v12.x (Erbium)Node.js v11.x Node.js v10.x (Dubnium)Node.js v9.x Node.js v8.x (Carbon)Node.js v7.x Node.js v6.x (Boron)N",
+            "icon": "",
+            "link": "https://nodejs.org/zh-tw/download/archive/v26.1.0",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_5",
+            "title": "Node.js — Run JavaScript Everywhere"
+          },
+          {
+            "content": "Node.js Releases Node.js。Node.js Releases Commercial support for versions past the Maintenance LTS phase is available through our OpenJS Ecosystem Sustainability Program partners Major Node.js versions enter Current release status for six months, which gives library authors time to add support for them. Historically (up to Node.js 26), odd-numbered releases (9, 11, etc.) become unsupported after six months, and even-numbered releases (10, 12, etc.) move to Active LTS status and are ready for general use. Starting with Node.js 27, the release cycle will be annual and every major version will move to LTS status after its six-month Current phase (and six additional months of Alpha phase). LTS release status is \"long-term support\", which typically guarantees that critical bugs will be fixed fo",
+            "icon": "",
+            "link": "https://nodejs.org/en/about/previous-releases?source=post_page-----c8106703260a-----------------------------------------",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_6",
+            "title": "Node.js Releases"
+          },
+          {
+            "content": "NodeSource Weekly — Oct 20, 2026: Node.js 27 Release Model, Node.js 26.12 & AI Agents NodeSource。NodeSource Weekly — Oct 20, 2026: Node.js 27 Release Model, Node.js 26.12 & AI Agents Estefany Aguilar 👋 Welcome to This Week’s Edition! Node.js is shipping new releases, preparing important security updates, and getting closer to a major change in how releases move toward LTS. This week: 🟢 Node.js 26.12.0 and 24.22.0 bring new WebSocket utilities, crypto APIs, SQLite improvements, performance updates, and more. 🔐 New Node.js security releases are coming October 21 for the 26.x, 24.x, and 22.x release lines. 🔄 The Node.js release schedule is changing, with Node.js 27 introducing the new model and an Alpha phase for earlier testing. 🎙️ Matteo Collina joins NodeSource to talk about AI agents, prod",
+            "icon": "",
+            "link": "https://mailto:joe@nodesource.com/blog/nodesource-weekly-oct-20-2026-nodejs-27-release-model-nodejs-26-12-ai-agents",
+            "media": "",
+            "publish_date": "2026/10/20",
+            "refer": "ref_7",
+            "title": "NodeSource Weekly — Oct 20, 2026: Node.js 27 Release Model, Node.js 26.12 & AI Agents"
+          },
+          {
+            "content": "Node.js — JavaScript ஐ எங்கும் இயக்க Node.js。Node.js® பதிவிறக்கக் காப்பகம் v26.11.1 முதல் வெளியீடு 05 மே, 2026 கடைசி புதுப்பிப்பு 14 அக்., 2026 சிறு பதிப்புகள் 18 N-API பதிப்பு v147 npm பதிப்பு v11.20.0 V8 பதிப்பு v14.6.202.34 இந்தப் பதிப்பிற்கானமாற்றங்களின் தொகுப்பை அல்லது வலைப்பதிவு இடுகையை வாசிக்கவும். வெளியீட்டு கால அட்டவணை மற்றும் LTS நிலை உட்பட Node.js வெளியீடுகள் பற்றி மேலும் தெரிந்துகொள்ளுங்கள். வெளியீட்டுக் கோப்புகளுக்கான கையொப்பமிடப்பட்ட SHASUMS. கையொப்பமிடப்பட்ட SHASUMS-களை எவ்வாறு சரிபார்ப்பது என்பது குறித்த விவரம். கையொப்பமிடப்பட்ட Node.js v26.11.1 மூலக் குறியீடு டார்பால் கோப்பைப் பதிவிறக்கவும். பிற வெளியீடுகள் v26.11.1 Current Node.js v26.x LTS Node.js v24.x (Krypton)Node.js v22.x (Jod) EOL Node.js v25.x Node.js v23.x Node.js v21.x Node.js v20.x (Iron)Node.js v19.x Node.js v18.x (Hydrogen)Node.js v17.x Node.js v16.x (Gallium)Node.js v15.x Node.js v14.x (Fermium)Node.js v13.x Node.js v12.x (Erbium)Node.js v11.x Node.js v10.x (Dubnium)Node.js v9.x No",
+            "icon": "",
+            "link": "https://nodejs.org/ta/download/archive/v26.11.1",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_8",
+            "title": "Node.js — JavaScript ஐ எஙகம இயகக"
+          },
+          {
+            "content": "Node.js — Node.js Releases Node.js。Node.js Releases Commercial support for versions past the Maintenance LTS phase is available through our OpenJS Ecosystem Sustainability Program partners Major Node.js versions enter Current release status for six months, which gives library authors time to add support for them. Historically (up to Node.js 26), odd-numbered releases (9, 11, etc.) become unsupported after six months, and even-numbered releases (10, 12, etc.) move to Active LTS status and are ready for general use. Starting with Node.js 27, the release cycle will be annual and every major version will move to LTS status after its six-month Current phase (and six additional months of Alpha phase). LTS release status is \"long-term support\", which typically guarantees that critical bugs will b",
+            "icon": "",
+            "link": "https://nodejs.org/en/about/previous-releases",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_9",
+            "title": "Node.js — Node.js Releases"
+          },
+          {
+            "content": "Node.js — 在任何地方运行 JavaScript Node.js。Node.js® 历史版本下载 v24.16.0 (Krypton) First released 2025年5月06日 Last updated 2026年10月20日 Minor versions 31 N-API version v137 npm version v11.13.0 V8 version v13.6.233.17 阅读该版本的 变更日志 或 博客。 了解关于 Node.js 版本 的更多信息,包括发版计划和LTS状态。 文件 签名SHASUMS 。 如何 校验 签名SHASUMS. 下载签名的 Node.js v24.16.0 源码 压缩包。",
+            "icon": "",
+            "link": "https://nodejs.org/zh-cn/download/archive/v24.16.0",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_10",
+            "title": "Node.js — 在任何地方运行 JavaScript"
+          }
+        ]
+      }
+    },
+    {
+      "engine": "search_pro_quark",
+      "query": "новый релиз Node.js",
+      "contentSize": "medium",
+      "status": 200,
+      "fee": 0.05,
+      "coverage": {
+        "results": 10,
+        "withLink": 10,
+        "withMedia": 10,
+        "withTitle": 10,
+        "withContent": 10,
+        "withDate": 10,
+        "withRefer": 10,
+        "sampleKeys": [
+          "content",
+          "icon",
+          "link",
+          "media",
+          "publish_date",
+          "refer",
+          "title"
+        ]
+      },
+      "body": {
+        "created": 1792781243,
+        "id": "202610240247220b7b35dac6be4107",
+        "request_id": "202610240247220b7b35dac6be4107",
+        "search_intent": [
+          {
+            "intent": "SEARCH_ALWAYS",
+            "keywords": "новый релиз Node.js",
+            "query": "новый релиз Node.js"
+          }
+        ],
+        "search_result": [
+          {
+            "content": "　　Node.js 23 被正式标记为终止支持（EOL）版本。\n　　V24.0.1\n　　V8 JavaScript 引擎升级至 13.6 版本，引入了 Float16Array、显式资源管理、RegExp.escape、WebAssembly Memory64 以及实用的 Error.isError 方法等诸多新特性。\n　　AsyncLocalStorage 默认使用 AsyncContextFrame 优化异步上下文追踪，进一步提升复杂应用的性能与稳定性。这些功能紧跟网页标准演进，让开发者能够构建更现代化的应用。\n　　新版本集成了 npm 11，不仅提升包管理效率，增强安全协议，还改善与现代 JavaScript 包的兼容性。此外，Windows 平台 编译工具 从 MSVC 全面过渡至 ClangCL，确保不同开发环境的一致性。HTTP 客户端也升级至 Undici 7，支持更多现代 HTTP 特性。\n　　在易用性方面，URLPattern API 现已全局可用，无需显式导入即可使用。实验性权限模型（Permission Model）从 Node.js 20 版本升级，简化标志为“–permission”，逐步走向广泛应用。\n　　新版还改进了测试运行模块，可以自动等待子测试完成，免去开发者手动管理 Promise 的麻烦，降低出错风险。\n　　值得注意的是，此版本弃用或移除了部分 API。例如，url.parse （） 被 WHATWG URL API 取代，tls.createSecurePair 等功能也被移除。",
+            "icon": "",
+            "link": "https://m.xitongzhijia.net/soft/210586.html",
+            "media": "系统之家官网",
+            "publish_date": "2026-05-07",
+            "refer": "ref_1",
+            "title": "Node.js（Java运行环境）V26.0.0 官方最新版"
+          },
+          {
+            "content": "Node.js（Java运行环境）V24.0.1 官方最新版\n　　 系统之家 5月9日最新消息，Node.js发布的最新的24版本，此次更新 不仅带来更强的性能、更高的安全性以及更顺畅的开发体验，同时升级V8引擎、集成npm 11、全局URLPattern、过渡至ClangCL ，下面让我们一起来看看完整的更新内容吧。\n　　Node.js 24版本： 前往下载\n　　系统之家附上本次更新主要修复内容如下\n　　V8 JavaScript 引擎升级至 13.6 版本，引入了 Float16Array、显式资源管理、RegExp.escape、WebAssembly Memory64 以及实用的 Error.isError 方法等诸多新特性。\n　　AsyncLocalStorage 默认使用 AsyncContextFrame 优化异步上下文追踪，进一步提升复杂应用的性能与稳定性。这些功能紧跟网页标准演进，让开发者能够构建更现代化的应用。\n　　新版本集成了 npm 11，不仅提升包管理效率，增强安全协议，还改善与现代 JavaScript 包的兼容性。此外，Windows 平台 编译工具 从 MSVC 全面过渡至 ClangCL，确保不同开发环境的一致性。HTTP 客户端也升级至 Undici 7，支持更多现代 HTTP 特性。\n　　在易用性方面，URLPattern API 现已全局可用，无需显式导入即可使用。实验性权限模型（Permission Model）从 Node.js 20 版本升级，简化标志为“–permission”，逐步走向广泛应用。\n　　新版还改进了测试运行模块，可以自动等待子测试完成，免去开发者手动管理 Promise 的麻烦，降低出错风险。",
+            "icon": "",
+            "link": "https://m.xitongzhijia.net/news/20250509/300963.html",
+            "media": "系统之家",
+            "publish_date": "2025-05-09",
+            "refer": "ref_2",
+            "title": "JavaScript运行环境Node.js发布24版本！附更新日志记及下载"
+          },
+          {
+            "content": "关注\nIT之家 5 月 9 日消息， Node.js ，这一广受欢迎的开源跨平台 JavaScript 运行环境，正式发布了 24.0 版本， 新版本承诺带来更强的性能、更高的安全性以及更顺畅的开发体验。\nNode.js  24.0 的亮点之一是 V8 JavaScript 引擎升级至 13.6 版本，引入了 Float16Array、显式资源管理、 RegExp.escape 、WebAssembly Memory64 以及实用的  Error.isError  方法等诸多新特性。\nAsyncLocalStorage 默认使用 AsyncContextFrame 优化异步上下文追踪，进一步提升复杂应用的性能与稳定性。这些功能紧跟网页标准演进，让开发者能够构建更现代化的应用。\nIT之家援引 linuxiac 博文介绍，新版本集成了 npm 11，不仅提升包管理效率，增强安全协议，还改善与现代 JavaScript 包的兼容性。此外，Windows 平台编译工具从 MSVC 全面过渡至 ClangCL，确保不同开发环境的一致性。HTTP 客户端也升级至 Undici 7，支持更多现代 HTTP 特性。\n在易用性方面，URLPattern API 现已全局可用，无需显式导入即可使用。实验性权限模型（Permission Model）从  Node.js  20 版本升级，简化标志为“–permission”，逐步走向广泛应用。\n新版还改进了测试运行模块，可以自动等待子测试完成，免去开发者手动管理 Promise 的麻烦，降低出错风险。\n值得注意的是，此版本弃用或移除了部分 API。例如， url.parse  () 被 WHATWG URL API 取代， tls.createSecurePair  等功能也被移除。\n举报\n挂机打宝，一键称霸！高爆传奇，热血开战，装备自己，横扫全场！\n广告 月灵传奇",
+            "icon": "",
+            "link": "https://view.inews.qq.com/a/20250509A01JCB00",
+            "media": "腾讯网",
+            "publish_date": "2025-05-09",
+            "refer": "ref_3",
+            "title": "Node.js 24 发布：升级 V8 引擎、集成npm 11、全局URLPattern"
+          },
+          {
+            "content": "IT之家  5 月 9 日消息， Node.js ，这一广受欢迎的开源跨平台 JavaScript 运行环境，正式发布了 24.0 版本， 新版本承诺带来更强的性能、更高的安全性以及更顺畅的开发体验。Node.js  24.0 的亮点之一是 V8 JavaScript 引擎升级至 13.6 版本，引入了 Float16Array、显式资源管理、 RegExp.escape 、WebAssembly Memory64 以及实用的  Error.isError  方法等诸多新特性。AsyncLocalStorage 默认使用 AsyncContextFrame 优化异步上下文追踪，进一步提升复杂应用的性能与稳定性。这些功能紧跟网页标准演进，让开发者能够构建更现代化的应用。",
+            "icon": "",
+            "link": "https://www.ithome.com/0/851/635.htm",
+            "media": "IT之家",
+            "publish_date": "2025-05-09",
+            "refer": "ref_4",
+            "title": "Node.js 24 发布：升级 V8 引擎、集成 npm 11、全局 URLPattern、过渡至 ClangCL"
+          },
+          {
+            "content": "IT之家 5 月 9 日消息， Node.js ，这一广受欢迎的开源跨平台 JavaScript 运行环境，正式发布了 24.0 版本， 新版本承诺带来更强的性能、更高的安全性以及更顺畅的开发体验。Node.js  24.0 的亮点之一是 V8 JavaScript 引擎升级至 13.6 版本，引入了 Float16Array、显式资源管理、 RegExp.escape 、WebAssembly Memory64 以及实用的  Error.isError  方法等诸多新特性。AsyncLocalStorage 默认使用 AsyncContextFrame 优化异步上下文追踪，进一步提升复杂应用的性能与稳定性。这些功能紧跟网页标准演进，让开发者能够构建更现代化的应用。",
+            "icon": "",
+            "link": "https://t.cj.sina.cn/articles/view/1826017320/6cd6d02802001ewno",
+            "media": "新浪财经",
+            "publish_date": "2025-05-09",
+            "refer": "ref_5",
+            "title": "Node.js 24 发布：升级 V8 引擎、集成npm 11、全局URLPattern"
+          },
+          {
+            "content": "近日，Node.js 官方团队正式 发布 了 Node.js v24.0.0 版本，这是一个具有里程碑意义的重大更新。作为 \"Current\" 版本，它将在未来六个月内引领 Node.js 的发展方向，并将于今年 10 月份进入长期支持(LTS)阶段。此次更新带来了诸多重要变化，包括 V8 JavaScript 引擎升级至 13.6 版本、npm 升级至 11 版本，以及多项性能优化和 API 改进。本文将深入解析 Node.js v24.0.0 的重要更新内容，帮助开发者快速了解这些变化对项目开发的影响。无论你是 Node.js 老手还是新手，这些变化都值得你重点关注。一、核心 引擎 升级：V8 13.6 带来新特性Node.js v24.0.0 最引人注目的变化之一是将 V8 JavaScript 引擎升级到了 13.6 版本。这一升级由 Michaël Zasso 在 PR #58070 中完成，带来了多项 JavaScript 新特性：1. Float16Array 支持",
+            "icon": "",
+            "link": "https://m.163.com/dy/article_cambrian/JV0CMHKC05563UC5.html",
+            "media": "网易",
+            "publish_date": "2025-05-08",
+            "refer": "ref_6",
+            "title": "node.js v24.0.0 正式发布！10大重磅更新助力开发者，性能大幅提升，不容错过！"
+          },
+          {
+            "content": "最新长期支持版 Node.js 在保持其作为企业级 JavaScript 应用程序首选运行时的同时，带来了更新。Node.js 仍然是最流行的 JavaScript 运行时之一。事实上，它就像一个巨无霸：自 2009 年推出以来，它似乎势不可挡。事实上，Node.js 是 JavaScript 的行业标准运行时，被 Netflix、Uber、eBay、PayPal、LinkedIn、Trello、NASA、沃尔玛、Groupon 等许多公司使用。这个开源的跨平台运行时环境是开发可扩展网络应用程序的绝佳工具，并且已成为最广泛使用的 Web 框架之一。Node.js 如此流行的原因之一是它可以将加载时间减少多达 60%。对于大规模应用程序而言，这极其重要。但是，最新版本有什么值得兴奋的呢？说实话，您必须回到 23.0.0 版本才能找到一个未被特别列为安全版本的版本。由于 23.0.0 版本于 2024 年 10 月 16 日发布，在科技年代中它可能看起来有点过时了，但它是一个 LTS 版本，因此它将存在一段时间。至于 Node.js 23 中的新功能，让我们来看一下。此版本有四个主要亮点：",
+            "icon": "",
+            "link": "https://baijiahao.baidu.com/s?id=1824807977802447401",
+            "media": "百家号",
+            "publish_date": "2025-02-23",
+            "refer": "ref_7",
+            "title": "最新Node.js有什么，以及如何安装？"
+          },
+          {
+            "content": "node 最新版 下载， node  14.3.0 当前发布版， node  12.17.0 长期支持版，主版本的  Node.js  进入 当前版 将持续六个月的时间，在此期间库作者可以对其进行支持。 六个月之后，奇数版本（诸如 9、11 等）将变为不支持状态，只有偶数版本（诸如 10、12 等）变成 活跃 LTS 状态，并且准备投入使用。 LTS 发布版的状态是“长期支持版”，这意味着重大的 Bug 将在后续的 30 个月内持续得到不断地修复。 上线应该仅使用 活跃 LTS 或者是 维护 LTS 版。node -v 18.15 .0-x86.msi04-16Node.js ，简称 Node ，是一个开源且跨平台的JavaScript运行时环境，它允许在浏览器外运行JavaScript代码。 Node.js 于2009 年 由Ryan Dahl创立，旨在创建高性能的Web服务器和网络应用程序。它基于Google Chrome的V8 ...node -v18.16.0-x64， Node js最新WINDOWS环境安装包06-20",
+            "icon": "",
+            "link": "https://m.blog.csdn.net/qq_60870118/article/details/129727274?fromshare=blogdetail&sharefrom=from_link&sharerId=129727274&sharerefer=PC&sharesource=m0_75149094&sharetype=blogdetail",
+            "media": "CSDN技术社区",
+            "publish_date": "2024-09-02",
+            "refer": "ref_8",
+            "title": "2024年node.js最新版(18.15.0)详细安装教程(保姆级)"
+          },
+          {
+            "content": "软件类型：应用软件\n软件大小：26.06 MB\n更新时间：2024-08-22\n软件评级：\n运行环境：WinAll\n软件语言：简体中文\n安全监测：   无插件  360 √ 腾讯 √ 金山 √ 瑞星 √\n　　Node.js 是一个可以在服务器上运行的 Javascript，现在最新版已经是 16 版本啦！这个新版本会取代之前稳定的 Node.js 14，成为现在的主流。对了，新版还有一个改动，就是以前没处理好的拒绝现在改成 throw 模式了。另外，还有 N-API 7 版本，这个版本引入了很多新的方法来处理数组缓冲区哦！\n新特性\n　　AbortController\n　　Node.js 15 加入了 AbortController 的一个实验性实现。AbortController 是一个全局实用工具类，可根据 AbortController Web API，在选定的基于 Promise 的 API 中发出取消信号\n　　N-API 7\n　　N-API 7 是上一个大版本以来的第一个新版，并带来了使用 ArrayBuffers 的更多方法。\n　　N-API是一个用于构建本机插件的API，它独立于底层Javascript运行时环境（如V8），并作为Node.js本身的一部分。此API将作为跨Node.js版本已编译的应用程序接口（Application Binary Interface）的稳定版，简称（ABI）。它是为了将Addons插件和底层Javascript引擎的改动隔离开来，并且允许在一个版本编译的模块不需要重新编译就可以在更高版本的Node.js上运行。",
+            "icon": "",
+            "link": "https://m.chunjingban.net/soft/53148.html",
+            "media": "纯净版系统",
+            "publish_date": "2024-08-22",
+            "refer": "ref_9",
+            "title": "Node.js V16.14.2 64位官方版"
+          },
+          {
+            "content": "Node.js 最新版本为 v19.5.0，发布于 2023 年 9 月 29 日。主要特性包括：弃用未公开模块，提高安全性。弃用 ES3 异步回调，鼓励使用 Promise 或 async/await。弃用 V8 的 --harmony 标志，所有 ES6+ 功能默认启用。新建 Diagnostics 工作组，专注解决诊断问题。性能优化，提升 JavaScript 执行速度。Node.js 最新版本Node.js 最新版本为  v19.5.0 ，于 2023 年 9 月 29 日发布。主要特性弃用未公开模块： 已弃用未公开的核心模块，以提高安全性。 弃用 ES3 异步回调： 不再支持异步回调，鼓励使用 Promise 或 async/await。 弃用 V8 的 --harmony 标志： 弃用 --harmony 标志，所有 ES6+ 功能现在都是默认启用的。 新的 Diagnostics 工作组： 创建了一个新的工作组来专门解决诊断问题。 性能优化： 对 V8 引擎进行了优化，提高了 JavaScript 执行速度。其他变化",
+            "icon": "",
+            "link": "https://m.php.cn/faq/957962.html",
+            "media": "php中文网",
+            "publish_date": "2024-08-21",
+            "refer": "ref_10",
+            "title": "node.is最新版本"
+          }
+        ]
+      }
+    },
+    {
+      "engine": "search_std",
+      "query": "OpenAI latest model announcement",
+      "contentSize": "high",
+      "status": 200,
+      "fee": 0.01,
+      "coverage": {
+        "results": 10,
+        "withLink": 10,
+        "withMedia": 6,
+        "withTitle": 10,
+        "withContent": 10,
+        "withDate": 9,
+        "withRefer": 10,
+        "sampleKeys": [
+          "content",
+          "icon",
+          "link",
+          "media",
+          "publish_date",
+          "refer",
+          "title"
+        ]
+      },
+      "body": {
+        "created": 1792781244,
+        "id": "2026102402472358a995d60d9a4dfd",
+        "request_id": "2026102402472358a995d60d9a4dfd",
+        "search_intent": [
+          {
+            "intent": "SEARCH_ALWAYS",
+            "keywords": "OpenAI latest model announcement",
+            "query": "OpenAI latest model announcement"
+          }
+        ],
+        "search_result": [
+          {
+            "content": "【OpenAI宣布新的o3模型】财联社12月21日电，OpenAI发布了下一代推理模型o3，这是今年早些时候发布的o1推理”模型的最新版本。就像o1一样，o3是一个模型家族，o3-mini是一款更小的精简版模型，专门针对特定任务进行了微调。OpenAI声称，至少在某些条件下，o3可以接近实现AGI。OpenAI总裁Greg Brockman表示，最新的推理模型o3是一个突破，在最困难的基准上有了阶跃函数的改进。现在开始安全测试和红队演练。\n发布于：上海",
+            "icon": "https://sfile.chatglm.cn/searchImage/k_sina_cn_icon_new.jpg",
+            "link": "https://k.sina.cn/article_2868676035_aafc85c302001cq2s.html?oid=3830079618867146",
+            "media": "sina.cn",
+            "publish_date": "2024-12-21",
+            "refer": "ref_1",
+            "title": "OpenAI宣布新的o3模型"
+          },
+          {
+            "content": "OpenAI 近日發佈了最新的小型模型 ——GPT-5.4mini 和 GPT-5.4nano。這兩款模型的推出，專門爲需要快速響應的高頻任務而設計，標誌着 AI 技術的又一次飛躍。\n根據 OpenAI 的官方消息，GPT-5.4mini 和 nano 都是基於之前的 GPT-5.4模型進行了優化，不僅保留了其諸多優點，還在速度和效率上進行了提升。尤其是在編寫代碼、邏輯推理和多模態理解等應用場景中，這些小型模型展示了比傳統大型模型更爲出色的性能。GPT-5.4mini 的運行速度比之前的版本提升了兩倍，讓用戶在高壓的工作環境中可以更快地完成任務。\n具體而言，GPT-5.4mini 在代碼工作流的快速迭代上表現尤爲突出，能夠高效處理精準編輯、代碼庫導航以及前端生成等複雜任務。此外，在多模態領域，GPT-5.4mini 還能夠迅速解析密集的用戶界面截圖，順利完成各類計算機操作，進一步提升了用戶體驗。\n而 GPT-5.4nano 則是目前體積最小、成本最低的版本，專爲追求經濟與速度的用戶設計。作爲 GPT-5nano 的重大升級版，它在文本分類、數據提取和簡單輔助任務中表現不俗，是開發者的理想選擇。\n這兩款新模型已經全面上線，GPT-5.4mini 可通過 API、Codex 和 ChatGPT 進行訪問，而 GPT-5.4nano 則主要通過 API 提供服務。更令人振奮的是，二者的成本也非常親民，極大地降低了開發者的使用門檻。\nOpenAI 的這次發佈無疑爲 AI 領域注入了新的活力，未來的智能應用場景將更加豐富，用戶的工作效率也將顯著提升。期待這兩款模型在實際應用中的表現，給我們帶來更多驚喜!",
+            "icon": "",
+            "link": "https://news.aibase.com/tw/news/26308",
+            "media": "",
+            "publish_date": "2026-03-18",
+            "refer": "ref_2",
+            "title": "OpenAI 發佈超強小型模型GPT-5.4 mini與nano，速度與性能雙豐收！"
+          },
+          {
+            "content": "OpenAI 正式发布 GPT-4.1 系列：百万 Token 长文本、更强编码、价格更优！ OpenAI 隆重推出专为开发者打造的全新模型系列——GPT-4.1！该系列包含三个强大的新成员：旗舰级的 GPT-4.1、高速的 GPT-4.1 Mini，以及有史以来最小、最快、最经济的 GPT-4.1 Nano。这些模型在编码能力、复杂指令遵循、长文本处理（首次支持高达一百万 Token 上下文，且无额外费用）以及多模态理解方面均实现了显著提升，性能全面超越 GPT-4o，并在关键指标上比肩甚至超越 GPT-4.5。视频中，OpenAI 团队成员详细介绍了这些模型的性能优势、基准测试结果，并通过精彩的实时演示（如现场编写功能完善的前端应用、处理超长日志文件）展现了它们的实际能力。同时，他们还分享了更优惠的定价策略，并宣布了 GPT-4.5 的后续计划。快来了解这些为开发者量身定制、现已在 API 中可用的新一代 AI 模型吧！",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_bilibili_com_icon_new.jpg",
+            "link": "https://www.bilibili.com/video/BV1UAonYDEGs/",
+            "media": "哔哩哔哩",
+            "publish_date": "2025-04-15",
+            "refer": "ref_3",
+            "title": "OpenAI 正式发布 GPT-4.1 系列：百万 Token 长文本、更强编码、价格更优！"
+          },
+          {
+            "content": "OpenAI 宣布推出其最新旗舰生成式 AI 模型 GPT-4o，该模型将在未来几周内分阶段集成至 OpenAI 的各个产品之中。最让人惊喜的是，GPT-4o 将免费提供给所有用户使用。OpenAI 首席技术官穆里穆拉蒂 (Muri Murati) 表示，GPT-4o 将提供与 GPT-4 同等水平的智能，但在文本、图像以及语音处理方面均取得了进一步提升。\n微信扫码，手机继续看\n分享到博客或BSS\n提交",
+            "icon": "",
+            "link": "https://www.huya.com/video/play/983291514.html",
+            "media": "",
+            "publish_date": "2024-05-14",
+            "refer": "ref_4",
+            "title": "OpenAI全新AI模型GPT-4o发布会全程视频 中文字幕"
+          },
+          {
+            "content": "本报记者 张晓玉\n北京时间2月13日凌晨，人工智能（AI）公司 OpenArtificialIntelligence（以下简称OpenAI”）有关人士宣布，公司将在未来几个月内推出新一代人工智能模型GPT-5，并在其之前先行发布GPT-4.5。这一消息引发了业界广泛关注。\n又一次突破\n据悉，此次公布的GPT-4.5和GPT-5.0，标志着OpenAI在技术上的又一次突破。根据该人士的声明，GPT-4.5代号为Orion”，将是OpenAI最后一个非思维链模型”。与之前的模型相比，非思维链模型在数学和物理等领域的表现相对较弱，而GPT-4.5的推出被视为OpenAI向更高级别模型过渡的重要一步。\n更为重磅的是GPT-5.0的发布计划。该模型将整合OpenAI的多项核心技术，包括o3推理模型，并应用于ChatGPT及其API平台。值得注意的是，OpenAI决定不再将o3作为独立模型发布，而是将其融入GPT-5.0中，以打造一个更强大的统一系统。这一系统将能够自动选择思考”和非思考”功能，适用于多种复杂任务。\n此外，OpenAI还宣布，免费版ChatGPT用户将能够在标准智能设置下无限制地使用GPT-5.0，但会设置防止滥用的阈值。而ChatGPTPlus和Pro订阅用户则能够以更高智能级别运行GPT-5.0，享受更强大的功能，包括语音、绘图、搜索和深度研究等。\n清华大学战略新兴产业研究中心副主任胡麒牧向《证券日报》记者表示，OpenAI的一系列动作对当前人工智能的发展产生了重要影响。一方面，其新模型的推出推动了人工智能技术的进步，促使其他企业进一步加快技术创新步伐，形成良好的行业竞争氛围，推动整个AI行业向前发展。另一方面，OpenAI通过免费版ChatGPT开放GPT-5的使用权限，降低了用户使用门槛的同时，也让更多人能够接触和使用先进的人工智能技术，并将进一步促进人工智能技术在更多领域的融合与发展。\n竞争加剧\nOpenAI的持续创新也激发了竞争对手的研发热情。\nAdobeSystemsIncorporated（以下简称Adobe”）近期推出新款AI视频产品，直接与OpenAI等公司展开竞争；北京抖音信息服务有限公司（以下简称字节跳动”）旗下的豆包大模型团队也提出了UltraMem架构，旨在解决稀疏模型推理中的高额访存问题。据称，该架构的推理速度较现有MoE架构提升2倍至6倍，成本最高可降低83%。\n添翼数字经济智库高级研究员吴婉莹向《证券日报》记者表示，OpenAI即将发布GPT-5和过渡模型GPT-4.5的消息，标志着人工智能领域的技术竞争和行业格局将迎来新一轮变革，这将不仅是一次技术迭代，更是对行业生态、商业模式和全球治理框架的全面挑战。同时，将迫使竞争对手加速研发，推动行业整体技术水平的跃升，但也可能加剧资源向头部企业集中。\n随着OpenAI新模型的逐步推出以及其他公司的积极应对，人工智能领域的竞争将愈发激烈，这也将为行业发展带来更多的机遇与变革，值得持续关注。”吴婉莹说。\n在胡麒牧看来，OpenAI公布的GPT-4.5和GPT-5.0，不仅展示了其在生成式AI领域的强大技术实力，也进一步推动了人工智能技术的普及与应用。然而，随着Adobe、字节跳动等公司的加入，AI领域的竞争格局正在发生深刻变化。",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_toutiao_com_icon_new.jpg",
+            "link": "https://www.toutiao.com/article/7470952279399563795/",
+            "media": "今日头条",
+            "publish_date": "2025-02-14",
+            "refer": "ref_5",
+            "title": "OpenAI宣布将推出新一代人工智能模型"
+          },
+          {
+            "content": "来源：滚动播报\n三名了解相关规划的消息人士透露，OpenAI 正准备推出全新模型系列，暂定名称为 Astra”，该模型处理长期复杂任务的能力得到升级。消息人士称，OpenAI 首席执行官萨姆奥特曼本周在华盛顿向政策制定者与监管机构展示了 Astra 模型。OpenAI 重点推介该模型的一项能力：支持多个智能体长期协同运作，攻克高难度难题，可用于大型项目推进或是复杂高等数学问题求解。Astra 将成为 OpenAI 全新系列模型，与 Sol、Terra、Luna 模型并列。消息人士并未透露 OpenAI 计划何时正式发布该模型。OpenAI 尚未敲定 Astra 的定位：究竟命名为 GPT 6，还是作为 GPT-5 系列衍生版本（例如 GPT 5.7）。其中一名消息人士表示，这批模型现已进入测试阶段，并且计划率先适用特朗普政府拟定的全新监管机制 ——AI 模型面向公众发布前，必须提交给联邦政府报备。美国政府设定目标，力争在本周末的期限内敲定这套监管框架。消息人士表示，短期之内，OpenAI 还计划发布一份报告，披露其利用顶尖 AI 攻克十道此前悬而未决数学难题的相关情况，以此展示自身最强人工智能模型的性能。\n本文作者可以追加内容哦 !",
+            "icon": "https://sfile.chatglm.cn/searchImage/eastmoney_icon_new.jpg",
+            "link": "https://caifuhao.eastmoney.com/news/20260801062115009512090",
+            "media": "东方财富网",
+            "publish_date": "2026-08-01",
+            "refer": "ref_6",
+            "title": "OpenAI 正准备推出全新模型“Astra”"
+          },
+          {
+            "content": "【OpenAI拟下周发布全新预训练模型Aastra”】据消息源@synthwavedd在X平台上发布的推文，OpenAI计划于下周发布名为Astra的新模型，其内部代号为mewfour。这款模型是OpenAI自GPT-4.5以来训练的最大规模的全新预训练模型。此前有报道称，Astra的一个内部版本已经解决了10个重要的开放数学问题。如果按照Sol API的费率来计算，解决这些问题所需的总词元成本约为2,000美元，折合人民币约13,524元。此外，该模型据说能够组织和协同AI智能体，适用于处理长周期、高难度的任务，并且面向更强大的推理和协作型工作流。\n(责任编辑：k13132)",
+            "icon": "",
+            "link": "https://news.t0001.com/hot/202608/1422095.html",
+            "media": "",
+            "publish_date": "2026-08-07",
+            "refer": "ref_7",
+            "title": "OpenAI拟下周发布全新预训练模型“Aastra”"
+          },
+          {
+            "content": "美国开放人工智能研究中心OpenAI于12月11日发布了其人工智能模型GPT的最新升级版本GPT-5.2，以应对生成式人工智能领域日益激烈的竞争。这一举动是对谷歌公司11月发布的人工智能模型双子座3出色表现的直接回应。OpenAI首席执行官萨姆·奥尔特曼近期启动了红色警报”，加快了GPT升级版本的研发与发布速度。\n自今年8月推出GPT-5以来，OpenAI在11月紧接着发布了GPT-5.1版本，而现在不到一个月的时间内又推出了新的更新。这种快速迭代显示出人工智能行业当前面临的巨大竞争压力。",
+            "icon": "https://sfile.chatglm.cn/searchImage/china_icon_new.jpg",
+            "link": "https://news.china.com/socialgd/10000169/20251212/49067714.html",
+            "media": "中华网",
+            "publish_date": "2025-12-12",
+            "refer": "ref_8",
+            "title": "GPT-5.2来了！OpenAI最新发布 应对激烈竞争"
+          },
+          {
+            "content": "OpenAI即将推出一款名为「o3」的新AI模型，旨在加强其与Google等竞争对手的较量。\n据彭博报道，o3模型在12月20日首次亮相，相较于OpenAI现有产品，它具备更先进的类似人类推理能力，并专注于解决复杂的多步骤问题。\nOpenAI的CEO Sam Altman透露，他们计划在2025年1月底发布o3的简化版o3-mini，随后不久将推出完整的o3模型。\nOpenAI还分享了o3在回答编码等复杂问题上的早期表现，展示了其相较于前代产品o1的优越性。",
+            "icon": "https://sfile.chatglm.cn/searchImage/www_icspec_com_icon_new.jpg",
+            "link": "https://www.icspec.com/news/article-details/2398367",
+            "media": "icspec",
+            "publish_date": "2024-12-24",
+            "refer": "ref_9",
+            "title": "OpenAI将推新AI模型o3，2025年初亮相-icspec"
+          },
+          {
+            "content": "（新華社旧金山十二日电）记者吴晓凌报道。美國開放人工智能研究中心（OpenAI）於十二月十一日正式推出其旗艦模型GPT的最新升级版本GPT-5.2，以應對生成式人工智能領域日益激烈的市場競爭。\n免费影视、动漫、音乐、游戏、小说资源长期稳定更新！ 点此立即查看\n為回應谷歌公司十一月初發佈的人工智能模型双子座3的出色表現，OpenAI首席執行官薩姆·奥爾特曼近期啟動了紅色警報”，進一步加快了GPT升級版本的發佈進程。\nOpenAI在今年八月推出GPT-5後，僅隔三個月便發佈了升級版GPT-5.1，而眼下不到一個月就再次推出重要更新。行業觀察家認為，這一舉動凸顯了人工智能領域當前所面臨的巨大競爭壓力。（完）",
+            "icon": "",
+            "link": "https://www.youleyou.com/wenzhang/2604217.html",
+            "media": "",
+            "publish_date": "",
+            "refer": "ref_10",
+            "title": "GPT新版重磅升级！OpenAI发布最新模型优化"
+          }
+        ]
+      }
+    }
+  ],
+  "verdicts": [],
+  "spentCny": 0.43
+}
