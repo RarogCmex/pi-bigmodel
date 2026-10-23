@@ -23,8 +23,8 @@
  * This module must stay importable under plain Node (the offline test suite
  * imports it with fetch stubbed), so every pi import is `import type` and the
  * agent dir is injected: `index.ts` resolves it with pi's real `getAgentDir()`
- * at runtime, with a replicated `~/.pi/agent` fallback (config.js:491 on
- * pi 1.1.0) for installs where the package does not resolve.
+ * at runtime, with a replicated `~/.pi/agent` fallback (pi's `getAgentDir` in
+ * `config.js`) for installs where the package does not resolve.
  */
 
 import { mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";

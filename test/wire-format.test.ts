@@ -36,9 +36,9 @@ function model(id: string): Model<"openai-completions"> {
 /**
  * What pi core actually hands the adapter for a requested thinking level:
  * `clampThinkingLevel` first (agent-session `_clampThinkingLevel`), then "off"
- * becomes `undefined` (`core/model-runtime.js:502`). Tests must go through this,
- * because a forced thinker never sees "off" in a real session — pi clamps it up
- * to the lowest level the model supports.
+ * becomes `undefined` (the level normalization in `core/model-runtime.js`).
+ * Tests must go through this, because a forced thinker never sees "off" in a
+ * real session — pi clamps it up to the lowest level the model supports.
  */
 function wireLevel(target: Model<"openai-completions">, requested: ModelThinkingLevel): ThinkingLevel | undefined {
 	const clamped = clampThinkingLevel(target, requested);
