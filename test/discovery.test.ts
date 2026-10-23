@@ -4,7 +4,7 @@ import { buildOverlay, fetchBigModelModels, parseModelIds } from "../discovery.t
 
 const CHAT = "openai-completions" as const;
 import { DEFAULT_BASE_URL } from "../models.ts";
-import { CATALOG_BY_ID } from "../catalog.ts";
+import { CATALOG_BY_ID, RETIRED_MODEL_IDS } from "../catalog.ts";
 import type { RefreshModelsContext } from "@earendil-works/pi-ai";
 
 /** Exact shape of the live `GET /models` response, 2026-09-24. */
@@ -63,12 +63,29 @@ describe("parseModelIds", () => {
 describe("buildOverlay", () => {
 	test("known ids produce no overlay — curated prices win", () => {
 		const overlay = buildOverlay(parseModelIds(LIVE_PAYLOAD), DEFAULT_BASE_URL, CHAT);
-		// Every live id is already curated, so the overlay is empty…
+		// Every live id is either curated or retired (glm-4.5), so the overlay is
+		// empty…
 		assert.deepEqual(overlay.map((m) => m.id), []);
 		// …but a brand-new id would register with family-guessed defaults.
 		const fresh = buildOverlay(["glm-6"], DEFAULT_BASE_URL, CHAT);
 		assert.deepEqual(fresh.map((m) => m.id), ["glm-6"]);
 		assert.deepEqual(fresh[0].cost, { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 });
+	});
+
+	test("a retired id never comes back as a guessed entry", () => {
+		// The retirement of glm-4.5 is only real if the overlay honours it: the id is
+		// still listed by the gateway (that is the premise, asserted here), and an id
+		// missing from the catalog is exactly what buildOverlay turns into a
+		// zero-cost, family-guessed entry. Without RETIRED_MODEL_IDS the offline
+		// catalog would look clean while every live session got the model back.
+		assert.ok(parseModelIds(LIVE_PAYLOAD).includes("glm-4.5"), "the gateway still lists it");
+		assert.equal(CATALOG_BY_ID.has("glm-4.5"), false);
+		assert.equal(RETIRED_MODEL_IDS.has("glm-4.5"), true);
+		assert.deepEqual(
+			buildOverlay(["glm-4.5", "glm-6"], DEFAULT_BASE_URL, CHAT).map((m) => m.id),
+			["glm-6"],
+			"the retired id must not resurrect, the unknown id still must",
+		);
 	});
 
 	test("excluded families never auto-register", () => {

@@ -22,7 +22,7 @@
  */
 
 import type { RefreshModelsContext } from "@earendil-works/pi-ai";
-import { CATALOG_BY_ID, type GatewayApi } from "./catalog.ts";
+import { CATALOG_BY_ID, RETIRED_MODEL_IDS, type GatewayApi } from "./catalog.ts";
 import { unknownModelToModel, type BigModelModel } from "./models.ts";
 
 /** Payload of `GET /models` on open.bigmodel.cn. */
@@ -59,6 +59,12 @@ export function parseModelIds(payload: unknown): string[] {
  * Overlay for discovered ids: catalog models stay in the baseline with full
  * metadata and pricing, so only ids the catalog does not know become overlay
  * entries (family-guessed thinking/vision/windows, zero cost).
+ *
+ * `RETIRED_MODEL_IDS` is subtracted as well, and that is load-bearing rather
+ * than tidiness: a deliberately dropped id is precisely a known-to-the-gateway id
+ * missing from `CATALOG`, so without the filter the overlay would re-add it as a
+ * guessed zero-cost entry on the next `GET /models` — undoing the retirement in
+ * every live session while the offline catalog looked clean.
  */
 export function buildOverlay(
 	ids: readonly string[],
@@ -66,7 +72,9 @@ export function buildOverlay(
 	api: GatewayApi,
 	known: ReadonlySet<string> = new Set(CATALOG_BY_ID.keys()),
 ): BigModelModel[] {
-	return ids.filter((id) => !known.has(id) && !EXCLUDED.test(id)).map((id) => unknownModelToModel(id, baseUrl, api));
+	return ids
+		.filter((id) => !known.has(id) && !RETIRED_MODEL_IDS.has(id) && !EXCLUDED.test(id))
+		.map((id) => unknownModelToModel(id, baseUrl, api));
 }
 
 /** Resolve the bearer token pi's auth layer did not hand us (env-only setups). */

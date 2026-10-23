@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test, { describe } from "node:test";
-import { CATALOG, CATALOG_BY_ID, IMAGE_MODEL_IDS, type CnyTier } from "../catalog.ts";
+import { CATALOG, CATALOG_BY_ID, IMAGE_MODEL_IDS, RETIRED_MODEL_IDS, type CnyTier } from "../catalog.ts";
 import { DEFAULT_BASE_URL } from "../models.ts";
 
 /** Exact live listing of `GET /models` on open.bigmodel.cn, 2026-09-24. */
@@ -90,8 +90,18 @@ describe("catalog invariants", () => {
 	});
 
 	test("every model in the live /models listing is curated", () => {
+		// Two allowed states for a live id, and both must be deliberate: curated
+		// here, or retired with a reason (glm-4.5: still listed by the gateway,
+		// dropped because its price is no longer published — see RETIRED_MODEL_IDS).
+		// Nothing may fall through either list.
 		for (const id of LIVE_MODELS_IDS) {
-			assert.ok(CATALOG_BY_ID.has(id), `catalog missing live id ${id}`);
+			assert.ok(
+				CATALOG_BY_ID.has(id) || RETIRED_MODEL_IDS.has(id),
+				`live id ${id} is neither curated nor retired`,
+			);
+		}
+		for (const id of RETIRED_MODEL_IDS) {
+			assert.equal(CATALOG_BY_ID.has(id), false, `${id} is retired and curated at once`);
 		}
 	});
 

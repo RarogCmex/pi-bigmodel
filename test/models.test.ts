@@ -98,12 +98,14 @@ describe("buildModels / entryToModel", () => {
 		});
 	});
 
-	test("GLM-4.7 / GLM-4.5V offer 'off' again (turn-level thinking, probed 2026-10-09)", () => {
-		// Both were forced thinkers on 2026-09-24. `thinking:{type:"disabled"}` is
-		// now accepted AND honoured: a 64-token answer to "12*13" came back as
-		// content "156" with completion_tokens_details.reasoning_tokens === 0,
-		// while `enabled` spent all 64 tokens in reasoning_content.
-		for (const id of ["glm-4.7", "glm-4.5v"]) {
+	test("GLM-4.7 offers 'off' again (turn-level thinking, probed 2026-10-09)", () => {
+		// It was a forced thinker on 2026-09-24. `thinking:{type:"disabled"}` is now
+		// accepted AND honoured: a 64-token answer to "12*13" came back as content
+		// "156" with completion_tokens_details.reasoning_tokens === 0, while
+		// `enabled` spent all 64 tokens in reasoning_content. GLM-4.5V behaved the
+		// same way but was retired 2026-10-23 (see catalog.ts), so this guard now
+		// rides on the one reclassified id that is still offered.
+		for (const id of ["glm-4.7"]) {
 			const model = entryToModel(CATALOG_BY_ID.get(id)!, DEFAULT_BASE_URL, RATE, CHAT);
 			assert.equal(model.reasoning, true, id);
 			assert.equal(model.thinkingLevelMap, undefined, `${id}: should not pin a level map`);
@@ -164,7 +166,7 @@ describe("buildModels / entryToModel", () => {
 	});
 
 	test("vision models declare image input", () => {
-		for (const id of ["glm-5.3-flash", "glm-4.6v", "glm-4.5v", "glm-5v-turbo"]) {
+		for (const id of ["glm-5.3-flash", "glm-4.6v", "glm-5v-turbo"]) {
 			const model = entryToModel(CATALOG_BY_ID.get(id)!, DEFAULT_BASE_URL, RATE, CHAT);
 			assert.deepEqual(model.input, ["text", "image"], id);
 		}

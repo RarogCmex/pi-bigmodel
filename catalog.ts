@@ -19,14 +19,14 @@
  * Output caps re-measured live 2026-10-09 from free rejections
  * (`max_tokens: 99999999` → 400 code 1210 「限制数值范围[1,N]») on BOTH surfaces —
  * chat completions and /api/v1/responses agree on every id:
- *   131072  glm-4.5, 4.6, 4.7, 4.7-flash, 4.7-flashx, 5, 5.1, 5.2, 5.3,
- *           5.3-flash, 5.3-flashx, 5-turbo, 5v-turbo
+ *   131072  4.6, 4.7, 4.7-flash, 4.7-flashx, 5, 5.1, 5.2, 5.3, 5.3-flash,
+ *           5.3-flashx, 5-turbo, 5v-turbo (and glm-4.5, retired 2026-10-23)
  *   98304   glm-4.5-air, 4.5-airx, 4.5-flash
  *   32768   glm-4.6v, 4.6v-flashx, 4.6v-flash
- *   16384   glm-4.5v, 4.1v-thinking-flash, 4.1v-thinking-flashx,
- *           4-flash-250414, 4-flashx-250414
- * Two catalog entries disagreed and were corrected: glm-4.5 (96K -> 128K) and
- * glm-4.5v (32K -> 16K).
+ *   16384   4.1v-thinking-flash, 4.1v-thinking-flashx, 4-flash-250414,
+ *           4-flashx-250414 (and glm-4.5v, retired 2026-10-23)
+ * Two catalog entries disagreed with the gateway and were corrected before
+ * retirement: glm-4.5 (96K -> 128K) and glm-4.5v (32K -> 16K).
  *
  * Thinking was re-probed live 2026-10-09 (`thinking:{type:"disabled"}`, then a
  * 64-token generation to see whether reasoning actually stopped):
@@ -42,11 +42,22 @@
  *     lie, so they stay `always`.
  *   Everything else accepted `disabled` and produced no reasoning (dynamic).
  *
- * Note on the OpenAPI enums (2026-10-09): the documented model enum for text
- * requests omits `glm-4.5` and the vision enum omits `glm-4.5v`, and neither
- * appears in model-overview — yet `GET /models` still lists `glm-4.5` and both
- * answer /chat/completions with 200 and echo their own id (no silent rerouting).
- * They stay in the catalog; the enum is a docs artifact, not an entitlement list.
+ * `glm-4.5` and `glm-4.5v` were RETIRED 2026-10-23. They had been kept because
+ * they still answered (200, echoing their own id, so no silent rerouting) even
+ * after vanishing from the docs' model enums and from model-overview on
+ * 2026-10-09 — the enum is a docs artifact, not an entitlement list, and the
+ * gateway is what pi talks to. What changed is not their availability but their
+ * priceability: with no published rate they carried `cny: 0` plus a priceNote,
+ * i.e. a real GLM-4.5 turn was reported to pi as costing $0. A model whose cost
+ * cannot be computed corrupts the accounting every other entry here is careful
+ * about, and both are the oldest text/VLM pair still listed. Dropping them is
+ * therefore about the honesty of the numbers, not about the models working.
+ *
+ * The retirement is enforced twice, because the live overlay would otherwise
+ * undo it: `RETIRED_MODEL_IDS` is filtered out of `buildOverlay` (discovery.ts),
+ * so a `GET /models` that still lists `glm-4.5` cannot resurrect it as a
+ * family-guessed, zero-cost entry — which is exactly what an id missing from
+ * this file would otherwise become.
  *
  * Models are omitted on purpose (README "Намеренно не включены"):
  *   - `glm-4v-flash` (16K ctx / 1K out — useless for an agent)
@@ -55,15 +66,18 @@
  *   - non-chat modalities (embeddings, rerank, OCR, GLM-Image/CogView/CogVideo,
  *     TTS/ASR/Realtime) — not usable through chat completions for an agent.
  *
- * `GET /models` (live, 2026-09-24) currently returns exactly:
+ * `GET /models` (live, 2026-09-24; unchanged 2026-10-09) returned exactly:
  *   glm-4.5, glm-4.5-air, glm-4.6, glm-4.7, glm-5, glm-5-turbo, glm-5.1,
  *   glm-5.2, glm-5.3, glm-5.3-flash, glm-5.3-flashx
+ * — `glm-4.5` is the one listing id this catalog deliberately does not offer.
  * — free flash models and VLMs are NOT listed there but answer /chat/completions,
  * which is why discovery is an additive overlay, never a replacement.
  *
- * GLM-4.6 / GLM-4.5 / GLM-4.5-AirX are priced at zero with a priceNote: the
- * current public price page no longer lists them (only private instances), and
- * inventing a CNY rate would corrupt cost reports.
+ * GLM-4.6 / GLM-4.5-AirX are priced at zero with a priceNote: the current public
+ * price page no longer lists them (only private instances), and inventing a CNY
+ * rate would corrupt cost reports. They are kept only because they are still in
+ * the docs' model enum and in model-overview, i.e. still offered; glm-4.5 and
+ * glm-4.5v lost both, which is why they went rather than stayed at zero.
  */
 
 import type { ModelInputLimits, ThinkingLevelMap } from "@earendil-works/pi-ai";
@@ -354,19 +368,6 @@ export const CATALOG: readonly CatalogEntry[] = [
 		priceNote: "исчез из публичного прайса (сент-2026) — цена неизвестна, отчёты покажут ¥0",
 	},
 	{
-		id: "glm-4.5",
-		name: "GLM-4.5",
-		contextWindow: CTX_128K,
-		// The docs give 96K for the "GLM-4.5 family", and glm-4.5-air/-airx/-flash
-		// do disclose [1,98304]; this id discloses [1,131072] on BOTH surfaces
-		// (free rejection probe, 2026-10-09). The gateway wins.
-		maxTokens: OUT_128K,
-		input: ["text"],
-		thinking: { kind: "dynamic" },
-		cny: { input: 0, output: 0, cacheRead: 0 },
-		priceNote: "исчез из публичного прайса (сент-2026) — цена неизвестна, отчёты покажут ¥0",
-	},
-	{
 		// Same output-band caveat as glm-4.7: base = the ≥0.2K output band.
 		id: "glm-4.5-air",
 		name: "GLM-4.5-Air",
@@ -465,22 +466,6 @@ export const CATALOG: readonly CatalogEntry[] = [
 		cny: { input: 0, output: 0, cacheRead: 0 },
 	},
 	{
-		id: "glm-4.5v",
-		name: "GLM-4.5V",
-		contextWindow: CTX_64K,
-		// Was OUT_32K. Both surfaces disclose [1,16384] (2026-10-09) and the
-		// vision request spec says 「GLM-4.5V最大支持16K输出长度」 — the catalog entry
-		// was simply wrong, and pi would have requested outputs the gateway 400s.
-		maxTokens: OUT_16K,
-		input: ["text", "image"],
-		imageLimits: CN_IMAGE_LIMITS_50,
-		// Forced thinker on 2026-09-24; `disabled` accepted and honoured live
-		// 2026-10-09 (reasoning_tokens 0), so "off" is a real option again.
-		thinking: { kind: "dynamic" },
-		cny: { input: 2, output: 6, cacheRead: 0.4 },
-		cnyTiers: [tier32K({ input: 4, output: 12, cacheRead: 0.8 })],
-	},
-	{
 		id: "glm-4.1v-thinking-flash",
 		name: "GLM-4.1V-Thinking-Flash (free)",
 		contextWindow: CTX_64K,
@@ -512,4 +497,21 @@ export const CATALOG_BY_ID: ReadonlyMap<string, CatalogEntry> = new Map(
 );
 
 /** Every image-capable entry carries documented limits (see CN_IMAGE_LIMITS*). */
+/**
+ * Ids the gateway still serves and this plugin deliberately does NOT offer.
+ *
+ * Kept here rather than deleted with the entries themselves, for one concrete
+ * reason: discovery is an additive overlay, so an id that is simply absent from
+ * `CATALOG` comes back at session start as a family-guessed, zero-cost entry the
+ * moment `GET /models` lists it — the opposite of what dropping it was for.
+ * `buildOverlay` (discovery.ts) subtracts this set, so "retired" means retired
+ * in a live session too.
+ *
+ * `glm-4.5` and `glm-4.5v` (2026-10-23): dropped from the docs' model enums and
+ * from model-overview, and with no published price they could only be reported
+ * at ¥0. Availability was never the problem — the number was. See the header
+ * comment for the full reasoning and for what would put them back.
+ */
+export const RETIRED_MODEL_IDS: ReadonlySet<string> = new Set(["glm-4.5", "glm-4.5v"]);
+
 export const IMAGE_MODEL_IDS: readonly string[] = CATALOG.filter((e) => e.input.includes("image")).map((e) => e.id);

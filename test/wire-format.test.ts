@@ -194,10 +194,11 @@ describe("thinking semantics per ThinkingControl kind", () => {
 	});
 
 	test("dynamic: 'off' really sends thinking.type=disabled", async () => {
-		// GLM-4.7 and GLM-4.5V were forced thinkers until 2026-10-09; both now
-		// honour `disabled` (reasoning_tokens 0 on a 64-token answer).
-		// pi spells "off" as `reasoning: undefined` (ThinkingLevel has no "off").
-		for (const id of ["glm-4.7", "glm-4.5v", "glm-5.1", "glm-4.5-flash"]) {
+		// GLM-4.7 was a forced thinker until 2026-10-09 and now honours `disabled`
+		// (reasoning_tokens 0 on a 64-token answer); GLM-4.5V did too but was
+		// retired 2026-10-23. `glm-5.1` and `glm-4.5-flash` are plain dynamic
+		// thinkers. pi spells "off" as `reasoning: undefined`.
+		for (const id of ["glm-4.7", "glm-5.1", "glm-4.5-flash"]) {
 			const target = model(id);
 			assert.equal(clampThinkingLevel(target, "off"), "off", `${id}: off must stay off`);
 			const body = await capture(target, { reasoning: wireLevel(target, "off") });
