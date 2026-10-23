@@ -1,0 +1,123 @@
+{
+  "probedAt": "2026-10-23T18:59:57.698Z",
+  "outcomes": {
+    "/api/biz/customer/getUserAccountStatus": {
+      "status": 200,
+      "text": "{\"code\":404,\"msg\":\"接口不存在: /customer/getUserAccountStatus\",\"data\":null,\"success\":false}",
+      "verdict": "no such method under this router (in-band 404 with HTTP 200)"
+    },
+    "/api/biz/customer/getUserAccount": {
+      "status": 200,
+      "text": "{\"code\":404,\"msg\":\"接口不存在: /customer/getUserAccount\",\"data\":null,\"success\":false}",
+      "verdict": "no such method under this router (in-band 404 with HTTP 200)"
+    },
+    "/api/biz/customer/getAccount": {
+      "status": 200,
+      "text": "{\"code\":404,\"msg\":\"接口不存在: /customer/getAccount\",\"data\":null,\"success\":false}",
+      "verdict": "no such method under this router (in-band 404 with HTTP 200)"
+    },
+    "/api/biz/customer/queryAccount": {
+      "status": 200,
+      "text": "{\"code\":404,\"msg\":\"接口不存在: /customer/queryAccount\",\"data\":null,\"success\":false}",
+      "verdict": "no such method under this router (in-band 404 with HTTP 200)"
+    },
+    "/api/biz/customer/getAccountInfo": {
+      "status": 200,
+      "text": "{\"code\":404,\"msg\":\"接口不存在: /customer/getAccountInfo\",\"data\":null,\"success\":false}",
+      "verdict": "no such method under this router (in-band 404 with HTTP 200)"
+    },
+    "/api/biz/customer/getBalance": {
+      "status": 200,
+      "text": "{\"code\":404,\"msg\":\"接口不存在: /customer/getBalance\",\"data\":null,\"success\":false}",
+      "verdict": "no such method under this router (in-band 404 with HTTP 200)"
+    },
+    "/api/biz/customer/queryBalance": {
+      "status": 200,
+      "text": "{\"code\":404,\"msg\":\"接口不存在: /customer/queryBalance\",\"data\":null,\"success\":false}",
+      "verdict": "no such method under this router (in-band 404 with HTTP 200)"
+    },
+    "/api/biz/customer/account": {
+      "status": 200,
+      "text": "{\"code\":404,\"msg\":\"接口不存在: /customer/account\",\"data\":null,\"success\":false}",
+      "verdict": "no such method under this router (in-band 404 with HTTP 200)"
+    },
+    "/api/biz/customer/account/getAccountBalance": {
+      "status": 200,
+      "text": "{\"code\":404,\"msg\":\"接口不存在: /customer/account/getAccountBalance\",\"data\":null,\"success\":false}",
+      "verdict": "no such method under this router (in-band 404 with HTTP 200)"
+    },
+    "/api/biz/customer/getResourcePackageList": {
+      "status": 200,
+      "text": "{\"code\":404,\"msg\":\"接口不存在: /customer/getResourcePackageList\",\"data\":null,\"success\":false}",
+      "verdict": "no such method under this router (in-band 404 with HTTP 200)"
+    },
+    "/api/biz/customer/getUserResourcePackage": {
+      "status": 200,
+      "text": "{\"code\":404,\"msg\":\"接口不存在: /customer/getUserResourcePackage\",\"data\":null,\"success\":false}",
+      "verdict": "no such method under this router (in-band 404 with HTTP 200)"
+    },
+    "/api/biz/customer/package/list": {
+      "status": 200,
+      "text": "{\"code\":404,\"msg\":\"接口不存在: /customer/package/list\",\"data\":null,\"success\":false}",
+      "verdict": "no such method under this router (in-band 404 with HTTP 200)"
+    },
+    "/api/biz/resourcePackage/list": {
+      "status": 200,
+      "text": "{\"code\":404,\"msg\":\"接口不存在: /resourcePackage/list\",\"data\":null,\"success\":false}",
+      "verdict": "no such method under this router (in-band 404 with HTTP 200)"
+    },
+    "/api/biz/account/getBalance": {
+      "status": 200,
+      "text": "{\"code\":404,\"msg\":\"接口不存在: /account/getBalance\",\"data\":null,\"success\":false}",
+      "verdict": "no such method under this router (in-band 404 with HTTP 200)"
+    },
+    "/api/biz/customer/getCustomerInfo": {
+      "status": 403,
+      "text": "APIKey not allow access: /biz/customer/getCustomerInfo",
+      "verdict": "EXISTS but this key class is not allowed"
+    },
+    "/api/finance/account/balance": {
+      "status": 404,
+      "text": "{\"timestamp\":\"2026-10-23T19:00:01.268+00:00\",\"status\":404,\"error\":\"Not Found\",\"path\":\"/account/balance\"}",
+      "verdict": "no such route"
+    },
+    "/api/paas/v4/account/balance": {
+      "status": 404,
+      "text": "{\"timestamp\":\"2026-10-23T19:00:01.495+00:00\",\"status\":404,\"error\":\"Not Found\",\"path\":\"/v4/account/balance\"}",
+      "verdict": "no such route"
+    }
+  },
+  "headerShapes": {
+    "/api/biz/customer/getCustomerInfo :: Authorization (bare key)": {
+      "status": 403,
+      "text": "APIKey not allow access: /biz/customer/getCustomerInfo",
+      "verdict": "EXISTS but this key class is not allowed"
+    },
+    "/api/biz/customer/getCustomerInfo :: X-Api-Key": {
+      "status": 403,
+      "text": "APIKey not allow access: /biz/customer/getCustomerInfo",
+      "verdict": "EXISTS but this key class is not allowed"
+    },
+    "/api/biz/customer/getCustomerInfo :: Authorization on a ZERO-BALANCE key": {
+      "status": 403,
+      "text": "APIKey not allow access: /biz/customer/getCustomerInfo",
+      "verdict": "EXISTS but this key class is not allowed"
+    },
+    "/api/biz/customer/getCustomerInfo :: no auth": {
+      "status": 200,
+      "text": "{\"code\":1001,\"msg\":\"Header中未收到Authorization参数，无法进行身份验证。\",\"success\":false}",
+      "verdict": "exists, needs auth (in-band 1001)"
+    }
+  },
+  "headers": {
+    "alt-svc": "h3=\":443\"; ma=3600",
+    "content-length": "361",
+    "content-type": "application/json; charset=UTF-8",
+    "date": "Fri, 23 Oct 2026 19:00:02 GMT",
+    "ga-traceid": "e5e0f474dc6346428c96c370f0bf1f1c",
+    "set-cookie": "acw_tc=ac12811b17927820024248114e0af30084529dc32c4e744e42b0580b8d104b;path=/;HttpOnly;Max-Age=1800",
+    "x-log-id": "20261024030002e9ea86c84d6f4c07",
+    "x-request-id": "ebd85ddd-3d6e-4831-b04d-4fc7588b2f6a"
+  },
+  "verdict": "NO balance API for model API keys: nothing returns balance data, and the one account endpoint that exists is closed to API keys (403 'APIKey not allow access'). Balance is console-only (https://bigmodel.cn/finance)."
+}
