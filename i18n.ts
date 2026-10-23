@@ -81,6 +81,48 @@ export const MESSAGES = {
 		ru: 'BigModel: BIGMODEL_PROTOCOL="{requested}" не распознано — зарегистрирован {api}. ' +
 			"Допустимые значения: responses, completions.",
 	},
+	baseUrlWarningOtherSurface: {
+		// Both directions were measured with a real key (2026-10-23) and they do
+		// NOT fail the same way: the completions base under Responses gives a clean
+		// 404, while the Responses base under completions gives 403
+		// `model_access_denied` for every model, including the ids `GET /api/v1/models`
+		// lists. The wording therefore claims "fails", not "404" — the exact shapes
+		// live in the README where the evidence is.
+		en: 'BigModel: BIGMODEL_BASE_URL="{override}" is the base of a different wire surface. ' +
+			"With {api} registered the adapter requests {wouldRequest}, which is not the {api} endpoint — " +
+			"the call fails instead of reaching the model. Set it to {suggested}.",
+		ru: 'BigModel: BIGMODEL_BASE_URL="{override}" — база другой wire-поверхности. ' +
+			"При зарегистрированном {api} адаптер запросит {wouldRequest}, а это не эндпоинт {api} — " +
+			"вызов падает, не дойдя до модели. Укажите {suggested}.",
+	},
+	baseUrlWarningFullEndpoint: {
+		// Measured 404 on both surfaces: `…/api/v1/responses/responses` and
+		// `…/api/paas/v4/chat/completions/chat/completions`.
+		en: 'BigModel: BIGMODEL_BASE_URL="{override}" is a complete endpoint, not a base. ' +
+			"The adapter appends its own path on top, so the request goes to {wouldRequest} — a 404 on both surfaces. " +
+			"Drop the trailing segment: {suggested}.",
+		ru: 'BigModel: BIGMODEL_BASE_URL="{override}" — полный эндпоинт, а не база. ' +
+			"Адаптер дописывает свой путь сверху, поэтому запрос уйдёт на {wouldRequest} — 404 на обеих поверхностях. " +
+			"Уберите хвостовой сегмент: {suggested}.",
+	},
+	baseUrlMismatchError: {
+		// The same diagnosis, attached to the failing response instead of the
+		// session start: this one is readable in print/json mode too. The status is
+		// quoted rather than asserted, because the two directions differ (404 vs 403)
+		// and the original body is kept so a false positive still tells the truth.
+		// Carries `BASE_URL_TAG` (and the `REWRITE_PREFIX` header) on purpose: this
+		// text quotes the gateway's `403 … model_access_denied`, which the auth
+		// classifier matches, so without the tag the user would be told to check a
+		// perfectly good API key. See `isOwnDiagnosis` in errors.ts.
+		en: "BigModel (Zhipu AI): [baseurl] the request went to {wouldRequest} and was answered {status}. BIGMODEL_BASE_URL=\"{override}\" " +
+			"is not the base of the {api} surface — the adapter appends its own path to whatever is set there. " +
+			"Set BIGMODEL_BASE_URL to {suggested} (or pick the other protocol with BIGMODEL_PROTOCOL). " +
+			"Original answer: {original}",
+		ru: "BigModel (Zhipu AI): [baseurl] запрос ушёл на {wouldRequest} и получил {status}. BIGMODEL_BASE_URL=\"{override}\" — " +
+			"не база поверхности {api}: адаптер дописывает свой путь к тому, что там указано. " +
+			"Укажите BIGMODEL_BASE_URL={suggested} (или выберите другой протокол через BIGMODEL_PROTOCOL). " +
+			"Исходный ответ: {original}",
+	},
 
 	// ── bigmodel_search errors (search.ts) ───────────────────────────────
 	searchNoKey: {

@@ -113,6 +113,17 @@ export function normalizeOverflowError(errorMessage: string): string | null {
 export function shouldClarify(message: { errorMessage?: string }): boolean {
 	const text = message.errorMessage ?? "";
 	if (!text) return false;
+	// Anything this layer wrote is already explained — re-classifying it is how a
+	// correct diagnosis gets buried under the wrong hint. The base-URL diagnosis
+	// (provider.ts) proved it: its text quotes the gateway's `403 …
+	// model_access_denied`, which AUTH_RE matches, so without this guard the user
+	// was told to check an API key that was fine while the base URL was not.
+	// The tag, not the header, is what works here: pi wraps a non-2xx body as
+	// `bigmodel API error (403): {…}` before extensions see it, so a message of
+	// ours arrives prefixed and never starts with its own header.
+	// `turn_end` does not lose the auth hint by this: it reads the tag back via
+	// `classifyRewritten`.
+	if (isOwnDiagnosis(text)) return false;
 	return AUTH_RE.test(text);
 }
 
@@ -138,11 +149,25 @@ export const REWRITE_PREFIX = "BigModel (Zhipu AI): ";
  * pre-i18n versions of this plugin (persisted sessions).
  */
 export const AUTH_TAG = "[auth]";
+/**
+ * Tag for the base-URL diagnosis (provider.ts). It exists because the
+ * `REWRITE_PREFIX` guard is not enough in the real flow: pi wraps a non-2xx body
+ * as `bigmodel API error (403): {…}` before extensions see it, so a message of
+ * ours arrives *prefixed*, never starting with our own header. A tag survives
+ * that wrapping, and — like `[auth]` and `[billing …]` — it is ASCII, so it can
+ * be read back under either locale.
+ */
+export const BASE_URL_TAG = "[baseurl]";
 const LEGACY_AUTH_MARKER = `${REWRITE_PREFIX}ключ API недействителен`;
+
+/** Text this layer produced: already explained, must not be re-classified. */
+function isOwnDiagnosis(text: string): boolean {
+	return text.includes(BASE_URL_TAG) || text.startsWith(REWRITE_PREFIX);
+}
 
 export function clarifyErrorMessage(errorMessage: string): string | undefined {
 	if (!errorMessage) return undefined;
-	if (errorMessage.startsWith(REWRITE_PREFIX)) return undefined; // idempotent
+	if (isOwnDiagnosis(errorMessage)) return undefined; // idempotent
 	if (!AUTH_RE.test(errorMessage)) return undefined;
 	return t("authRewrite", { keysUrl: API_KEYS_URL, original: errorMessage });
 }
@@ -153,7 +178,7 @@ export function clarifyErrorMessage(errorMessage: string): string | undefined {
  */
 export function classifyLimitError(errorMessage: string): { kind: LimitKind; code?: string } | undefined {
 	if (!errorMessage) return undefined;
-	if (errorMessage.includes(REWRITE_PREFIX)) return undefined; // idempotent: already rewritten
+	if (isOwnDiagnosis(errorMessage)) return undefined; // idempotent: already rewritten
 	const stringCode = /"?(?:code|type)"?\s*:\s*"([a-z_]+)"/i.exec(errorMessage)?.[1];
 	if (stringCode) {
 		if (RESPONSES_TRANSIENT_CODES.test(stringCode)) return undefined;

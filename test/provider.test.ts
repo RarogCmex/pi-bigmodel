@@ -1,8 +1,11 @@
 import assert from "node:assert/strict";
 import test, { describe, afterEach } from "node:test";
+import type { AssistantMessage } from "@earendil-works/pi-ai";
+import { isContextOverflow, isRetryableAssistantError } from "@earendil-works/pi-ai";
 import type { AuthContext, ProviderAuthInteraction, ProviderStreams } from "@earendil-works/pi-ai";
 import { CATALOG } from "../catalog.ts";
-import { DEFAULT_BASE_URL, PROVIDER_ID } from "../models.ts";
+import { DEFAULT_BASE_URL, PROVIDER_ID, diagnoseBaseUrl } from "../models.ts";
+import type { BaseUrlMismatch } from "../models.ts";
 import {
   API_KEY_AUTH_NAME,
   API_KEYS_URL,
@@ -10,6 +13,7 @@ import {
   BASE_URL_ENV_VAR,
   bigmodelApiKeyAuth,
   buildBigModelProvider,
+  remediateMisdirectedRequest,
   resolveBaseUrl,
   withGatewayErrorRemediation,
 } from "../provider.ts";
@@ -70,6 +74,71 @@ describe("resolveBaseUrl", () => {
 
   test("ignores a blank override", () => {
     assert.equal(resolveBaseUrl(CHAT, () => "   "), DEFAULT_BASE_URL);
+  });
+});
+
+/** `diagnoseBaseUrl` with an env map, so no process state is involved. */
+function diagnose(api: typeof CHAT | typeof RESP, override?: string) {
+  return diagnoseBaseUrl(api, (name) => (name === BASE_URL_ENV_VAR ? override : undefined));
+}
+
+describe("diagnoseBaseUrl: an override that cannot work is named, not swallowed", () => {
+  test("the default base is never a mismatch", () => {
+    assert.equal(diagnose(RESP).mismatch, undefined);
+    assert.equal(diagnose(CHAT).mismatch, undefined);
+    assert.equal(diagnose(RESP).baseUrl, RESPONSES_BASE_URL);
+  });
+
+  test("the other surface's base is caught, with the URL that would 404", () => {
+    // The exact trap the README used to only describe: completions base, Responses on.
+    const { baseUrl, mismatch } = diagnose(RESP, "https://open.bigmodel.cn/api/paas/v4");
+    assert.ok(mismatch);
+    assert.equal(mismatch.kind, "other-surface");
+    assert.equal(baseUrl, "https://open.bigmodel.cn/api/paas/v4", "the override must stay verbatim");
+    assert.equal(mismatch.wouldRequest, "https://open.bigmodel.cn/api/paas/v4/responses");
+    assert.equal(mismatch.suggested, RESPONSES_BASE_URL);
+  });
+
+  test("and the mirror image: the Responses base under completions", () => {
+    const { mismatch } = diagnose(CHAT, "https://open.bigmodel.cn/api/v1");
+    assert.ok(mismatch);
+    assert.equal(mismatch.kind, "other-surface");
+    assert.equal(mismatch.wouldRequest, "https://open.bigmodel.cn/api/v1/chat/completions");
+    assert.equal(mismatch.suggested, DEFAULT_BASE_URL);
+  });
+
+  test("a complete endpoint instead of a base is caught before the doubling", () => {
+    const { mismatch } = diagnose(RESP, "https://open.bigmodel.cn/api/v1/responses");
+    assert.ok(mismatch);
+    assert.equal(mismatch.kind, "full-endpoint");
+    assert.equal(mismatch.wouldRequest, "https://open.bigmodel.cn/api/v1/responses/responses");
+    assert.equal(mismatch.suggested, RESPONSES_BASE_URL);
+
+    const chat = diagnose(CHAT, "https://open.bigmodel.cn/api/paas/v4/chat/completions");
+    assert.ok(chat.mismatch);
+    assert.equal(chat.mismatch.kind, "full-endpoint");
+    assert.equal(chat.mismatch.suggested, DEFAULT_BASE_URL);
+  });
+
+  test("a proxy or mirror is left alone: matching paths and bare hosts are not mistakes", () => {
+    for (const override of [
+      "https://proxy.example.com/api/paas/v4", // path-preserving proxy, completions
+      "https://api.z.ai/api/paas/v4",
+      "https://proxy.example.com", // bare host: a rewriting proxy looks the same
+      "http://127.0.0.1:8080",
+    ]) {
+      assert.equal(diagnose(CHAT, override).mismatch, undefined, override);
+    }
+    for (const override of ["https://proxy.example.com/api/v1", "https://proxy.example.com"]) {
+      assert.equal(diagnose(RESP, override).mismatch, undefined, override);
+    }
+  });
+
+  test("a value new URL would reject is diagnosed, not thrown on", () => {
+    const { baseUrl, mismatch } = diagnose(RESP, "open.bigmodel.cn/api/paas/v4");
+    assert.equal(baseUrl, "open.bigmodel.cn/api/paas/v4");
+    // No scheme → no path to reason about; staying silent beats a wrong guess.
+    assert.equal(mismatch, undefined);
   });
 });
 
@@ -311,5 +380,109 @@ describe("withGatewayErrorRemediation", () => {
     const again = withGatewayErrorRemediation(api);
     assert.throws(() => again.streamSimple({} as never, {} as never, options as never), /stop here/);
     assert.equal((captured() as { fetch: unknown }).fetch, options.fetch, "the marked fetch was reused, not rewrapped");
+  });
+});
+
+/**
+ * The second channel for a misdirected base: the session-start notice is
+ * TUI-only, so in print/json mode the explanation has to ride the failing
+ * response. Both directions of the mistake were measured on 2026-10-23 (real
+ * key, rejections only, ¥0) — 404 for the completions base under Responses and
+ * 403 `model_access_denied` for the mirror — hence the fixture bodies below.
+ */
+describe("remediateMisdirectedRequest", () => {
+  const MISMATCH = {
+    kind: "other-surface" as const,
+    override: "https://open.bigmodel.cn/api/paas/v4",
+    api: RESP,
+    wouldRequest: "https://open.bigmodel.cn/api/paas/v4/responses",
+    suggested: RESPONSES_BASE_URL,
+  };
+  const LIVE_404 = '{"timestamp":"2026-10-23T15:58:44.222+00:00","status":404,"error":"Not Found","path":"/v4/responses"}';
+  const LIVE_403 = '{"error":{"code":"model_access_denied","message":"No permission to access model: glm-5.3"}}';
+
+  function named(mismatch: BaseUrlMismatch, status: number, body: string) {
+    return remediateMisdirectedRequest(new Response(body, { status }), mismatch);
+  }
+
+  async function messageOf(out: Response): Promise<string> {
+    return JSON.parse(await out.text()).error.message;
+  }
+
+  test("rewrites the 404 while preserving the status and the gateway's own answer", async () => {
+    const out = await named(MISMATCH, 404, LIVE_404);
+    assert.equal(out.status, 404);
+    const message = await messageOf(out);
+    assert.match(message, /api\/paas\/v4\/responses/, "the URL that actually went out");
+    assert.match(message, /404/);
+    assert.match(message, /api\/v1/, "the fix");
+    assert.match(message, /Not Found/, "the original body is quoted, not replaced by a claim");
+  });
+
+  test("rewrites the mirror direction, whose failure is a 403 and not a 404", async () => {
+    const mismatch = {
+      kind: "other-surface" as const,
+      override: "https://open.bigmodel.cn/api/v1",
+      api: CHAT,
+      wouldRequest: "https://open.bigmodel.cn/api/v1/chat/completions",
+      suggested: DEFAULT_BASE_URL,
+    };
+    const out = await named(mismatch, 403, LIVE_403);
+    assert.equal(out.status, 403);
+    const message = await messageOf(out);
+    assert.match(message, /model_access_denied/);
+    assert.match(message, /api\/paas\/v4/);
+  });
+
+  test("leaves every other status untouched — the very same object", async () => {
+    for (const status of [200, 201, 400, 401, 429, 500]) {
+      const original = new Response('{"ok":true}', { status });
+      assert.equal(await remediateMisdirectedRequest(original, MISMATCH), original, `status ${status}`);
+    }
+  });
+
+  test("the rewritten text changes no decision pi makes: not retryable, not an overflow", async () => {
+    for (const [status, body] of [[404, LIVE_404], [403, LIVE_403]] as const) {
+      const message = await messageOf(await named(MISMATCH, status, body));
+      const errored = {
+        role: "assistant",
+        stopReason: "error",
+        errorMessage: message,
+        provider: PROVIDER_ID,
+      } as unknown as AssistantMessage;
+      assert.equal(isRetryableAssistantError(errored), false, `status ${status} became retryable`);
+      assert.equal(isContextOverflow(errored, 131_072), false, `status ${status} became an overflow`);
+    }
+  });
+
+  test("the diagnosis reaches the injected fetch only when the provider was built with one", async () => {
+    function injectedFetch(mismatch: BaseUrlMismatch | undefined, inner: typeof fetch): typeof fetch {
+      let captured: { fetch?: typeof fetch } | undefined;
+      const api: ProviderStreams = {
+        stream: () => {
+          throw new Error("not used");
+        },
+        streamSimple: (_model, _context, options) => {
+          captured = options as { fetch?: typeof fetch };
+          throw new Error("stop here");
+        },
+      } as ProviderStreams;
+      const wrapped = withGatewayErrorRemediation(api, mismatch);
+      assert.throws(
+        () => wrapped.streamSimple({} as never, {} as never, { fetch: inner } as never),
+        /stop here/,
+      );
+      return captured!.fetch!;
+    }
+    const inner = (async () =>
+      new Response(LIVE_404, { status: 404, headers: { "content-type": "application/json" } })) as unknown as typeof fetch;
+
+    const explained = await injectedFetch(MISMATCH, inner)("https://open.bigmodel.cn/api/paas/v4/responses", {} as never);
+    assert.equal(explained.status, 404);
+    assert.match(await messageOf(explained), /BIGMODEL_BASE_URL/);
+
+    const plain = await injectedFetch(undefined, inner)("https://open.bigmodel.cn/api/paas/v4/responses", {} as never);
+    assert.equal(plain.status, 404);
+    assert.equal(await plain.text(), LIVE_404, "without a mismatch the body must stay byte-identical");
   });
 });

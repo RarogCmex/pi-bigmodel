@@ -9,8 +9,8 @@
  *     our other CNY-billed gateway plugins, so cost reports stay comparable.
  *
  *  2. Request shape, per wire protocol. Both surfaces are OpenAI-flavoured and
- *     pi-ai 1.1.0 even auto-detects `open.bigmodel.cn` as zai for the
- *     completions adapter (`api/openai-completions.js:1227`), which gets
+ *     pi-ai even auto-detects `open.bigmodel.cn` as zai for the completions
+ *     adapter (the z.ai-URL branch of `api/openai-completions.js`), which gets
  *     `thinkingFormat: "zai"`, `maxTokensField: "max_tokens"`,
  *     `supportsStore: false` and `supportsDeveloperRole: false` right. What
  *     detection cannot know, and why the flags below are explicit:
@@ -131,9 +131,18 @@ export function resolveProtocol(
 
 /**
  * Endpoint override for proxies or the international api.z.ai mirror. One
- * variable, applied to whichever surface is active: a proxy that fronts
- * open.bigmodel.cn front both paths, and two variables would invite a
+ * variable, applied verbatim to whichever surface is active — a proxy that
+ * fronts open.bigmodel.cn fronts both paths, and two variables would invite a
  * half-migrated setup. Trailing slashes are trimmed.
+ *
+ * "Verbatim" is the point and also the hazard: the value is a *base*, and each
+ * adapter appends its own path (`/responses`, `/chat/completions`). A value
+ * pointing at the other surface therefore does not reach that API at all, and
+ * the user sees an unexplained failure on the first turn — measured 2026-10-23:
+ * 404 on the completions base, 403 `model_access_denied` on the Responses base
+ * (`research/2026-10-23-base-url-misconfig.md`). `diagnoseBaseUrl` names that
+ * mistake without changing what is registered: rewriting the value would break
+ * proxies, which is why the diagnosis is a warning and never a correction.
  */
 export function resolveBaseUrl(
 	api: GatewayApi,
@@ -141,6 +150,101 @@ export function resolveBaseUrl(
 ): string {
 	const trimmed = env(BASE_URL_ENV_VAR)?.trim().replace(/\/+$/, "");
 	return trimmed ? trimmed : BASE_URL_BY_API[api];
+}
+
+/** The path each pi-ai adapter appends to a model's `baseUrl`. */
+const SURFACE_TERMINAL: Readonly<Record<GatewayApi, string>> = {
+	"openai-responses": "/responses",
+	"openai-completions": "/chat/completions",
+};
+
+/**
+ * The path family that identifies the *other* surface. Both are real paths on
+ * this gateway (`/api/paas/v4` for completions, `/api/v1` for Responses), so an
+ * override carrying the wrong one does not reach this API — measured 2026-10-23,
+ * a fact about the gateway rather than a guess about the value.
+ */
+const OTHER_SURFACE_PATH: Readonly<Record<GatewayApi, string>> = {
+	"openai-responses": "/paas/v4",
+	"openai-completions": "/api/v1",
+};
+
+export interface BaseUrlMismatch {
+	/**
+	 * `other-surface`: the base belongs to the surface that is not registered.
+	 * `full-endpoint`: the value is a complete URL, not a base.
+	 */
+	kind: "other-surface" | "full-endpoint";
+	/** Exactly what the user set, for quoting back. */
+	override: string;
+	/** The surface that is actually registered. */
+	api: GatewayApi;
+	/** The URL the adapter will really request, so the failure is legible. */
+	wouldRequest: string;
+	/** What to set instead. */
+	suggested: string;
+}
+
+/** Path part of an absolute URL; tolerant of values `new URL` would reject. */
+function pathOf(url: string): string {
+	const match = /^[a-z][a-z0-9+.-]*:\/\/[^/]*(\/.*)?$/i.exec(url);
+	// Query and fragment are not part of the path and would otherwise turn a
+	// legitimate `…/api/v1?key=…` into a false positive.
+	return (match?.[1] ?? "").split(/[?#]/)[0].toLowerCase();
+}
+
+/**
+ * Resolve the base URL and, when the override cannot work on the registered
+ * surface, say why. Two shapes are recognisable without guessing:
+ *
+ *  - the override already ends with the segment the adapter appends
+ *    (`…/api/v1/responses`), so the request doubles it;
+ *  - the override carries the other surface's path family, so the appended
+ *    segment lands on a path the gateway does not serve.
+ *
+ * A bare host (`https://proxy.example.com`) is left alone: a reverse proxy that
+ * rewrites paths is indistinguishable from a mistake there, and inventing a
+ * warning for it would teach users to ignore this one.
+ */
+export function diagnoseBaseUrl(
+	api: GatewayApi,
+	env: (name: string) => string | undefined = (n) => process.env[n],
+): { baseUrl: string; mismatch?: BaseUrlMismatch } {
+	const baseUrl = resolveBaseUrl(api, env);
+	// No override means the default, which is correct by construction.
+	const raw = env(BASE_URL_ENV_VAR)?.trim().replace(/\/+$/, "");
+	if (!raw) return { baseUrl };
+
+	const path = pathOf(baseUrl);
+	const terminal = SURFACE_TERMINAL[api];
+
+	if (path.endsWith(terminal)) {
+		return {
+			baseUrl,
+			mismatch: {
+				kind: "full-endpoint",
+				override: raw,
+				api,
+				wouldRequest: `${baseUrl}${terminal}`,
+				suggested: baseUrl.slice(0, -terminal.length) || BASE_URL_BY_API[api],
+			},
+		};
+	}
+
+	if (path.includes(OTHER_SURFACE_PATH[api])) {
+		return {
+			baseUrl,
+			mismatch: {
+				kind: "other-surface",
+				override: raw,
+				api,
+				wouldRequest: `${baseUrl}${terminal}`,
+				suggested: BASE_URL_BY_API[api],
+			},
+		};
+	}
+
+	return { baseUrl };
 }
 
 function toCost(cny: CnyPrice, tiers: readonly CnyTier[] | undefined, rate: number): ModelCost {

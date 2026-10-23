@@ -366,3 +366,28 @@ describe("classifyRewritten — reading our own tags back after pi's in-place re
 		assert.equal(classifyRewritten("[billing] something"), undefined);
 	});
 });
+
+describe("our own rewrites are not re-classified", () => {
+	/**
+	 * Regression guard for a real false positive found live on 2026-10-23: the
+	 * base-URL diagnosis quotes the gateway's `403 … model_access_denied`, AUTH_RE
+	 * matches it, and the user was told to check an API key that was fine. Anything
+	 * this layer wrote is already explained, so the gate must say so.
+	 */
+	const OUR_BASE_URL_DIAGNOSIS =
+		'BigModel (Zhipu AI): the request went to https://open.bigmodel.cn/api/v1/chat/completions and was answered 403. ' +
+		'BIGMODEL_BASE_URL="https://open.bigmodel.cn/api/v1" is not the base of the openai-completions surface. ' +
+		'Original answer: {"error":{"code":"model_access_denied","message":"No permission to access model: glm-5.3"}}';
+
+	test("shouldClarify ignores a message that already carries our prefix", () => {
+		assert.equal(shouldClarify(errored(OUR_BASE_URL_DIAGNOSIS)), false);
+		// The raw gateway body still gets clarified — the guard is about our text,
+		// not about 403s.
+		assert.equal(shouldClarify(errored('403: {"code":"model_access_denied","message":"No permission"}')), true);
+	});
+
+	test("clarifyErrorMessage and classifyLimitError stay idempotent on it", () => {
+		assert.equal(clarifyErrorMessage(OUR_BASE_URL_DIAGNOSIS), undefined);
+		assert.equal(classifyLimitError(OUR_BASE_URL_DIAGNOSIS), undefined);
+	});
+});

@@ -86,7 +86,7 @@ import {
 	shouldClarify,
 } from "./errors.ts";
 import { t } from "./i18n.ts";
-import { PROVIDER_ID, resolveProtocol } from "./models.ts";
+import { PROVIDER_ID, diagnoseBaseUrl, resolveProtocol } from "./models.ts";
 import { API_KEYS_URL } from "./errors.ts";
 import { buildBigModelProvider, withGatewayErrorRemediation } from "./provider.ts";
 import {
@@ -189,9 +189,9 @@ export default function (pi: ExtensionAPI) {
   // `ask` mode), exposed the pi-alibaba-models way: `codemode` by default —
   // callable from codemode scripts, never declared every turn. Config lives in
   // `{agentDir}/pi-bigmodel.json`; the agent dir mirrors pi's getAgentDir
-  // (config.js:491 on 1.1.0 — PI_CODING_AGENT_DIR, then ~/.pi/agent) because a
-  // runtime import of pi-coding-agent here would break the offline suite's
-  // plain-Node import of this module.
+  // (its `getAgentDir` in config.js — PI_CODING_AGENT_DIR, then ~/.pi/agent)
+  // because a runtime import of pi-coding-agent here would break the offline
+  // suite's plain-Node import of this module.
   const agentDir = fallbackAgentDir();
   const searchCfg = loadSearchConfig(agentDir);
   const searchExposure = resolveSearchExposure(searchCfg);
@@ -296,7 +296,14 @@ export default function (pi: ExtensionAPI) {
   // trade-off): `BIGMODEL_PROTOCOL=responses` (default) or `completions`.
   const { api, requested, recognized } = resolveProtocol();
   const streams = api === "openai-responses" ? openAIResponsesApi() : openAICompletionsApi();
-  pi.registerProvider(buildBigModelProvider(api, withGatewayErrorRemediation(streams)));
+  // One resolution, shared by the registration and by the base-URL warning
+  // below, so the message can never describe a URL other than the one pi uses.
+  // The override is registered verbatim — a proxy may be serving this exact
+  // path, and silently "fixing" the value would break it.
+  const { baseUrl, mismatch } = diagnoseBaseUrl(api);
+  pi.registerProvider(
+    buildBigModelProvider(api, withGatewayErrorRemediation(streams, mismatch), undefined, baseUrl),
+  );
 
   // A typo'd protocol must not pass silently: `BIGMODEL_PROTOCOL=completio` would
   // otherwise land on Responses — the surface with no thinking off-switch — and
@@ -307,6 +314,31 @@ export default function (pi: ExtensionAPI) {
     pi.on("session_start", (_event, ctx) => {
       if (!ctx.hasUI) return;
       ctx.ui.notify(t("protocolWarning", { requested, api }), "warning");
+    });
+  }
+
+  // A BIGMODEL_BASE_URL that cannot work must not turn into an unexplained
+  // failure on the first turn (measured 2026-10-23: 404 on the completions
+  // base, 403 `model_access_denied` on the Responses base). Two channels, because
+  // one of them is blind: `withGatewayErrorRemediation` above rewrites the failing
+  // response itself (every mode shows that), while this notice rides
+  // `session_start` and only where a notice cannot corrupt output. The override is
+  // still registered verbatim, because a proxy may be serving that exact path.
+  if (mismatch) {
+    pi.on("session_start", (_event, ctx) => {
+      if (!ctx.hasUI) return;
+      const key = mismatch.kind === "other-surface"
+        ? "baseUrlWarningOtherSurface"
+        : "baseUrlWarningFullEndpoint";
+      ctx.ui.notify(
+        t(key, {
+          override: mismatch.override,
+          api: mismatch.api,
+          wouldRequest: mismatch.wouldRequest,
+          suggested: mismatch.suggested,
+        }),
+        "warning",
+      );
     });
   }
 }

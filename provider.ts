@@ -17,6 +17,7 @@ import {
 } from "@earendil-works/pi-ai";
 import { fetchBigModelModels } from "./discovery.ts";
 import { API_KEYS_URL, remediateInBandResponse } from "./errors.ts";
+import { t } from "./i18n.ts";
 
 export { API_KEYS_URL } from "./errors.ts";
 import {
@@ -27,6 +28,7 @@ import {
 	DEFAULT_BASE_URL,
 	PROVIDER_ID,
 	resolveBaseUrl,
+	type BaseUrlMismatch,
 	type GatewayApi,
 } from "./models.ts";
 
@@ -45,7 +47,56 @@ const processEnv: EnvReader = (name) =>
 const REMEDIATED = Symbol("bigmodel-in-band-remediation");
 
 /**
- * Wrap a wire surface so every response passes `remediateInBandResponse`.
+ * Rewrite the failure of a request that provably went to a base which cannot
+ * serve the registered surface.
+ *
+ * The session-start warning (index.ts) is TUI-only, so in print/json mode the one
+ * misconfiguration whose symptom is an opaque first-turn failure would stay
+ * unexplained. Here the explanation rides the response itself, which every mode
+ * shows. Three deliberate restraints:
+ *
+ *  - only 404/403 are touched. Those are the statuses measured for a misdirected
+ *    base (404 on the completions base, 403 `model_access_denied` on the Responses
+ *    base); a 200, a 401 or a 429 is none of this function's business;
+ *  - the status is preserved unchanged and only the body differs, so pi's retry
+ *    and overflow classifiers decide exactly as they would have without us;
+ *  - the gateway's original body is quoted inside the message. If the diagnosis
+ *    ever fires on a proxy that does serve these paths, the truth is still there.
+ */
+export async function remediateMisdirectedRequest(
+	response: Response,
+	mismatch: BaseUrlMismatch,
+): Promise<Response> {
+	if (response.status !== 404 && response.status !== 403) return response;
+	let original = "";
+	try {
+		original = (await response.clone().text()).replace(/\s+/g, " ").trim().slice(0, 240);
+	} catch {
+		// A body we cannot read is not a reason to swallow the explanation.
+	}
+	const envelope = JSON.stringify({
+		error: {
+			code: String(response.status),
+			message: t("baseUrlMismatchError", {
+				override: mismatch.override,
+				api: mismatch.api,
+				wouldRequest: mismatch.wouldRequest,
+				suggested: mismatch.suggested,
+				status: String(response.status),
+				original: original || "(empty body)",
+			}),
+		},
+	});
+	return new Response(envelope, {
+		status: response.status,
+		headers: { "content-type": "application/json; charset=utf-8" },
+	});
+}
+
+/**
+ * Wrap a wire surface so every response passes `remediateInBandResponse` — and,
+ * when `mismatch` is given, so a request aimed at a base that cannot serve this
+ * surface comes back with the diagnosis instead of a bare 404.
  *
  * The Responses surface answers authentication failures with **HTTP 200** and an
  * in-band `{"code":1000,"msg":"身份验证失败。","success":false}` body (measured
@@ -60,11 +111,17 @@ const REMEDIATED = Symbol("bigmodel-in-band-remediation");
  * not an in-band error passes through byte-identical, and the body is read via
  * `clone()` so an unremediated stream stays intact.
  */
-export function withGatewayErrorRemediation(api: ProviderStreams): ProviderStreams {
+export function withGatewayErrorRemediation(
+	api: ProviderStreams,
+	mismatch?: BaseUrlMismatch,
+): ProviderStreams {
 	const inject = (options: { fetch?: typeof fetch } | undefined): { fetch?: typeof fetch } => {
 		const inner: typeof fetch | undefined = options?.fetch;
 		if ((inner as { [REMEDIATED]?: boolean } | undefined)?.[REMEDIATED]) return options ?? {};
-		const wrapped: typeof fetch = async (input, init) => remediateInBandResponse(await (inner ?? fetch)(input, init));
+		const wrapped: typeof fetch = async (input, init) => {
+			const response = await remediateInBandResponse(await (inner ?? fetch)(input, init));
+			return mismatch ? remediateMisdirectedRequest(response, mismatch) : response;
+		};
 		(wrapped as unknown as { [REMEDIATED]: boolean })[REMEDIATED] = true;
 		return { ...options, fetch: wrapped };
 	};

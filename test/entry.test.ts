@@ -240,6 +240,19 @@ describe("extension wiring", () => {
 		assert.equal(second.turnResult, undefined, "a duplicate hint was emitted");
 	});
 
+	test("our own base-URL diagnosis is never re-read as an auth failure", () => {
+		// The shape pi really produces: `bigmodel API error (403): {…}` wraps our body,
+		// so the text no longer starts with our header — only the ASCII tag survives.
+		// Live 2026-10-23 this was a false positive: the user was told to check a
+		// working key while the base URL was the problem.
+		const raw =
+			'bigmodel API error (403): {"code":"403","message":"BigModel (Zhipu AI): [baseurl] ' +
+			'запрос ушёл на https://open.bigmodel.cn/api/v1/chat/completions и получил 403. "}';
+		const { message, turnResult } = runTurn(pi, raw);
+		assert.equal((message as { errorMessage: string }).errorMessage, raw, "the diagnosis was rewritten");
+		assert.equal(turnResult, undefined, "an auth hint was appended for a base-URL problem");
+	});
+
 	test("the overflow rewrite is what turn_end sees, and it is not a billing case", () => {
 		const { message } = runTurn(pi, LIVE.overflow1261);
 		assert.match(String((message as { errorMessage: string }).errorMessage), /^context_length_exceeded:/);
@@ -269,5 +282,82 @@ describe("protocol selection is surfaced, not swallowed", () => {
 		const provider = pi.registered[0] as { baseUrl: string; getModels(): { api: string }[] };
 		assert.equal(provider.baseUrl, "https://open.bigmodel.cn/api/paas/v4");
 		for (const model of provider.getModels()) assert.equal(model.api, "openai-completions");
+	});
+});
+
+/**
+ * A BIGMODEL_BASE_URL that cannot work is the one misconfiguration whose symptom
+ * is an opaque 404 on the first turn, so it gets the same `session_start` channel
+ * as the protocol typo. What it must NOT do is change the registered URL: a proxy
+ * may legitimately serve the exact path a human reads as a mistake.
+ */
+describe("a base URL that cannot work is surfaced, not corrected", () => {
+	const realBase = process.env.BIGMODEL_BASE_URL;
+	const realProtocol = process.env.BIGMODEL_PROTOCOL;
+	const realAgentDir = process.env.PI_CODING_AGENT_DIR;
+	let tmpAgentDir: string;
+
+	beforeEach(() => {
+		tmpAgentDir = mkdtempSync(join(tmpdir(), "pi-bm-baseurl-"));
+		process.env.PI_CODING_AGENT_DIR = tmpAgentDir;
+		delete process.env.BIGMODEL_PROTOCOL;
+	});
+	afterEach(() => {
+		for (const [name, real] of [
+			["BIGMODEL_BASE_URL", realBase],
+			["BIGMODEL_PROTOCOL", realProtocol],
+			["PI_CODING_AGENT_DIR", realAgentDir],
+		] as const) {
+			if (real === undefined) delete process.env[name];
+			else process.env[name] = real;
+		}
+		rmSync(tmpAgentDir, { recursive: true, force: true });
+	});
+
+	function uiCtx(hasUI = true) {
+		const notes: { message: string; level?: string }[] = [];
+		return {
+			notes,
+			ctx: {
+				hasUI,
+				ui: { notify: (message: string, level?: string) => notes.push({ message, level }) },
+			},
+		};
+	}
+
+	test("the override is registered verbatim and the warning names the 404 URL", () => {
+		process.env.BIGMODEL_BASE_URL = "https://open.bigmodel.cn/api/paas/v4";
+		const pi = fakePi();
+		extension(pi as never);
+		// No silent "fixing": what the user set is what pi will use.
+		const provider = pi.registered[0] as { baseUrl: string };
+		assert.equal(provider.baseUrl, "https://open.bigmodel.cn/api/paas/v4");
+
+		const { notes, ctx } = uiCtx();
+		pi.emit("session_start", {}, ctx);
+		const warning = notes.find((n) => n.level === "warning");
+		assert.ok(warning, "no warning was emitted");
+		assert.match(warning.message, /api\/paas\/v4\/responses/, "the doomed URL must be spelled out");
+		assert.match(warning.message, /https:\/\/open\.bigmodel\.cn\/api\/v1/, "the fix must be spelled out");
+	});
+
+	test("a matching base URL and a bare proxy host stay silent", () => {
+		for (const override of ["https://open.bigmodel.cn/api/v1", "https://proxy.example.com"]) {
+			process.env.BIGMODEL_BASE_URL = override;
+			const pi = fakePi();
+			extension(pi as never);
+			const { notes, ctx } = uiCtx();
+			pi.emit("session_start", {}, ctx);
+			assert.equal(notes.length, 0, `${override} produced a warning`);
+		}
+	});
+
+	test("print mode has no channel, so it stays silent instead of corrupting output", () => {
+		process.env.BIGMODEL_BASE_URL = "https://open.bigmodel.cn/api/paas/v4";
+		const pi = fakePi();
+		extension(pi as never);
+		const { notes, ctx } = uiCtx(false);
+		pi.emit("session_start", {}, ctx);
+		assert.equal(notes.length, 0);
 	});
 });
