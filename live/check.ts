@@ -1,6 +1,16 @@
 /**
  * Live smoke test — only runs when BIGMODEL_API_KEY is set:
- *   BIGMODEL_API_KEY=… npm run live
+ *   BIGMODEL_API_KEY=… npm run live        # everything below
+ *   BIGMODEL_API_KEY=… npm run live:free   # same file, billed checks skipped
+ *
+ * The second form is the lane that is meant to be run on every host upgrade: it
+ * costs ¥0 (rejections are not billed, and the accepted calls it keeps are all on
+ * free-tier ids), so it passes on a zero-balance key, and it already earns its
+ * keep — a `pi -p` run against a misconfigured base on 2026-10-23 found that pi
+ * wraps a non-2xx body as `bigmodel API error (403): {…}`, which broke an
+ * idempotency guard no offline test could see. The split is declared at each
+ * test site via `billed(...)` rather than inferred from names, because a hidden
+ * convention is exactly what rots.
  *
  * Verifies against the real gateway. **Cost, itemized rather than asserted
  * cheap** — the sweep is not uniformly `max_tokens: 8`:
@@ -10,12 +20,13 @@
  *   - ¥0 because the id is free-tier: the thinking matrix on free ids, the cache
  *     probes, the Responses stream and image checks;
  *   - billed, and the bulk of the spend: one request per PAID catalog id at
- *     `max_tokens: 8`, plus the deliberately larger generations the reclassified
- *     thinkers need to prove reasoning actually stopped (64 and 48 tokens),
- *     `glm-5.2` streaming `reasoning_content` at 300, one `glm-4.5-air`
- *     rejection, and two `search_std` calls (¥0.02) from the bigmodel_search
- *     sidecar check. Measured 2026-10-09 on a funded key: 41 checks, ~277 s,
- *     ≈¥0.05 (before the sidecar check was added).
+ *     `max_tokens: 8`, plus the deliberately larger generation the reclassified
+ *     thinker needs to prove reasoning actually stopped (64 tokens on glm-4.7),
+ *     `glm-5.2` streaming `reasoning_content` at 300, and two `search_std` calls
+ *     (¥0.02) from the bigmodel_search sidecar check. Measured 2026-10-09 on a
+ *     funded key: 41 checks, ~277 s, ≈¥0.05, when the catalog was 24 ids and the
+ *     reclassified pair was still two; today it is 22 ids and one of those four
+ *     paid checks is gone.
  * Every 2xx is recorded in the ledger printed by the final test, so "free" stays a
  * measured claim instead of a comment (pitfalls L35).
  *
@@ -24,8 +35,8 @@
  *   3. a forced thinker (glm-5.3) rejects disabled with code 1210;
  *   4. glm-5.2 accepts thinking+reasoning_effort and streams reasoning_content;
  *   5. GET /models matches the ids the catalog expects;
- *   6. the reclassified thinkers behave as the catalog now claims (glm-4.7 /
- *      glm-4.5v honour thinking.type=disabled; glm-4.1v-thinking does not);
+ *   6. the reclassified thinker behaves as the catalog now claims (glm-4.7
+ *      honours thinking.type=disabled; glm-4.1v-thinking does not);
  *   7. output caps and the context-overflow code, both read from REJECTIONS on
  *      free models (a rejected request is not billed);
  *   8. cache hits are reported in usage.prompt_tokens_details.cached_tokens;
@@ -62,9 +73,39 @@ const BASE = process.env.BIGMODEL_BASE_URL?.trim() || DEFAULT_BASE_URL;
  * is a claim about the status code, not an intention.
  */
 const BILLED: string[] = [];
+
+/**
+ * `live:free` lane: skip every check that can put a charge on the key.
+ * Declared per test (`{ skip: (!KEY && …) || billed("why") }`) so the class is
+ * visible where the money would be spent, and so an unclassified new test fails
+ * the lane's promise rather than quietly joining it.
+ */
+const FREE_ONLY = process.env.BIGMODEL_LIVE_FREE === "1";
+function billed(why: string): string | false {
+	return FREE_ONLY ? `billed: ${why} — run \`npm run live\` (without BIGMODEL_LIVE_FREE) to include it` : false;
+}
 function ledger(label: string, status: number, body: Record<string, unknown>): void {
 	if (status < 200 || status >= 300) return;
 	BILLED.push(`${label} max=${String(body.max_tokens ?? body.max_output_tokens ?? "-")}`);
+}
+
+/**
+ * A 429 that means "no balance", not "slow down". The plugin itself treats it as
+ * non-retryable at runtime (`errors.ts`), and this file must agree: retrying a
+ * permanent billing refusal turned the Responses sweep into a 15-minute test on a
+ * zero-balance key (measured 2026-10-23 — 5 × 5 s backoff per paid id, for an
+ * answer that never changes).
+ */
+const PERMANENT_429 = new Set(["1113", "insufficient_quota"]);
+
+/** Business code out of a body, so the retry decision can use it. */
+function codeOf(text: string): string {
+	try {
+		const json = JSON.parse(text);
+		return String(json?.error?.code ?? json?.code ?? "");
+	} catch {
+		return "";
+	}
 }
 
 /** Free-tier models answer 429 under bursts; a live smoke test retries a couple of times. */
@@ -80,11 +121,17 @@ async function chat(body: Record<string, unknown>): Promise<{ status: number; js
 			ledger(`chat/${String(body.model)}`, response.status, body);
 			return { status: response.status, json: await response.json().catch(() => null) };
 		}
+		// A burst 429 is retried; a billing 429 is an answer, and retrying it only
+		// burns 40 s of backoff per call.
+		if (PERMANENT_429.has(codeOf(await response.clone().text()))) {
+			ledger(`chat/${String(body.model)}`, response.status, body);
+			return { status: response.status, json: await response.json().catch(() => null) };
+		}
 		await new Promise((resolve) => setTimeout(resolve, attempt * 4_000));
 	}
 }
 
-test("live: catalog ids answer chat completions", { skip: !KEY && "set BIGMODEL_API_KEY" }, async (t) => {
+test("live: catalog ids answer chat completions", { skip: (!KEY && "set BIGMODEL_API_KEY") || billed("one 2xx per paid catalog id") }, async (t) => {
 	for (const entry of CATALOG) {
 		await t.test(entry.id, async () => {
 			const { status, json } = await chat({
@@ -120,7 +167,7 @@ test("live: glm-5.3 rejects thinking disabled with code 1210", { skip: !KEY && "
 	assert.equal(json?.error?.code, "1210");
 });
 
-test("live: glm-5.2 streams reasoning_content with effort", { skip: !KEY && "set BIGMODEL_API_KEY" }, async () => {
+test("live: glm-5.2 streams reasoning_content with effort", { skip: (!KEY && "set BIGMODEL_API_KEY") || billed("a 300-token glm-5.2 generation") }, async () => {
 	const response = await fetch(`${BASE}/chat/completions`, {
 		method: "POST",
 		headers: { Authorization: `Bearer ${KEY}`, "Content-Type": "application/json" },
@@ -147,6 +194,9 @@ test("live: GET /models returns the expected listing", { skip: !KEY && "set BIGM
 	});
 	assert.equal(response.status, 200);
 	const ids = parseModelIds(await response.json());
+	// `glm-4.5` is here ON PURPOSE: the listing still returns it while the catalog
+	// retires it, and this probe is what proves the overlay filter (see
+	// RETIRED_MODEL_IDS) is guarding a real, still-listed id rather than a ghost.
 	for (const expected of ["glm-4.5", "glm-4.6", "glm-4.7", "glm-5", "glm-5.2", "glm-5.3", "glm-5.3-flash"]) {
 		assert.ok(ids.includes(expected), `missing ${expected}`);
 	}
@@ -178,12 +228,13 @@ async function cappedProbe(model: string, maxTokens: number): Promise<{ status: 
 	return { status: response.status, json };
 }
 
-test("live: reclassified thinkers behave as the catalog claims", { skip: !KEY && "set BIGMODEL_API_KEY" }, async (t) => {
-	// glm-4.7 and glm-4.5v were forced thinkers on 2026-09-24. Both accepted
+test("live: the reclassified thinker behaves as the catalog claims", { skip: (!KEY && "set BIGMODEL_API_KEY") || billed("a 64-token glm-4.7 generation") }, async (t) => {
+	// glm-4.7 was a forced thinker on 2026-09-24. It accepted
 	// thinking.type=disabled on 2026-10-09 AND stopped reasoning
-	// (completion_tokens_details.reasoning_tokens === 0), which is why they are
-	// `dynamic` in the catalog now.
-	for (const id of ["glm-4.7", "glm-4.5v"]) {
+	// (completion_tokens_details.reasoning_tokens === 0), which is why it is
+	// `dynamic` in the catalog now. glm-4.5v behaved identically and was retired
+	// on 2026-10-23, so this probe covers the one reclassified id still offered.
+	for (const id of ["glm-4.7"]) {
 		await t.test(`${id} honours disabled`, async () => {
 			const { status, json } = await chat({
 				model: id,
@@ -351,7 +402,7 @@ async function responses(body: Record<string, unknown>, key: string = KEY!, time
 			signal: AbortSignal.timeout(timeoutMs),
 		});
 		const text = await response.text();
-		if (response.status === 429 && attempt < 5) {
+		if (response.status === 429 && attempt < 5 && !PERMANENT_429.has(codeOf(text))) {
 			await new Promise((resolve) => setTimeout(resolve, attempt * 5_000));
 			continue;
 		}
@@ -368,16 +419,37 @@ async function responses(body: Record<string, unknown>, key: string = KEY!, time
 
 test("live: every catalog id exists on the Responses surface", { skip: !KEY && "set BIGMODEL_API_KEY" }, async () => {
 	// Free by construction: `max_output_tokens: 99999999` is rejected before any
-	// inference, and the rejection text discloses the cap. A missing model would
-	// answer `model_not_found` instead — so this asserts existence AND that the
+	// inference, and the rejection text discloses the cap. A missing model answers
+	// 400 `model_not_found` instead — so this asserts existence AND that the
 	// catalog's maxTokens still matches what the gateway enforces.
+	//
+	// Except on a key with no balance, which is the state `npm run live:free` is
+	// meant to run in (measured 2026-10-23, KEY1): the billing check fires BEFORE
+	// the parameter check for a PAID id, so `glm-5.3` answers 429
+	// `insufficient_quota` and discloses no cap, while a missing id still answers
+	// 400 `model_not_found` (the id is validated first — otherwise this branch
+	// could hide a removed model). So 429 is accepted as proof of *existence*
+	// only, and the cap comparison stays a funded-key assertion.
+	let capsChecked = 0;
 	for (const entry of CATALOG) {
 		const { status, json } = await responses({ model: entry.id, input: "hi", max_output_tokens: 99_999_999 });
+		if (status === 429) {
+			const code = String(json?.error?.code ?? "");
+			assert.ok(
+				code === "insufficient_quota" || code === "1113",
+				`${entry.id}: 429 for a reason other than an empty balance: ${code}`,
+			);
+			continue;
+		}
 		assert.equal(status, 400, `${entry.id}: ${JSON.stringify(json).slice(0, 160)}`);
 		assert.notEqual(json?.error?.code, "model_not_found", `${entry.id} is not served on this surface`);
 		const disclosed = Number(/\[1,\s*(\d+)\]/.exec(String(json?.error?.message ?? ""))?.[1]);
 		assert.equal(disclosed, entry.maxTokens, `${entry.id}: catalog maxTokens is stale`);
+		capsChecked += 1;
 	}
+	// Loud rather than silent: on a broke key this test proves routing, not caps.
+	// Printing which it did keeps "the suite is green" from meaning two things.
+	console.log(`      Responses sweep: caps verified for ${capsChecked}/${CATALOG.length} ids (the rest answered a billing refusal)`);
 });
 
 test("live: a Responses stream completes with reasoning, text and cache details", { skip: !KEY && "set BIGMODEL_API_KEY" }, async () => {
@@ -466,7 +538,7 @@ test("live: the completions surface still answers when the protocol is switched 
 	assert.match(String(json?.choices?.[0]?.message?.content ?? ""), /OK/);
 });
 
-test("live: the bigmodel_search sidecar answers end to end (billed: two search_std calls)", { skip: !KEY && "set BIGMODEL_API_KEY" }, async () => {
+test("live: the bigmodel_search sidecar answers end to end (billed: two search_std calls)", { skip: (!KEY && "set BIGMODEL_API_KEY") || billed("two search_std calls, ¥0.02") }, async () => {
 	// The tool itself, not a hand-rolled fetch: key resolution (env path — the
 	// agent dir points nowhere so the live run must resolve BIGMODEL_API_KEY),
 	// request building, parsing, formatting and the structured output. Cost on a

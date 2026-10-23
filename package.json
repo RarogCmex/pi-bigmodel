@@ -29,7 +29,8 @@
     "test": "node --test --import ./test/no-network.ts",
     "typecheck": "tsc -p tsconfig.json",
     "check": "npm run typecheck && npm test",
-    "live": "node --test 'live/*.ts'"
+    "live": "node --test 'live/*.ts'",
+    "live:free": "BIGMODEL_LIVE_FREE=1 node --test 'live/*.ts'"
   },
   "pi": {
     "extensions": [
@@ -50,5 +51,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
   }
 }
