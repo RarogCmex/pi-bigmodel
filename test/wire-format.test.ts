@@ -13,7 +13,12 @@
 import assert from "node:assert/strict";
 import test, { describe } from "node:test";
 import { openAICompletionsApi } from "@earendil-works/pi-ai";
-import { clampThinkingLevel, normalizeContext, Type } from "@earendil-works/pi-ai";
+import { clampThinkingLevel, normalizeContext } from "@earendil-works/pi-ai";
+// pi 1.5.0: pi-ai no longer re-exports TypeBox. Pi maps the old import to the
+// compat entry plus its bundled TypeBox at runtime, but `tsc` sees neither, so
+// the builder comes from `typebox` directly — the form the 1.5.0 docs prescribe
+// for new code.
+import { Type } from "typebox";
 import type { AssistantMessage, Context, Model, ModelThinkingLevel, ThinkingLevel, Tool, TranscriptContext } from "@earendil-works/pi-ai";
 import { CATALOG, CATALOG_BY_ID } from "../catalog.ts";
 import { DEFAULT_BASE_URL, DEFAULT_CNY_PER_USD, entryToModel } from "../models.ts";

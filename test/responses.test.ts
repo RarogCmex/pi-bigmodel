@@ -21,7 +21,12 @@ import assert from "node:assert/strict";
 import test, { describe } from "node:test";
 import { readFileSync } from "node:fs";
 import { openAIResponsesApi } from "@earendil-works/pi-ai";
-import { clampThinkingLevel, getSupportedThinkingLevels, normalizeContext, Type } from "@earendil-works/pi-ai";
+import { clampThinkingLevel, getSupportedThinkingLevels, normalizeContext } from "@earendil-works/pi-ai";
+// pi 1.5.0: pi-ai no longer re-exports TypeBox. Pi maps the old import to the
+// compat entry plus its bundled TypeBox at runtime, but `tsc` sees neither, so
+// the builder comes from `typebox` directly — the form the 1.5.0 docs prescribe
+// for new code.
+import { Type } from "typebox";
 import type { AssistantMessage, Context, Model, ModelThinkingLevel, ThinkingLevel, Tool, TranscriptContext } from "@earendil-works/pi-ai";
 import { CATALOG, CATALOG_BY_ID, GLM53_EFFORT } from "../catalog.ts";
 import {

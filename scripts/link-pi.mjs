@@ -28,6 +28,12 @@ const PI_PKG = "@earendil-works/pi-coding-agent";
 const LINKS = [
   [PI_PKG, PI_PKG],
   ["@earendil-works/pi-ai", `${PI_PKG}/node_modules/@earendil-works/pi-ai`],
+  // pi 1.5.0 validates tool arguments with pi-schema; test/schema-coercion.test.ts
+  // asserts the coercion contract against the very validator the host ships.
+  ["@earendil-works/pi-schema", `${PI_PKG}/node_modules/@earendil-works/pi-schema`],
+  // pi 1.5.0 stopped re-exporting TypeBox from pi-ai; tests import the builder
+  // from the host's bundled `typebox` directly, as the 1.5.0 docs prescribe.
+  ["typebox", `${PI_PKG}/node_modules/typebox`],
   ["@types/node", `${PI_PKG}/node_modules/@types/node`],
 ];
 
